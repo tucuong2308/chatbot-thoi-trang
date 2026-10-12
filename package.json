@@ -1,0 +1,17 @@
+{
+  "name": "chatbot-thoi-trang",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "sync": "curl -X POST -H \"x-admin-key: $ADMIN_KEY\" http://localhost:8787/admin/sync"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261006.1",
+    "typescript": "^5.6.0",
+    "wrangler": "^4.149.0"
+  }
+}

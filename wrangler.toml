@@ -1,0 +1,32 @@
+name = "chatbot-thoi-trang"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# Đồng bộ dữ liệu từ Google Sheets mỗi 15 phút
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Bản sao danh mục sản phẩm + lịch sử chat
+# Tạo bằng: npx wrangler kv namespace create SHOP_KV  rồi dán id vào đây
+[[kv_namespaces]]
+binding = "SHOP_KV"
+id = "THAY_BANG_ID_KV"
+
+# Vector sản phẩm
+# Tạo bằng: npx wrangler vectorize create san-pham --dimensions=768 --metric=cosine
+[[vectorize]]
+binding = "VECTORS"
+index_name = "san-pham"
+
+[vars]
+SHOP_NAME = "Mộc Lam Studio"
+GEMINI_MODEL = "gemini-2.5-flash"
+EMBED_MODEL = "gemini-embedding-2"
+EMBED_DIM = "768"
+# Link CSV của từng sheet (Google Sheets > Tệp > Chia sẻ > Công bố lên web > CSV)
+SHEET_CSV_SANPHAM = ""
+SHEET_CSV_BIENTHE = ""
+SHEET_CSV_BANGSIZE = ""
+
+# Bí mật: đặt bằng `npx wrangler secret put <TÊN>` (khi chạy local thì để trong .dev.vars)
+# GEMINI_API_KEY, FB_PAGE_TOKEN, FB_VERIFY_TOKEN, FB_APP_SECRET, ADMIN_KEY

@@ -1,0 +1,253 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "gioi_tinh": {
+      "type": "STRING",
+      "enum": [
+        "nữ",
+        "nam",
+        "unisex"
+      ]
+    },
+    "danh_muc": {
+      "type": "STRING",
+      "enum": [
+        "áo",
+        "đầm",
+        "chân váy",
+        "quần",
+        "set đồ",
+        "áo khoác",
+        "đồ ngủ",
+        "đồ bơi"
+      ]
+    },
+    "kieu_sp": {
+      "type": "STRING",
+      "enum": [
+        "áo thun",
+        "áo sơ mi",
+        "áo kiểu",
+        "áo croptop",
+        "áo hai dây",
+        "áo len",
+        "áo polo",
+        "đầm suông",
+        "đầm ôm body",
+        "đầm xòe",
+        "đầm babydoll",
+        "đầm maxi",
+        "đầm sơ mi",
+        "chân váy chữ A",
+        "chân váy bút chì",
+        "chân váy xếp ly",
+        "chân váy jean",
+        "quần jean",
+        "quần tây",
+        "quần ống rộng",
+        "quần short",
+        "quần jogger",
+        "quần legging",
+        "áo khoác jean",
+        "áo blazer",
+        "áo cardigan",
+        "áo khoác gió",
+        "áo phao",
+        "khác"
+      ]
+    },
+    "kieu_co": {
+      "type": "STRING",
+      "enum": [
+        "trễ vai",
+        "lệch vai",
+        "cổ V",
+        "cổ tròn",
+        "cổ vuông",
+        "cổ yếm",
+        "hai dây",
+        "cúp ngực",
+        "cổ sơ mi",
+        "cổ đức/bẻ",
+        "cổ lọ",
+        "cổ thuyền",
+        "cổ tim",
+        "không áp dụng"
+      ]
+    },
+    "tay_ao": {
+      "type": "STRING",
+      "enum": [
+        "sát nách",
+        "tay ngắn",
+        "tay lỡ",
+        "tay dài",
+        "tay phồng",
+        "tay loe",
+        "không áp dụng"
+      ]
+    },
+    "do_dai": {
+      "type": "STRING",
+      "enum": [
+        "croptop",
+        "ngang hông",
+        "qua mông",
+        "trên gối",
+        "ngang gối",
+        "midi",
+        "maxi",
+        "không áp dụng"
+      ]
+    },
+    "dang": {
+      "type": "STRING",
+      "enum": [
+        "ôm",
+        "suông",
+        "rộng/oversize",
+        "xòe",
+        "chữ A",
+        "babydoll",
+        "đứng"
+      ]
+    },
+    "chat_lieu": {
+      "type": "STRING",
+      "enum": [
+        "cotton",
+        "thun",
+        "lụa/satin",
+        "voan/chiffon",
+        "linen/đũi",
+        "jean",
+        "kaki",
+        "len",
+        "nỉ",
+        "ren",
+        "da",
+        "polyester",
+        "khác"
+      ]
+    },
+    "hoa_tiet": {
+      "type": "STRING",
+      "enum": [
+        "trơn",
+        "hoa nhí",
+        "hoa to",
+        "kẻ sọc",
+        "caro",
+        "chấm bi",
+        "in chữ/hình",
+        "ren",
+        "loang màu"
+      ]
+    },
+    "mau_chinh": {
+      "type": "STRING",
+      "enum": [
+        "trắng",
+        "đen",
+        "be/kem",
+        "nâu",
+        "xám",
+        "hồng",
+        "đỏ",
+        "cam",
+        "vàng",
+        "xanh lá",
+        "xanh dương",
+        "xanh navy",
+        "tím",
+        "nhiều màu"
+      ]
+    },
+    "phong_cach": {
+      "type": "STRING",
+      "enum": [
+        "basic",
+        "nữ tính/tiểu thư",
+        "công sở",
+        "cá tính/streetwear",
+        "vintage",
+        "quyến rũ",
+        "thể thao",
+        "hàn quốc"
+      ]
+    },
+    "mua": {
+      "type": "STRING",
+      "enum": [
+        "xuân hè",
+        "thu đông",
+        "quanh năm"
+      ]
+    },
+    "co_gian": {
+      "type": "STRING",
+      "enum": [
+        "không",
+        "ít",
+        "nhiều"
+      ]
+    },
+    "dip": {
+      "type": "ARRAY",
+      "items": {
+        "type": "STRING",
+        "enum": [
+          "đi làm",
+          "đi học",
+          "dạo phố",
+          "hẹn hò",
+          "đi biển",
+          "dự tiệc",
+          "ở nhà",
+          "tập thể thao"
+        ]
+      }
+    },
+    "chi_tiet": {
+      "type": "ARRAY",
+      "items": {
+        "type": "STRING",
+        "enum": [
+          "bèo nhún",
+          "nơ",
+          "xẻ tà",
+          "cut-out",
+          "đính cúc",
+          "thắt eo/đai",
+          "có túi",
+          "có lót trong",
+          "phối ren",
+          "dây rút",
+          "khóa kéo"
+        ]
+      }
+    },
+    "mo_ta_tu_do": {
+      "type": "STRING",
+      "description": "2-3 câu tiếng Việt tả kiểu dáng, màu, chất liệu, dịp mặc"
+    }
+  },
+  "required": [
+    "gioi_tinh",
+    "danh_muc",
+    "kieu_sp",
+    "kieu_co",
+    "tay_ao",
+    "do_dai",
+    "dang",
+    "chat_lieu",
+    "hoa_tiet",
+    "mau_chinh",
+    "phong_cach",
+    "mua",
+    "co_gian",
+    "dip",
+    "chi_tiet",
+    "mo_ta_tu_do"
+  ]
+}
