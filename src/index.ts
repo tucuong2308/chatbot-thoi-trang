@@ -1,7 +1,8 @@
 import { handleUserMessage } from "./agent";
-import { syncCatalog } from "./catalog";
+import { importCatalog, syncCatalog } from "./catalog";
 import { extractMessages, sendImage, sendText, sendTyping, verifySignature } from "./messenger";
 import type { Env } from "./types";
+import { importVectors, type VectorLine } from "./vectors";
 
 async function replyMessenger(env: Env, senderId: string, text: string) {
   await sendTyping(env, senderId);
@@ -45,11 +46,22 @@ export default {
       return Response.json(await handleUserMessage(env, `test:${user}`, text));
     }
 
-    // Đồng bộ ngay từ Google Sheets
-    if (req.method === "POST" && url.pathname === "/admin/sync") {
+    if (url.pathname.startsWith("/admin/")) {
+      if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405 });
       if (req.headers.get("x-admin-key") !== env.ADMIN_KEY) return new Response("Unauthorized", { status: 401 });
-      const c = await syncCatalog(env);
-      return Response.json({ products: c.products.length, variants: c.variants.length, updatedAt: c.updatedAt });
+      try {
+        // Đồng bộ ngay từ Google Sheets
+        if (url.pathname === "/admin/sync") return Response.json(await syncCatalog(env));
+        // Nạp thẳng 3 bảng CSV (dùng khi chưa có Google Sheets): {"san_pham": "...", "bien_the": "...", "bang_size": "..."}
+        if (url.pathname === "/admin/import") return Response.json(await importCatalog(env, await req.json()));
+        // Nạp vector từ scripts/embed_products.py: mỗi dòng một JSON {"id","kieu","b64"|"values"}
+        if (url.pathname === "/admin/vectors") {
+          const lines = (await req.text()).split("\n").filter((l) => l.trim()).map((l) => JSON.parse(l) as VectorLine);
+          return Response.json(await importVectors(env, lines));
+        }
+      } catch (err) {
+        return Response.json({ loi: (err as Error).message }, { status: 400 });
+      }
     }
 
     return new Response("Chatbot thời trang đang chạy");

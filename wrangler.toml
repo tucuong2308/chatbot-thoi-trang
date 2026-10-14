@@ -6,21 +6,26 @@ compatibility_date = "2025-09-01"
 [triggers]
 crons = ["*/15 * * * *"]
 
-# Bản sao danh mục sản phẩm + lịch sử chat
-# Tạo bằng: npx wrangler kv namespace create SHOP_KV  rồi dán id vào đây
+# Lịch sử chat của từng khách
+# Tạo bằng: npx wrangler kv namespace create SHOP_KV  rồi dán id vào đây (chạy local thì để nguyên)
 [[kv_namespaces]]
 binding = "SHOP_KV"
 id = "THAY_BANG_ID_KV"
 
-# Vector sản phẩm
-# Tạo bằng: npx wrangler vectorize create san-pham --dimensions=768 --metric=cosine
-[[vectorize]]
-binding = "VECTORS"
-index_name = "san-pham"
+# Bản sao danh mục sản phẩm + vector, để bot viết SQL tra cứu
+# Tạo bằng: npx wrangler d1 create chatbot-thoi-trang  rồi dán database_id vào đây (chạy local thì để nguyên)
+# Tạo bảng: npx wrangler d1 migrations apply chatbot-thoi-trang --local   (bỏ --local khi lên mạng)
+[[d1_databases]]
+binding = "DB"
+database_name = "chatbot-thoi-trang"
+database_id = "THAY_BANG_ID_D1"
+migrations_dir = "migrations"
 
 [vars]
 SHOP_NAME = "Mộc Lam Studio"
-GEMINI_MODEL = "gemini-2.5-flash"
+# Model chính bị quá tải hoặc chậm thì tự chuyển sang model dự phòng
+GEMINI_MODEL = "gemini-3.8-flash"
+GEMINI_MODEL_DU_PHONG = "gemini-3.5-flash-lite"
 EMBED_MODEL = "gemini-embedding-2"
 EMBED_DIM = "768"
 # Link CSV của từng sheet (Google Sheets > Tệp > Chia sẻ > Công bố lên web > CSV)

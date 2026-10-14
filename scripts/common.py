@@ -40,3 +40,30 @@ def gemini(model, method, body, key, retries=5):
                 time.sleep(wait)
                 continue
             raise SystemExit(f"Gemini lỗi {e.code}: {e.read().decode()[:500]}")
+
+
+def load_admin_key():
+    """ADMIN_KEY để gọi /admin/* của Worker: biến môi trường, scripts/.env hoặc .dev.vars"""
+    if os.environ.get("ADMIN_KEY"):
+        return os.environ["ADMIN_KEY"]
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    for path in (os.path.join(root, "scripts", ".env"), os.path.join(root, ".dev.vars")):
+        if os.path.exists(path):
+            for line in open(path, encoding="utf-8"):
+                if line.startswith("ADMIN_KEY="):
+                    return line.strip().split("=", 1)[1]
+    raise SystemExit("Thiếu ADMIN_KEY (đặt trong .dev.vars hoặc scripts/.env)")
+
+
+def post_worker(base_url, path, data, content_type="application/json"):
+    """Gửi dữ liệu lên endpoint /admin/* của Worker (VD http://localhost:8787)."""
+    body = data if isinstance(data, bytes) else json.dumps(data, ensure_ascii=False).encode()
+    req = urllib.request.Request(
+        base_url.rstrip("/") + path, data=body, method="POST",
+        headers={"content-type": content_type, "x-admin-key": load_admin_key()},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=300) as res:
+            return json.load(res)
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"Worker lỗi {e.code}: {e.read().decode()[:500]}")

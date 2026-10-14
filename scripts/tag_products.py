@@ -18,7 +18,7 @@ from common import gemini, load_env
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCHEMA = json.load(open(os.path.join(ROOT, "data", "gemini-schema-thuoc-tinh.json"), encoding="utf-8"))
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
 COLUMNS = list(SCHEMA["properties"].keys())
 
 PROMPT = """Bạn là nhân viên nhập liệu của một shop thời trang ở Việt Nam.
