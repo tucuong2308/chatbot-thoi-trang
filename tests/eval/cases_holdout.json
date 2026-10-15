@@ -1,0 +1,438 @@
+[
+  {
+    "id": "ho_nhu_cau_mem_01",
+    "loai": "nhu_cau_mem",
+    "hoi_thoai": [
+      "văn phòng e nóng quá, có sơ mi nam tay ngắn mặc đi làm ko shop"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP31028",
+      "SP43482",
+      "SP9265"
+    ],
+    "ghi_chu": "Xem ảnh: chỉ 3 sơ mi nam người lớn tay ngắn: SP31028 (xanh navy trơn), SP43482 (xám nhạt), SP9265 (caro đen trắng, hơi casual nhưng vẫn mặc đi làm được). Các sơ mi khác tay dài (kể cả loại xắn tay). SP34044, SP13323 là áo trẻ em."
+  },
+  {
+    "id": "ho_nhu_cau_mem_02",
+    "loai": "nhu_cau_mem",
+    "hoi_thoai": [
+      "mới tập chạy bộ buổi sáng, cần quần cho nam mặc chạy"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP13109",
+      "SP17927",
+      "SP7547",
+      "SP2107",
+      "SP32426",
+      "SP2193",
+      "SP8397",
+      "SP32457",
+      "SP15644",
+      "SP15613",
+      "SP15331",
+      "SP42104"
+    ],
+    "ghi_chu": "Quần thể thao nam còn hàng: track pants (SP13109, SP17927, SP7547) và quần short thể thao (Adidas/Nike). SP3508 và SP46400 hết hàng. Loại quần jean, quần tây, quần short cargo/in hình kiểu đi chơi (SP52520, SP41701) và quần trẻ em (SP13222, SP13255, SP13256)."
+  },
+  {
+    "id": "ho_nhu_cau_mem_03",
+    "loai": "nhu_cau_mem",
+    "hoi_thoai": [
+      "e mới đăng ký lớp yoga, shop có quần nào co giãn mặc tập được ko ạ"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP20372",
+      "SP28455",
+      "SP31605",
+      "SP42350",
+      "SP39125",
+      "SP49757"
+    ],
+    "ghi_chu": "Quần nữ co giãn/thể thao: quần track tím SP20372, chân váy liền legging SP28455, SP31605, legging SP42350, SP39125, SP49757. SP41313 (legging trắng kiểu mặc với kurta, khoảng hở 2 size S/L) để ngoài vì màu trắng mỏng không hợp tập. Loại jean, quần tây."
+  },
+  {
+    "id": "ho_nhu_cau_mem_04",
+    "loai": "nhu_cau_mem",
+    "hoi_thoai": [
+      "sắp sinh nhật bố e 55 tuổi, muốn mua áo len tặng bố, kiểu đứng tuổi lịch sự"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP11522",
+      "SP18968",
+      "SP15183",
+      "SP19809",
+      "SP20788",
+      "SP8395",
+      "SP17195"
+    ],
+    "ghi_chu": "Áo len nam kiểu trung niên: cổ tim trơn (SP11522, SP18968), họa tiết trám cổ điển (SP15183), len sọc cổ polo (SP19809), gile len đỏ đô (SP20788), cardigan xám (SP8395), len sọc xanh rêu (SP17195). Loại SP16195 (gile vàng chói), SP19532 (ảnh là áo cộc tay), SP22328 (họa tiết khối trẻ trung)."
+  },
+  {
+    "id": "ho_nhu_cau_mem_05",
+    "loai": "nhu_cau_mem",
+    "hoi_thoai": [
+      "lớp e chụp kỷ yếu, yêu cầu áo nữ màu trắng trơn, ko in hình gì"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP11756",
+      "SP41401",
+      "SP44692"
+    ],
+    "ghi_chu": "Xem ảnh: áo nữ trắng hoàn toàn trơn: SP11756, SP41401 (trắng, nhún nhẹ), SP44692 (tunic trắng). Loại SP8454, SP26894 (in hình), SP33751, SP33215 (họa tiết hồng), SP52118 (nhãn White nhưng in hoa nhiều màu)."
+  },
+  {
+    "id": "ho_nhu_cau_mem_06",
+    "loai": "nhu_cau_mem",
+    "hoi_thoai": [
+      "chị đang bầu tháng thứ 5, cần đồ rộng rãi thoải mái mặc đi làm, đầm hoặc áo dài qua mông đều đc"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP43678",
+      "SP59996",
+      "SP23050",
+      "SP57040",
+      "SP37198",
+      "SP33750",
+      "SP43323",
+      "SP33963"
+    ],
+    "ghi_chu": "Dáng suông/rộng/eo cao, không bó bụng, không có thắt lưng ngang eo: kaftan SP43678, suông SP59996, SP23050, chữ A SP57040, eo cao SP37198, tunic rộng SP33750, SP33963, áo dài dáng rộng SP43323. Loại đầm ôm, đầm thắt eo (SP18895, SP59985), cúp ngực."
+  },
+  {
+    "id": "ho_nhu_cau_mem_07",
+    "loai": "nhu_cau_mem",
+    "hoi_thoai": [
+      "mua áo cho con trai e học lớp 2 với, áo gì cũng được"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP34044",
+      "SP31102",
+      "SP40153",
+      "SP13323",
+      "SP4870"
+    ],
+    "hanh_vi_mong_doi": "Phải chỉ gợi ý đồ trẻ em; không được gợi ý áo nam người lớn.",
+    "ghi_chu": "Áo bé trai: SP34044, SP31102, SP40153 (Boys) và các áo trẻ em bị gắn nhãn Men: SP13323 (Gini and Jony Kids Boys), SP4870 (Levis Kids). Không được gợi ý áo nam người lớn."
+  },
+  {
+    "id": "ho_phong_cach_01",
+    "loai": "phong_cach_thi_giac",
+    "hoi_thoai": [
+      "thích kiểu bánh bèo xíu, đầm hoa nhí hoặc có bèo nhún á"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP23050",
+      "SP57991",
+      "SP59985",
+      "SP18895"
+    ],
+    "ghi_chu": "Xem ảnh: SP23050 (hoa nhí, tầng bèo), SP57991 (họa tiết, bèo cổ), SP59985 (bèo nhún ngực), SP18895 (hoa nhỏ, thắt nơ). Loại đầm hoa to kiểu vạt chéo trưởng thành (SP18736, SP18735), đầm trơn, đầm bé gái."
+  },
+  {
+    "id": "ho_phong_cach_02",
+    "loai": "phong_cach_thi_giac",
+    "hoi_thoai": [
+      "có áo thun nam đen in graphic ngầu ngầu ko"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP3045",
+      "SP53795",
+      "SP44839",
+      "SP3346"
+    ],
+    "ghi_chu": "Áo thun nam nền đen, in hình/graphic lớn: SP3045, SP53795, SP44839, SP3346. Loại SP12792 (áo đấu MU, không phải graphic); SP40153 là áo trẻ em."
+  },
+  {
+    "id": "ho_phong_cach_03",
+    "loai": "phong_cach_thi_giac",
+    "hoi_thoai": [
+      "mình mê chất bò, có áo hay váy nữ nào nhìn kiểu denim ko (ko tính quần jean)"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP44702",
+      "SP57084"
+    ],
+    "ghi_chu": "Xem ảnh: SP44702 (sơ mi denim sát nách), SP57084 (chân váy denim sáng màu). SP6887 áo khoác jean hết hàng; SP13515, SP10002, SP4929 là đồ bé gái dù nhãn Women."
+  },
+  {
+    "id": "ho_phong_cach_04",
+    "loai": "phong_cach_thi_giac",
+    "hoi_thoai": [
+      "áo nữ màu pastel nhẹ nhàng có ko shop"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP9156",
+      "SP21416",
+      "SP24950",
+      "SP10988",
+      "SP33215",
+      "SP33751"
+    ],
+    "ghi_chu": "Màu pastel theo ảnh: tím lavender SP9156, hồng nhạt SP21416, xanh mint SP24950, hồng nhạt SP10988, kem phối hồng SP33215, trắng hoa hồng/xanh SP33751. Loại màu đậm/chói (SP26864 hồng sen, SP7215 hồng tím), trắng tinh, đen. SP4895 là đồ trẻ em."
+  },
+  {
+    "id": "ho_phong_cach_05",
+    "loai": "phong_cach_thi_giac",
+    "hoi_thoai": [
+      "áo phao nam có ko shop, loại phồng phồng ấy"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP19337",
+      "SP15466",
+      "SP15321"
+    ],
+    "ghi_chu": "Xem ảnh: áo trần bông/phao: SP19337 (phao có mũ), SP15466 (gile phao xanh), SP15321 (áo trần bông có mũ). Các áo khoác khác là nỉ, gió, fleece. SP19330 là áo phao nữ."
+  },
+  {
+    "id": "ho_phong_cach_06",
+    "loai": "phong_cach_thi_giac",
+    "hoi_thoai": [
+      "có đồ nữ họa tiết da báo / animal print ko"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP58509",
+      "SP6857",
+      "SP39223"
+    ],
+    "ghi_chu": "Xem ảnh + tên: SP58509 (đầm da báo), SP6857 (chân váy 'Animal Stroke Print'), SP39223 (áo 'Animal Chiffon')."
+  },
+  {
+    "id": "ho_phu_dinh_hoac_01",
+    "loai": "phu_dinh_hoac",
+    "hoi_thoai": [
+      "quan jean nam mau xanh dam hoac den, ko lay loai bac mau wash, size L"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP24692",
+      "SP43246",
+      "SP18488",
+      "SP12753"
+    ],
+    "ghi_chu": "Jean nam còn L, xem ảnh màu tối không bạc: SP24692 (đen), SP12753 (đen), SP43246 (xanh rất đậm), SP18488 (xanh đậm). Loại: SP31334, SP58418, SP15560 (wash bạc), SP21586 (xám wash)."
+  },
+  {
+    "id": "ho_phu_dinh_hoac_02",
+    "loai": "phu_dinh_hoac",
+    "hoi_thoai": [
+      "áo nữ màu đỏ hoặc cam mặc hè, đừng lấy áo hai dây nha"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP33963",
+      "SP33750",
+      "SP27271",
+      "SP32641"
+    ],
+    "ghi_chu": "Áo nữ đỏ/cam, không phải áo len/khoác: tunic đỏ SP33963, tunic đỏ cam SP33750, tunic đỏ họa tiết SP27271, polo sọc cam SP32641. Loại SP10506 (áo hai dây - đúng cái khách cấm), SP20133 (nhãn Red nhưng ảnh caro hồng tím), SP7215 (hồng tím), SP18200 (áo len), SP31443 (áo khoác)."
+  },
+  {
+    "id": "ho_phu_dinh_hoac_03",
+    "loai": "phu_dinh_hoac",
+    "hoi_thoai": [
+      "chân váy size M, đừng màu đen, cũng ko lấy váy jean"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP57085",
+      "SP8499",
+      "SP6864"
+    ],
+    "ghi_chu": "Chân váy nữ người lớn còn M, không đen, không denim: SP57085, SP8499, SP6864. Loại: SP57084 (denim), SP34494/SP28455/SP6857/SP25930/SP31605 (đen), SP27199, SP13515, SP10002, SP4929 (đồ bé gái), các váy không có M."
+  },
+  {
+    "id": "ho_phu_dinh_hoac_04",
+    "loai": "phu_dinh_hoac",
+    "hoi_thoai": [
+      "áo nam mặc ấm ấm, ko phải áo thun cũng ko phải sơ mi, ko lấy áo khoác, dưới 350k"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP11522",
+      "SP22328",
+      "SP17195",
+      "SP18968",
+      "SP12534",
+      "SP19548",
+      "SP54948"
+    ],
+    "ghi_chu": "Áo len/áo nỉ nam < 350k: SP11522, SP22328, SP17195, SP18968, SP12534, SP19548, SP54948. SP19532 nhãn Sweater nhưng ảnh là áo cộc tay -> không 'ấm' -> loại. SP20788 359k vượt giá."
+  },
+  {
+    "id": "ho_phu_dinh_hoac_05",
+    "loai": "phu_dinh_hoac",
+    "hoi_thoai": [
+      "đầm xanh lá hoặc xanh ngọc, trừ kiểu cúp ngực"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP59985",
+      "SP38828",
+      "SP57060"
+    ],
+    "ghi_chu": "Đầm xanh lá/ngọc: SP59985 (xanh rêu), SP38828, SP57060 (xanh cổ vịt), SP51465 (cúp ngực -> loại theo yêu cầu)."
+  },
+  {
+    "id": "ho_nhieu_luot_01",
+    "loai": "nhieu_luot",
+    "hoi_thoai": [
+      "quần tây nữ đi làm",
+      "có màu nào sáng sáng ko, đen nhiều quá rồi",
+      "size M"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP44666"
+    ],
+    "hanh_vi_mong_doi": "Phải giữ ngữ cảnh 'quần tây nữ' + 'không đen' khi khách chỉ nói 'size M'. Nếu nhắc SP27914 phải nói hết M; không được giới thiệu SP27909.",
+    "ghi_chu": "Quần tây nữ không đen, sáng màu, còn M: SP44666 (be nâu, M L). SP27917 nhãn Brown nhưng ảnh gần như đen -> không 'sáng'. SP27914 nâu chỉ còn L. SP27909 trắng đã ngừng bán."
+  },
+  {
+    "id": "ho_nhieu_luot_02",
+    "loai": "nhieu_luot",
+    "hoi_thoai": [
+      "shop có bán đồ cho bé gái ko",
+      "váy đầm ấy",
+      "dưới 400k nhé"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP35433",
+      "SP23621"
+    ],
+    "ghi_chu": "Đầm bé gái < 400k còn hàng: SP35433 (269k), SP23621 (309k). SP50722, SP50721, SP25503 > 400k; SP33486, SP27223, SP27227, SP27198 là đầm bé gái nhãn Women nhưng đều > 400k."
+  },
+  {
+    "id": "ho_nhieu_luot_03",
+    "loai": "nhieu_luot",
+    "hoi_thoai": [
+      "áo khoác nam màu đen",
+      "cái nào có mũ ko",
+      "size L nha"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP39496",
+      "SP19337",
+      "SP16202"
+    ],
+    "ghi_chu": "Áo khoác nam đen có mũ còn L: SP39496 (fleece đen mũ xám), SP19337 (phao đen phối trắng đỏ, có mũ), SP16202 (hoodie đen - chấp nhận như áo khoác có mũ). SP15321 có mũ nhưng không có L."
+  },
+  {
+    "id": "ho_nhieu_luot_04",
+    "loai": "nhieu_luot",
+    "hoi_thoai": [
+      "shop có sơ mi nữ ko",
+      "cái này ko có tay hả, có loại tay dài ko"
+    ],
+    "kieu_cham": "hanh_vi",
+    "hanh_vi_mong_doi": "Phải nói rõ sơ mi nữ duy nhất (SP44702) là loại sát nách và shop không có sơ mi nữ tay dài. Không được giới thiệu sơ mi nam hay áo khác như là 'sơ mi nữ tay dài'. Có thể gợi ý áo nữ tay dài thay thế (ví dụ SP33963, SP20133) và nói rõ đó không phải sơ mi.",
+    "ghi_chu": "Shirts nữ chỉ có SP44702 (ảnh: sát nách)."
+  },
+  {
+    "id": "ho_khong_co_01",
+    "loai": "khong_co",
+    "hoi_thoai": [
+      "có đầm màu vàng ko shop, size M"
+    ],
+    "kieu_cham": "hanh_vi",
+    "hanh_vi_mong_doi": "Phải nói shop không có đầm màu vàng. Không được giới thiệu đầm màu khác như thể là vàng (SP59985 là xanh rêu). Có thể gợi ý áo vàng SP2938 hoặc đầm màu khác, nói rõ màu.",
+    "ghi_chu": "Không có đầm nữ màu vàng (kể cả xem ảnh)."
+  },
+  {
+    "id": "ho_khong_co_02",
+    "loai": "khong_co",
+    "hoi_thoai": [
+      "quần short jean nam có ko, anh mặc size L"
+    ],
+    "kieu_cham": "hanh_vi",
+    "hanh_vi_mong_doi": "Phải nói shop không có quần short jean cho nam người lớn. Không được giới thiệu SP13222 (quần short jean trẻ em, dù nhãn Men). Có thể gợi ý quần short nam khác còn size L (ví dụ SP2193, SP8397, SP32457) và nói rõ không phải chất jean.",
+    "ghi_chu": "Quần short jean duy nhất SP13222 là 'Palm Tree Kids Boys'."
+  },
+  {
+    "id": "ho_khong_co_03",
+    "loai": "khong_co",
+    "hoi_thoai": [
+      "shop có áo len cổ lọ (cổ cao) ko"
+    ],
+    "kieu_cham": "hanh_vi",
+    "hanh_vi_mong_doi": "Phải nói shop không có áo len cổ lọ. Không được gọi áo len cổ tim/cổ tròn/cổ bẻ là cổ lọ. Có thể gợi ý áo len khác và nói rõ kiểu cổ.",
+    "ghi_chu": "Xem ảnh tất cả áo len nam/nữ: cổ tim, cổ tròn, cổ bẻ, cardigan, gile - không có cổ lọ."
+  },
+  {
+    "id": "ho_khong_co_04",
+    "loai": "khong_co",
+    "hoi_thoai": [
+      "cho mình áo khoác jean nữ nha"
+    ],
+    "kieu_cham": "hanh_vi",
+    "hanh_vi_mong_doi": "Phải nói áo khoác jean nữ (SP6887) hiện đã hết hàng/không còn size. Không được nhận đơn hay nói còn hàng. Có thể gợi ý áo khoác nữ khác còn hàng (SP31443, SP22314, SP19330, SP25025) hoặc đồ denim khác (SP44702).",
+    "ghi_chu": "SP6887 size_con_hang rỗng."
+  },
+  {
+    "id": "ho_loc_cung_01",
+    "loai": "loc_cung",
+    "hoi_thoai": [
+      "so mi nam duoi 200k con size S ko"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP9456",
+      "SP58793",
+      "SP11087",
+      "SP9254"
+    ],
+    "ghi_chu": "Sơ mi nam < 200k còn S. SP16793, SP31028, SP51417 không có S; SP13963 ngừng bán."
+  },
+  {
+    "id": "ho_loc_cung_02",
+    "loai": "loc_cung",
+    "hoi_thoai": [
+      "Áo nữ đang giảm giá, dưới 300k, size L có mẫu nào"
+    ],
+    "kieu_cham": "san_pham",
+    "chap_nhan": [
+      "SP32641",
+      "SP52136",
+      "SP8454",
+      "SP21416",
+      "SP11441",
+      "SP14582",
+      "SP33963"
+    ],
+    "ghi_chu": "Áo nữ (Tshirts/Tops/Tunics/Sweaters) có gia_goc, giá < 300k, còn L. SP30946, SP26894 không có L; SP20637 là đầm."
+  },
+  {
+    "id": "ho_size_01",
+    "loai": "size",
+    "hoi_thoai": [
+      "mình 1m66 nặng 63kg, áo thun SP6965 còn size vừa với mình ko?"
+    ],
+    "kieu_cham": "hanh_vi",
+    "hanh_vi_mong_doi": "Theo bảng size, 1m66/63kg ứng với XL. Phải nói SP6965 KHÔNG còn XL (chỉ còn S, M) nên không có size vừa. Không được khuyên lấy S hoặc M cho vừa. Nên gợi ý áo thun nam khác còn XL (ví dụ SP44854, SP2200, SP9671, SP17920).",
+    "ghi_chu": "Bảng size: XL = 60-66kg/165-170cm. SP6965 size_con_hang: S M."
+  },
+  {
+    "id": "ho_size_02",
+    "loai": "size",
+    "hoi_thoai": [
+      "anh nặng 70kg cao 1m72 mặc quần SP42104 freesize vừa ko"
+    ],
+    "kieu_cham": "hanh_vi",
+    "hanh_vi_mong_doi": "Phải nói Freesize chỉ dành cho khoảng 40-58kg / 150-165cm nên SP42104 không vừa với 70kg/1m72. Không được khẳng định là vừa. Nên gợi ý quần short nam khác có size lớn nhất XL và nói rõ XL theo bảng là 60-66kg nên vẫn có thể chật; có thể khuyên liên hệ nhân viên.",
+    "ghi_chu": "SP42104 size_con_hang: Freesize. 70kg vượt mọi size trong bảng."
+  }
+]

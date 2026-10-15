@@ -21,11 +21,35 @@ database_name = "chatbot-thoi-trang"
 database_id = "THAY_BANG_ID_D1"
 migrations_dir = "migrations"
 
+# Ảnh sản phẩm tự host (bản demo): public/anh/<ma_sp>.jpg, phục vụ ở /anh/<ma_sp>.jpg
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Tin nhắn Messenger đi qua hàng đợi để có tới 15 phút xử lý (waitUntil chỉ có 30 giây)
+# Tạo bằng: npx wrangler queues create chatbot-tin-nhan   (chạy local thì không cần)
+[[queues.producers]]
+binding = "HANG_DOI"
+queue = "chatbot-tin-nhan"
+
+[[queues.consumers]]
+queue = "chatbot-tin-nhan"
+max_batch_size = 1
+max_batch_timeout = 0
+max_retries = 0
+
 [vars]
 SHOP_NAME = "Mộc Lam Studio"
+# Địa chỉ Worker sau khi deploy (VD https://chatbot-thoi-trang.<ten>.workers.dev), để gửi ảnh /anh/... qua Messenger
+DIA_CHI_CONG_KHAI = ""
 # Model chính bị quá tải hoặc chậm thì tự chuyển sang model dự phòng
 GEMINI_MODEL = "gemini-3.8-flash"
 GEMINI_MODEL_DU_PHONG = "gemini-3.5-flash-lite"
+# Model suy nghĩ + gọi công cụ chạy qua API kiểu OpenAI thay vì Gemini: đặt LLM_NHA_CUNG_CAP = "openai",
+# điền OPENAI_MODEL (VD tên model trên build.nvidia.com) và NVIDIA_API_KEY trong .dev.vars. Embedding vẫn dùng Gemini.
+LLM_NHA_CUNG_CAP = "gemini"
+OPENAI_BASE_URL = "https://integrate.api.nvidia.com/v1"
+OPENAI_MODEL = ""
 EMBED_MODEL = "gemini-embedding-2"
 EMBED_DIM = "768"
 # Link CSV của từng sheet (Google Sheets > Tệp > Chia sẻ > Công bố lên web > CSV)

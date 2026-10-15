@@ -53,26 +53,27 @@ async function loadVectors(env: Env): Promise<VecMap> {
   return data;
 }
 
+export type Kenh = Kind;
+
 /**
- * Xếp `ids` theo độ gần với vector câu hỏi. Có cả vector chữ lẫn vector ảnh thì gộp hai bảng xếp hạng
- * bằng RRF (điểm chữ và điểm ảnh khác thang đo nên không cộng thẳng). Món chưa có vector giữ thứ tự cũ, xếp sau.
+ * Điểm cosine giữa vector câu hỏi của từng kênh và vector sản phẩm cùng kênh.
+ * Kênh "mo_ta" so với vector tạo từ chữ, kênh "anh" so với vector tạo từ ảnh. Món thiếu vector thì không có điểm kênh đó.
  */
-export async function rankIds(env: Env, query: number[], ids: string[]): Promise<{ ids: string[]; scores: Map<string, number> }> {
+export async function channelScores(
+  env: Env, ids: string[], queries: Partial<Record<Kind, number[]>>,
+): Promise<Map<string, Partial<Record<Kind, number>>>> {
   const vecs = await loadVectors(env);
-  const q = normalize(new Float32Array(query));
-  const scores = new Map<string, number>();
+  const out = new Map<string, Partial<Record<Kind, number>>>();
   for (const kind of ["mo_ta", "anh"] as const) {
-    const ranked = ids
-      .flatMap((id) => {
-        const v = vecs.get(id)?.[kind];
-        return v && v.length === q.length ? [{ id, s: dot(q, v) }] : [];
-      })
-      .sort((a, b) => b.s - a.s);
-    ranked.forEach(({ id }, rank) => scores.set(id, (scores.get(id) ?? 0) + 1 / (60 + rank)));
+    const qv = queries[kind];
+    if (!qv?.length) continue;
+    const q = normalize(new Float32Array(qv));
+    for (const id of ids) {
+      const v = vecs.get(id)?.[kind];
+      if (v && v.length === q.length) out.set(id, { ...out.get(id), [kind]: dot(q, v) });
+    }
   }
-  const order = new Map(ids.map((id, i) => [id, i]));
-  const sorted = [...ids].sort((a, b) => (scores.get(b) ?? 0) - (scores.get(a) ?? 0) || order.get(a)! - order.get(b)!);
-  return { ids: sorted, scores };
+  return out;
 }
 
 export interface VectorLine {

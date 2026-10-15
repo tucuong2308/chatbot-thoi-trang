@@ -1,0 +1,432 @@
+[
+  {
+    "id": "tn_01",
+    "hoi_thoai": [
+      "shop ơi có áo sơ mi caro xanh tay dài cho nam ko ạ"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP16793",
+    "chap_nhan": [
+      "SP11087",
+      "SP15981",
+      "SP16793",
+      "SP8147"
+    ],
+    "ghi_chu": "Sơ mi caro nam tay dài tông xanh; loại caro xám SP30111, tay ngắn SP20180/SP9265"
+  },
+  {
+    "id": "tn_02",
+    "hoi_thoai": [
+      "cần cái đầm mặc đi đám cưới bạn thân mà ko lố, có tay áo xíu cho đỡ hở nha"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP38828",
+    "chap_nhan": [
+      "SP38828",
+      "SP59983",
+      "SP18735",
+      "SP18736",
+      "SP20637",
+      "SP59981"
+    ],
+    "ghi_chu": "Đầm nữ dài ngang gối, có tay ngắn/lỡ, nhìn lịch sự; loại đầm cúp ngực, 2 dây, sát nách và đầm dạo phố"
+  },
+  {
+    "id": "tn_03",
+    "hoi_thoai": [
+      "hoodie xám nam loại chui đầu, ko cần khoá kéo"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP54948",
+    "chap_nhan": [
+      "SP15018",
+      "SP16207",
+      "SP54948"
+    ],
+    "ghi_chu": "Hoodie nam chui đầu màu xám; loại hoodie khoá kéo SP15619 và hoodie đen SP16202"
+  },
+  {
+    "id": "tn_04",
+    "hoi_thoai": [
+      "có áo khoác thể thao ko shop",
+      "loại khoá kéo màu đen nha, cho nam"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP9768",
+    "chap_nhan": [
+      "SP15603",
+      "SP9768"
+    ],
+    "ghi_chu": "Áo khoác gió/thể thao nam màu đen có khoá kéo; SP15321 xanh đen kiểu bomber có mũ nên loại"
+  },
+  {
+    "id": "tn_05",
+    "hoi_thoai": [
+      "mua váy cho bé gái nhà e tầm 3 4 tuổi, thích họa tiết hoa lá sặc sỡ xíu"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP27227",
+    "chap_nhan": [
+      "SP27198",
+      "SP27223",
+      "SP27227",
+      "SP33486"
+    ],
+    "ghi_chu": "Váy trẻ em gái có họa tiết; loại váy jean SP23621/SP35433 và váy trơn"
+  },
+  {
+    "id": "tn_06",
+    "hoi_thoai": [
+      "quần jean nữ skinny ôm chân",
+      "màu nhạt thôi nha, ko lấy màu đậm hay đen"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP52539",
+    "chap_nhan": [
+      "SP27022",
+      "SP52539",
+      "SP57076"
+    ],
+    "ghi_chu": "Jean nữ ôm màu xanh nhạt; loại SP51499/SP51509/SP33538 màu tối"
+  },
+  {
+    "id": "tn_07",
+    "hoi_thoai": [
+      "áo polo nam màu trơn mặc đi làm, ko in chữ to"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP2200",
+    "chap_nhan": [
+      "SP2200",
+      "SP2243",
+      "SP4426",
+      "SP17920",
+      "SP38621"
+    ],
+    "ghi_chu": "Polo nam một màu; loại polo sọc SP7910/SP20668/SP4422 và SP5096 in hình to"
+  },
+  {
+    "id": "tn_08",
+    "hoi_thoai": [
+      "ad ơi chân váy đen đi làm có ko, dài tới gối"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP44646",
+    "chap_nhan": [
+      "SP44646",
+      "SP34494",
+      "SP25930"
+    ],
+    "ghi_chu": "Chân váy nữ màu đen dáng công sở ngang gối; SP40434 xám, ngắn"
+  },
+  {
+    "id": "tn_09",
+    "hoi_thoai": [
+      "e cần quần tây nam màu đen mặc đi làm"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP26154",
+    "chap_nhan": [
+      "SP26154",
+      "SP17927",
+      "SP26144",
+      "SP29846"
+    ],
+    "ghi_chu": "Quần âu nam đen/gần đen; loại các quần xám, nâu ô liu, và jean đen SP12753"
+  },
+  {
+    "id": "tn_10",
+    "hoi_thoai": [
+      "có áo thun nam nền đen in hình ngầu ngầu ko shop"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP3346",
+    "chap_nhan": [
+      "SP3045",
+      "SP3346",
+      "SP44839",
+      "SP53795"
+    ],
+    "ghi_chu": "Áo thun nam đen có hình in lớn; loại áo đấu SP12792"
+  },
+  {
+    "id": "tn_11",
+    "hoi_thoai": [
+      "quan short the thao nam mau den di tap gym"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP32457",
+    "chap_nhan": [
+      "SP15613",
+      "SP2107",
+      "SP32457",
+      "SP8397"
+    ],
+    "ghi_chu": "Quần short thể thao nam đen/xám đậm; SP15644 xanh navy nỉ, SP2193 navy"
+  },
+  {
+    "id": "tn_12",
+    "hoi_thoai": [
+      "có áo dáng dài kiểu Ấn Độ kèm luôn quần legging ko ạ"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP41313",
+    "chap_nhan": [
+      "SP39125",
+      "SP41313",
+      "SP49757"
+    ],
+    "ghi_chu": "Ba bộ áo tunic dài + legging trên ảnh"
+  },
+  {
+    "id": "tn_13",
+    "hoi_thoai": [
+      "áo len nam có họa tiết sọc hay caro ấy, ko lấy loại trơn"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP15183",
+    "chap_nhan": [
+      "SP15183",
+      "SP17195",
+      "SP19809",
+      "SP22328"
+    ],
+    "ghi_chu": "Áo len nam có hoa văn/sọc; loại len trơn SP11522, SP19949"
+  },
+  {
+    "id": "tn_14",
+    "hoi_thoai": [
+      "có áo gile len mặc ngoài sơ mi cho nam ko"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP20788",
+    "chap_nhan": [
+      "SP16195",
+      "SP20788"
+    ],
+    "ghi_chu": "Áo len không tay nam cổ tim"
+  },
+  {
+    "id": "tn_15",
+    "hoi_thoai": [
+      "tìm áo khoác ko tay cho nam, kiểu gile phao hay nỉ giữ ấm"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP5560",
+    "chap_nhan": [
+      "SP15466",
+      "SP22313",
+      "SP5560"
+    ],
+    "ghi_chu": "Áo gile khoác ngoài nam (phao/nỉ); loại gile len"
+  },
+  {
+    "id": "tn_16",
+    "hoi_thoai": [
+      "chân váy dài tới mắt cá kiểu boho đi biển có ko shop"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP30925",
+    "chap_nhan": [
+      "SP30925"
+    ],
+    "ghi_chu": "Chỉ có một chân váy dài chạm mắt cá"
+  },
+  {
+    "id": "tn_17",
+    "hoi_thoai": [
+      "đầm cúp ngực ko dây đi chơi tối"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP51465",
+    "chap_nhan": [
+      "SP48479",
+      "SP48525",
+      "SP51465"
+    ],
+    "ghi_chu": "Đầm quây ngực; SP57040 lệch vai, SP57055 hai dây nên loại"
+  },
+  {
+    "id": "tn_18",
+    "hoi_thoai": [
+      "áo sơ mi trắng nam công sở tay dài"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP9254",
+    "chap_nhan": [
+      "SP14748",
+      "SP15997",
+      "SP9254",
+      "SP11110"
+    ],
+    "ghi_chu": "Sơ mi nam trắng/trắng gần như trơn; SP11110 có sọc rất mờ"
+  },
+  {
+    "id": "tn_19",
+    "hoi_thoai": [
+      "có sơ mi nam màu hồng ko shop",
+      "loại trơn mặc đi làm ấy, ko lấy sọc"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP9452",
+    "chap_nhan": [
+      "SP17550",
+      "SP9452",
+      "SP9456"
+    ],
+    "ghi_chu": "Sơ mi nam hồng trơn kiểu công sở; loại SP8724 sọc, SP7171 kiểu casual túi hộp"
+  },
+  {
+    "id": "tn_20",
+    "hoi_thoai": [
+      "áo thun cho bé trai 5 tuổi"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP4870",
+    "chap_nhan": [
+      "SP31102",
+      "SP4870",
+      "SP40153"
+    ],
+    "ghi_chu": "Áo thun trẻ em kiểu bé trai; loại áo hồng bé gái SP4895/SP40943"
+  },
+  {
+    "id": "tn_21",
+    "hoi_thoai": [
+      "quần lửng tập thể dục cho nữ, ôm ôm co giãn"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP32587",
+    "chap_nhan": [
+      "SP28455",
+      "SP32587",
+      "SP42350",
+      "SP31605"
+    ],
+    "ghi_chu": "Quần lửng nữ dáng thể thao/legging lửng; SP31605 là váy quần có legging"
+  },
+  {
+    "id": "tn_22",
+    "hoi_thoai": [
+      "áo khoác nữ ấm ấm mùa lạnh, màu tối dễ phối"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP22314",
+    "chap_nhan": [
+      "SP19330",
+      "SP22314",
+      "SP12536"
+    ],
+    "ghi_chu": "Áo khoác nữ màu đen giữ ấm; loại áo gió tím SP25025, khoác đỏ SP31443"
+  },
+  {
+    "id": "tn_23",
+    "hoi_thoai": [
+      "có áo khoác len mỏng kiểu cardigan cho nữ ko ạ"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP21137",
+    "chap_nhan": [
+      "SP14582",
+      "SP20303",
+      "SP21137"
+    ],
+    "ghi_chu": "Cardigan nữ mở trước"
+  },
+  {
+    "id": "tn_24",
+    "hoi_thoai": [
+      "quần tây nữ công sở ống đứng"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP27920",
+    "chap_nhan": [
+      "SP27912",
+      "SP27917",
+      "SP27920",
+      "SP32404",
+      "SP44666"
+    ],
+    "ghi_chu": "Quần âu nữ; loại SP33538 trông như jean đen skinny"
+  },
+  {
+    "id": "tn_25",
+    "hoi_thoai": [
+      "shop có áo thun nữ in hình con bướm ko"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP3931",
+    "chap_nhan": [
+      "SP26894",
+      "SP3931"
+    ],
+    "ghi_chu": "Hai áo thun nữ in hình bướm"
+  },
+  {
+    "id": "tn_26",
+    "hoi_thoai": [
+      "áo ba lỗ nữ màu hồng mặc hè"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP25543",
+    "chap_nhan": [
+      "SP10506",
+      "SP21416",
+      "SP25543",
+      "SP26864"
+    ],
+    "ghi_chu": "Áo sát nách nữ màu hồng (SP25543 sọc hồng trắng)"
+  },
+  {
+    "id": "tn_27",
+    "hoi_thoai": [
+      "chân váy jean ngắn cho nữ nha ad"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP38504",
+    "chap_nhan": [
+      "SP10002",
+      "SP13515",
+      "SP38504"
+    ],
+    "ghi_chu": "Chân váy jean ngắn người lớn; loại SP3896 có hình thêu kiểu trẻ em, SP57084 dài ngang gối"
+  },
+  {
+    "id": "tn_28",
+    "hoi_thoai": [
+      "co ao da banh clb ko shop, mu cang tot"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP12792",
+    "chap_nhan": [
+      "SP12792"
+    ],
+    "ghi_chu": "Chỉ có một áo đấu bóng đá"
+  },
+  {
+    "id": "tn_29",
+    "hoi_thoai": [
+      "quần short kaki túi hộp nam đi chơi"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP52520",
+    "chap_nhan": [
+      "SP29176",
+      "SP52520"
+    ],
+    "ghi_chu": "Quần short túi hộp màu kaki"
+  },
+  {
+    "id": "tn_30",
+    "hoi_thoai": [
+      "váy hoa nhí tay ngắn nhẹ nhàng kiểu vintage"
+    ],
+    "kieu_cham": "san_pham",
+    "cam_hung": "SP18895",
+    "chap_nhan": [
+      "SP18895",
+      "SP23050"
+    ],
+    "ghi_chu": "Đầm nữ in hoa có tay ngắn; SP18735/SP18736 tay lỡ dáng quấn nên loại"
+  }
+]

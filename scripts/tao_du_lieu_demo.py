@@ -4,17 +4,20 @@ Dùng khi chưa có Google Sheets thật. Giá, size, tồn kho là số giả n
 
 Đầu vào: scripts/out/san_pham_da_gan.csv (kết quả của tag_products.py)
 Đầu ra:  scripts/out/demo/san_pham.csv, bien_the.csv, bang_size.csv
+         public/anh/<ma_sp>.jpg (Worker tự phục vụ ảnh ở /anh/<ma_sp>.jpg)
 Nạp:     python scripts/tao_du_lieu_demo.py --nap http://localhost:8787
 """
 import argparse
 import csv
 import hashlib
 import os
+import shutil
 
 from common import post_worker
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "scripts", "out", "demo")
+ANH = os.path.join(ROOT, "public", "anh")
 
 # Khoảng giá (nghìn đồng) theo danh mục
 GIA = {"áo": (149, 399), "đầm": (259, 699), "chân váy": (199, 449), "quần": (199, 499),
@@ -42,6 +45,7 @@ def main():
 
     rows = list(csv.DictReader(open(args.vao, encoding="utf-8-sig")))
     os.makedirs(OUT, exist_ok=True)
+    os.makedirs(ANH, exist_ok=True)
     products, variants = [], []
     for r in rows:
         ma = r["ma_sp"]
@@ -49,9 +53,14 @@ def main():
         gia = (lo + so(ma, hi - lo + 1)) // 10 * 10 * 1000 + 9000  # VD 289000
         gia_goc = gia + (so(ma + "goc", 3) + 1) * 50000 if so(ma + "sale", 4) == 0 else ""
         trang_thai = "ngừng bán" if so(ma + "tt", 40) == 0 else "đang bán"
+        anh = ""
+        if r.get("anh") and os.path.exists(r["anh"]):
+            ext = os.path.splitext(r["anh"])[1] or ".jpg"
+            shutil.copy(r["anh"], os.path.join(ANH, ma + ext))
+            anh = f"/anh/{ma}{ext}"
         products.append({
             **{k: v for k, v in r.items() if not k.startswith("kaggle_") and k not in ("anh", "gan_boi")},
-            "anh_chinh_url": r.get("anh", ""), "gia_ban": gia, "gia_goc": gia_goc, "trang_thai": trang_thai,
+            "anh_chinh_url": anh, "gia_ban": gia, "gia_goc": gia_goc, "trang_thai": trang_thai,
         })
         sizes = ["Freesize"] if r.get("dang") == "rộng/oversize" and so(ma + "fs", 3) == 0 else SIZES
         for s in sizes:

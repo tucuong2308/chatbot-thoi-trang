@@ -1,9 +1,25 @@
 export interface Env {
   SHOP_KV: KVNamespace;
   DB: D1Database;
+  /** Ảnh trong thư mục public/ (Workers Static Assets), VD /anh/SP0001.jpg */
+  ASSETS: Fetcher;
+  /** Hàng đợi tin nhắn Messenger: xử lý ở consumer để có đủ thời gian (xem ảnh, nhiều vòng tra cứu). */
+  HANG_DOI: Queue<TinNhanMessenger>;
   SHOP_NAME: string;
   GEMINI_MODEL: string;
   GEMINI_MODEL_DU_PHONG?: string;
+  /** "gemini" (mặc định) hoặc "openai": model suy nghĩ + gọi công cụ chạy qua API kiểu OpenAI (VD NVIDIA). */
+  LLM_NHA_CUNG_CAP?: string;
+  OPENAI_BASE_URL?: string;
+  OPENAI_MODEL?: string;
+  OPENAI_MODEL_DU_PHONG?: string;
+  /** Khóa của API kiểu OpenAI (VD DeepSeek); không có thì dùng NVIDIA_API_KEY. */
+  OPENAI_API_KEY?: string;
+  NVIDIA_API_KEY?: string;
+  /** Số ảnh mỗi lần gửi model nhìn (mặc định 16 với Gemini, 8 với API kiểu OpenAI). */
+  ANH_MOI_LO?: string;
+  /** Địa chỉ Worker trên mạng, để đổi ảnh dạng /anh/... thành link đầy đủ khi gửi Messenger. */
+  DIA_CHI_CONG_KHAI?: string;
   EMBED_MODEL: string;
   EMBED_DIM: string;
   SHEET_CSV_SANPHAM: string;
@@ -26,4 +42,9 @@ export interface ToolTrace {
   cong_cu: string;
   tham_so: Record<string, unknown>;
   ket_qua: unknown;
+}
+
+export interface TinNhanMessenger {
+  senderId: string;
+  text: string;
 }

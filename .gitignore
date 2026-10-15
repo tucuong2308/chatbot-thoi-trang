@@ -4,3 +4,4 @@ node_modules/
 scripts/out/
 scripts/.env
 raw/
+public/anh/

@@ -25,10 +25,18 @@ def main():
         print(f"\n>>> KHÁCH: {cau}")
         for step in res.get("trace", []):
             kq = step["ket_qua"]
-            tom_tat = kq.get("loi") or (f"{kq.get('tong_so_khop')} món khớp, trả {len(kq.get('san_pham', []))}"
-                                        if "tong_so_khop" in kq else f"{kq.get('so_dong')} dòng")
+            if kq.get("loi"):
+                tom_tat = kq["loi"]
+            elif "tong_so_khop" in kq:
+                tom_tat = f"{kq['tong_so_khop']} món khớp, trả {len(kq.get('san_pham', []))}, điểm kênh {kq.get('diem_cac_kenh')}"
+            elif "da_xem" in kq:
+                tom_tat = f"xem {kq['da_xem']} ảnh, hợp {[h['ma_sp'] for h in kq.get('hop', [])]}"
+            else:
+                tom_tat = f"{kq.get('so_dong')} dòng"
             print(f"    [{step['cong_cu']}] {json.dumps(step['tham_so'], ensure_ascii=False)}")
             print(f"        -> {tom_tat}")
+        for msg in res.get("interim", []):
+            print(f"<<< BOT (nhắn tạm): {msg}")
         print(f"<<< BOT ({res.get('model')}, {time.time() - t:.1f}s): {res['text']}")
 
 

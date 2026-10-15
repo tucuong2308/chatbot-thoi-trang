@@ -1,13 +1,16 @@
 import { handleUserMessage } from "./agent";
 import { importCatalog, syncCatalog } from "./catalog";
 import { extractMessages, sendImage, sendText, sendTyping, verifySignature } from "./messenger";
-import type { Env } from "./types";
+import type { Env, TinNhanMessenger } from "./types";
 import { importVectors, type VectorLine } from "./vectors";
 
 async function replyMessenger(env: Env, senderId: string, text: string) {
   await sendTyping(env, senderId);
   try {
-    const reply = await handleUserMessage(env, `fb:${senderId}`, text);
+    const reply = await handleUserMessage(env, `fb:${senderId}`, text, async (msg) => {
+      await sendText(env, senderId, msg);
+      await sendTyping(env, senderId);
+    });
     for (const url of reply.images) await sendImage(env, senderId, url);
     await sendText(env, senderId, reply.text);
   } catch (err) {
@@ -17,7 +20,7 @@ async function replyMessenger(env: Env, senderId: string, text: string) {
 }
 
 export default {
-  async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
 
     // Meta xác minh webhook lần đầu
@@ -27,15 +30,15 @@ export default {
       return ok ? new Response(url.searchParams.get("hub.challenge")) : new Response("Forbidden", { status: 403 });
     }
 
-    // Tin nhắn mới từ Messenger: trả 200 ngay, xử lý ở nền
+    // Tin nhắn mới từ Messenger: trả 200 ngay, đẩy vào hàng đợi.
+    // Không xử lý bằng waitUntil vì nó chỉ có 30 giây sau khi trả lời, không đủ cho nhiều vòng tra cứu và xem ảnh.
     if (req.method === "POST" && url.pathname === "/webhook/messenger") {
       const body = await req.text();
       if (!(await verifySignature(env, body, req.headers.get("x-hub-signature-256")))) {
         return new Response("Bad signature", { status: 401 });
       }
-      for (const m of extractMessages(JSON.parse(body))) {
-        ctx.waitUntil(replyMessenger(env, m.senderId, m.text));
-      }
+      const messages = extractMessages(JSON.parse(body));
+      if (messages.length) await env.HANG_DOI.sendBatch(messages.map((m) => ({ body: m })));
       return new Response("EVENT_RECEIVED");
     }
 
@@ -67,7 +70,15 @@ export default {
     return new Response("Chatbot thời trang đang chạy");
   },
 
+  /** Consumer của hàng đợi: mỗi lần tối đa 15 phút (giới hạn của Cloudflare Queues). */
+  async queue(batch: MessageBatch<TinNhanMessenger>, env: Env) {
+    for (const m of batch.messages) {
+      await replyMessenger(env, m.body.senderId, m.body.text);
+      m.ack(); // lỗi đã được báo cho khách trong replyMessenger, không gửi lại để khỏi trả lời trùng
+    }
+  },
+
   async scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext) {
     ctx.waitUntil(syncCatalog(env));
   },
-} satisfies ExportedHandler<Env>;
+} satisfies ExportedHandler<Env, TinNhanMessenger>;

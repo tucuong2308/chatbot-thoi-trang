@@ -6,14 +6,17 @@ Trợ lý AI tư vấn quần áo trên Facebook Messenger. Bot hiểu câu như
 
 ```
 Khách nhắn Messenger
-   → Facebook gọi webhook → Cloudflare Worker (src/index.ts)
-        Gemini đọc tin nhắn và tự gọi công cụ (src/agent.ts, function calling, tối đa 4 vòng):
-          - tim_san_pham: Gemini viết câu SELECT lọc cứng (loại, giá, size, màu, phủ định...),
-            Worker bỏ món hết hàng/ngừng bán rồi xếp hạng theo nghĩa (src/tools.ts, src/vectors.ts)
-          - truy_van: câu SELECT bất kỳ (bảng size, tồn kho từng size, đếm mẫu...)
-          SQL sai hoặc ra 0 món thì Gemini đọc kết quả, sửa và gọi lại
-        Gemini viết câu trả lời chỉ dựa trên kết quả tra cứu, kèm mã [SP...] để gửi ảnh
-   → Worker gọi Send API trả lời khách (src/messenger.ts)
+   → Facebook gọi webhook → Worker trả 200 ngay, đẩy tin nhắn vào hàng đợi (Cloudflare Queues)
+   → Consumer của hàng đợi (tối đa 15 phút) chạy agent (src/agent.ts):
+        Gemini tự quyết từng bước, tối đa 6 vòng / 90 giây:
+          - tim_san_pham: lọc cứng bằng SQL do nó viết, rồi xếp hạng theo nghĩa qua kênh mô tả (vector chữ)
+            và/hoặc kênh ảnh (vector ảnh), kèm điểm từng kênh để nó tự đánh giá độ chắc (src/tools.ts)
+          - xem_anh: tự nhìn ảnh từng sản phẩm theo lô 16 ảnh khi thuộc tính không đủ để quyết
+            ("che bụng", "nhìn sang"...); trước đó nhắn khách chờ một chút (src/images.ts)
+          - truy_van: SELECT bất kỳ (bảng size, tồn kho từng size, đếm mẫu...)
+        Nhu cầu mềm được agent tự đổi thành kiểu dáng cụ thể như người bán hàng (src/prompt.ts),
+        không cần thêm cột dữ liệu.
+   → Gửi tin nhắn tạm (nếu có), ảnh và câu trả lời qua Send API (src/messenger.ts)
 
 Google Sheets (bản gốc, chủ shop sửa)
    → cron 15 phút đọc CSV → chuẩn hóa giá trị → ghi đè bản sao trong D1 (src/catalog.ts)
@@ -21,13 +24,18 @@ Vector sản phẩm (từ mô tả và từ ảnh) → scripts/embed_products.py
 Lịch sử chat → KV (7 ngày, 10 lượt gần nhất)
 ```
 
+**Vì sao cần hàng đợi**: xử lý bằng `waitUntil` chỉ có 30 giây sau khi trả lời webhook, không đủ cho
+nhiều vòng tra cứu và xem ảnh. Queues có trong gói miễn phí (10.000 thao tác/ngày, khoảng 3.000 tin nhắn).
+
 **SQL do model viết chỉ được đọc** (src/sql.ts): chỉ một câu SELECT/WITH, chặn từ khóa ghi và bảng nội bộ,
 và luôn chạy trong dạng `SELECT * FROM (...) LIMIT n` nên lệnh ghi lọt vào cũng là lỗi cú pháp.
 Dữ liệu trong D1 chỉ là bản sao, lần đồng bộ sau sẽ dựng lại từ Sheets. Lịch sử chat nằm ở KV, model không chạm tới.
 
 **Xếp hạng theo nghĩa chạy ngay trong Worker**: vector nằm trong D1 và được giữ trong bộ nhớ;
 SQL lọc trước rồi mới chấm điểm, nên không cần Vectorize (đủ nhanh tới vài nghìn sản phẩm).
-Có cả vector chữ lẫn vector ảnh thì gộp hai bảng xếp hạng bằng RRF.
+
+**Xem ảnh**: Gemini nhận tối đa 3.600 ảnh và 20 MB dữ liệu đính kèm mỗi request; lô 16 ảnh (2-6 MB với ảnh shop thật)
+nằm xa giới hạn đó. Mỗi lần xem tối đa 32 ảnh, vì gói Workers miễn phí chỉ cho 50 lượt gọi ra ngoài mỗi lần chạy.
 
 **Model**: `GEMINI_MODEL` là model chính, `GEMINI_MODEL_DU_PHONG` dùng khi model chính quá tải;
 model lỗi tạm thời bị bỏ qua 5 phút để khách không phải chờ.
@@ -40,6 +48,8 @@ model lỗi tạm thời bị bỏ qua 5 phút để khách không phải chờ.
 | `scripts/embed_products.py` | Tạo vector sản phẩm (chữ, và ảnh với `--anh`) rồi nạp vào Worker |
 | `scripts/tao_du_lieu_demo.py` | Dựng bộ dữ liệu demo (giá, size, tồn kho giả) khi chưa có Google Sheets |
 | `scripts/hoi_thu.py` | Hỏi thử bot và xem bot đã chạy SQL gì |
+| `tests/eval/` | Bộ test độc lập (`cases.json`) và script chấm `run_eval.py`, kết quả trong `ket_qua/` |
+| `public/` | Ảnh sản phẩm tự host (`public/anh/`, chỉ cho bản demo, không đưa lên git) |
 | `data/bo-cot-thuoc-tinh-thoi-trang.xlsx` | Mẫu bảng tính: SanPham, BienThe, BangSize, DanhMuc |
 | `data/gemini-schema-thuoc-tinh.json` | Danh sách giá trị cho phép, dùng chung cho script và bot |
 
@@ -60,7 +70,10 @@ npx wrangler login
 npx wrangler kv namespace create SHOP_KV                # dán id vào wrangler.toml
 npx wrangler d1 create chatbot-thoi-trang               # dán database_id vào wrangler.toml
 npx wrangler d1 migrations apply chatbot-thoi-trang --remote
+npx wrangler queues create chatbot-tin-nhan
 ```
+
+Sau khi deploy, đặt `DIA_CHI_CONG_KHAI` trong `wrangler.toml` thành địa chỉ Worker để gửi được ảnh `/anh/...` qua Messenger.
 
 ## Chuẩn bị dữ liệu
 
@@ -85,7 +98,8 @@ npm run dev
 python scripts/hoi_thu.py "đầm đi biển dưới 400k, không lấy màu đen" "mẫu đầu còn size M không" "mình 52kg cao 158 mặc size gì"
 ```
 
-Mọi câu trong một lần chạy là một cuộc hội thoại. Script in ra từng câu SQL bot đã viết và số món tìm được.
+Mọi câu trong một lần chạy là một cuộc hội thoại. Script in ra từng câu SQL bot đã viết, điểm từng kênh,
+các lần xem ảnh và tin nhắn tạm.
 Hoặc gọi thẳng `POST /chat` với `{"user":"test","text":"..."}` và header `x-admin-key`: kết quả có `trace` là các bước tra cứu.
 
 ## Đưa lên mạng và nối Messenger
@@ -106,11 +120,20 @@ Trong Meta for Developers > Messenger > Webhooks: URL `https://<worker>.workers.
 - [ ] Chuyển sang nhân viên khi khách cần (tắt bot cho cuộc chat đó)
 - [ ] Nối Zalo OA
 
+## Đo chất lượng
+
+`tests/eval/cases.json` gồm 50 câu hỏi do một agent riêng viết: agent đó không được xem code, lời nhắc hay thuộc tính
+do Gemini gắn, chỉ có ảnh, nhãn gốc, giá và tồn kho, và tự nhìn ảnh để quyết định món nào đúng. Coi file này là cố định:
+không sửa để bot "đậu"; case nào thật sự sai thì ghi vào `tests/eval/tranh_chap.md`.
+
+```bash
+npm run dev
+python tests/eval/run_eval.py --url http://localhost:8787 --ten ten_lan_chay
+```
+
 ## Lưu ý
 
 - `gemini-2.5-flash` không còn mở cho khóa mới; đang dùng `gemini-3.8-flash` (chính) và `gemini-3.5-flash-lite` (dự phòng).
-- Messenger: Worker trả lời trong nền (`waitUntil`), chỉ có khoảng 30 giây. Model chính chậm hoặc quá tải ở tin nhắn đầu có thể làm lỡ câu trả lời;
-  nếu hay gặp thì đổi `GEMINI_MODEL` sang model nhanh hơn hoặc chuyển phần xử lý sang Cloudflare Queues.
 - Gói Workers miễn phí giới hạn 50 truy vấn D1 và 50 lần gọi ra ngoài mỗi tin nhắn; một tin nhắn thường dùng dưới 15.
 - Gói miễn phí của Gemini dùng dữ liệu gửi lên để cải thiện sản phẩm. Khi chạy cho khách thật nên bật gói trả phí.
 - Link CSV "Công bố lên web" là công khai: hợp cho demo, không hợp cho dữ liệu thật của khách.
