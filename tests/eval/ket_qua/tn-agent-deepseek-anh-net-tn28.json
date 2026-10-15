@@ -1,0 +1,59 @@
+{
+ "tong": {
+  "trung_3": "1/1",
+  "chinh_xac_tb": 0.33,
+  "bao_phu_3_tb": 1.0,
+  "hanh_vi_dat": "0/0",
+  "loi_chay": 0,
+  "giay_moi_luot_trung_vi": 11.9,
+  "giay_moi_luot_p90": 11.9,
+  "giay_moi_luot_max": 11.9,
+  "so_case_xem_anh": 0,
+  "case_bia_ma": 0,
+  "case_nhac_ma_khong_ban_duoc": 0,
+  "model": [
+   "deepseek-flash"
+  ]
+ },
+ "theo_loai": [
+  {
+   "loai": "tu_nhien",
+   "so_case": 1,
+   "loi_chay": 0,
+   "trung_3": "1/1",
+   "chinh_xac_tb": 0.33,
+   "bao_phu_3_tb": 1.0,
+   "hanh_vi_dat": "",
+   "giay_tb": 11.9,
+   "case_bia_ma": 0
+  }
+ ],
+ "chi_tiet": [
+  {
+   "id": "tn_28",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 11.9,
+   "giay_luot_cuoi": 11.9,
+   "so_buoc_cong_cu": 3,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em chào chị ạ! Em vừa tra kho cho chị về áo bóng đá câu lạc bộ nè:\n\n- [SP12792] Nike Men Manchester United Black Jersey – 399.000đ (giá gốc 499.000đ), còn size S, màu đen. Đây là áo jersey CLB đúng nghĩa duy nhất shop đang có: nền đen viền đỏ ở cổ/tay, sọc trắng đỏ ngang ngực, polyester thoáng mát, mặc đá bóng hay dạo phố đều ổn.\n- [SP15603] Nike Men Football Soccer Black Jackets – 379.000đ, dáng suông, khoác gió thể thao kiểu bóng đá, hợp mặc sân bãi se lạnh.\n- [SP31443] Nike Women Football Red Jacket – 439.000đ (giá gốc 489.000đ), khoác gió bóng đá nữ màu đỏ, có túi và sọc trắng dọc tay.\n\nShop hiện chưa có thêm mẫu áo CLB khác (kiểu nhiều đội, nhiều màu) ạ. Chị cho em biết chị mặc size gì và thích màu nào để em xem kỹ tồn kho nhé, hoặc chị muốn mua thì gửi em mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: co ao da banh clb ko shop, mu cang tot",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em chào chị ạ! Em vừa tra kho cho chị về áo bóng đá câu lạc bộ nè:\n\n- [SP12792] Nike Men Manchester United Black Jersey – 399.000đ (giá gốc 499.000đ), còn size S, màu đen. Đây là áo jersey CLB đúng nghĩa duy nhất shop đang có: nền đen viền đỏ ở cổ/tay, sọc trắng đỏ ngang ngực, polyester thoáng mát, mặc đá bóng hay dạo phố đều ổn.\n- [SP15603] Nike Men Football Soccer Black Jackets – 379.000đ, dáng suông, khoác gió thể thao kiểu bóng đá, hợp mặc sân bãi se lạnh.\n- [SP31443] Nike Women Football Red Jacket – 439.000đ (giá gốc 489.000đ), khoác gió bóng đá nữ màu đỏ, có túi và sọc trắng dọc tay.\n\nShop hiện chưa có thêm mẫu áo CLB khác (kiểu nhiều đội, nhiều màu) ạ. Chị cho em biết chị mặc size gì và thích màu nào để em xem kỹ tồn kho nhé, hoặc chị muốn mua thì gửi em mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP12792",
+    "SP15603",
+    "SP31443"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  }
+ ]
+}
