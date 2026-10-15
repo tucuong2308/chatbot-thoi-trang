@@ -185,7 +185,13 @@ async function xemAnh(env: Env, args: { ma_sp: string[]; yeu_cau: string; loi_nh
 
 async function truyVan(env: Env, args: { sql: string }) {
   const rows = await runSelect(env, args.sql, 50);
-  return { so_dong: rows.length, dong: rows.map(compact) };
+  // Câu SELECT tự do không lọc món ngừng bán / hết hàng: gắn cờ để model không đem món đó ra gợi ý.
+  const ids = [...new Set(rows.map((r) => String(r.ma_sp ?? "")).filter(Boolean))];
+  const sellable = new Set(ids.length ? (await available(env, ids)).map((r) => String(r.ma_sp)) : []);
+  return {
+    so_dong: rows.length,
+    dong: rows.map((r) => compact(r.ma_sp ? { ...r, dang_ban_va_con_hang: sellable.has(String(r.ma_sp)) } : r)),
+  };
 }
 
 export interface ToolContext {

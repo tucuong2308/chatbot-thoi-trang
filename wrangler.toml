@@ -42,14 +42,15 @@ max_retries = 0
 SHOP_NAME = "Mộc Lam Studio"
 # Địa chỉ Worker sau khi deploy (VD https://chatbot-thoi-trang.<ten>.workers.dev), để gửi ảnh /anh/... qua Messenger
 DIA_CHI_CONG_KHAI = ""
-# Model chính bị quá tải hoặc chậm thì tự chuyển sang model dự phòng
+# Model suy nghĩ + gọi công cụ + xem ảnh. Mặc định: DeepSeek V4.1 Flash qua API kiểu OpenAI,
+# khóa đặt ở OPENAI_API_KEY trong .dev.vars (lên mạng: npx wrangler secret put OPENAI_API_KEY).
+# Muốn dùng Gemini thay thế: đặt LLM_NHA_CUNG_CAP = "gemini" (dùng GEMINI_MODEL, GEMINI_MODEL_DU_PHONG).
+# Embedding luôn dùng Gemini (EMBED_MODEL), vì vector sản phẩm đã tạo bằng model đó.
+LLM_NHA_CUNG_CAP = "openai"
+OPENAI_BASE_URL = "https://api.deepseek.com/v1"
+OPENAI_MODEL = "deepseek-flash"
 GEMINI_MODEL = "gemini-3.8-flash"
 GEMINI_MODEL_DU_PHONG = "gemini-3.5-flash-lite"
-# Model suy nghĩ + gọi công cụ chạy qua API kiểu OpenAI thay vì Gemini: đặt LLM_NHA_CUNG_CAP = "openai",
-# điền OPENAI_MODEL (VD tên model trên build.nvidia.com) và NVIDIA_API_KEY trong .dev.vars. Embedding vẫn dùng Gemini.
-LLM_NHA_CUNG_CAP = "gemini"
-OPENAI_BASE_URL = "https://integrate.api.nvidia.com/v1"
-OPENAI_MODEL = ""
 EMBED_MODEL = "gemini-embedding-2"
 EMBED_DIM = "768"
 # Link CSV của từng sheet (Google Sheets > Tệp > Chia sẻ > Công bố lên web > CSV)
@@ -58,4 +59,4 @@ SHEET_CSV_BIENTHE = ""
 SHEET_CSV_BANGSIZE = ""
 
 # Bí mật: đặt bằng `npx wrangler secret put <TÊN>` (khi chạy local thì để trong .dev.vars)
-# GEMINI_API_KEY, FB_PAGE_TOKEN, FB_VERIFY_TOKEN, FB_APP_SECRET, ADMIN_KEY
+# GEMINI_API_KEY, OPENAI_API_KEY, FB_PAGE_TOKEN, FB_VERIFY_TOKEN, FB_APP_SECRET, ADMIN_KEY

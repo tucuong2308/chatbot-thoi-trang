@@ -8,7 +8,7 @@ export interface Env {
   SHOP_NAME: string;
   GEMINI_MODEL: string;
   GEMINI_MODEL_DU_PHONG?: string;
-  /** "gemini" (mặc định) hoặc "openai": model suy nghĩ + gọi công cụ chạy qua API kiểu OpenAI (VD NVIDIA). */
+  /** "openai" (API kiểu OpenAI: DeepSeek, NVIDIA...) hoặc "gemini". */
   LLM_NHA_CUNG_CAP?: string;
   OPENAI_BASE_URL?: string;
   OPENAI_MODEL?: string;

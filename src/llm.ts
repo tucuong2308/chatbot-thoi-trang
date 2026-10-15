@@ -3,7 +3,7 @@ import type { Env } from "./types";
 
 /**
  * Lớp gọi model trò chuyện, dùng chung cho Gemini và các API kiểu OpenAI (NVIDIA build.nvidia.com,
- * OpenRouter, DeepSeek...). Chọn bằng LLM_NHA_CUNG_CAP = "gemini" (mặc định) hoặc "openai".
+ * OpenRouter, DeepSeek...). Chọn bằng LLM_NHA_CUNG_CAP = "openai" hoặc "gemini" (không đặt thì là Gemini).
  * Embedding luôn dùng Gemini (src/gemini.ts) vì vector sản phẩm đã tạo bằng model đó.
  */
 
@@ -59,7 +59,10 @@ export async function visionJson(env: Env, parts: Part[], schema: object): Promi
     ? { type: "text", text: p.text }
     : { type: "image_url", image_url: { url: `data:${p.image.mime};base64,${p.image.b64}` } }));
   content.push({ type: "text", text: `Chỉ trả về một đối tượng JSON đúng schema sau, không thêm chữ nào khác:\n${JSON.stringify(toJsonSchema(schema))}` });
-  const res = await openaiCall(env, { messages: [{ role: "user", content }], temperature: 0 }, 90_000);
+  // Xem ảnh chỉ cần nhận xét ngắn: tắt phần suy nghĩ của DeepSeek, nếu không nó có thể nghĩ hết số token
+  // cho phép rồi trả về câu trả lời rỗng (đo thực tế: 6 ảnh, có suy nghĩ 30-48 giây; tắt suy nghĩ 2,5 giây).
+  const noThinking = /deepseek/i.test(env.OPENAI_BASE_URL ?? "") ? { thinking: { type: "disabled" } } : {};
+  const res = await openaiCall(env, { messages: [{ role: "user", content }], temperature: 0, ...noThinking }, 90_000);
   return parseJsonLoose(res.message.content ?? "");
 }
 
@@ -137,7 +140,8 @@ async function openaiCall(env: Env, body: Record<string, unknown>, timeoutMs: nu
         res = await fetch(`${base}/chat/completions`, {
           method: "POST",
           headers: { "content-type": "application/json", authorization: `Bearer ${env.OPENAI_API_KEY || env.NVIDIA_API_KEY}` },
-          body: JSON.stringify({ model, max_tokens: 4096, ...body }),
+          // Model suy luận tính cả phần suy nghĩ vào max_tokens; để rộng tay kẻo bị cắt trước khi kịp trả lời.
+          body: JSON.stringify({ model, max_tokens: 16_000, ...body }),
           signal: AbortSignal.timeout(timeoutMs),
         });
       } catch (err) {
@@ -146,7 +150,9 @@ async function openaiCall(env: Env, body: Record<string, unknown>, timeoutMs: nu
       }
       if (res.ok) {
         const data: any = await res.json();
-        return { model, message: data.choices?.[0]?.message ?? {} };
+        const choice = data.choices?.[0];
+        if (choice?.finish_reason === "length") console.warn(`${model} bị cắt vì hết max_tokens`);
+        return { model, message: choice?.message ?? {} };
       }
       const wait = Number(res.headers.get("retry-after")) * 1000 || 20_000;
       lastErr = new GeminiError(`${model} lỗi ${res.status}: ${(await res.text()).slice(0, 300)}`, res.status, wait);

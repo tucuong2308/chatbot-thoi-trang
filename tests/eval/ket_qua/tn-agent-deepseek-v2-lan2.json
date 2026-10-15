@@ -1,0 +1,811 @@
+{
+ "tong": {
+  "trung_3": "28/30",
+  "chinh_xac_tb": 0.73,
+  "bao_phu_3_tb": 0.69,
+  "hanh_vi_dat": "0/0",
+  "loi_chay": 0,
+  "giay_moi_luot_trung_vi": 8.65,
+  "giay_moi_luot_p90": 16.0,
+  "giay_moi_luot_max": 24.2,
+  "so_case_xem_anh": 6,
+  "case_bia_ma": 0,
+  "case_nhac_ma_khong_ban_duoc": 1,
+  "model": [
+   "deepseek-flash"
+  ]
+ },
+ "theo_loai": [
+  {
+   "loai": "tu_nhien",
+   "so_case": 30,
+   "loi_chay": 0,
+   "trung_3": "28/30",
+   "chinh_xac_tb": 0.73,
+   "bao_phu_3_tb": 0.69,
+   "hanh_vi_dat": "",
+   "giay_tb": 10.5,
+   "case_bia_ma": 0
+  }
+ ],
+ "chi_tiet": [
+  {
+   "id": "tn_01",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.0,
+   "giay_luot_cuoi": 7.0,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị chọn đồ ạ 😊 Shop có mấy mẫu sơ mi nam caro xanh dài tay đây ạ:\n\n[SP8147] Highlander Men Blue Checked Hadden Slim Fit Shirt – 249.000đ (giá gốc 299.000đ), còn size M, L, XL. Caro xanh dương, cotton mềm thoáng, phong cách basic dễ mặc đi làm hay dạo phố.\n[SP20180] Wrangler Men Rodeo Blue Shirt – 259.000đ, còn size S, L. Cổ sơ mi, form suông thoải mái, cotton thấm hút tốt, hợp mặc hằng ngày.\n[SP32762] John Miller Men Check Blue Shirt – 369.000đ (giá gốc 469.000đ), còn size S, M. Caro nhẹ trên nền xanh dương, phong cách công sở lịch lãm, hợp đi làm.\n\nAnh/chị cho em biết cần size nào (hoặc chiều cao, cân nặng) để em coi kỹ mẫu nào vừa nhé. Anh/chị muốn mua mẫu nào thì cho em mã, size và màu, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: shop ơi có áo sơ mi caro xanh tay dài cho nam ko ạ",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị chọn đồ ạ 😊 Shop có mấy mẫu sơ mi nam caro xanh dài tay đây ạ:\n\n[SP8147] Highlander Men Blue Checked Hadden Slim Fit Shirt – 249.000đ (giá gốc 299.000đ), còn size M, L, XL. Caro xanh dương, cotton mềm thoáng, phong cách basic dễ mặc đi làm hay dạo phố.\n[SP20180] Wrangler Men Rodeo Blue Shirt – 259.000đ, còn size S, L. Cổ sơ mi, form suông thoải mái, cotton thấm hút tốt, hợp mặc hằng ngày.\n[SP32762] John Miller Men Check Blue Shirt – 369.000đ (giá gốc 469.000đ), còn size S, M. Caro nhẹ trên nền xanh dương, phong cách công sở lịch lãm, hợp đi làm.\n\nAnh/chị cho em biết cần size nào (hoặc chiều cao, cân nặng) để em coi kỹ mẫu nào vừa nhé. Anh/chị muốn mua mẫu nào thì cho em mã, size và màu, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP8147",
+    "SP20180",
+    "SP32762"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_02",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 16.0,
+   "giay_luot_cuoi": 16.0,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio ạ. Em vừa xem kỹ mấy mẫu có tay áo, chọn được 3 cái mặc đám cưới bạn thân là vừa xinh vừa không lố nè chị:\n\n- [SP18736] Arrow Woman Rima Red Dress – 359.000đ – còn S, M, L – đầm xòe chữ A cổ V, tay lỡ che vai, hoa nhí trên nền hồng dịu, nhìn nữ tính mà kín đáo, mặc đám cưới bạn thân rất vừa mắt.\n- [SP20637] AND Women Solid Grey and Black Dress – 289.000đ (giá gốc 389.000đ) – còn M, L, XL – đầm suông phối xám đen, tay ngắn, thanh lịch kiểu công sở mà có thắt eo nhẹ, an toàn và tôn dáng.\n- [SP38828] Latin Quarters Women Teal Dress – 369.000đ – còn S, M, L, XL – đầm suông xanh teal cổ tròn, tay lỡ che vai, dáng gọn gàng, màu trầm nhã nên không bị \"lố\" trong tiệc cưới.\n\nChị thấy mẫu nào ưng không, hoặc chị cho em biết chị thích tông màu nào với mặc size gì để em lọc thêm ạ? Nếu chị muốn chốt thì cho em mã, size và màu, nhân viên shop sẽ nhắn lại chốt đơn giúp chị nha (em chưa tự lên đơn được ạ).",
+   "hoi_thoai_day_du": [
+    "Khách: cần cái đầm mặc đi đám cưới bạn thân mà ko lố, có tay áo xíu cho đỡ hở nha",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ từng mẫu để chọn được cái vừa kín đáo vừa xinh cho chị nhé",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio ạ. Em vừa xem kỹ mấy mẫu có tay áo, chọn được 3 cái mặc đám cưới bạn thân là vừa xinh vừa không lố nè chị:\n\n- [SP18736] Arrow Woman Rima Red Dress – 359.000đ – còn S, M, L – đầm xòe chữ A cổ V, tay lỡ che vai, hoa nhí trên nền hồng dịu, nhìn nữ tính mà kín đáo, mặc đám cưới bạn thân rất vừa mắt.\n- [SP20637] AND Women Solid Grey and Black Dress – 289.000đ (giá gốc 389.000đ) – còn M, L, XL – đầm suông phối xám đen, tay ngắn, thanh lịch kiểu công sở mà có thắt eo nhẹ, an toàn và tôn dáng.\n- [SP38828] Latin Quarters Women Teal Dress – 369.000đ – còn S, M, L, XL – đầm suông xanh teal cổ tròn, tay lỡ che vai, dáng gọn gàng, màu trầm nhã nên không bị \"lố\" trong tiệc cưới.\n\nChị thấy mẫu nào ưng không, hoặc chị cho em biết chị thích tông màu nào với mặc size gì để em lọc thêm ạ? Nếu chị muốn chốt thì cho em mã, size và màu, nhân viên shop sẽ nhắn lại chốt đơn giúp chị nha (em chưa tự lên đơn được ạ)."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP18736",
+    "SP20637",
+    "SP38828"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_03",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 15.1,
+   "giay_luot_cuoi": 15.1,
+   "so_buoc_cong_cu": 3,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em vừa lọc xong, bên em có 2 mẫu hoodie nam màu xám chui đầu, không khóa kéo, chị tham khảo nhé:\n\n- [SP15018] ADIDAS Men Printed Grey Sweatshirts – 719.000đ (gốc 769.000đ): hoodie có mũ, túi và dây rút, chất nỉ dày ấm, form oversize năng động, in hình trước ngực. Còn size L, XL.\n- [SP16207] Puma Men Cheveron Wording Grey SweatShirt – 859.000đ (gốc 1.009.000đ): hoodie xám có mũ + túi + dây rút, dáng rộng, in chữ kiểu thể thao, hợp dạo phố/thể thao. Còn size S, M, XL.\n\nEm có thấy mẫu Nike [SP15619] cũng màu xám nhưng là loại có khóa kéo nên em để riêng, chị muốn xem thì em gửi ạ.\n\nChị cho em biết chị thường mặc size gì (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác hơn. Ưng mẫu nào chị nhắn mã + size + màu giúp em, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: hoodie xám nam loại chui đầu, ko cần khoá kéo",
+    "Bot: Dạ em vừa lọc xong, bên em có 2 mẫu hoodie nam màu xám chui đầu, không khóa kéo, chị tham khảo nhé:\n\n- [SP15018] ADIDAS Men Printed Grey Sweatshirts – 719.000đ (gốc 769.000đ): hoodie có mũ, túi và dây rút, chất nỉ dày ấm, form oversize năng động, in hình trước ngực. Còn size L, XL.\n- [SP16207] Puma Men Cheveron Wording Grey SweatShirt – 859.000đ (gốc 1.009.000đ): hoodie xám có mũ + túi + dây rút, dáng rộng, in chữ kiểu thể thao, hợp dạo phố/thể thao. Còn size S, M, XL.\n\nEm có thấy mẫu Nike [SP15619] cũng màu xám nhưng là loại có khóa kéo nên em để riêng, chị muốn xem thì em gửi ạ.\n\nChị cho em biết chị thường mặc size gì (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác hơn. Ưng mẫu nào chị nhắn mã + size + màu giúp em, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP15018",
+    "SP16207",
+    "SP15619"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_04",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 19.1,
+   "giay_luot_cuoi": 11.8,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em tìm rồi ạ, khoác gió nam màu đen có khóa kéo đây chị:\n\n- [SP15321] Nike Men Solid Black Jackets – 659.000đ, còn S/M/XL. Khoác gió thể thao đen trơn, khóa kéo + túi + dây rút, chống gió tốt, mặc tập lẫn dạo phố đều ổn.\n- [SP15603] Nike Men Football Soccer Black Jackets – 379.000đ, còn L/XL. Dáng suông nhẹ, khóa kéo tiện, giá dễ chịu, hợp mặc tập thể thao.\n- [SP9768] ADIDAS Men Adna Black Jackets – 489.000đ, còn S/L/XL. Cổ lọ chống gió, có khóa kéo và túi, kiểu thể thao năng động.\n\nChị cho em xin size chị thường mặc (hoặc cân nặng/chiều cao) để em kiểm tra kỹ còn hàng nhé. Chị muốn mặc tập luyện hay dạo phố ạ?",
+   "hoi_thoai_day_du": [
+    "Khách: có áo khoác thể thao ko shop",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị tìm đồ ạ 😊 Shop có áo khoác thể thao, chị tham khảo vài mẫu nè:\n\n- [SP31443] Nike Women Football Red Jacket – 439.000đ (đang giảm từ 489.000đ), còn S/M/L, áo khoác gió nữ màu đỏ nổi bật, có khóa kéo + túi, mặc tập thể thao hay dạo phố đều ổn.\n- [SP15603] Nike Men Football Soccer Black Jackets – 379.000đ, còn L/XL, khoác gió nam đen tối giản, polyester nhẹ, phù hợp tập luyện.\n- [SP9768] ADIDAS Men Adna Black Jackets – 489.000đ, còn S/L/XL, khoác gió nam cổ lọ, chống gió tốt, đi tập hay dạo phố đều tiện.\n\nChị cho em biết chị đang tìm áo cho nam hay nữ, và thích màu gì để em lọc kỹ hơn nhé?",
+    "Khách: loại khoá kéo màu đen nha, cho nam",
+    "Bot: Dạ em tìm rồi ạ, khoác gió nam màu đen có khóa kéo đây chị:\n\n- [SP15321] Nike Men Solid Black Jackets – 659.000đ, còn S/M/XL. Khoác gió thể thao đen trơn, khóa kéo + túi + dây rút, chống gió tốt, mặc tập lẫn dạo phố đều ổn.\n- [SP15603] Nike Men Football Soccer Black Jackets – 379.000đ, còn L/XL. Dáng suông nhẹ, khóa kéo tiện, giá dễ chịu, hợp mặc tập thể thao.\n- [SP9768] ADIDAS Men Adna Black Jackets – 489.000đ, còn S/L/XL. Cổ lọ chống gió, có khóa kéo và túi, kiểu thể thao năng động.\n\nChị cho em xin size chị thường mặc (hoặc cân nặng/chiều cao) để em kiểm tra kỹ còn hàng nhé. Chị muốn mặc tập luyện hay dạo phố ạ?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP15321",
+    "SP15603",
+    "SP9768"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_05",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 14.3,
+   "giay_luot_cuoi": 14.3,
+   "so_buoc_cong_cu": 5,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em giúp chị chọn váy cho bé nhé!\n\nEm tìm được 2 mẫu họa tiết hoa lá, màu sặc sỡ hợp bé gái 3-4 tuổi:\n\n[SP27227] Doodle Kids Girl Printed White Dress – 599.000đ – còn M, L – đầm xòe cotton họa tiết hoa lá nhiều màu, mát, bé mặc chơi/dạo phố rất xinh.\n[SP29172] United Colors of Benetton Kids Girls Printed Pink Skirt – 429.000đ – còn M – chân váy chữ A hồng hoa to nổi bật, dáng năng động cho bé.\n\nChị cho em bé cao, nặng khoảng bao nhiêu để em xem size nào vừa nhất nhé. Chị ưng mẫu nào thì cho em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: mua váy cho bé gái nhà e tầm 3 4 tuổi, thích họa tiết hoa lá sặc sỡ xíu",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em ngắm kỹ mấy mẫu váy bé gái cho chị nhé",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em giúp chị chọn váy cho bé nhé!\n\nEm tìm được 2 mẫu họa tiết hoa lá, màu sặc sỡ hợp bé gái 3-4 tuổi:\n\n[SP27227] Doodle Kids Girl Printed White Dress – 599.000đ – còn M, L – đầm xòe cotton họa tiết hoa lá nhiều màu, mát, bé mặc chơi/dạo phố rất xinh.\n[SP29172] United Colors of Benetton Kids Girls Printed Pink Skirt – 429.000đ – còn M – chân váy chữ A hồng hoa to nổi bật, dáng năng động cho bé.\n\nChị cho em bé cao, nặng khoảng bao nhiêu để em xem size nào vừa nhất nhé. Chị ưng mẫu nào thì cho em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP27227",
+    "SP29172"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.5,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_06",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 17.0,
+   "giay_luot_cuoi": 11.9,
+   "so_buoc_cong_cu": 3,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em xem kỹ ảnh rồi ạ. Bên em mẫu jean nữ dáng ôm mà tông màu nhạt chỉ có đúng một mẫu thôi:\n\n- [SP52539] Pepe Jeans Women Blue Jeans – 269.000đ, còn M/L/XL. Jean xanh wash sáng, tông nhạt nhẹ nhàng, dáng ôm tôn chân, co giãn nhẹ mặc thoải mái.\n\nHai mẫu còn lại (Jealous 21 và Elle) ảnh lên đều là xanh đậm nên em không dám giới thiệu vì không đúng ý chị.\n\nChị cho em biết chị mặc size gì để em kiểm tra còn đúng size nhé. Nếu chị chịu nới sang tông xanh đậm hơn hoặc màu khác thì em lọc thêm cho chị ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: quần jean nữ skinny ôm chân",
+    "Bot: Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được mấy mẫu quần jean nữ dáng ôm chân cho chị đây:\n\n- [SP27022] Jealous 21 Women Washed Blue Jeans – 289.000đ, còn S/M/XL. Jean xanh wash, co giãn nhẹ, dáng ôm tôn chân, dễ phối đi làm/đi học/dạo phố.\n- [SP33538] Wrangler Women Black Giselle Jeans – 499.000đ, còn S/M/L. Jean đen ống ôm, chất dày dặn bền, mặc lên gọn chân và sạch sẽ.\n- [SP51499] Denizen Women Blue Jeans – 219.000đ, còn S/M. Jean xanh navy tối giản, co giãn nhẹ, giá mềm, dáng ôm cơ bản.\n\nChị thích màu xanh hay đen hơn, và chị đang mặc size gì để em xem còn đúng size không ạ?",
+    "Khách: màu nhạt thôi nha, ko lấy màu đậm hay đen",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ màu từng mẫu để chọn đúng tông nhạt cho chị nhé",
+    "Bot: Dạ em xem kỹ ảnh rồi ạ. Bên em mẫu jean nữ dáng ôm mà tông màu nhạt chỉ có đúng một mẫu thôi:\n\n- [SP52539] Pepe Jeans Women Blue Jeans – 269.000đ, còn M/L/XL. Jean xanh wash sáng, tông nhạt nhẹ nhàng, dáng ôm tôn chân, co giãn nhẹ mặc thoải mái.\n\nHai mẫu còn lại (Jealous 21 và Elle) ảnh lên đều là xanh đậm nên em không dám giới thiệu vì không đúng ý chị.\n\nChị cho em biết chị mặc size gì để em kiểm tra còn đúng size nhé. Nếu chị chịu nới sang tông xanh đậm hơn hoặc màu khác thì em lọc thêm cho chị ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP52539"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_07",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 12.7,
+   "giay_luot_cuoi": 12.7,
+   "so_buoc_cong_cu": 3,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em xin phép tư vấn ạ! Em vừa ngó kỹ ảnh, cả 3 mẫu polo nam dưới đây đều màu trơn, chỉ có logo nhỏ bên ngực trái chứ không in chữ to:\n\n- [SP2243] ADIDAS Men Stripe Polo White Polo T-shirt — 379.000đ (giá gốc 529.000đ), còn S, L, XL. Màu trắng trơn dễ phối, dáng gọn, mặc đi làm rất lịch sự.\n- [SP2200] Adidas Men Red Polo T-shirt — 319.000đ, còn S, M, XL. Màu đỏ đô trơn, dáng suông thoải mái, chất thun co giãn mặc cả ngày không bí.\n- [SP17920] Nike Mens Traning Blue T-shirt — 209.000đ, còn L, XL. Màu xanh dương trơn, giá dễ chịu nhất, phù hợp đi làm lẫn dạo phố.\n\nChị cho em biết anh mặc size gì (hoặc cân nặng/chiều cao) để em kiểm tra size còn đúng không nhé. Chị ưng mẫu nào thì nhắn em mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo polo nam màu trơn mặc đi làm, ko in chữ to",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em ngó kỹ từng mẫu xem có in chữ to không nhé!",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em xin phép tư vấn ạ! Em vừa ngó kỹ ảnh, cả 3 mẫu polo nam dưới đây đều màu trơn, chỉ có logo nhỏ bên ngực trái chứ không in chữ to:\n\n- [SP2243] ADIDAS Men Stripe Polo White Polo T-shirt — 379.000đ (giá gốc 529.000đ), còn S, L, XL. Màu trắng trơn dễ phối, dáng gọn, mặc đi làm rất lịch sự.\n- [SP2200] Adidas Men Red Polo T-shirt — 319.000đ, còn S, M, XL. Màu đỏ đô trơn, dáng suông thoải mái, chất thun co giãn mặc cả ngày không bí.\n- [SP17920] Nike Mens Traning Blue T-shirt — 209.000đ, còn L, XL. Màu xanh dương trơn, giá dễ chịu nhất, phù hợp đi làm lẫn dạo phố.\n\nChị cho em biết anh mặc size gì (hoặc cân nặng/chiều cao) để em kiểm tra size còn đúng không nhé. Chị ưng mẫu nào thì nhắn em mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP2243",
+    "SP2200",
+    "SP17920"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_08",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 6.8,
+   "giay_luot_cuoi": 6.8,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ có ạ, em gửi chị mấy mẫu chân váy đen dài tới gối mặc đi làm được luôn:\n\n- [SP34494] Van Heusen Woman Black Skirt – 329.000đ – chân váy chữ A, ngang gối, kaki đứng dáng, còn S/M/L/XL. Kiểu chữ A dễ mặc, không bó, hợp công sở.\n- [SP44646] Arrow Woman Black Skirt – 319.000đ (giá gốc 419.000đ) – chân váy bút chì dáng ôm, ngang gối, đang giảm giá, còn S và XL. Hợp chị nào thích tôn dáng.\n- [SP25930] Femella Women Black Skirt – 379.000đ – bút chì ôm, ngang gối, có đai eo điểm nhấn, còn M/L/XL.\n\nChị thích dáng suông nhẹ nhàng hay ôm tôn dáng hơn ạ? Chị cho em số đo hoặc cân nặng/chiều cao để em gợi ý size chuẩn nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: ad ơi chân váy đen đi làm có ko, dài tới gối",
+    "Bot: Dạ có ạ, em gửi chị mấy mẫu chân váy đen dài tới gối mặc đi làm được luôn:\n\n- [SP34494] Van Heusen Woman Black Skirt – 329.000đ – chân váy chữ A, ngang gối, kaki đứng dáng, còn S/M/L/XL. Kiểu chữ A dễ mặc, không bó, hợp công sở.\n- [SP44646] Arrow Woman Black Skirt – 319.000đ (giá gốc 419.000đ) – chân váy bút chì dáng ôm, ngang gối, đang giảm giá, còn S và XL. Hợp chị nào thích tôn dáng.\n- [SP25930] Femella Women Black Skirt – 379.000đ – bút chì ôm, ngang gối, có đai eo điểm nhấn, còn M/L/XL.\n\nChị thích dáng suông nhẹ nhàng hay ôm tôn dáng hơn ạ? Chị cho em số đo hoặc cân nặng/chiều cao để em gợi ý size chuẩn nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP34494",
+    "SP44646",
+    "SP25930"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_09",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 4.3,
+   "giay_luot_cuoi": 4.3,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio. Em tìm được mấy mẫu quần tây nam màu đen mặc đi làm đây ạ:\n\n- [SP29402] Genesis Men Black Trousers – 359.000đ – còn S, M, L, XL – dáng đứng, kaki đen trơn, phong cách công sở, dễ mặc đi làm hằng ngày.\n- [SP26154] John Miller Men Black Trousers – 379.000đ (giá gốc 429.000đ) – còn S, M, L, XL – kaki đen dáng đứng, đang giảm giá, lịch sự đi làm.\n- [SP12222] Basics Men Olive Trousers – 249.000đ (giá gốc 299.000đ) – còn S, M – giá mềm nhất, kaki đen cơ bản dễ phối.\n\nChị cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra size còn đúng không nhé? Chị muốn mua thì cho em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: e cần quần tây nam màu đen mặc đi làm",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio. Em tìm được mấy mẫu quần tây nam màu đen mặc đi làm đây ạ:\n\n- [SP29402] Genesis Men Black Trousers – 359.000đ – còn S, M, L, XL – dáng đứng, kaki đen trơn, phong cách công sở, dễ mặc đi làm hằng ngày.\n- [SP26154] John Miller Men Black Trousers – 379.000đ (giá gốc 429.000đ) – còn S, M, L, XL – kaki đen dáng đứng, đang giảm giá, lịch sự đi làm.\n- [SP12222] Basics Men Olive Trousers – 249.000đ (giá gốc 299.000đ) – còn S, M – giá mềm nhất, kaki đen cơ bản dễ phối.\n\nChị cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra size còn đúng không nhé? Chị muốn mua thì cho em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP29402",
+    "SP26154",
+    "SP12222"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_10",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 12.7,
+   "giay_luot_cuoi": 12.7,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em tư vấn ngay cho chị đây ạ. Em vừa xem kỹ hình in từng mẫu, chỉ có 1 món đúng kiểu \"ngầu\" thật sự:\n\n- [SP53795] Puma Men Black T-shirt — 219.000đ — còn S, M — nền đen, hình in đỏ đen trừu tượng kèm chi tiết trắng nhìn mạnh mẽ, đúng chất streetwear, form suông thoải mái.\n\nMấy mẫu đen in hình khác em xem thì in chữ + mặt cười kiểu dễ thương hoặc khối màu đơn giản, không ngầu bằng nên em không dám giới thiệu.\n\nChị cho em xin size hoặc chiều cao/cân nặng để em kiểm tra size chuẩn nhé. Chị ưng mẫu này thì em xin mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: có áo thun nam nền đen in hình ngầu ngầu ko shop",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ hình in từng mẫu cho chị nhé!",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tư vấn ngay cho chị đây ạ. Em vừa xem kỹ hình in từng mẫu, chỉ có 1 món đúng kiểu \"ngầu\" thật sự:\n\n- [SP53795] Puma Men Black T-shirt — 219.000đ — còn S, M — nền đen, hình in đỏ đen trừu tượng kèm chi tiết trắng nhìn mạnh mẽ, đúng chất streetwear, form suông thoải mái.\n\nMấy mẫu đen in hình khác em xem thì in chữ + mặt cười kiểu dễ thương hoặc khối màu đơn giản, không ngầu bằng nên em không dám giới thiệu.\n\nChị cho em xin size hoặc chiều cao/cân nặng để em kiểm tra size chuẩn nhé. Chị ưng mẫu này thì em xin mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP53795"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_11",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 4.6,
+   "giay_luot_cuoi": 4.6,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em tìm được 2 mẫu quần short nam màu đen hợp đi tập gym nè chị:\n\n- [SP15613] Nike Men Runng Black Shorts – 399.000đ – còn Freesize – polyester nhẹ, co giãn tốt, lưng thun có dây rút, có túi, dáng rộng thoải mái khi tập.\n- [SP32457] ADIDAS Men Black Shorts – 349.000đ – còn M, L – chất thun co giãn, dáng suông, có túi, mặc tập hay dạo phố đều ổn.\n\nChị cho em xin size anh nhà mặc thường ngày (hoặc cân nặng/chiều cao) để em tư vấn chính xác hơn nhé. Chị muốn mẫu nào thì nhắn em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: quan short the thao nam mau den di tap gym",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tìm được 2 mẫu quần short nam màu đen hợp đi tập gym nè chị:\n\n- [SP15613] Nike Men Runng Black Shorts – 399.000đ – còn Freesize – polyester nhẹ, co giãn tốt, lưng thun có dây rút, có túi, dáng rộng thoải mái khi tập.\n- [SP32457] ADIDAS Men Black Shorts – 349.000đ – còn M, L – chất thun co giãn, dáng suông, có túi, mặc tập hay dạo phố đều ổn.\n\nChị cho em xin size anh nhà mặc thường ngày (hoặc cân nặng/chiều cao) để em tư vấn chính xác hơn nhé. Chị muốn mẫu nào thì nhắn em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP15613",
+    "SP32457"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_12",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 24.2,
+   "giay_luot_cuoi": 24.2,
+   "so_buoc_cong_cu": 6,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em xin tư vấn cho chị ạ 🌿\n\nShop mình chưa có bộ bán kèm sẵn (áo + legging chung một set), nhưng có áo tunic dáng dài kiểu kurti Ấn và quần legging bán riêng, chị ghép lại mặc thành bộ rất hợp:\n\n- [SP33750] Vero Moda Women Red Tunic – 309.000đ – còn S, M, L, XL: áo tunic dài qua mông màu đỏ, thêu nhẹ kiểu kurti Ấn, dáng suông dễ mặc.\n- [SP15079] Mother Earth Women Printed Green Tunics – 369.000đ (gốc 469.000đ) – còn M, L, XL: tunic dài họa tiết xanh có thắt eo, phong cách kurti Ấn, che khuyết điểm tốt.\n- [SP42350] Flying Machine Women Black Leggings – 359.000đ – còn S, M: legging đen ôm, co giãn, màu đen dễ phối với mọi áo tunic ở trên.\n\nNếu chị thích màu khác, em còn legging [SP49757] đỏ mận (S, M, XL) và [SP41313] màu xám (S, L) ạ.\n\nChị cho em biết chị thường mặc size gì (hoặc cân nặng/chiều cao) để em tư vấn size chuẩn nhé? Chị muốn lấy mẫu nào thì để lại mã + size + màu, em xin chuyển nhân viên shop nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: có áo dáng dài kiểu Ấn Độ kèm luôn quần legging ko ạ",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ từng mẫu cho chị nhé",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em xin tư vấn cho chị ạ 🌿\n\nShop mình chưa có bộ bán kèm sẵn (áo + legging chung một set), nhưng có áo tunic dáng dài kiểu kurti Ấn và quần legging bán riêng, chị ghép lại mặc thành bộ rất hợp:\n\n- [SP33750] Vero Moda Women Red Tunic – 309.000đ – còn S, M, L, XL: áo tunic dài qua mông màu đỏ, thêu nhẹ kiểu kurti Ấn, dáng suông dễ mặc.\n- [SP15079] Mother Earth Women Printed Green Tunics – 369.000đ (gốc 469.000đ) – còn M, L, XL: tunic dài họa tiết xanh có thắt eo, phong cách kurti Ấn, che khuyết điểm tốt.\n- [SP42350] Flying Machine Women Black Leggings – 359.000đ – còn S, M: legging đen ôm, co giãn, màu đen dễ phối với mọi áo tunic ở trên.\n\nNếu chị thích màu khác, em còn legging [SP49757] đỏ mận (S, M, XL) và [SP41313] màu xám (S, L) ạ.\n\nChị cho em biết chị thường mặc size gì (hoặc cân nặng/chiều cao) để em tư vấn size chuẩn nhé? Chị muốn lấy mẫu nào thì để lại mã + size + màu, em xin chuyển nhân viên shop nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP33750",
+    "SP15079",
+    "SP42350"
+   ],
+   "trung_3": false,
+   "chinh_xac": 0.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.0
+  },
+  {
+   "id": "tn_13",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 4.9,
+   "giay_luot_cuoi": 4.9,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em tìm được 3 mẫu áo len nam có họa tiết sọc/caro (không trơn) đây ạ:\n\n- [SP15183] Arrow Sport Men Check Blue Sweaters – 399.000đ (giá gốc 449.000đ), còn L, XL. Họa tiết caro xanh dương nổi bật, dáng suông dễ mặc.\n- [SP22328] John Players Men Stripes Navy Blue Sweater – 229.000đ, còn S, M, XL. Kẻ sọc ngang màu navy trẻ trung, giá dễ chịu nhất.\n- [SP17195] U.S. Polo Assn. Men Stripes Green Sweater – 269.000đ (giá gốc 319.000đ), còn S, L, XL. Sọc ngang ngực màu xanh lá, đang giảm giá.\n\nCả 3 đều là áo len cổ V, tay dài, dáng suông, hợp mặc thu đông. Anh/chị cho em biết size cần không, em kiểm tra tồn kho cụ thể giúp ạ?",
+   "hoi_thoai_day_du": [
+    "Khách: áo len nam có họa tiết sọc hay caro ấy, ko lấy loại trơn",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tìm được 3 mẫu áo len nam có họa tiết sọc/caro (không trơn) đây ạ:\n\n- [SP15183] Arrow Sport Men Check Blue Sweaters – 399.000đ (giá gốc 449.000đ), còn L, XL. Họa tiết caro xanh dương nổi bật, dáng suông dễ mặc.\n- [SP22328] John Players Men Stripes Navy Blue Sweater – 229.000đ, còn S, M, XL. Kẻ sọc ngang màu navy trẻ trung, giá dễ chịu nhất.\n- [SP17195] U.S. Polo Assn. Men Stripes Green Sweater – 269.000đ (giá gốc 319.000đ), còn S, L, XL. Sọc ngang ngực màu xanh lá, đang giảm giá.\n\nCả 3 đều là áo len cổ V, tay dài, dáng suông, hợp mặc thu đông. Anh/chị cho em biết size cần không, em kiểm tra tồn kho cụ thể giúp ạ?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP15183",
+    "SP22328",
+    "SP17195"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_14",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 14.4,
+   "giay_luot_cuoi": 14.4,
+   "so_buoc_cong_cu": 7,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị/anh chọn đồ ngay tại đây ạ. Shop mình có mấy mẫu len sát nách (kiểu gile) cho nam mặc ngoài sơ mi đây ạ:\n\n- [SP20788] Genesis Men Solid Maroon Sweater – 359.000đ – còn S, M – áo len sát nách dáng suông, cổ V, màu đỏ đô phong cách Hàn Quốc, mặc khoác ngoài sơ mi rất gọn và lịch sự.\n- [SP16195] Puma Men Stripped SL Yellow Sweater – 779.000đ – còn M, XL – áo len nam không tay cổ V màu vàng, len mềm giữ ấm, đúng kiểu gile mặc cùng sơ mi và quần jean.\n\nNếu anh thích kiểu sát nách nhưng chất liệu khác (không phải len), shop còn [SP15466] Puma Men Active Padded Vest – 679.000đ (đang giảm từ 779.000đ) – vest phao màu xanh dương, còn S, L, XL, hợp mặc ngoài khi trời lạnh hơn ạ.\n\nAnh cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra còn đúng size không nhé?",
+   "hoi_thoai_day_du": [
+    "Khách: có áo gile len mặc ngoài sơ mi cho nam ko",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị/anh chọn đồ ngay tại đây ạ. Shop mình có mấy mẫu len sát nách (kiểu gile) cho nam mặc ngoài sơ mi đây ạ:\n\n- [SP20788] Genesis Men Solid Maroon Sweater – 359.000đ – còn S, M – áo len sát nách dáng suông, cổ V, màu đỏ đô phong cách Hàn Quốc, mặc khoác ngoài sơ mi rất gọn và lịch sự.\n- [SP16195] Puma Men Stripped SL Yellow Sweater – 779.000đ – còn M, XL – áo len nam không tay cổ V màu vàng, len mềm giữ ấm, đúng kiểu gile mặc cùng sơ mi và quần jean.\n\nNếu anh thích kiểu sát nách nhưng chất liệu khác (không phải len), shop còn [SP15466] Puma Men Active Padded Vest – 679.000đ (đang giảm từ 779.000đ) – vest phao màu xanh dương, còn S, L, XL, hợp mặc ngoài khi trời lạnh hơn ạ.\n\nAnh cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra còn đúng size không nhé?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP20788",
+    "SP16195",
+    "SP15466"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_15",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 18.3,
+   "giay_luot_cuoi": 18.3,
+   "so_buoc_cong_cu": 6,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em xin phục vụ anh ạ. Với yêu cầu áo khoác không tay (gile) giữ ấm cho nam, bên em có mấy mẫu hợp nè:\n\n- [SP22313] Wildcraft Men Black Fleece Jacket – 509.000đ, còn S, XL. Gile nỉ lông cừu màu đen, dáng suông, khóa kéo + có túi, giữ ấm tốt đúng kiểu gile nỉ anh tìm.\n- [SP15466] Puma Men Mens Active Padded Vest Blue Jackets – 679.000đ (giá gốc 779.000đ), còn S, L, XL. Gile phao xanh dương, dáng ngang hông khỏe khoắn, chuẩn \"gile phao\" và đang được giảm giá.\n- [SP38156] Wildcraft Men Green Fleece Sleeveless Jacket – 369.000đ, còn S, M, XL. Gile lông cừu không tay màu xanh lá, nhẹ ấm, giá dễ chịu nhất.\n\nAnh muốn em tư vấn size thì cho em chiều cao/cân nặng anh nhé. Anh ưng mẫu nào, màu size gì thì để lại giúp em, nhân viên shop sẽ nhắn chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: tìm áo khoác ko tay cho nam, kiểu gile phao hay nỉ giữ ấm",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em xin phục vụ anh ạ. Với yêu cầu áo khoác không tay (gile) giữ ấm cho nam, bên em có mấy mẫu hợp nè:\n\n- [SP22313] Wildcraft Men Black Fleece Jacket – 509.000đ, còn S, XL. Gile nỉ lông cừu màu đen, dáng suông, khóa kéo + có túi, giữ ấm tốt đúng kiểu gile nỉ anh tìm.\n- [SP15466] Puma Men Mens Active Padded Vest Blue Jackets – 679.000đ (giá gốc 779.000đ), còn S, L, XL. Gile phao xanh dương, dáng ngang hông khỏe khoắn, chuẩn \"gile phao\" và đang được giảm giá.\n- [SP38156] Wildcraft Men Green Fleece Sleeveless Jacket – 369.000đ, còn S, M, XL. Gile lông cừu không tay màu xanh lá, nhẹ ấm, giá dễ chịu nhất.\n\nAnh muốn em tư vấn size thì cho em chiều cao/cân nặng anh nhé. Anh ưng mẫu nào, màu size gì thì để lại giúp em, nhân viên shop sẽ nhắn chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP22313",
+    "SP15466",
+    "SP38156"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [
+    "SP38156"
+   ],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_16",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 12.9,
+   "giay_luot_cuoi": 12.9,
+   "so_buoc_cong_cu": 5,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ chị ơi, em tìm kỹ rồi: shop hiện **không có** mẫu chân váy dài tới mắt cá đúng kiểu boho đi biển ạ. Em có nới bớt điều kiện (bỏ tiêu chí \"đi biển\" và \"boho\") thì được đúng 1 mẫu chân váy dài, em gửi chị tham khảo nhé:\n\n- [SP30925] Fabindia Women Printed Black Ghera Skirt – 229.000đ – còn size M, L – chân váy maxi dài, họa tiết hoa nhí, chất cotton mềm thoáng, dáng xòe nên mặc đi biển cũng nhẹ nhàng dễ chịu (tuy phong cách nghiêng về vintage hơn là boho thuần).\n\nChị cho em hỏi thêm: chị thích tông màu nào (trắng, be, xanh...) để em tìm kỹ hơn? Hoặc nếu chị chịu khó đổi sang **đầm maxi hai dây/sát nách** thì shop có nhiều mẫu đi biển hơn, em tìm giúp chị nhé!",
+   "hoi_thoai_day_du": [
+    "Khách: chân váy dài tới mắt cá kiểu boho đi biển có ko shop",
+    "Bot: Dạ chị ơi, em tìm kỹ rồi: shop hiện **không có** mẫu chân váy dài tới mắt cá đúng kiểu boho đi biển ạ. Em có nới bớt điều kiện (bỏ tiêu chí \"đi biển\" và \"boho\") thì được đúng 1 mẫu chân váy dài, em gửi chị tham khảo nhé:\n\n- [SP30925] Fabindia Women Printed Black Ghera Skirt – 229.000đ – còn size M, L – chân váy maxi dài, họa tiết hoa nhí, chất cotton mềm thoáng, dáng xòe nên mặc đi biển cũng nhẹ nhàng dễ chịu (tuy phong cách nghiêng về vintage hơn là boho thuần).\n\nChị cho em hỏi thêm: chị thích tông màu nào (trắng, be, xanh...) để em tìm kỹ hơn? Hoặc nếu chị chịu khó đổi sang **đầm maxi hai dây/sát nách** thì shop có nhiều mẫu đi biển hơn, em tìm giúp chị nhé!"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP30925"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_17",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.2,
+   "giay_luot_cuoi": 7.2,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ 🌸 Chị tìm đầm cúp ngực không dây mặc đi chơi tối, em lọc ra được mấy mẫu này:\n\n- [SP51465] Tonga Women Teal Dress – 629.000đ, còn S/M/L/XL. Đầm ôm body cúp ngực tôn dáng, màu teal nổi bật, có thắt eo — lên dáng chuẩn cho buổi hẹn hò/tuổi tối.\n- [SP48479] French Connection Women Black Dress – 389.000đ, còn M/XL. Cúp ngực quyến rũ, dáng suông ngang gối, kèm đai thắt eo, màu đen dễ mặc đi chơi tối mà vẫn lịch sự.\n- [SP48525] French Connection Women White & Blue Striped Dress – 439.000đ (giảm từ 539.000đ), còn S/M/L/XL. Cúp ngực dáng xòe, sọc xanh trẻ trung, hơi hướng mùa hè dạo phố.\n\nChị thích mẫu nào hay muốn em xem thêm ảnh mẫu nào để chọn cho chuẩn không ạ? Chị cho em biết chị mặc size gì (hoặc cân nặng/chiều cao) để em tư vấn vừa nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: đầm cúp ngực ko dây đi chơi tối",
+    "Bot: Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ 🌸 Chị tìm đầm cúp ngực không dây mặc đi chơi tối, em lọc ra được mấy mẫu này:\n\n- [SP51465] Tonga Women Teal Dress – 629.000đ, còn S/M/L/XL. Đầm ôm body cúp ngực tôn dáng, màu teal nổi bật, có thắt eo — lên dáng chuẩn cho buổi hẹn hò/tuổi tối.\n- [SP48479] French Connection Women Black Dress – 389.000đ, còn M/XL. Cúp ngực quyến rũ, dáng suông ngang gối, kèm đai thắt eo, màu đen dễ mặc đi chơi tối mà vẫn lịch sự.\n- [SP48525] French Connection Women White & Blue Striped Dress – 439.000đ (giảm từ 539.000đ), còn S/M/L/XL. Cúp ngực dáng xòe, sọc xanh trẻ trung, hơi hướng mùa hè dạo phố.\n\nChị thích mẫu nào hay muốn em xem thêm ảnh mẫu nào để chọn cho chuẩn không ạ? Chị cho em biết chị mặc size gì (hoặc cân nặng/chiều cao) để em tư vấn vừa nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP51465",
+    "SP48479",
+    "SP48525"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_18",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 6.4,
+   "giay_luot_cuoi": 6.4,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em chào anh/chị ạ! Em là trợ lý AI của Mộc Lam Studio, em xin phép tư vấn mình nhé.\n\nVới áo sơ mi trắng nam tay dài đi làm, shop đang có mấy mẫu này:\n\n[SP14748] Arrow Men Solid White Shirts – 259.000đ – trơn trắng, dáng suông, cổ bẻ, cotton; còn size M, L. Mẫu trơn cơ bản dễ mặc nhất, kiểu gì cũng phối được với quần tây.\n[SP9254] Mark Taylor Men Solid White Shirts – 189.000đ – trắng trơn, tay dài cotton; còn S, M, L, XL. Giá mềm nhất trong nhóm trơn, hợp anh mới sắm đồ công sở.\n[SP11110] Indigo Nation Men Check White Shirts – 269.000đ – nền trắng kẻ sọc nhỏ, cổ đức, cotton; còn M, L, XL. Kẻ sọc mảnh nhìn vẫn lịch sự mà đỡ đơn điệu hơn áo trơn.\n\nAnh cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác nhé? Nếu anh muốn mua, anh gửi em mã sản phẩm + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo sơ mi trắng nam công sở tay dài",
+    "Bot: Dạ em chào anh/chị ạ! Em là trợ lý AI của Mộc Lam Studio, em xin phép tư vấn mình nhé.\n\nVới áo sơ mi trắng nam tay dài đi làm, shop đang có mấy mẫu này:\n\n[SP14748] Arrow Men Solid White Shirts – 259.000đ – trơn trắng, dáng suông, cổ bẻ, cotton; còn size M, L. Mẫu trơn cơ bản dễ mặc nhất, kiểu gì cũng phối được với quần tây.\n[SP9254] Mark Taylor Men Solid White Shirts – 189.000đ – trắng trơn, tay dài cotton; còn S, M, L, XL. Giá mềm nhất trong nhóm trơn, hợp anh mới sắm đồ công sở.\n[SP11110] Indigo Nation Men Check White Shirts – 269.000đ – nền trắng kẻ sọc nhỏ, cổ đức, cotton; còn M, L, XL. Kẻ sọc mảnh nhìn vẫn lịch sự mà đỡ đơn điệu hơn áo trơn.\n\nAnh cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác nhé? Nếu anh muốn mua, anh gửi em mã sản phẩm + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP14748",
+    "SP9254",
+    "SP11110"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_19",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 13.4,
+   "giay_luot_cuoi": 10.7,
+   "so_buoc_cong_cu": 5,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em kiểm tra rồi, sơ mi nam màu hồng của shop chỉ có duy nhất mẫu [SP17550] và là loại kẻ sọc, chưa có loại trơn màu hồng ạ.\n\nNếu anh cần sơ mi trơn mặc đi làm thì shop có mấy mẫu này:\n\n- [SP14748] Arrow Men Solid White Shirts – 259.000đ, sơ mi trơn trắng cổ bẻ tay dài, cotton, phong cách công sở, còn size M, L.\n- [SP51417] Myntra Men Blue Shirt – 189.000đ (gốc 289.000đ), sơ mi trơn xanh dương cổ sơ mi, có túi, đang sale, còn size M.\n- [SP9254] Mark Taylor Men Solid White Shirts – 189.000đ, sơ mi trơn trắng cổ sơ mi tay dài, còn S, M, L, XL.\n\nAnh thấy màu trắng hoặc xanh dương ổn không, hay muốn em tìm thêm tông khác ạ?",
+   "hoi_thoai_day_du": [
+    "Khách: có sơ mi nam màu hồng ko shop",
+    "Bot: Dạ có ạ, shop có 1 mẫu sơ mi nam màu hồng:\n\n- [SP17550] Mark Taylor Men Red & White Striped Shirt – 399.000đ, sơ mi nam tay dài, kẻ sọc hồng trắng, cotton thoáng mát, dáng suông mặc lịch sự đi làm. Hiện chỉ còn size XL.\n\nChị muốn em xem thêm size khác hay màu khác không ạ?",
+    "Khách: loại trơn mặc đi làm ấy, ko lấy sọc",
+    "Bot: Dạ em kiểm tra rồi, sơ mi nam màu hồng của shop chỉ có duy nhất mẫu [SP17550] và là loại kẻ sọc, chưa có loại trơn màu hồng ạ.\n\nNếu anh cần sơ mi trơn mặc đi làm thì shop có mấy mẫu này:\n\n- [SP14748] Arrow Men Solid White Shirts – 259.000đ, sơ mi trơn trắng cổ bẻ tay dài, cotton, phong cách công sở, còn size M, L.\n- [SP51417] Myntra Men Blue Shirt – 189.000đ (gốc 289.000đ), sơ mi trơn xanh dương cổ sơ mi, có túi, đang sale, còn size M.\n- [SP9254] Mark Taylor Men Solid White Shirts – 189.000đ, sơ mi trơn trắng cổ sơ mi tay dài, còn S, M, L, XL.\n\nAnh thấy màu trắng hoặc xanh dương ổn không, hay muốn em tìm thêm tông khác ạ?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP17550",
+    "SP14748",
+    "SP51417"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_20",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 8.5,
+   "giay_luot_cuoi": 8.5,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em xin phép tư vấn ạ.\n\nEm rất tiếc, shop hiện chưa có áo thun dành cho bé 5 tuổi ạ. Bên em là thời trang người lớn, size nhỏ nhất là S cũng đã ứng với khoảng 148–155cm, 40–47kg rồi, nên không có cỡ nào vừa cho bé 5 tuổi cả ạ.\n\nNếu chị cần áo thun cho người lớn trong nhà (ba mẹ, anh chị lớn), chị cho em biết giới tính và tầm size/cân nặng, em tìm giúp ngay. Hoặc chị muốn em chuyển nhân viên shop để hỏi thêm về các dòng khác thì em xin phép nhắn lại ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo thun cho bé trai 5 tuổi",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em xin phép tư vấn ạ.\n\nEm rất tiếc, shop hiện chưa có áo thun dành cho bé 5 tuổi ạ. Bên em là thời trang người lớn, size nhỏ nhất là S cũng đã ứng với khoảng 148–155cm, 40–47kg rồi, nên không có cỡ nào vừa cho bé 5 tuổi cả ạ.\n\nNếu chị cần áo thun cho người lớn trong nhà (ba mẹ, anh chị lớn), chị cho em biết giới tính và tầm size/cân nặng, em tìm giúp ngay. Hoặc chị muốn em chuyển nhân viên shop để hỏi thêm về các dòng khác thì em xin phép nhắn lại ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [],
+   "trung_3": false,
+   "chinh_xac": 0.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.0
+  },
+  {
+   "id": "tn_21",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.8,
+   "giay_luot_cuoi": 7.8,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em gợi ý mấy mẫu quần nữ tập thể thao, dáng ôm và co giãn tốt cho chị nhé:\n\n- [SP37560] Madagascar3 Girls White Shorts – 309.000đ, size S, M, XL: quần short thể thao cotton mềm, co giãn, đúng kiểu lửng thoải mái vận động (ảnh thực tế màu hồng nhạt).\n- [SP31605] Nike Women Running Black Skirt with Capris – 439.000đ, size M, L, XL: legging ôm phối chân váy, chất thun co giãn, nhìn năng động khi chạy bộ.\n- [SP39125] Aneri Women Purple Leggings – 409.000đ, size M, L, XL: legging ôm sát màu tím, thun co giãn, mặc tập hàng ngày rất thoải mái.\n\nChị cho em biết chị thường mặc size gì (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác hơn nhé. Nếu ưng mẫu nào, chị gửi em mã + size + màu, em sẽ nhờ nhân viên shop nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: quần lửng tập thể dục cho nữ, ôm ôm co giãn",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em gợi ý mấy mẫu quần nữ tập thể thao, dáng ôm và co giãn tốt cho chị nhé:\n\n- [SP37560] Madagascar3 Girls White Shorts – 309.000đ, size S, M, XL: quần short thể thao cotton mềm, co giãn, đúng kiểu lửng thoải mái vận động (ảnh thực tế màu hồng nhạt).\n- [SP31605] Nike Women Running Black Skirt with Capris – 439.000đ, size M, L, XL: legging ôm phối chân váy, chất thun co giãn, nhìn năng động khi chạy bộ.\n- [SP39125] Aneri Women Purple Leggings – 409.000đ, size M, L, XL: legging ôm sát màu tím, thun co giãn, mặc tập hàng ngày rất thoải mái.\n\nChị cho em biết chị thường mặc size gì (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác hơn nhé. Nếu ưng mẫu nào, chị gửi em mã + size + màu, em sẽ nhờ nhân viên shop nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP37560",
+    "SP31605",
+    "SP39125"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_22",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 11.7,
+   "giay_luot_cuoi": 11.7,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em đã tra rồi ạ, đây là mấy mẫu áo khoác nữ màu tối, ấm cho mùa lạnh bên shop:\n\n- [SP19330] United Colors of Benetton Women Solid Black Jacket – 679.000đ – còn S, M, L, XL: áo phao đen cổ lọ, dày dặn chống gió, ấm nhất trong nhóm, màu đen phối gì cũng được.\n- [SP22314] Wildcraft Women Solid Black Jacket – 649.000đ – còn S, M, L: áo khoác gió đen tối giản, nhẹ mà giữ ấm tốt, hợp mặc hằng ngày.\n- [SP21137] s.Oliver Women Stripes Grey Sweater – 829.000đ (giá gốc 979.000đ) – còn L: cardigan len xám kẻ sọc dài qua mông, ấm vừa, thanh lịch, dễ phối.\n\nChị thích kiểu dày ấm như áo phao hay nhẹ như cardigan hơn ạ? Chị cho em size đang mặc để em kiểm tra còn đúng size nhé. Khi chị chọn được mẫu, chị gửi em mã, size, màu, em sẽ nhờ nhân viên shop nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo khoác nữ ấm ấm mùa lạnh, màu tối dễ phối",
+    "Bot: Dạ em đã tra rồi ạ, đây là mấy mẫu áo khoác nữ màu tối, ấm cho mùa lạnh bên shop:\n\n- [SP19330] United Colors of Benetton Women Solid Black Jacket – 679.000đ – còn S, M, L, XL: áo phao đen cổ lọ, dày dặn chống gió, ấm nhất trong nhóm, màu đen phối gì cũng được.\n- [SP22314] Wildcraft Women Solid Black Jacket – 649.000đ – còn S, M, L: áo khoác gió đen tối giản, nhẹ mà giữ ấm tốt, hợp mặc hằng ngày.\n- [SP21137] s.Oliver Women Stripes Grey Sweater – 829.000đ (giá gốc 979.000đ) – còn L: cardigan len xám kẻ sọc dài qua mông, ấm vừa, thanh lịch, dễ phối.\n\nChị thích kiểu dày ấm như áo phao hay nhẹ như cardigan hơn ạ? Chị cho em size đang mặc để em kiểm tra còn đúng size nhé. Khi chị chọn được mẫu, chị gửi em mã, size, màu, em sẽ nhờ nhân viên shop nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP19330",
+    "SP22314",
+    "SP21137"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_23",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 6.1,
+   "giay_luot_cuoi": 6.1,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em xin phục vụ chị ạ 🌿\n\nShop đang có 3 mẫu cardigan nữ chất liệu len, mỏng nhẹ mặc được quanh năm:\n\n- [SP20303] Jealous 21 Women Solid Purple Sweater – 419.000đ, còn L, XL. Len mềm, cổ V tay dài dáng suông, màu tím thanh lịch, dễ mặc đi làm lẫn dạo phố.\n- [SP20222] Wrangler Women Scoop Grey Sweater – 379.000đ, còn S, M, L, XL. Len mỏng màu xám kẻ sọc, có cúc, mặc khoác ngoài áo dài tay rất gọn gàng.\n- [SP21137] s.Oliver Women Stripes Grey Sweater – 829.000đ (giá gốc 979.000đ), còn L. Dáng suông dài qua mông, có túi, hợp chị nào thích kiểu cardigan dài che hông.\n\nChị cho em biết chị thích màu nào và mặc size gì để em xem kỹ tồn kho nhé. Chị muốn mua thì để lại mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: có áo khoác len mỏng kiểu cardigan cho nữ ko ạ",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em xin phục vụ chị ạ 🌿\n\nShop đang có 3 mẫu cardigan nữ chất liệu len, mỏng nhẹ mặc được quanh năm:\n\n- [SP20303] Jealous 21 Women Solid Purple Sweater – 419.000đ, còn L, XL. Len mềm, cổ V tay dài dáng suông, màu tím thanh lịch, dễ mặc đi làm lẫn dạo phố.\n- [SP20222] Wrangler Women Scoop Grey Sweater – 379.000đ, còn S, M, L, XL. Len mỏng màu xám kẻ sọc, có cúc, mặc khoác ngoài áo dài tay rất gọn gàng.\n- [SP21137] s.Oliver Women Stripes Grey Sweater – 829.000đ (giá gốc 979.000đ), còn L. Dáng suông dài qua mông, có túi, hợp chị nào thích kiểu cardigan dài che hông.\n\nChị cho em biết chị thích màu nào và mặc size gì để em xem kỹ tồn kho nhé. Chị muốn mua thì để lại mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP20303",
+    "SP20222",
+    "SP21137"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_24",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 4.6,
+   "giay_luot_cuoi": 4.6,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em gửi chị mấy mẫu quần tây nữ dáng đứng hợp công sở ạ:\n\n- [SP32404] Arrow Woman Black Trousers – 369.000đ, còn S, M – màu đen dáng đứng, vải lên form chuẩn, mặc đi làm gọn gàng.\n- [SP27917] Scullers For Her Brown Striped Trousers – 249.000đ, còn S, M, L – nâu kẻ sọc thanh lịch, kaki bền, giá dễ chịu nhất.\n- [SP27920] Scullers For Her Black Trousers – 499.000đ, còn M, L, XL – đen trơn ít nhăn, có khóa kéo, phù hợp mặc hằng ngày.\n\nChị cho em biết chị mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác hơn nhé?",
+   "hoi_thoai_day_du": [
+    "Khách: quần tây nữ công sở ống đứng",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em gửi chị mấy mẫu quần tây nữ dáng đứng hợp công sở ạ:\n\n- [SP32404] Arrow Woman Black Trousers – 369.000đ, còn S, M – màu đen dáng đứng, vải lên form chuẩn, mặc đi làm gọn gàng.\n- [SP27917] Scullers For Her Brown Striped Trousers – 249.000đ, còn S, M, L – nâu kẻ sọc thanh lịch, kaki bền, giá dễ chịu nhất.\n- [SP27920] Scullers For Her Black Trousers – 499.000đ, còn M, L, XL – đen trơn ít nhăn, có khóa kéo, phù hợp mặc hằng ngày.\n\nChị cho em biết chị mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác hơn nhé?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP32404",
+    "SP27917",
+    "SP27920"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_25",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 5.5,
+   "giay_luot_cuoi": 5.5,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ có ạ! Bên em đang có đúng một mẫu áo thun in hình bướm:\n\n[SP3931] Jealous 21 Women's Black Butterfly T-shirt – 159.000đ – còn size S, L, XL – áo thun nữ màu đen, dáng suông rộng rãi, cổ V, in hình bướm nổi bật trước ngực, hợp mặc dạo phố hoặc đi chơi.\n\nChị cho em biết chị mặc size nào để em kiểm tra kỹ hơn nhé, hoặc nếu chị thích hình in khác (chữ, hình ngộ nghĩnh...) em tìm thêm mẫu khác cho chị ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: shop có áo thun nữ in hình con bướm ko",
+    "Bot: Dạ có ạ! Bên em đang có đúng một mẫu áo thun in hình bướm:\n\n[SP3931] Jealous 21 Women's Black Butterfly T-shirt – 159.000đ – còn size S, L, XL – áo thun nữ màu đen, dáng suông rộng rãi, cổ V, in hình bướm nổi bật trước ngực, hợp mặc dạo phố hoặc đi chơi.\n\nChị cho em biết chị mặc size nào để em kiểm tra kỹ hơn nhé, hoặc nếu chị thích hình in khác (chữ, hình ngộ nghĩnh...) em tìm thêm mẫu khác cho chị ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP3931"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.5
+  },
+  {
+   "id": "tn_26",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 6.5,
+   "giay_luot_cuoi": 6.5,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em gửi chị mấy mẫu áo ba lỗ nữ màu hồng mặc hè nhé:\n\n- [SP25543] Wrangler Women Striper Tank Pink Top – 329.000đ, size S/L/XL, áo hai dây sát nách màu hồng kẻ sọc, thun co giãn mát, hợp mặc dạo phố hoặc tập thể thao hè.\n- [SP21416] Roxy Women Pink Top – 299.000đ (giá gốc 349.000đ), size M/L/XL, sát nách màu hồng trơn, ôm nhẹ tôn dáng, đang giảm giá.\n- [SP26864] Jealous 21 Women Pink Top – 159.000đ, size S/XL, sát nách cổ thuyền màu hồng, dáng suông thoải mái, giá mềm nhất.\n\nChị ưu tiên dáng ôm tôn eo hay suông rộng thoải mái để em lọc kỹ hơn ạ? Mà em cũng chưa rõ chị mặc size nào, chị cho em chiều cao/cân nặng thì em tra bảng size tư vấn cho chuẩn nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: áo ba lỗ nữ màu hồng mặc hè",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em gửi chị mấy mẫu áo ba lỗ nữ màu hồng mặc hè nhé:\n\n- [SP25543] Wrangler Women Striper Tank Pink Top – 329.000đ, size S/L/XL, áo hai dây sát nách màu hồng kẻ sọc, thun co giãn mát, hợp mặc dạo phố hoặc tập thể thao hè.\n- [SP21416] Roxy Women Pink Top – 299.000đ (giá gốc 349.000đ), size M/L/XL, sát nách màu hồng trơn, ôm nhẹ tôn dáng, đang giảm giá.\n- [SP26864] Jealous 21 Women Pink Top – 159.000đ, size S/XL, sát nách cổ thuyền màu hồng, dáng suông thoải mái, giá mềm nhất.\n\nChị ưu tiên dáng ôm tôn eo hay suông rộng thoải mái để em lọc kỹ hơn ạ? Mà em cũng chưa rõ chị mặc size nào, chị cho em chiều cao/cân nặng thì em tra bảng size tư vấn cho chuẩn nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP25543",
+    "SP21416",
+    "SP26864"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_27",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 8.8,
+   "giay_luot_cuoi": 8.8,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ 🌸 Chân váy jean ngắn cho nữ thì em thấy mấy mẫu này hợp nè:\n\n- [SP13515] Palm Tree Kids Girl Washed Blue Skirts – 339.000đ, còn S/M/L, màu xanh dương wash, dáng chữ A trên gối, kiểu năng động dễ phối áo thun.\n- [SP38504] Gini and Jony Girls Navy Blue Skirts – 219.000đ (giá tốt nhất), còn S/XL, xanh navy, chữ A trên gối, có túi, hợp dạo phố – hẹn hò.\n- [SP3896] Disney Kids Girl's Denim Minnie Dark Blue Skirt – 289.000đ, còn L/XL, xanh dương đậm, chữ A trên gối, cá tính kiểu streetwear.\n\nChị thích mẫu nào để em gửi ảnh cho chị xem nhé? Với chị cho em biết chị mặc size gì, hoặc cân nặng/chiều cao để em tư vấn size cho chuẩn ạ. Nếu chị thích dáng dài hơn một chút (ngang gối) thì em còn mẫu [SP57084] nữa ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: chân váy jean ngắn cho nữ nha ad",
+    "Bot: Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ 🌸 Chân váy jean ngắn cho nữ thì em thấy mấy mẫu này hợp nè:\n\n- [SP13515] Palm Tree Kids Girl Washed Blue Skirts – 339.000đ, còn S/M/L, màu xanh dương wash, dáng chữ A trên gối, kiểu năng động dễ phối áo thun.\n- [SP38504] Gini and Jony Girls Navy Blue Skirts – 219.000đ (giá tốt nhất), còn S/XL, xanh navy, chữ A trên gối, có túi, hợp dạo phố – hẹn hò.\n- [SP3896] Disney Kids Girl's Denim Minnie Dark Blue Skirt – 289.000đ, còn L/XL, xanh dương đậm, chữ A trên gối, cá tính kiểu streetwear.\n\nChị thích mẫu nào để em gửi ảnh cho chị xem nhé? Với chị cho em biết chị mặc size gì, hoặc cân nặng/chiều cao để em tư vấn size cho chuẩn ạ. Nếu chị thích dáng dài hơn một chút (ngang gối) thì em còn mẫu [SP57084] nữa ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP13515",
+    "SP38504",
+    "SP3896"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_28",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 11.7,
+   "giay_luot_cuoi": 11.7,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị/anh chọn đồ nha. Em vừa tra kho rồi ạ:\n\nVề **áo CLB bóng đá** thì shop hiện có đúng 1 mẫu, còn lại là mấy áo thể thao mang đi đá banh cũng ổn:\n\n- [SP12792] Nike Men Manchester United Black Jersey – 399.000đ (giá gốc 499.000đ), còn size S. Đây là áo CLB chuẩn, chất polyester thoáng mát, form suông dễ vận động.\n- [SP2200] Adidas Men Red Polo T-shirt – 319.000đ, còn S, M, XL. Chất thun thấm hút mồ hôi tốt, màu đỏ nổi, mặc đá bóng hay đi chơi đều được.\n- [SP42112] ADIDAS Men Grey T-Shirt – 279.000đ, còn S, XL. Áo thun thể thao co giãn thoải mái, màu xám dễ mặc.\n\nCòn **mũ** thì xin lỗi anh/chị, shop em hiện chỉ bán quần áo thôi, chưa có mũ hay phụ kiện ạ.\n\nAnh/chị cho em biết muốn lấy mẫu nào, size nào thì em xin thông tin để nhân viên shop nhắn lại chốt đơn nhé. Mà áo CLB Manchester kia giờ chỉ còn size S, anh/chị xem có vừa không ạ?",
+   "hoi_thoai_day_du": [
+    "Khách: co ao da banh clb ko shop, mu cang tot",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị/anh chọn đồ nha. Em vừa tra kho rồi ạ:\n\nVề **áo CLB bóng đá** thì shop hiện có đúng 1 mẫu, còn lại là mấy áo thể thao mang đi đá banh cũng ổn:\n\n- [SP12792] Nike Men Manchester United Black Jersey – 399.000đ (giá gốc 499.000đ), còn size S. Đây là áo CLB chuẩn, chất polyester thoáng mát, form suông dễ vận động.\n- [SP2200] Adidas Men Red Polo T-shirt – 319.000đ, còn S, M, XL. Chất thun thấm hút mồ hôi tốt, màu đỏ nổi, mặc đá bóng hay đi chơi đều được.\n- [SP42112] ADIDAS Men Grey T-Shirt – 279.000đ, còn S, XL. Áo thun thể thao co giãn thoải mái, màu xám dễ mặc.\n\nCòn **mũ** thì xin lỗi anh/chị, shop em hiện chỉ bán quần áo thôi, chưa có mũ hay phụ kiện ạ.\n\nAnh/chị cho em biết muốn lấy mẫu nào, size nào thì em xin thông tin để nhân viên shop nhắn lại chốt đơn nhé. Mà áo CLB Manchester kia giờ chỉ còn size S, anh/chị xem có vừa không ạ?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP12792",
+    "SP2200",
+    "SP42112"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_29",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.5,
+   "giay_luot_cuoi": 7.5,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được 2 mẫu short kaki nam có túi hộp, hợp đi chơi:\n\n[SP29176] United Colors of Benetton Boys Khaki Shorts – 399.000đ, còn M, L, XL. Kaki be, dáng rộng thoải mái, nhiều túi hộp tiện đựng đồ, đúng kiểu streetwear đi chơi dạo phố.\n[SP52520] Pepe Jeans Men Cream Cargo Shorts – 489.000đ, còn S, L, XL. Kaki kem dáng suông, nhiều túi hộp, chất bền, mặc đi chơi hay đi biển đều ổn.\n\nChị cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra còn đúng size nhé. Chị muốn chốt mẫu nào thì để lại mã + size + màu, nhân viên shop sẽ nhắn lại ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: quần short kaki túi hộp nam đi chơi",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được 2 mẫu short kaki nam có túi hộp, hợp đi chơi:\n\n[SP29176] United Colors of Benetton Boys Khaki Shorts – 399.000đ, còn M, L, XL. Kaki be, dáng rộng thoải mái, nhiều túi hộp tiện đựng đồ, đúng kiểu streetwear đi chơi dạo phố.\n[SP52520] Pepe Jeans Men Cream Cargo Shorts – 489.000đ, còn S, L, XL. Kaki kem dáng suông, nhiều túi hộp, chất bền, mặc đi chơi hay đi biển đều ổn.\n\nChị cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra còn đúng size nhé. Chị muốn chốt mẫu nào thì để lại mã + size + màu, nhân viên shop sẽ nhắn lại ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP29176",
+    "SP52520"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_30",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 4.7,
+   "giay_luot_cuoi": 4.7,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio ạ. Với yêu cầu váy hoa nhí tay ngắn, nhẹ nhàng kiểu vintage, em tìm được 2 mẫu này:\n\n[SP23050] Arrow Woman Multi Coloured Floral Dress – 569.000đ – còn size M – đầm xòe voan hoa nhí, cổ tròn tay ngắn, dáng nhẹ nhàng nữ tính, mặc dạo phố/hẹn hò rất hợp không khí vintage.\n\n[SP18895] Arrow Woman Lida Grey Dress – 339.000đ (giá gốc 389.000đ) – còn size S, M – đầm suông hoa nhí nền xám trang nhã, tay ngắn cổ tròn, kiểu dịu dàng dễ mặc đi làm, đi học.\n\nChị thích mẫu nào để em xem kỹ hơn, hay chị cho em chiều cao/cân nặng để em tư vấn size chính xác nhé?",
+   "hoi_thoai_day_du": [
+    "Khách: váy hoa nhí tay ngắn nhẹ nhàng kiểu vintage",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio ạ. Với yêu cầu váy hoa nhí tay ngắn, nhẹ nhàng kiểu vintage, em tìm được 2 mẫu này:\n\n[SP23050] Arrow Woman Multi Coloured Floral Dress – 569.000đ – còn size M – đầm xòe voan hoa nhí, cổ tròn tay ngắn, dáng nhẹ nhàng nữ tính, mặc dạo phố/hẹn hò rất hợp không khí vintage.\n\n[SP18895] Arrow Woman Lida Grey Dress – 339.000đ (giá gốc 389.000đ) – còn size S, M – đầm suông hoa nhí nền xám trang nhã, tay ngắn cổ tròn, kiểu dịu dàng dễ mặc đi làm, đi học.\n\nChị thích mẫu nào để em xem kỹ hơn, hay chị cho em chiều cao/cân nặng để em tư vấn size chính xác nhé?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP23050",
+    "SP18895"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  }
+ ]
+}

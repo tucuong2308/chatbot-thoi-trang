@@ -37,8 +37,11 @@ SQL lọc trước rồi mới chấm điểm, nên không cần Vectorize (đ�
 **Xem ảnh**: Gemini nhận tối đa 3.600 ảnh và 20 MB dữ liệu đính kèm mỗi request; lô 16 ảnh (2-6 MB với ảnh shop thật)
 nằm xa giới hạn đó. Mỗi lần xem tối đa 32 ảnh, vì gói Workers miễn phí chỉ cho 50 lượt gọi ra ngoài mỗi lần chạy.
 
-**Model**: `GEMINI_MODEL` là model chính, `GEMINI_MODEL_DU_PHONG` dùng khi model chính quá tải;
-model lỗi tạm thời bị bỏ qua 5 phút để khách không phải chờ.
+**Model**: mặc định dùng DeepSeek V4.1 Flash (`deepseek-flash`) qua API kiểu OpenAI cho phần suy nghĩ, gọi công cụ
+và xem ảnh; khóa đặt ở `OPENAI_API_KEY`. Trên bộ test tự nhiên 30 câu (`tests/eval/ket_qua/`), bản agent với DeepSeek
+trúng 30/30, bao phủ top 3 là 0,81, so với 21/25 và 0,66 khi dùng `gemini-3.1-flash-lite`; chi phí khoảng 0,4 xu Mỹ mỗi cuộc hội thoại.
+Đặt `LLM_NHA_CUNG_CAP = "gemini"` để quay lại Gemini (`GEMINI_MODEL` chính, `GEMINI_MODEL_DU_PHONG` dự phòng; gói miễn phí
+chỉ cho 20 lượt/ngày với gemini-3.8-flash). Embedding luôn dùng Gemini.
 
 | Thư mục | Nội dung |
 | --- | --- |
@@ -133,7 +136,7 @@ python tests/eval/run_eval.py --url http://localhost:8787 --ten ten_lan_chay
 
 ## Lưu ý
 
-- `gemini-2.5-flash` không còn mở cho khóa mới; đang dùng `gemini-3.8-flash` (chính) và `gemini-3.5-flash-lite` (dự phòng).
+- `gemini-2.5-flash` không còn mở cho khóa mới. Khi dùng Gemini: `gemini-3.8-flash` (chính) và `gemini-3.5-flash-lite` (dự phòng).
 - Gói Workers miễn phí giới hạn 50 truy vấn D1 và 50 lần gọi ra ngoài mỗi tin nhắn; một tin nhắn thường dùng dưới 15.
 - Gói miễn phí của Gemini dùng dữ liệu gửi lên để cải thiện sản phẩm. Khi chạy cho khách thật nên bật gói trả phí.
 - Link CSV "Công bố lên web" là công khai: hợp cho demo, không hợp cho dữ liệu thật của khách.
