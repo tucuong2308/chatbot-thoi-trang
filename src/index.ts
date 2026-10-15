@@ -10,7 +10,7 @@ async function replyMessenger(env: Env, senderId: string, text: string) {
     const reply = await handleUserMessage(env, `fb:${senderId}`, text, async (msg) => {
       await sendText(env, senderId, msg);
       await sendTyping(env, senderId);
-    });
+    }, async () => { await sendTyping(env, senderId); });
     for (const url of reply.images) await sendImage(env, senderId, url);
     await sendText(env, senderId, reply.text);
   } catch (err) {

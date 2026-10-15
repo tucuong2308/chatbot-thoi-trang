@@ -38,6 +38,8 @@ export interface BotReply {
  */
 export async function handleUserMessage(
   env: Env, userKey: string, message: string, send?: (text: string) => Promise<void>,
+  /** Gọi sau mỗi vòng tra cứu: Messenger dùng để bật lại "đang soạn tin", khách không thấy bot im lặng. */
+  typing?: () => Promise<void>,
 ): Promise<BotReply> {
   const started = Date.now();
   const history = [...(await loadHistory(env, userKey)), { role: "user" as const, text: message }];
@@ -92,6 +94,7 @@ export async function handleUserMessage(
       return { call, result };
     }));
     messages.push({ role: "tool", results });
+    await typing?.().catch(() => {});
   }
 
   if (!text) text = "Dạ em chưa trả lời được câu này, em chuyển nhân viên hỗ trợ chị ngay nhé.";

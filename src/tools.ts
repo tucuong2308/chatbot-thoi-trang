@@ -107,6 +107,13 @@ const round3 = (n: number | undefined) => (n === undefined ? undefined : Math.ro
 async function timSanPham(
   env: Env, args: { sql?: string; theo_mo_ta?: string; theo_anh?: string; uu_tien?: string; so_luong?: number },
 ) {
+  // Tạo vector câu hỏi song song với bước SQL thay vì chờ SQL xong mới gọi (bớt khoảng 0,5-1 giây mỗi lần tìm).
+  const embeds = Promise.all((["mo_ta", "anh"] as const).map(async (kenh) => {
+    const text = kenh === "mo_ta" ? args.theo_mo_ta : args.theo_anh;
+    if (!text?.trim()) return [kenh, null] as const;
+    try { return [kenh, await embedText(env, text)] as const; } catch (err) { return [kenh, err as Error] as const; }
+  }));
+
   let ids: string[] | null = null;
   if (args.sql?.trim()) {
     const rows = await runSelect(env, args.sql, 500);
@@ -124,11 +131,10 @@ async function timSanPham(
   // Điểm từng kênh, rồi gộp bằng RRF có trọng số (điểm chữ và điểm ảnh khác thang đo nên không cộng thẳng).
   const queries: Partial<Record<Kenh, number[]>> = {};
   const errors: string[] = [];
-  await Promise.all((["mo_ta", "anh"] as const).map(async (kenh) => {
-    const text = kenh === "mo_ta" ? args.theo_mo_ta : args.theo_anh;
-    if (!text?.trim()) return;
-    try { queries[kenh] = await embedText(env, text); } catch (err) { errors.push(`kênh ${kenh}: ${(err as Error).message}`); }
-  }));
+  for (const [kenh, v] of await embeds) {
+    if (v instanceof Error) errors.push(`kênh ${kenh}: ${v.message}`);
+    else if (v) queries[kenh] = v;
+  }
   const order = rows.map((r) => String(r.ma_sp));
   const scores = await channelScores(env, order, queries);
   const weight: Record<Kenh, number> = args.uu_tien === "mo_ta" ? { mo_ta: 1, anh: 0.3 }
