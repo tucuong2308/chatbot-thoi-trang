@@ -198,7 +198,7 @@ async function chatOpenAI(
     return { id: c.id, name: c.function?.name, args };
   });
   // Đôi khi máy chủ không tách được lời gọi công cụ của DeepSeek và trả nguyên dạng <｜DSML｜ invoke ...> trong content.
-  if (!toolCalls.length && /DSML｜\s*invoke/.test(message.content ?? "")) {
+  if (!toolCalls.length && /DSML｜+\s*invoke/.test(message.content ?? "")) {
     toolCalls = parseDsml(message.content);
     if (toolCalls.length) {
       message.content = null;
@@ -210,14 +210,14 @@ async function chatOpenAI(
   return { text: String(message.content ?? "").trim(), toolCalls, model, raw };
 }
 
-/** Đọc lời gọi công cụ dạng chữ của DeepSeek: <｜DSML｜ invoke name="..."> <｜DSML｜ parameter name="..." string="true">...</｜DSML｜ parameter> */
+/** Đọc lời gọi công cụ dạng chữ của DeepSeek (một hoặc hai dấu ｜): <｜DSML｜ invoke name="..."> <｜DSML｜ parameter name="..." string="true">...</｜DSML｜ parameter> */
 export function parseDsml(text: string): ToolCall[] {
   const calls: ToolCall[] = [];
-  const invokes = text.split(/<｜DSML｜\s*invoke\s+name="/).slice(1);
+  const invokes = text.split(/<｜+DSML｜+\s*invoke\s+name="/).slice(1);
   invokes.forEach((chunk, i) => {
     const name = chunk.slice(0, chunk.indexOf('"'));
     const args: Record<string, unknown> = {};
-    for (const m of chunk.matchAll(/<｜DSML｜\s*parameter\s+name="([^"]+)"(?:\s+string="(true|false)")?>([\s\S]*?)(?=<\/?｜DSML｜)/g)) {
+    for (const m of chunk.matchAll(/<｜+DSML｜+\s*parameter\s+name="([^"]+)"(?:\s+string="(true|false)")?>([\s\S]*?)(?=<\/?｜+DSML)/g)) {
       const [, key, isString, raw] = m;
       const value = raw.trim();
       if (isString === "false") {
