@@ -16,6 +16,8 @@ export interface Env {
   /** Khóa của API kiểu OpenAI (VD DeepSeek); không có thì dùng NVIDIA_API_KEY. */
   OPENAI_API_KEY?: string;
   NVIDIA_API_KEY?: string;
+  /** "tat" để tắt suy nghĩ của DeepSeek ở vòng trò chuyện chính; mặc định bật (bước xem ảnh luôn tắt). */
+  DEEPSEEK_SUY_NGHI?: string;
   /** Số ảnh mỗi lần gửi model nhìn (mặc định 16 với Gemini, 8 với API kiểu OpenAI). */
   ANH_MOI_LO?: string;
   /** Địa chỉ Worker trên mạng, để đổi ảnh dạng /anh/... thành link đầy đủ khi gửi Messenger. */
@@ -42,6 +44,14 @@ export interface ToolTrace {
   cong_cu: string;
   tham_so: Record<string, unknown>;
   ket_qua: unknown;
+}
+
+/** Số token của một lần gọi model (theo trường usage của API kiểu OpenAI). */
+export interface TokenUsage {
+  vao: number;
+  ra: number;
+  suy_nghi: number;
+  vao_cache: number;
 }
 
 export interface TinNhanMessenger {

@@ -1,0 +1,2750 @@
+{
+ "tong": {
+  "trung_3": "28/30",
+  "chinh_xac_tb": 0.79,
+  "bao_phu_3_tb": 0.78,
+  "hanh_vi_dat": "0/0",
+  "loi_chay": 0,
+  "giay_moi_luot_trung_vi": 8.5,
+  "giay_moi_luot_p90": 19.8,
+  "giay_moi_luot_max": 22.5,
+  "so_case_xem_anh": 5,
+  "case_bia_ma": 0,
+  "case_nhac_ma_khong_ban_duoc": 0,
+  "model": [
+   "deepseek-flash"
+  ],
+  "so_lan_goi_model": 94,
+  "token_vao": 687232,
+  "token_vao_cache": 574720,
+  "token_ra": 38631,
+  "token_suy_nghi": 15189
+ },
+ "theo_loai": [
+  {
+   "loai": "tu_nhien",
+   "so_case": 30,
+   "loi_chay": 0,
+   "trung_3": "28/30",
+   "chinh_xac_tb": 0.79,
+   "bao_phu_3_tb": 0.78,
+   "hanh_vi_dat": "",
+   "giay_tb": 11.3,
+   "case_bia_ma": 0
+  }
+ ],
+ "chi_tiet": [
+  {
+   "id": "tn_01",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.0,
+   "giay_luot_cuoi": 7.0,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4925,
+     "ra": 318,
+     "suy_nghi": 134,
+     "vao_cache": 0
+    },
+    {
+     "vao": 6960,
+     "ra": 412,
+     "suy_nghi": 142,
+     "vao_cache": 5120
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE kieu_sp = 'áo sơ mi' AND tay_ao = 'tay dài' AND hoa_tiet = 'caro' AND mau_chinh IN ('xanh lá','xanh dương','xanh navy') AND gioi_tinh IN ('nam','unisex') AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "áo sơ mi caro xanh tay dài cho nam mặc thoải mái",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP16793",
+      "SP20180",
+      "SP32762",
+      "SP11087",
+      "SP8147",
+      "SP30111"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 6, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.745, \"thu_5\": 0.65, \"trung_vi\": 0.676}}, \"san_pham\": [{\"ma_sp\": \"SP16793\", \"ten_sp\": \"Highlander Men Check Blue Shirt\", \"gia_ban\": 169000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo sơ mi\", \"kieu_co\": \"cổ đức/bẻ\", \"tay_ao\": \"tay dài\", \"do_dai\": \"ngang hông\", \"dang\": "
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em giúp chị tìm ngay ạ. Shop có mấy mẫu sơ mi caro xanh tay dài cho nam đây:\n\n- [SP16793] Highlander Men Check Blue Shirt – 169.000đ, còn M, XL: caro xanh dương phối trắng, cotton thoáng, dáng suông dễ mặc hằng ngày.\n- [SP32762] John Miller Men Check Blue Shirt – 369.000đ (giá gốc 469.000đ), còn S, M: caro nhỏ xanh dương nhạt, cổ sơ mi lịch sự, hợp đi làm.\n- [SP11087] Scullers Men Green Check Shirt – 179.000đ, còn S, M, XL: caro xanh lá phối trắng, dáng suông, có 2 túi ngực.\n\nChị cho em biết người mặc cao/cân nặng khoảng bao nhiêu và thích xanh dương hay xanh lá để em chọn size chuẩn hơn nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: shop ơi có áo sơ mi caro xanh tay dài cho nam ko ạ",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em giúp chị tìm ngay ạ. Shop có mấy mẫu sơ mi caro xanh tay dài cho nam đây:\n\n- [SP16793] Highlander Men Check Blue Shirt – 169.000đ, còn M, XL: caro xanh dương phối trắng, cotton thoáng, dáng suông dễ mặc hằng ngày.\n- [SP32762] John Miller Men Check Blue Shirt – 369.000đ (giá gốc 469.000đ), còn S, M: caro nhỏ xanh dương nhạt, cổ sơ mi lịch sự, hợp đi làm.\n- [SP11087] Scullers Men Green Check Shirt – 179.000đ, còn S, M, XL: caro xanh lá phối trắng, dáng suông, có 2 túi ngực.\n\nChị cho em biết người mặc cao/cân nặng khoảng bao nhiêu và thích xanh dương hay xanh lá để em chọn size chuẩn hơn nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP16793",
+    "SP32762",
+    "SP11087"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_02",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 14.7,
+   "giay_luot_cuoi": 14.7,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4941,
+     "ra": 421,
+     "suy_nghi": 65,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 7969,
+     "ra": 499,
+     "suy_nghi": 170,
+     "vao_cache": 5248
+    },
+    {
+     "vao": 10424,
+     "ra": 549,
+     "suy_nghi": 198,
+     "vao_cache": 8448
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'đầm' AND trang_thai = 'đang bán' AND mau_chinh <> 'trắng' AND tay_ao <> 'không áp dụng' AND tay_ao <> 'sát nách' AND tay_ao <> 'hai dây' AND kieu_co NOT IN ('trễ vai','lệch vai','hai dây','cúp ngực','cổ yếm') ORDER BY CASE WHEN do_dai IN ('midi','ngang gối','trên gối') THEN 0 ELSE 1 END",
+      "theo_mo_ta": "đầm thanh lịch kín đáo mặc đi đám cưới, không lố, có tay áo",
+      "theo_anh": "đầm nhã nhặn thanh lịch, không quá gợi cảm, có tay",
+      "uu_tien": "mo_ta",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP18736",
+      "SP23050",
+      "SP59996",
+      "SP57044",
+      "SP18735",
+      "SP57991",
+      "SP20637",
+      "SP59983",
+      "SP58509",
+      "SP38828",
+      "SP18895",
+      "SP10365",
+      "SP50721",
+      "SP23621"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 14, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.383, \"thu_5\": 0.347, \"trung_vi\": 0.341}, \"anh\": {\"cao_nhat\": 0.393, \"thu_5\": 0.382, \"trung_vi\": 0.373}}, \"san_pham\": [{\"ma_sp\": \"SP18736\", \"ten_sp\": \"Arrow Woman Rima Red Dress\", \"gia_ban\": 359000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"đầm\", \"kieu_sp\": \"đầm suông\", \"kieu_co\":"
+    },
+    {
+     "cong_cu": "xem_anh",
+     "tham_so": {
+      "ma_sp": [
+       "SP18736",
+       "SP23050",
+       "SP59996",
+       "SP57044",
+       "SP18735",
+       "SP57991",
+       "SP20637",
+       "SP59983",
+       "SP58509",
+       "SP38828",
+       "SP18895",
+       "SP10365",
+       "SP50721",
+       "SP23621"
+      ],
+      "yeu_cau": "Chọn giúp đầm mặc đi đám cưới của bạn thân: thanh lịch, nhã nhặn, không lố/không quá nổi bật, kín đáo vừa phải, có tay áo che vai. Loại bỏ mẫu quá gợi cảm, hở nhiều, hoặc họa tiết quá sặc sỡ. Nói rõ từng mã hợp hay không và vì sao.",
+      "loi_nhan_cho": "Dạ chị chờ em xíu, em xem kỹ từng mẫu cho chị nhé"
+     },
+     "ma_trong_ket_qua": [
+      "SP57044",
+      "SP20637",
+      "SP38828",
+      "SP10365",
+      "SP18736",
+      "SP23050",
+      "SP59996",
+      "SP18735",
+      "SP57991",
+      "SP59983",
+      "SP58509",
+      "SP18895",
+      "SP50721",
+      "SP23621"
+     ],
+     "ket_qua_rut_gon": "{\"da_xem\": 14, \"hop\": [{\"ma_sp\": \"SP57044\", \"ten_sp\": \"Elle Women Black Dress\", \"gia_ban\": 489000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"đầm\", \"kieu_sp\": \"đầm suông\", \"kieu_co\": \"cổ V\", \"tay_ao\": \"tay ngắn\", \"do_dai\": \"trên gối\", \"dang\": \"suông\", \"chat_lieu\": \"ren\", \"hoa_tiet\": \"ren\", \"mau_chinh\": \"đen\", \"phong_cach\": \"nữ tính/tiểu thư\", \"dip\": \"dạo phố, hẹn hò, dự tiệc\", \"chi_tiet\": \"có lót trong, phối"
+    }
+   ],
+   "tra_loi": "Dạ em tìm được mấy mẫu nhã nhặn, có tay che vai, mặc dự cưới không bị lố ạ:\n\n[SP57044] Elle Women Black Dress – 489.000đ – size S, M, XL – đầm ren đen cổ V vừa phải, tay ngắn, có lót trong nên kín đáo mà vẫn sang, mặc đám cưới tối rất ổn ạ.\n[SP38828] Latin Quarters Women Teal Dress – 369.000đ – size S, M, L, XL – màu teal trơn thanh lịch, tay ngắn, thắt eo xòe nhẹ nên dễ mặc và tôn dáng, đứng giữa đám đông vẫn nhã ạ.\n[SP20637] AND Women Solid Grey and Black Dress – 289.000đ (đang giảm từ 389.000đ) – size M, L, XL – phối xám/đen, dáng suông kín đáo, kiểu công sở nhẹ nhàng, giá cũng dễ chịu ạ.\n\nChị cho em biết chị mặc size nào hoặc cân nặng/chiều cao để em tư vấn size chuẩn nhé. Chị ưng mẫu nào thì nhắn em mã + size, em chuyển nhân viên shop liên hệ chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: cần cái đầm mặc đi đám cưới bạn thân mà ko lố, có tay áo xíu cho đỡ hở nha",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ từng mẫu cho chị nhé",
+    "Bot: Dạ em tìm được mấy mẫu nhã nhặn, có tay che vai, mặc dự cưới không bị lố ạ:\n\n[SP57044] Elle Women Black Dress – 489.000đ – size S, M, XL – đầm ren đen cổ V vừa phải, tay ngắn, có lót trong nên kín đáo mà vẫn sang, mặc đám cưới tối rất ổn ạ.\n[SP38828] Latin Quarters Women Teal Dress – 369.000đ – size S, M, L, XL – màu teal trơn thanh lịch, tay ngắn, thắt eo xòe nhẹ nên dễ mặc và tôn dáng, đứng giữa đám đông vẫn nhã ạ.\n[SP20637] AND Women Solid Grey and Black Dress – 289.000đ (đang giảm từ 389.000đ) – size M, L, XL – phối xám/đen, dáng suông kín đáo, kiểu công sở nhẹ nhàng, giá cũng dễ chịu ạ.\n\nChị cho em biết chị mặc size nào hoặc cân nặng/chiều cao để em tư vấn size chuẩn nhé. Chị ưng mẫu nào thì nhắn em mã + size, em chuyển nhân viên shop liên hệ chốt đơn ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP57044",
+    "SP38828",
+    "SP20637"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_03",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 10.7,
+   "giay_luot_cuoi": 10.7,
+   "so_buoc_cong_cu": 3,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4920,
+     "ra": 357,
+     "suy_nghi": 167,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 5342,
+     "ra": 184,
+     "suy_nghi": 27,
+     "vao_cache": 5120
+    },
+    {
+     "vao": 7636,
+     "ra": 296,
+     "suy_nghi": 116,
+     "vao_cache": 5504
+    },
+    {
+     "vao": 8373,
+     "ra": 479,
+     "suy_nghi": 164,
+     "vao_cache": 7808
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE gioi_tinh IN ('nam','unisex') AND mau_chinh = 'xám' AND danh_muc = 'áo khoác' AND NOT EXISTS (SELECT 1 FROM san_pham_chi_tiet c WHERE c.ma_sp = san_pham.ma_sp AND c.chi_tiet = 'khóa kéo')",
+      "theo_mo_ta": "hoodie chui đầu, áo nỉ có mũ, không khóa kéo, mặc dạo phố",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 0, \"goi_y\": \"SQL không ra món nào. Nới điều kiện ít quan trọng nhất rồi gọi lại, và nói với khách đã nới gì.\"}"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, gioi_tinh, danh_muc, kieu_sp, mau_chinh, gia_ban, trang_thai, mo_ta_tu_do FROM san_pham WHERE gioi_tinh IN ('nam','unisex') AND danh_muc IN ('áo khoác','áo') AND (mo_ta_tu_do LIKE '%hood%' OR ten_sp LIKE '%hood%' OR mo_ta_tu_do LIKE '%mũ%' OR ten_sp LIKE '%nỉ%')"
+     },
+     "ma_trong_ket_qua": [
+      "SP31102",
+      "SP19477",
+      "SP39496",
+      "SP19337",
+      "SP15321",
+      "SP16202",
+      "SP54948",
+      "SP14113",
+      "SP15619",
+      "SP16207",
+      "SP15629",
+      "SP15018"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 12, \"dong\": [{\"ma_sp\": \"SP31102\", \"ten_sp\": \"Gini and jony Boys Printed Red T-shirt\", \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo thun\", \"mau_chinh\": \"đỏ\", \"gia_ban\": 239000, \"trang_thai\": \"đang bán\", \"mo_ta_tu_do\": \"Áo thun trẻ em nam màu đỏ, cổ tròn, tay ngắn, dáng suông thoải mái. Chất liệu cotton mềm mại, in hình mũ bảo hiểm và chữ thể thao nổi bật. Phù hợp mặc đi học, dạo"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT sp.ma_sp, sp.ten_sp, sp.gia_ban, sp.gia_goc, sp.kieu_sp, GROUP_CONCAT(DISTINCT c.chi_tiet) AS chi_tiet, GROUP_CONCAT(DISTINCT b.size || ':' || b.ton_kho) AS ton FROM san_pham sp LEFT JOIN san_pham_chi_tiet c ON c.ma_sp = sp.ma_sp LEFT JOIN bien_the b ON b.ma_sp = sp.ma_sp WHERE sp.ma_sp IN ('SP54948','SP16207','SP15018','SP15619','SP16202') GROUP BY sp.ma_sp"
+     },
+     "ma_trong_ket_qua": [
+      "SP15018",
+      "SP15619",
+      "SP16202",
+      "SP16207",
+      "SP54948"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 5, \"dong\": [{\"ma_sp\": \"SP15018\", \"ten_sp\": \"ADIDAS Men Printed Grey Sweatshirts\", \"gia_ban\": 719000, \"gia_goc\": 769000, \"kieu_sp\": \"áo len\", \"chi_tiet\": \"có túi,dây rút\", \"ton\": \"S:0,M:0,L:5,XL:1\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP15619\", \"ten_sp\": \"Nike Men AS Squad FT FZ Hoody Grey Sweatshirts\", \"gia_ban\": 829000, \"kieu_sp\": \"áo khoác gió\", \"chi_tiet\": \"có túi,dây rút,khóa"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em tìm giúp chị mấy mẫu hoodie xám nam chui đầu, không khóa kéo ạ:\n\n[SP54948] Do u speak green Men Grey Sweatshirt – 319.000đ (giá gốc 419.000đ), còn L, XL: áo nỉ xám có mũ, dây rút, túi kangaroo, dáng suông rộng, giá dễ chịu nhất.\n[SP16207] Puma Men Cheveron Wording Grey SweatShirt – 859.000đ (giá gốc 1.009.000đ), còn S, M, XL: xám than, nỉ mềm, in chữ PUMA trước ngực, form suông, hơi sporty.\n[SP15018] ADIDAS Men Printed Grey Sweatshirts – 719.000đ (giá gốc 769.000đ), còn L, XL: xám in logo adidas, có mũ và túi kangaroo, kiểu basic dễ phối.\n\nChị cho em biết chị thích mẫu nào, size nào không ạ? Em chưa tự lên đơn được, nhân viên shop sẽ nhắn lại chốt đơn với chị ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: hoodie xám nam loại chui đầu, ko cần khoá kéo",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tìm giúp chị mấy mẫu hoodie xám nam chui đầu, không khóa kéo ạ:\n\n[SP54948] Do u speak green Men Grey Sweatshirt – 319.000đ (giá gốc 419.000đ), còn L, XL: áo nỉ xám có mũ, dây rút, túi kangaroo, dáng suông rộng, giá dễ chịu nhất.\n[SP16207] Puma Men Cheveron Wording Grey SweatShirt – 859.000đ (giá gốc 1.009.000đ), còn S, M, XL: xám than, nỉ mềm, in chữ PUMA trước ngực, form suông, hơi sporty.\n[SP15018] ADIDAS Men Printed Grey Sweatshirts – 719.000đ (giá gốc 769.000đ), còn L, XL: xám in logo adidas, có mũ và túi kangaroo, kiểu basic dễ phối.\n\nChị cho em biết chị thích mẫu nào, size nào không ạ? Em chưa tự lên đơn được, nhân viên shop sẽ nhắn lại chốt đơn với chị ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP54948",
+    "SP16207",
+    "SP15018"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_04",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 15.4,
+   "giay_luot_cuoi": 8.1,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4913,
+     "ra": 254,
+     "suy_nghi": 76,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 7649,
+     "ra": 516,
+     "suy_nghi": 245,
+     "vao_cache": 5120
+    },
+    {
+     "vao": 5203,
+     "ra": 363,
+     "suy_nghi": 110,
+     "vao_cache": 4864
+    },
+    {
+     "vao": 7464,
+     "ra": 572,
+     "suy_nghi": 245,
+     "vao_cache": 5504
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'áo khoác' AND gioi_tinh IN ('nam','unisex') AND mau_chinh = 'đen' AND trang_thai = 'đang bán' AND EXISTS (SELECT 1 FROM san_pham_chi_tiet c WHERE c.ma_sp = san_pham.ma_sp AND c.chi_tiet = 'khóa kéo')",
+      "theo_mo_ta": "áo khoác thể thao mặc tập gym, chạy bộ, năng động",
+      "theo_anh": "áo khoác gió màu đen có khóa kéo, phong cách thể thao",
+      "uu_tien": "mo_ta",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP15321",
+      "SP9768",
+      "SP15603",
+      "SP52034",
+      "SP5560",
+      "SP39496",
+      "SP22313"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 7, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.629, \"thu_5\": 0.544, \"trung_vi\": 0.593}, \"anh\": {\"cao_nhat\": 0.425, \"thu_5\": 0.381, \"trung_vi\": 0.397}}, \"san_pham\": [{\"ma_sp\": \"SP15321\", \"ten_sp\": \"Nike Men Solid Black Jackets\", \"gia_ban\": 659000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo khoác\", \"kieu_sp\": \"áo khoác gió\", "
+    }
+   ],
+   "tra_loi": "Dạ em lọc được mấy mẫu áo khoác gió nam màu đen có khóa kéo, đúng kiểu thể thao đây ạ:\n\n- [SP15321] Nike Men Solid Black Jackets – 659.000đ, size còn S/M/XL, polyester nhẹ có mũ và dây rút, khóa kéo toàn thân, bo gấu bo tay, tập thể thao hay dạo phố đều tiện.\n- [SP9768] ADIDAS Men Adna Black Jackets – 489.000đ, size còn S/L/XL, dáng suông cổ đức, sọc trắng cách điệu ở tay, túi hai bên, mặc đi học lẫn tập gym đều ổn.\n- [SP15603] Nike Men Football Soccer Black Jackets – 379.000đ, size còn L/XL, giá dễ chịu nhất, sọc trắng dọc vai tay nhìn khỏe khoắn, hợp chạy bộ, đá bóng.\n\nChị mặc size gì để em xem kỹ tồn kho từng màu giúp chị nha. Còn nếu chị thích mua mẫu nào thì cho em mã + size, em xin thông tin rồi nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: có áo khoác thể thao ko shop",
+    "Bot: Dạ có chị nhé, shop có mấy mẫu áo khoác gió thể thao đang bán:\n\n- [SP25025] Nike Women Vapor Purple Jacket – 689.000đ, size S/M/L/XL, màu tím phối hồng, có mũ và khóa kéo, mặc tập thể thao hay dạo phố đều ổn.\n- [SP31443] Nike Women Football Red Jacket – 439.000đ (giá gốc 489.000đ), size S/M/L, màu đỏ nổi, polyester nhẹ có co giãn, sọc trắng dọc tay nhìn khỏe khoắn.\n- [SP9768] ADIDAS Men Adna Black Jackets – 489.000đ, size S/L/XL, dáng suông màu đen sọc trắng ở tay, dễ mặc đi học lẫn tập gym.\n\nChị cho em biết chị cần mẫu nữ hay nam, và mặc size gì để em lọc kỹ hơn nha. Em là trợ lý AI của Mộc Lam Studio ạ.",
+    "Khách: loại khoá kéo màu đen nha, cho nam",
+    "Bot: Dạ em lọc được mấy mẫu áo khoác gió nam màu đen có khóa kéo, đúng kiểu thể thao đây ạ:\n\n- [SP15321] Nike Men Solid Black Jackets – 659.000đ, size còn S/M/XL, polyester nhẹ có mũ và dây rút, khóa kéo toàn thân, bo gấu bo tay, tập thể thao hay dạo phố đều tiện.\n- [SP9768] ADIDAS Men Adna Black Jackets – 489.000đ, size còn S/L/XL, dáng suông cổ đức, sọc trắng cách điệu ở tay, túi hai bên, mặc đi học lẫn tập gym đều ổn.\n- [SP15603] Nike Men Football Soccer Black Jackets – 379.000đ, size còn L/XL, giá dễ chịu nhất, sọc trắng dọc vai tay nhìn khỏe khoắn, hợp chạy bộ, đá bóng.\n\nChị mặc size gì để em xem kỹ tồn kho từng màu giúp chị nha. Còn nếu chị thích mua mẫu nào thì cho em mã + size, em xin thông tin rồi nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP15321",
+    "SP9768",
+    "SP15603"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_05",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 19.8,
+   "giay_luot_cuoi": 19.8,
+   "so_buoc_cong_cu": 5,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4941,
+     "ra": 488,
+     "suy_nghi": 110,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 9654,
+     "ra": 361,
+     "suy_nghi": 150,
+     "vao_cache": 5376
+    },
+    {
+     "vao": 11154,
+     "ra": 968,
+     "suy_nghi": 688,
+     "vao_cache": 9984
+    },
+    {
+     "vao": 13689,
+     "ra": 637,
+     "suy_nghi": 223,
+     "vao_cache": 12032
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, danh_muc, kieu_sp, hoa_tiet, mau_chinh, gia_ban, trang_thai FROM san_pham WHERE ten_sp LIKE '%bé%' OR ten_sp LIKE '%trẻ%' OR ten_sp LIKE '%kid%' OR mo_ta_tu_do LIKE '%trẻ em%' OR mo_ta_tu_do LIKE '%bé gái%' OR danh_muc LIKE '%trẻ%'"
+     },
+     "ma_trong_ket_qua": [
+      "SP31102",
+      "SP4870",
+      "SP13323",
+      "SP18173",
+      "SP4895",
+      "SP25503",
+      "SP27227",
+      "SP23621",
+      "SP27198",
+      "SP33486",
+      "SP27223",
+      "SP35433",
+      "SP3896",
+      "SP27199",
+      "SP5005",
+      "SP10002",
+      "SP4929",
+      "SP29172",
+      "SP13515",
+      "SP13248"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 24, \"dong\": [{\"ma_sp\": \"SP31102\", \"ten_sp\": \"Gini and jony Boys Printed Red T-shirt\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo thun\", \"hoa_tiet\": \"in chữ/hình\", \"mau_chinh\": \"đỏ\", \"gia_ban\": 239000, \"trang_thai\": \"đang bán\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP4870\", \"ten_sp\": \"Levis Kids Boy's Dawson Red Teens Kidswear\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo thun\", \"hoa_tiet\": \"in chữ/hình"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE trang_thai = 'đang bán' AND hoa_tiet IN ('hoa nhí','hoa to') AND danh_muc IN ('đầm','chân váy')",
+      "theo_mo_ta": "váy cho bé gái nhỏ tuổi, họa tiết hoa lá sặc sỡ, dễ thương",
+      "theo_anh": "váy họa tiết hoa lá nhiều màu sặc sỡ, kiểu trẻ con dễ thương",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP29172",
+      "SP33486",
+      "SP27223",
+      "SP27198",
+      "SP23050",
+      "SP23621",
+      "SP49635",
+      "SP18736",
+      "SP57085",
+      "SP18735",
+      "SP8499",
+      "SP6864",
+      "SP59983",
+      "SP59981",
+      "SP57055"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 15, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.514, \"thu_5\": 0.463, \"trung_vi\": 0.439}, \"anh\": {\"cao_nhat\": 0.424, \"thu_5\": 0.394, \"trung_vi\": 0.374}}, \"san_pham\": [{\"ma_sp\": \"SP29172\", \"ten_sp\": \"United Colors of Benetton Kids Girls Printed Pink Skirt\", \"gia_ban\": 429000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"chân váy\", "
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT size, can_nang_kg, chieu_cao_cm, vong_1_cm, vong_2_cm, vong_3_cm FROM bang_size"
+     },
+     "ma_trong_ket_qua": [],
+     "ket_qua_rut_gon": "{\"so_dong\": 5, \"dong\": [{\"size\": \"S\", \"can_nang_kg\": \"40-47\", \"chieu_cao_cm\": \"148-155\", \"vong_1_cm\": \"78-82\", \"vong_2_cm\": \"60-64\", \"vong_3_cm\": \"84-88\"}, {\"size\": \"M\", \"can_nang_kg\": \"48-53\", \"chieu_cao_cm\": \"155-160\", \"vong_1_cm\": \"82-86\", \"vong_2_cm\": \"64-68\", \"vong_3_cm\": \"88-92\"}, {\"size\": \"L\", \"can_nang_kg\": \"54-59\", \"chieu_cao_cm\": \"160-165\", \"vong_1_cm\": \"86-90\", \"vong_2_cm\": \"68-72\", \"vo"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT sp.ma_sp, sp.ten_sp, sp.gia_ban, b.size, b.mau, b.ton_kho FROM san_pham sp JOIN bien_the b ON b.ma_sp = sp.ma_sp WHERE sp.ma_sp IN ('SP29172','SP33486','SP27223','SP27198','SP23621','SP25503','SP27227') AND b.ton_kho > 0 ORDER BY sp.ma_sp, b.size"
+     },
+     "ma_trong_ket_qua": [
+      "SP23621",
+      "SP25503",
+      "SP27198",
+      "SP27223",
+      "SP27227",
+      "SP29172",
+      "SP33486"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 15, \"dong\": [{\"ma_sp\": \"SP23621\", \"ten_sp\": \"Doodle Kids Girls Navy Blue Floral Print Dress\", \"gia_ban\": 309000, \"size\": \"XL\", \"mau\": \"xanh navy\", \"ton_kho\": 2, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP25503\", \"ten_sp\": \"Doodle Kids Girls Polka Dot Black Dress\", \"gia_ban\": 569000, \"size\": \"L\", \"mau\": \"xanh dương\", \"ton_kho\": 5, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP25503\", \"te"
+    },
+    {
+     "cong_cu": "xem_anh",
+     "tham_so": {
+      "ma_sp": [
+       "SP29172",
+       "SP33486",
+       "SP27223",
+       "SP23621",
+       "SP27198",
+       "SP27227"
+      ],
+      "yeu_cau": "Đây là đồ trẻ em gái. Kiểm tra: mẫu nào có họa tiết hoa lá rực rỡ/sặc sỡ, dáng váy hoặc chân váy dễ thương phù hợp bé gái 3-4 tuổi (không phải dáng người lớn, không quá tối màu/trơn). Nói rõ mẫu nào hợp nhất.",
+      "loi_nhan_cho": "Dạ chị chờ em xíu, em xem kỹ từng mẫu hoa cho bé nhé"
+     },
+     "ma_trong_ket_qua": [
+      "SP29172",
+      "SP33486",
+      "SP27198",
+      "SP27227",
+      "SP27223",
+      "SP23621"
+     ],
+     "ket_qua_rut_gon": "{\"da_xem\": 6, \"hop\": [{\"ma_sp\": \"SP29172\", \"ten_sp\": \"United Colors of Benetton Kids Girls Printed Pink Skirt\", \"gia_ban\": 429000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"chân váy\", \"kieu_sp\": \"khác\", \"kieu_co\": \"không áp dụng\", \"tay_ao\": \"không áp dụng\", \"do_dai\": \"trên gối\", \"dang\": \"xòe\", \"chat_lieu\": \"cotton\", \"hoa_tiet\": \"hoa to\", \"mau_chinh\": \"nhiều màu\", \"phong_cach\": \"nữ tính/tiểu thư\", \"dip\": \"dạ"
+    }
+   ],
+   "tra_loi": "Dạ em xem ảnh rồi ạ, có 3 mẫu hoa lá rực rỡ đúng ý chị:\n\n- [SP27227] Doodle Kids Girl Printed White Dress – 599.000đ – còn M, L – nền trắng in họa tiết bướm và hoa nhiều màu sặc sỡ nhất, tay phồng vai bèo, xòe tầng rất hợp bé gái nhỏ.\n- [SP29172] United Colors of Benetton Kids Girls Printed Pink Skirt – 429.000đ – còn M – chân váy xếp tầng hoa hồng đỏ rực rỡ, cotton mềm thoáng, bé mặc đi học hay dạo phố đều xinh.\n- [SP33486] Doodle Kids Girl Printed Blue Dress – 429.000đ – còn S, M, XL – đầm babydoll hai dây họa tiết hoa lá xanh navy trắng nổi bật, có diềm chấm bi và nơ đỏ, giá dễ thương nhất.\n\nDạ một điều em nói thật: bảng size bên em hiện là bảng size người lớn, chưa có bảng size riêng cho bé, nên em chưa dám chắc bé 3-4 tuổi mặc size nào. Chị cho em chiều cao, cân nặng của bé (hoặc bé đang mặc size gì) thì em nhờ nhân viên shop tư vấn size chuẩn giúp chị nhé. Chị thích mẫu nào để em xin mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: mua váy cho bé gái nhà e tầm 3 4 tuổi, thích họa tiết hoa lá sặc sỡ xíu",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ từng mẫu hoa cho bé nhé",
+    "Bot: Dạ em xem ảnh rồi ạ, có 3 mẫu hoa lá rực rỡ đúng ý chị:\n\n- [SP27227] Doodle Kids Girl Printed White Dress – 599.000đ – còn M, L – nền trắng in họa tiết bướm và hoa nhiều màu sặc sỡ nhất, tay phồng vai bèo, xòe tầng rất hợp bé gái nhỏ.\n- [SP29172] United Colors of Benetton Kids Girls Printed Pink Skirt – 429.000đ – còn M – chân váy xếp tầng hoa hồng đỏ rực rỡ, cotton mềm thoáng, bé mặc đi học hay dạo phố đều xinh.\n- [SP33486] Doodle Kids Girl Printed Blue Dress – 429.000đ – còn S, M, XL – đầm babydoll hai dây họa tiết hoa lá xanh navy trắng nổi bật, có diềm chấm bi và nơ đỏ, giá dễ thương nhất.\n\nDạ một điều em nói thật: bảng size bên em hiện là bảng size người lớn, chưa có bảng size riêng cho bé, nên em chưa dám chắc bé 3-4 tuổi mặc size nào. Chị cho em chiều cao, cân nặng của bé (hoặc bé đang mặc size gì) thì em nhờ nhân viên shop tư vấn size chuẩn giúp chị nhé. Chị thích mẫu nào để em xin mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP27227",
+    "SP29172",
+    "SP33486"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_06",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 15.9,
+   "giay_luot_cuoi": 9.4,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4913,
+     "ra": 311,
+     "suy_nghi": 24,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 8126,
+     "ra": 283,
+     "suy_nghi": 0,
+     "vao_cache": 5120
+    },
+    {
+     "vao": 5221,
+     "ra": 726,
+     "suy_nghi": 417,
+     "vao_cache": 4864
+    },
+    {
+     "vao": 7251,
+     "ra": 405,
+     "suy_nghi": 129,
+     "vao_cache": 5888
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ten_sp, mau_chinh, dang, gia_ban, trang_thai FROM san_pham WHERE gioi_tinh IN ('nữ','unisex') AND kieu_sp = 'quần jean' AND trang_thai = 'đang bán' ORDER BY mau_chinh"
+     },
+     "ma_trong_ket_qua": [],
+     "ket_qua_rut_gon": "{\"so_dong\": 7, \"dong\": [{\"ten_sp\": \"Jealous 21 Women Washed Blue Jeans\", \"mau_chinh\": \"xanh dương\", \"dang\": \"ôm\", \"gia_ban\": 289000, \"trang_thai\": \"đang bán\"}, {\"ten_sp\": \"Pepe Jeans Women Blue Jeans\", \"mau_chinh\": \"xanh dương\", \"dang\": \"ôm\", \"gia_ban\": 269000, \"trang_thai\": \"đang bán\"}, {\"ten_sp\": \"Elle Women Blue Jeans\", \"mau_chinh\": \"xanh dương\", \"dang\": \"ôm\", \"gia_ban\": 349000, \"trang_thai\": \""
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE gioi_tinh IN ('nữ','unisex') AND danh_muc = 'quần' AND kieu_sp = 'quần jean' AND dang = 'ôm' AND mau_chinh IN ('xanh dương','trắng','be/kem','hồng')",
+      "theo_mo_ta": "quần jean nữ skinny ôm chân, màu nhạt trẻ trung dễ phối đồ",
+      "theo_anh": "quần jean màu xanh nhạt / wash nhạt, không sẫm màu",
+      "so_luong": 10
+     },
+     "ma_trong_ket_qua": [
+      "SP27022",
+      "SP52539",
+      "SP57076"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 3, \"het_hang_hoac_ngung_ban\": 1, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.699, \"thu_5\": 0.654, \"trung_vi\": 0.656}, \"anh\": {\"cao_nhat\": 0.443, \"thu_5\": 0.377, \"trung_vi\": 0.387}}, \"san_pham\": [{\"ma_sp\": \"SP27022\", \"ten_sp\": \"Jealous 21 Women Washed Blue Jeans\", \"gia_ban\": 289000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần jean\", \"k"
+    }
+   ],
+   "tra_loi": "Dạ, em lọc lại chỉ còn jean xanh nhạt thôi ạ (mấy mẫu navy đậm em bỏ ra):\n\n- [SP52539] Pepe Jeans Women Blue Jeans – 269.000đ, còn M, L, XL, xanh dương nhạt, dáng ôm skinny có thắt lưng đi kèm, jean co giãn nhẹ, dễ mặc đi làm lẫn đi học.\n- [SP27022] Jealous 21 Women Washed Blue Jeans – 289.000đ, còn S, M, XL, xanh dương nhạt kiểu wash bụi, ôm skinny tôn dáng, có túi trước sau + khóa kéo.\n- [SP57076] Elle Women Blue Jeans – 349.000đ, còn M, L, XL, xanh dương nhạt tông sáng, dáng ôm skinny, phong cách basic dễ phối.\n\nChị mặc size gì ạ? Nếu chị muốn chốt, chị để lại mã + size, nhân viên shop sẽ nhắn lại chốt đơn giúp chị nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: quần jean nữ skinny ôm chân",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tìm giúp chị mấy mẫu quần jean nữ dáng ôm skinny đây ạ:\n\n- [SP51499] Denizen Women Blue Jeans – 219.000đ, size S, M, xanh navy đậm, dáng ôm skinny tôn dáng, jean co giãn nhẹ, giá dễ chịu nhất.\n- [SP51509] Denizen Women Navy Blue Jeans – 229.000đ, size S, M, XL, dáng ôm skinny, có túi và khóa kéo, dễ phối áo thun/sơ mi.\n- [SP27022] Jealous 21 Women Washed Blue Jeans – 289.000đ, size S, M, XL, xanh dương nhạt, phong cách cá tính, có túi trước sau.\n\nChị cho em biết chị mặc size gì và thích màu đen hay xanh để em lọc kỹ hơn nhé. Nếu chị muốn chốt mẫu nào, chị để lại mã + size + màu, nhân viên shop sẽ nhắn lại ạ.",
+    "Khách: màu nhạt thôi nha, ko lấy màu đậm hay đen",
+    "Bot: Dạ, em lọc lại chỉ còn jean xanh nhạt thôi ạ (mấy mẫu navy đậm em bỏ ra):\n\n- [SP52539] Pepe Jeans Women Blue Jeans – 269.000đ, còn M, L, XL, xanh dương nhạt, dáng ôm skinny có thắt lưng đi kèm, jean co giãn nhẹ, dễ mặc đi làm lẫn đi học.\n- [SP27022] Jealous 21 Women Washed Blue Jeans – 289.000đ, còn S, M, XL, xanh dương nhạt kiểu wash bụi, ôm skinny tôn dáng, có túi trước sau + khóa kéo.\n- [SP57076] Elle Women Blue Jeans – 349.000đ, còn M, L, XL, xanh dương nhạt tông sáng, dáng ôm skinny, phong cách basic dễ phối.\n\nChị mặc size gì ạ? Nếu chị muốn chốt, chị để lại mã + size, nhân viên shop sẽ nhắn lại chốt đơn giúp chị nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP52539",
+    "SP27022",
+    "SP57076"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_07",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 16.9,
+   "giay_luot_cuoi": 16.9,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4919,
+     "ra": 437,
+     "suy_nghi": 227,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6313,
+     "ra": 467,
+     "suy_nghi": 203,
+     "vao_cache": 5248
+    },
+    {
+     "vao": 6822,
+     "ra": 273,
+     "suy_nghi": 70,
+     "vao_cache": 6656
+    },
+    {
+     "vao": 8052,
+     "ra": 270,
+     "suy_nghi": 0,
+     "vao_cache": 7040
+    },
+    {
+     "vao": 8364,
+     "ra": 413,
+     "suy_nghi": 108,
+     "vao_cache": 8192
+    },
+    {
+     "vao": 10082,
+     "ra": 296,
+     "suy_nghi": 0,
+     "vao_cache": 8704
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE kieu_sp = 'áo polo' AND gioi_tinh IN ('nam','unisex') AND hoa_tiet = 'trơn'",
+      "theo_mo_ta": "áo polo trơn lịch sự mặc đi làm, gọn gàng thanh lịch",
+      "theo_anh": "áo polo trơn một màu, không họa tiết, không in chữ lớn, nhìn lịch sự",
+      "uu_tien": "mo_ta",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP17920",
+      "SP2200",
+      "SP4426"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 3, \"het_hang_hoac_ngung_ban\": 1, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.617, \"thu_5\": 0.56, \"trung_vi\": 0.612}, \"anh\": {\"cao_nhat\": 0.378, \"thu_5\": 0.338, \"trung_vi\": 0.365}}, \"san_pham\": [{\"ma_sp\": \"SP17920\", \"ten_sp\": \"Nike Mens Traning Blue T-shirt\", \"gia_ban\": 209000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo polo\", \"kieu_co\":"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "so_luong": 6,
+      "sql": "SELECT ma_sp FROM san_pham WHERE kieu_sp = 'áo polo' AND gioi_tinh IN ('nam','unisex') AND hoa_tiet = 'trơn'",
+      "theo_anh": "áo polo trơn một màu, không in chữ lớn, nhìn lịch sự",
+      "theo_mo_ta": "áo polo trơn lịch sự mặc đi làm, gọn gàng thanh lịch",
+      "uu_tien": "mo_ta"
+     },
+     "ma_trong_ket_qua": [
+      "SP17920",
+      "SP2200",
+      "SP4426"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 3, \"het_hang_hoac_ngung_ban\": 1, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.617, \"thu_5\": 0.56, \"trung_vi\": 0.612}, \"anh\": {\"cao_nhat\": 0.372, \"thu_5\": 0.347, \"trung_vi\": 0.362}}, \"san_pham\": [{\"ma_sp\": \"SP17920\", \"ten_sp\": \"Nike Mens Traning Blue T-shirt\", \"gia_ban\": 209000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo polo\", \"kieu_co\":"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT sp.ma_sp, sp.ten_sp, sp.gia_ban, b.mau, b.size, b.ton_kho FROM san_pham sp JOIN bien_the b ON b.ma_sp = sp.ma_sp WHERE sp.kieu_sp = 'áo polo' AND sp.gioi_tinh IN ('nam','unisex') AND sp.hoa_tiet = 'trơn' AND sp.trang_thai = 'đang bán' AND b.ton_kho > 0 ORDER BY sp.ma_sp, b.size"
+     },
+     "ma_trong_ket_qua": [
+      "SP17920",
+      "SP2200",
+      "SP4426"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 7, \"dong\": [{\"ma_sp\": \"SP17920\", \"ten_sp\": \"Nike Mens Traning Blue T-shirt\", \"gia_ban\": 209000, \"mau\": \"xanh dương\", \"size\": \"L\", \"ton_kho\": 4, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP17920\", \"ten_sp\": \"Nike Mens Traning Blue T-shirt\", \"gia_ban\": 209000, \"mau\": \"xanh dương\", \"size\": \"XL\", \"ton_kho\": 3, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP2200\", \"ten_sp\": \"Adidas Men Red Pol"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "so_luong": 6,
+      "sql": "SELECT ma_sp FROM san_pham WHERE kieu_sp = 'áo polo' AND gioi_tinh IN ('nam','unisex') AND hoa_tiet = 'trơn' ORDER BY gia_ban ASC",
+      "theo_mo_ta": "áo polo trơn lịch sự mặc đi làm",
+      "uu_tien": "mo_ta"
+     },
+     "ma_trong_ket_qua": [
+      "SP17920",
+      "SP2200",
+      "SP4426"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 3, \"het_hang_hoac_ngung_ban\": 1, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.609, \"thu_5\": 0.542, \"trung_vi\": 0.592}}, \"san_pham\": [{\"ma_sp\": \"SP17920\", \"ten_sp\": \"Nike Mens Traning Blue T-shirt\", \"gia_ban\": 209000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo polo\", \"kieu_co\": \"cổ đức/bẻ\", \"tay_ao\": \"tay ngắn\", \"do_dai\": \"ngang hông\", \"dang\": "
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em vừa kiểm tra lại tồn kho thật cho chị ạ. Polo nam màu trơn, mặc đi làm được, không in chữ to — shop có 3 mẫu:\n\n- [SP17920] Nike Mens Traning Blue T-shirt – 209.000đ – còn size L (4), XL (3) – polo xanh dương cổ bẻ, cotton co giãn nhẹ, thoáng; chỉ logo nhỏ trước ngực.\n- [SP2200] Adidas Men Red Polo T-shirt – 319.000đ – còn size S (1), M (5), XL (6) – polo đỏ đô form ôm vừa, có túi ngực, lịch sự khi đi làm.\n- [SP4426] Wrangler Men's Diamond Stitch Polo White T-shirt – 379.000đ – còn size M (3), L (5) – polo trắng basic, họa tiết chần chìm, dễ phối đồ công sở.\n\nChị cho em biết người mặc cao nặng khoảng bao nhiêu, hoặc đang mặc size gì, để em chọn size chuẩn hơn nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: áo polo nam màu trơn mặc đi làm, ko in chữ to",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em vừa kiểm tra lại tồn kho thật cho chị ạ. Polo nam màu trơn, mặc đi làm được, không in chữ to — shop có 3 mẫu:\n\n- [SP17920] Nike Mens Traning Blue T-shirt – 209.000đ – còn size L (4), XL (3) – polo xanh dương cổ bẻ, cotton co giãn nhẹ, thoáng; chỉ logo nhỏ trước ngực.\n- [SP2200] Adidas Men Red Polo T-shirt – 319.000đ – còn size S (1), M (5), XL (6) – polo đỏ đô form ôm vừa, có túi ngực, lịch sự khi đi làm.\n- [SP4426] Wrangler Men's Diamond Stitch Polo White T-shirt – 379.000đ – còn size M (3), L (5) – polo trắng basic, họa tiết chần chìm, dễ phối đồ công sở.\n\nChị cho em biết người mặc cao nặng khoảng bao nhiêu, hoặc đang mặc size gì, để em chọn size chuẩn hơn nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP17920",
+    "SP2200",
+    "SP4426"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_08",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 8.1,
+   "giay_luot_cuoi": 8.1,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4923,
+     "ra": 541,
+     "suy_nghi": 305,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6123,
+     "ra": 413,
+     "suy_nghi": 128,
+     "vao_cache": 5376
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'chân váy' AND mau_chinh = 'đen' AND do_dai IN ('ngang gối','qua mông','midi') AND trang_thai = 'đang bán' ORDER BY (CASE WHEN do_dai = 'ngang gối' THEN 0 ELSE 1 END), (CASE WHEN EXISTS (SELECT 1 FROM san_pham_dip d WHERE d.ma_sp = san_pham.ma_sp AND d.dip = 'đi làm') THEN 0 ELSE 1 END)",
+      "theo_mo_ta": "chân váy đen thanh lịch mặc đi làm, dài tới gối, kín đáo",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP34494",
+      "SP44646"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 2, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.536, \"thu_5\": 0.471, \"trung_vi\": 0.471}}, \"san_pham\": [{\"ma_sp\": \"SP34494\", \"ten_sp\": \"Van Heusen Woman Black Skirt\", \"gia_ban\": 329000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"chân váy\", \"kieu_sp\": \"chân váy chữ A\", \"kieu_co\": \"không áp dụng\", \"tay_ao\": \"không áp dụng\", \"do_dai\": \"ng"
+    }
+   ],
+   "tra_loi": "Dạ có ạ, em là trợ lý AI của Mộc Lam Studio, em tìm được 2 mẫu chân váy đen mặc đi làm cho chị đây:\n\n- [SP34494] Van Heusen Woman Black Skirt – 329.000đ – dáng chữ A, dài ngang gối, màu đen trơn, xẻ tà trước dễ đi lại, còn size S, M, L, XL. Mẫu này đúng kiểu \"đi làm dài tới gối\" nhất ạ.\n- [SP44646] Arrow Woman Black Skirt – 319.000đ (giá gốc 419.000đ) – chân váy bút chì đen có đai thắt eo, dài ngang gối, công sở thanh lịch, nhưng chỉ còn size S và XL.\n\nChị cho em biết chị thường mặc size nào, hoặc số đo cân nặng/chiều cao để em tư vấn size chuẩn hơn nhé. Chị ưng mẫu nào thì em ghi nhận mã + size để nhân viên shop nhắn chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: ad ơi chân váy đen đi làm có ko, dài tới gối",
+    "Bot: Dạ có ạ, em là trợ lý AI của Mộc Lam Studio, em tìm được 2 mẫu chân váy đen mặc đi làm cho chị đây:\n\n- [SP34494] Van Heusen Woman Black Skirt – 329.000đ – dáng chữ A, dài ngang gối, màu đen trơn, xẻ tà trước dễ đi lại, còn size S, M, L, XL. Mẫu này đúng kiểu \"đi làm dài tới gối\" nhất ạ.\n- [SP44646] Arrow Woman Black Skirt – 319.000đ (giá gốc 419.000đ) – chân váy bút chì đen có đai thắt eo, dài ngang gối, công sở thanh lịch, nhưng chỉ còn size S và XL.\n\nChị cho em biết chị thường mặc size nào, hoặc số đo cân nặng/chiều cao để em tư vấn size chuẩn hơn nhé. Chị ưng mẫu nào thì em ghi nhận mã + size để nhân viên shop nhắn chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP34494",
+    "SP44646"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_09",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 6.6,
+   "giay_luot_cuoi": 6.6,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4918,
+     "ra": 219,
+     "suy_nghi": 35,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6828,
+     "ra": 404,
+     "suy_nghi": 108,
+     "vao_cache": 5120
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'quần' AND kieu_sp = 'quần tây' AND mau_chinh = 'đen' AND gioi_tinh IN ('nam','unisex') AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "quần tây nam màu đen mặc đi làm, lịch sự công sở",
+      "uu_tien": "mo_ta",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP29402",
+      "SP12222",
+      "SP26154",
+      "SP29846",
+      "SP26144",
+      "SP13248"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 6, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.61, \"thu_5\": 0.522, \"trung_vi\": 0.581}}, \"san_pham\": [{\"ma_sp\": \"SP29402\", \"ten_sp\": \"Genesis Men Black Trousers\", \"gia_ban\": 359000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần tây\", \"kieu_co\": \"không áp dụng\", \"tay_ao\": \"không áp dụng\", \"do_dai\": \"không áp dụng\""
+    }
+   ],
+   "tra_loi": "Dạ em chào chị/anh ạ, em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được mấy mẫu quần tây nam màu đen có sẵn hàng, mặc đi làm ổn ạ:\n\n- [SP29402] Genesis Men Black Trousers – 359.000đ – size S, M, L, XL – kaki co giãn nhẹ, dáng đứng vừa phải, màu đen trơn dễ phối áo sơ mi đi làm.\n- [SP26154] John Miller Men Black Trousers – 379.000đ (giá gốc 429.000đ) – size S, M, L, XL – ống suông đứng, lên form lịch sự cho môi trường công sở.\n- [SP12222] Basics Men Olive Trousers – 249.000đ (giá gốc 299.000đ) – size S, M – dáng suông đứng, giá dễ chịu, mặc đi làm hàng ngày.\n\nAnh cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em tư vấn size chuẩn hơn nhé ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: e cần quần tây nam màu đen mặc đi làm",
+    "Bot: Dạ em chào chị/anh ạ, em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được mấy mẫu quần tây nam màu đen có sẵn hàng, mặc đi làm ổn ạ:\n\n- [SP29402] Genesis Men Black Trousers – 359.000đ – size S, M, L, XL – kaki co giãn nhẹ, dáng đứng vừa phải, màu đen trơn dễ phối áo sơ mi đi làm.\n- [SP26154] John Miller Men Black Trousers – 379.000đ (giá gốc 429.000đ) – size S, M, L, XL – ống suông đứng, lên form lịch sự cho môi trường công sở.\n- [SP12222] Basics Men Olive Trousers – 249.000đ (giá gốc 299.000đ) – size S, M – dáng suông đứng, giá dễ chịu, mặc đi làm hàng ngày.\n\nAnh cho em biết anh mặc size nào (hoặc cân nặng/chiều cao) để em tư vấn size chuẩn hơn nhé ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP29402",
+    "SP26154",
+    "SP12222"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_10",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.5,
+   "giay_luot_cuoi": 7.5,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4921,
+     "ra": 425,
+     "suy_nghi": 177,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6847,
+     "ra": 373,
+     "suy_nghi": 88,
+     "vao_cache": 5248
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE kieu_sp = 'áo thun' AND gioi_tinh IN ('nam','unisex') AND mau_chinh = 'đen' AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "áo thun nam in hình cá tính, ngầu, phong cách streetwear",
+      "theo_anh": "áo thun đen có hình in ngầu, cá tính",
+      "uu_tien": "anh",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP3346",
+      "SP44839",
+      "SP53795",
+      "SP3045",
+      "SP12792"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 5, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.623, \"thu_5\": 0.494, \"trung_vi\": 0.578}, \"anh\": {\"cao_nhat\": 0.41, \"thu_5\": 0.329, \"trung_vi\": 0.374}}, \"san_pham\": [{\"ma_sp\": \"SP3346\", \"ten_sp\": \"Myntra Men's You Are Not My Type Black T-shirt\", \"gia_ban\": 319000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo th"
+    }
+   ],
+   "tra_loi": "Dạ em tìm được mấy mẫu áo thun nam nền đen in hình, đúng kiểu ngầu ạ:\n\n- [SP3045] Tantra Men's Tiger Black T-shirt – 259.000đ, size S/M/XL: in hình hổ nhiều màu nổi bật, phong cách streetwear cá tính nhất trong mấy mẫu.\n- [SP3346] Myntra Men's You Are Not My Type Black T-shirt – 319.000đ, size M: in hình bàn tay + chữ nổi màu vàng/xanh, dáng suông cotton mặc thoải mái.\n- [SP44839] Puma Men Black & Green T-shirt – 299.000đ, size S/M/L/XL: họa tiết sóng âm màu xanh lá, form suông dễ mặc, đủ size cho anh/chị chọn.\n\nAnh/chị thích mẫu nào ạ? Cho em biết size và muốn lấy mẫu nào, em xin thông tin để nhân viên shop nhắn lại chốt đơn giúp mình nhé. Nếu muốn xem thêm mẫu khác em tìm tiếp ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: có áo thun nam nền đen in hình ngầu ngầu ko shop",
+    "Bot: Dạ em tìm được mấy mẫu áo thun nam nền đen in hình, đúng kiểu ngầu ạ:\n\n- [SP3045] Tantra Men's Tiger Black T-shirt – 259.000đ, size S/M/XL: in hình hổ nhiều màu nổi bật, phong cách streetwear cá tính nhất trong mấy mẫu.\n- [SP3346] Myntra Men's You Are Not My Type Black T-shirt – 319.000đ, size M: in hình bàn tay + chữ nổi màu vàng/xanh, dáng suông cotton mặc thoải mái.\n- [SP44839] Puma Men Black & Green T-shirt – 299.000đ, size S/M/L/XL: họa tiết sóng âm màu xanh lá, form suông dễ mặc, đủ size cho anh/chị chọn.\n\nAnh/chị thích mẫu nào ạ? Cho em biết size và muốn lấy mẫu nào, em xin thông tin để nhân viên shop nhắn lại chốt đơn giúp mình nhé. Nếu muốn xem thêm mẫu khác em tìm tiếp ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP3045",
+    "SP3346",
+    "SP44839"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_11",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 5.8,
+   "giay_luot_cuoi": 5.8,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4914,
+     "ra": 281,
+     "suy_nghi": 34,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 5873,
+     "ra": 180,
+     "suy_nghi": 0,
+     "vao_cache": 5120
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'quần' AND kieu_sp = 'quần short' AND mau_chinh = 'đen' AND gioi_tinh IN ('nam', 'unisex') AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "quần short thể thao mặc đi tập gym, co giãn thoải mái",
+      "theo_anh": "quần short đen thể thao nam, gọn gàng",
+      "uu_tien": "mo_ta",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP32457",
+      "SP15613"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 2, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.597, \"thu_5\": 0.589, \"trung_vi\": 0.589}, \"anh\": {\"cao_nhat\": 0.422, \"thu_5\": 0.404, \"trung_vi\": 0.404}}, \"san_pham\": [{\"ma_sp\": \"SP32457\", \"ten_sp\": \"ADIDAS Men Black Shorts\", \"gia_ban\": 349000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần short\", \"kieu_co\": "
+    }
+   ],
+   "tra_loi": "Dạ có 2 mẫu hợp với anh ạ:\n\n- [SP32457] ADIDAS Men Black Shorts – 349.000đ, size M, L – quần short đen dáng suông trên gối, polyester thoáng mát, có túi và dây rút, đúng kiểu tập gym.\n- [SP15613] Nike Men Runng Black Shorts – 399.000đ, Freesize – cũng đen, vải nhanh khô, có sọc trắng hai bên, tập hay mặc dạo phố đều được.\n\nAnh thích mẫu nào ạ? Anh cho em biết mã và size để em nhờ nhân viên shop nhắn lại chốt đơn giúp anh nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: quan short the thao nam mau den di tap gym",
+    "Bot: Dạ có 2 mẫu hợp với anh ạ:\n\n- [SP32457] ADIDAS Men Black Shorts – 349.000đ, size M, L – quần short đen dáng suông trên gối, polyester thoáng mát, có túi và dây rút, đúng kiểu tập gym.\n- [SP15613] Nike Men Runng Black Shorts – 399.000đ, Freesize – cũng đen, vải nhanh khô, có sọc trắng hai bên, tập hay mặc dạo phố đều được.\n\nAnh thích mẫu nào ạ? Anh cho em biết mã và size để em nhờ nhân viên shop nhắn lại chốt đơn giúp anh nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP32457",
+    "SP15613"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_12",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 22.1,
+   "giay_luot_cuoi": 22.1,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4930,
+     "ra": 466,
+     "suy_nghi": 177,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 11764,
+     "ra": 572,
+     "suy_nghi": 358,
+     "vao_cache": 5376
+    },
+    {
+     "vao": 15668,
+     "ra": 833,
+     "suy_nghi": 557,
+     "vao_cache": 12288
+    },
+    {
+     "vao": 19481,
+     "ra": 1011,
+     "suy_nghi": 616,
+     "vao_cache": 16384
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, danh_muc, kieu_sp, do_dai, gia_ban, trang_thai FROM san_pham WHERE danh_muc = 'set đồ' OR do_dai IN ('maxi','midi') OR kieu_sp IN ('áo kiểu','áo hai dây') ORDER BY danh_muc"
+     },
+     "ma_trong_ket_qua": [
+      "SP30925",
+      "SP44646",
+      "SP15560",
+      "SP51499",
+      "SP16520",
+      "SP41356",
+      "SP29846",
+      "SP14700",
+      "SP26154",
+      "SP8846",
+      "SP32404",
+      "SP12222",
+      "SP27598",
+      "SP44666",
+      "SP27914",
+      "SP27912",
+      "SP27920",
+      "SP8834",
+      "SP8903",
+      "SP20372"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 50, \"dong\": [{\"ma_sp\": \"SP30925\", \"ten_sp\": \"Fabindia Women Printed Black Ghera Skirt\", \"danh_muc\": \"chân váy\", \"kieu_sp\": \"chân váy xếp ly\", \"do_dai\": \"maxi\", \"gia_ban\": 229000, \"trang_thai\": \"đang bán\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP44646\", \"ten_sp\": \"Arrow Woman Black Skirt\", \"danh_muc\": \"chân váy\", \"kieu_sp\": \"chân váy bút chì\", \"do_dai\": \"midi\", \"gia_ban\": 319000, \"t"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc IN ('set đồ','áo','đầm')",
+      "theo_mo_ta": "áo dáng dài kiểu Ấn Độ kurti suông kèm quần legging",
+      "theo_anh": "áo dài suông kiểu Ấn Độ truyền thống, họa tiết dân tộc, mặc cùng quần legging",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP15079",
+      "SP44692",
+      "SP27271",
+      "SP33963",
+      "SP51453",
+      "SP11756",
+      "SP33750",
+      "SP7215",
+      "SP21169",
+      "SP22453",
+      "SP7427",
+      "SP28455",
+      "SP43323",
+      "SP20133",
+      "SP10365",
+      "SP38842",
+      "SP52118",
+      "SP38828",
+      "SP30946",
+      "SP13472"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 174, \"het_hang_hoac_ngung_ban\": 5, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.393, \"thu_5\": 0.363, \"trung_vi\": 0.287}, \"anh\": {\"cao_nhat\": 0.424, \"thu_5\": 0.408, \"trung_vi\": 0.305}}, \"san_pham\": [{\"ma_sp\": \"SP15079\", \"ten_sp\": \"Mother Earth Women Printed Green Tunics\", \"gia_ban\": 369000, \"gia_goc\": 469000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"áo\", \"k"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT s.ma_sp, s.ten_sp, s.danh_muc, s.do_dai, s.gia_ban, s.trang_thai, s.mo_ta_tu_do FROM san_pham s WHERE (s.ten_sp LIKE '%Tunic%' OR s.ten_sp LIKE '%Kurti%' OR s.ten_sp LIKE '%Kurta%' OR s.ten_sp LIKE '%Legging%' OR s.mo_ta_tu_do LIKE '%legging%' OR s.mo_ta_tu_do LIKE '%tunic%' OR s.ten_sp LIKE '%Fabindia%' OR s.ten_sp LIKE '%Global Desi%' OR s.ten_sp LIKE '%W Women%') AND s.gioi_tinh = 'nữ'"
+     },
+     "ma_trong_ket_qua": [
+      "SP30946",
+      "SP7427",
+      "SP22453",
+      "SP6874",
+      "SP28455",
+      "SP30925",
+      "SP8499",
+      "SP6857",
+      "SP31605",
+      "SP6887",
+      "SP39125",
+      "SP49757",
+      "SP41313",
+      "SP42350",
+      "SP33750",
+      "SP15079",
+      "SP27271",
+      "SP33963",
+      "SP44692",
+      "SP6864"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 20, \"dong\": [{\"ma_sp\": \"SP30946\", \"ten_sp\": \"Fabindia Women Blue Cambric Top\", \"danh_muc\": \"áo\", \"do_dai\": \"ngang hông\", \"gia_ban\": 289000, \"trang_thai\": \"đang bán\", \"mo_ta_tu_do\": \"Áo kiểu nữ màu xanh dương với cổ V và tay ngắn, chất liệu cotton thoáng mát. Thiết kế có các đường kẻ sọc nhiều màu ở hai bên ngực và hàng cúc giữa, phần thân dưới xếp ly tạo dáng suông nhẹ. Phù hợp mặc đi "
+    },
+    {
+     "cong_cu": "xem_anh",
+     "tham_so": {
+      "ma_sp": [
+       "SP44692",
+       "SP33963",
+       "SP27271",
+       "SP15079",
+       "SP33750",
+       "SP11756",
+       "SP49757",
+       "SP41313",
+       "SP39125",
+       "SP28455"
+      ],
+      "yeu_cau": "Kiểm tra món nào là áo dáng dài kiểu Ấn Độ (kurti/tunic cổ, dài qua mông hoặc dài hơn, họa tiết dân tộc/Ấn), và món nào là quần legging ôm dài mặc kèm áo dài. Nói rõ món nào hợp để ghép thành bộ áo dài Ấn Độ + legging.",
+      "loi_nhan_cho": "Dạ chị chờ em xíu, em xem kỹ từng mẫu để chọn bộ hợp kiểu Ấn Độ cho chị nhé"
+     },
+     "ma_trong_ket_qua": [
+      "SP44692",
+      "SP33963",
+      "SP27271",
+      "SP15079",
+      "SP33750",
+      "SP11756",
+      "SP49757",
+      "SP41313",
+      "SP39125",
+      "SP28455"
+     ],
+     "ket_qua_rut_gon": "{\"da_xem\": 10, \"hop\": [{\"ma_sp\": \"SP44692\", \"ten_sp\": \"Wills Lifestyle Women White Tunic\", \"gia_ban\": 649000, \"gia_goc\": 749000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo kiểu\", \"kieu_co\": \"cổ tròn\", \"tay_ao\": \"tay dài\", \"do_dai\": \"qua mông\", \"dang\": \"suông\", \"chat_lieu\": \"thun\", \"hoa_tiet\": \"ren\", \"mau_chinh\": \"trắng\", \"phong_cach\": \"nữ tính/tiểu thư\", \"dip\": \"đi làm, đi học, dạo phố, h"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị xem mẫu ạ 💐\n\nShop mình chưa có bộ áo dài Ấn bán kèm legging sẵn, nhưng có áo dáng dài kiểu kurti và legging bán riêng, ghép lại là được bộ chị cần:\n\n- [SP44692] Wills Lifestyle Women White Tunic – 649.000đ (đang sale từ 749.000đ), size S, M, L, XL, dáng suông dài qua mông, tay dài, ngực phối ren hoa, kiểu kurti Ấn thanh lịch\n- [SP33963] Femella Women Red Tunic – 279.000đ (sale từ 429.000đ), size M, L, dáng suông dài qua mông, cổ bẻ thắt nơ, tay dài, có 2 túi ngực\n- [SP49757] Vishudh Maroon Leggings – 359.000đ, size S, M, XL, legging ôm, dài qua mắt cá, gấu nhún co giãn – ghép đẹp với cả hai áo trên\n\nChị cho em biết chị thích tông trắng hay đỏ, và chiều cao/cân nặng để em tư vấn size chuẩn nhé. Chị muốn lấy món nào thì để lại mã + size, em chuyển nhân viên shop nhắn lại chốt đơn ạ (em chưa tự lên đơn được).",
+   "hoi_thoai_day_du": [
+    "Khách: có áo dáng dài kiểu Ấn Độ kèm luôn quần legging ko ạ",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ từng mẫu để chọn bộ hợp kiểu Ấn Độ cho chị nhé",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ chị xem mẫu ạ 💐\n\nShop mình chưa có bộ áo dài Ấn bán kèm legging sẵn, nhưng có áo dáng dài kiểu kurti và legging bán riêng, ghép lại là được bộ chị cần:\n\n- [SP44692] Wills Lifestyle Women White Tunic – 649.000đ (đang sale từ 749.000đ), size S, M, L, XL, dáng suông dài qua mông, tay dài, ngực phối ren hoa, kiểu kurti Ấn thanh lịch\n- [SP33963] Femella Women Red Tunic – 279.000đ (sale từ 429.000đ), size M, L, dáng suông dài qua mông, cổ bẻ thắt nơ, tay dài, có 2 túi ngực\n- [SP49757] Vishudh Maroon Leggings – 359.000đ, size S, M, XL, legging ôm, dài qua mắt cá, gấu nhún co giãn – ghép đẹp với cả hai áo trên\n\nChị cho em biết chị thích tông trắng hay đỏ, và chiều cao/cân nặng để em tư vấn size chuẩn nhé. Chị muốn lấy món nào thì để lại mã + size, em chuyển nhân viên shop nhắn lại chốt đơn ạ (em chưa tự lên đơn được)."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP44692",
+    "SP33963",
+    "SP49757"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.33
+  },
+  {
+   "id": "tn_13",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.7,
+   "giay_luot_cuoi": 7.7,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4926,
+     "ra": 268,
+     "suy_nghi": 71,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 7164,
+     "ra": 536,
+     "suy_nghi": 191,
+     "vao_cache": 5120
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE trang_thai = 'đang bán' AND gioi_tinh IN ('nam','unisex') AND danh_muc = 'áo' AND kieu_sp = 'áo len' AND chat_lieu = 'len' AND hoa_tiet IN ('kẻ sọc','caro') AND EXISTS (SELECT 1 FROM bien_the b WHERE b.ma_sp = san_pham.ma_sp AND b.ton_kho > 0)",
+      "theo_anh": "áo len nam họa tiết sọc hoặc caro",
+      "so_luong": 10
+     },
+     "ma_trong_ket_qua": [
+      "SP15183",
+      "SP22328",
+      "SP17195",
+      "SP20788",
+      "SP16195",
+      "SP8395",
+      "SP19809"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 7, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh anh\", \"diem_cac_kenh\": {\"anh\": {\"cao_nhat\": 0.436, \"thu_5\": 0.411, \"trung_vi\": 0.417}}, \"san_pham\": [{\"ma_sp\": \"SP15183\", \"ten_sp\": \"Arrow Sport Men Check Blue Sweaters\", \"gia_ban\": 399000, \"gia_goc\": 449000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo len\", \"kieu_co\": \"cổ V\", \"tay_ao\": \"tay dài\", \"do_dai\": \"ngang hô"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em tìm giúp chị mấy mẫu áo len nam có họa tiết nhé — đều là sọc/caro, không có mẫu trơn:\n\n- [SP15183] Arrow Sport Men Check Blue Sweaters – 399.000đ (giá gốc 449.000đ), còn L, XL: caro kim cương xanh dương–đen, viền cổ nổi, mặc đi làm hay dạo phố đều gọn.\n- [SP22328] John Players Men Stripes Navy Blue Sweater – 229.000đ, còn S, M, XL: sọc ngang navy–xanh nhạt, giá dễ chịu nhất trong nhóm, hợp đi học/đi làm hằng ngày.\n- [SP17195] U.S. Polo Assn. Men Stripes Green Sweater – 269.000đ (giá gốc 319.000đ), còn S, L, XL: sọc trắng–vàng–navy trên nền xanh lá, nhìn trẻ và nổi hơn hai mẫu kia.\n\nChị cho em xin chiều cao/cân nặng của người mặc để em chọn size chuẩn hơn nhé. Còn muốn mua mẫu nào thì chị để lại mã + size, em nhờ nhân viên shop nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo len nam có họa tiết sọc hay caro ấy, ko lấy loại trơn",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tìm giúp chị mấy mẫu áo len nam có họa tiết nhé — đều là sọc/caro, không có mẫu trơn:\n\n- [SP15183] Arrow Sport Men Check Blue Sweaters – 399.000đ (giá gốc 449.000đ), còn L, XL: caro kim cương xanh dương–đen, viền cổ nổi, mặc đi làm hay dạo phố đều gọn.\n- [SP22328] John Players Men Stripes Navy Blue Sweater – 229.000đ, còn S, M, XL: sọc ngang navy–xanh nhạt, giá dễ chịu nhất trong nhóm, hợp đi học/đi làm hằng ngày.\n- [SP17195] U.S. Polo Assn. Men Stripes Green Sweater – 269.000đ (giá gốc 319.000đ), còn S, L, XL: sọc trắng–vàng–navy trên nền xanh lá, nhìn trẻ và nổi hơn hai mẫu kia.\n\nChị cho em xin chiều cao/cân nặng của người mặc để em chọn size chuẩn hơn nhé. Còn muốn mua mẫu nào thì chị để lại mã + size, em nhờ nhân viên shop nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP15183",
+    "SP22328",
+    "SP17195"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_14",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 10.5,
+   "giay_luot_cuoi": 10.5,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4920,
+     "ra": 367,
+     "suy_nghi": 99,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 9990,
+     "ra": 283,
+     "suy_nghi": 190,
+     "vao_cache": 5248
+    },
+    {
+     "vao": 10767,
+     "ra": 244,
+     "suy_nghi": 160,
+     "vao_cache": 10240
+    },
+    {
+     "vao": 11243,
+     "ra": 307,
+     "suy_nghi": 0,
+     "vao_cache": 11008
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, danh_muc, kieu_sp, tay_ao, chat_lieu, gia_ban, gioi_tinh FROM san_pham WHERE trang_thai = 'đang bán' AND (chat_lieu IN ('len','nỉ') OR kieu_sp IN ('áo len','áo cardigan')) AND gioi_tinh IN ('nam','unisex')"
+     },
+     "ma_trong_ket_qua": [
+      "SP46400",
+      "SP15644",
+      "SP22202",
+      "SP19477",
+      "SP39496",
+      "SP22313",
+      "SP18968",
+      "SP22328",
+      "SP15183",
+      "SP11522",
+      "SP19532",
+      "SP8395",
+      "SP19809",
+      "SP17195",
+      "SP16202",
+      "SP54948",
+      "SP20788",
+      "SP14113",
+      "SP16195",
+      "SP19548"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 28, \"dong\": [{\"ma_sp\": \"SP46400\", \"ten_sp\": \"ADIDAS Men Grey Shorts\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần short\", \"tay_ao\": \"không áp dụng\", \"chat_lieu\": \"nỉ\", \"gia_ban\": 389000, \"gioi_tinh\": \"nam\", \"dang_ban_va_con_hang\": false}, {\"ma_sp\": \"SP15644\", \"ten_sp\": \"Nike Men As Df Crckt Navy Blue Shorts\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần short\", \"tay_ao\": \"không áp dụng\", \"chat_lieu\":"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE trang_thai = 'đang bán' AND gioi_tinh IN ('nam','unisex') AND danh_muc IN ('áo','áo khoác')",
+      "theo_mo_ta": "áo gile len không tay mặc ngoài áo sơ mi, phong cách công sở nam",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP20788",
+      "SP16195",
+      "SP9254",
+      "SP15997",
+      "SP17550",
+      "SP8395",
+      "SP14748",
+      "SP15981",
+      "SP9236",
+      "SP15910",
+      "SP26128",
+      "SP22328",
+      "SP51417",
+      "SP26103",
+      "SP9452",
+      "SP15183",
+      "SP9471",
+      "SP2200",
+      "SP19327",
+      "SP2243"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 96, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.691, \"thu_5\": 0.596, \"trung_vi\": 0.483}}, \"san_pham\": [{\"ma_sp\": \"SP20788\", \"ten_sp\": \"Genesis Men Solid Maroon Sweater\", \"gia_ban\": 359000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo len\", \"kieu_co\": \"cổ V\", \"tay_ao\": \"không áp dụng\", \"do_dai\": \"ngang hông\", \"dang\""
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, kieu_sp, tay_ao, chat_lieu, gia_ban, mo_ta_tu_do FROM san_pham WHERE ma_sp IN ('SP22313','SP20788','SP16195')"
+     },
+     "ma_trong_ket_qua": [
+      "SP16195",
+      "SP20788",
+      "SP22313"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 3, \"dong\": [{\"ma_sp\": \"SP16195\", \"ten_sp\": \"Puma Men Stripped SL Yellow Sweater\", \"kieu_sp\": \"áo len\", \"tay_ao\": \"không áp dụng\", \"chat_lieu\": \"len\", \"gia_ban\": 779000, \"mo_ta_tu_do\": \"Áo len nam dạng vest không tay, cổ V, họa tiết kẻ sọc vàng xám nổi bật. Chất liệu len mềm mại, phối cùng sơ mi tay dài tạo phong cách thanh lịch. Phù hợp mặc đi làm, đi học hoặc dạo phố.\", \"dang_ban_va_c"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, mau, size, ton_kho FROM bien_the WHERE ma_sp IN ('SP22313','SP20788','SP16195') AND ton_kho > 0 ORDER BY ma_sp, size"
+     },
+     "ma_trong_ket_qua": [
+      "SP16195",
+      "SP20788",
+      "SP22313"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 6, \"dong\": [{\"ma_sp\": \"SP16195\", \"mau\": \"vàng\", \"size\": \"M\", \"ton_kho\": 1, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP16195\", \"mau\": \"vàng\", \"size\": \"XL\", \"ton_kho\": 3, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP20788\", \"mau\": \"đỏ\", \"size\": \"M\", \"ton_kho\": 4, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP20788\", \"mau\": \"đỏ\", \"size\": \"S\", \"ton_kho\": 1, \"dang_ban_va_con_hang\": true}, {\"m"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio ạ. Shop có mấy mẫu gile mặc ngoài sơ mi cho nam đây chị:\n\n- [SP20788] Genesis Men Solid Maroon Sweater — 359.000đ, size S/M, màu đỏ đô. Áo len dạng vest không tay, cổ V, đúng kiểu mặc bên ngoài sơ mi trắng, hợp đi làm/đi học mùa thu đông.\n- [SP16195] Puma Men Stripped SL Yellow Sweater — 779.000đ, size M/XL, vàng kẻ sọc. Cũng là áo len không tay cổ V, phối sơ mi tay dài nhìn thanh lịch, nổi bật hơn.\n- [SP22313] Wildcraft Men Black Fleece Jacket — 509.000đ, size S/XL. Mẫu gile đen chất nỉ (không phải len), có khóa kéo và túi hai bên, hợp dạo phố/đi học khi trời se lạnh.\n\nChị cho em biết anh nhà mặc size gì, thích màu trơn hay có họa tiết để em chốt lại đúng mẫu nhé?",
+   "hoi_thoai_day_du": [
+    "Khách: có áo gile len mặc ngoài sơ mi cho nam ko",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio ạ. Shop có mấy mẫu gile mặc ngoài sơ mi cho nam đây chị:\n\n- [SP20788] Genesis Men Solid Maroon Sweater — 359.000đ, size S/M, màu đỏ đô. Áo len dạng vest không tay, cổ V, đúng kiểu mặc bên ngoài sơ mi trắng, hợp đi làm/đi học mùa thu đông.\n- [SP16195] Puma Men Stripped SL Yellow Sweater — 779.000đ, size M/XL, vàng kẻ sọc. Cũng là áo len không tay cổ V, phối sơ mi tay dài nhìn thanh lịch, nổi bật hơn.\n- [SP22313] Wildcraft Men Black Fleece Jacket — 509.000đ, size S/XL. Mẫu gile đen chất nỉ (không phải len), có khóa kéo và túi hai bên, hợp dạo phố/đi học khi trời se lạnh.\n\nChị cho em biết anh nhà mặc size gì, thích màu trơn hay có họa tiết để em chốt lại đúng mẫu nhé?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP20788",
+    "SP16195",
+    "SP22313"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_15",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 10.3,
+   "giay_luot_cuoi": 10.3,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4928,
+     "ra": 435,
+     "suy_nghi": 180,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6857,
+     "ra": 408,
+     "suy_nghi": 141,
+     "vao_cache": 5248
+    },
+    {
+     "vao": 8856,
+     "ra": 465,
+     "suy_nghi": 112,
+     "vao_cache": 7168
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE trang_thai = 'đang bán' AND danh_muc = 'áo khoác' AND gioi_tinh IN ('nam','unisex') AND tay_ao = 'không áp dụng'",
+      "theo_mo_ta": "áo gilet không tay giữ ấm, phao hoặc nỉ, mặc khoác ngoài",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 0, \"goi_y\": \"SQL không ra món nào. Nới điều kiện ít quan trọng nhất rồi gọi lại, và nói với khách đã nới gì.\"}"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, danh_muc, gioi_tinh, tay_ao, chat_lieu, gia_ban, trang_thai FROM san_pham WHERE danh_muc = 'áo khoác' AND gioi_tinh IN ('nam','unisex')"
+     },
+     "ma_trong_ket_qua": [
+      "SP5560",
+      "SP15603",
+      "SP22202",
+      "SP17628",
+      "SP52034",
+      "SP15466",
+      "SP19477",
+      "SP38156",
+      "SP9768",
+      "SP39496",
+      "SP19337",
+      "SP22313",
+      "SP15321",
+      "SP40050",
+      "SP15619",
+      "SP15629",
+      "SP30611"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 17, \"dong\": [{\"ma_sp\": \"SP5560\", \"ten_sp\": \"Reebok Men Sport Revesable Black Green Jacket\", \"danh_muc\": \"áo khoác\", \"gioi_tinh\": \"nam\", \"tay_ao\": \"sát nách\", \"chat_lieu\": \"polyester\", \"gia_ban\": 499000, \"trang_thai\": \"đang bán\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP15603\", \"ten_sp\": \"Nike Men Football Soccer Black Jackets\", \"danh_muc\": \"áo khoác\", \"gioi_tinh\": \"nam\", \"tay_ao\": \""
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT b.ma_sp, s.ten_sp, b.mau, b.size, b.ton_kho FROM bien_the b JOIN san_pham s ON s.ma_sp = b.ma_sp WHERE b.ma_sp IN ('SP5560','SP15466','SP22313','SP38156') AND b.ton_kho > 0 ORDER BY b.ma_sp, b.size"
+     },
+     "ma_trong_ket_qua": [
+      "SP15466",
+      "SP22313",
+      "SP38156",
+      "SP5560"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 12, \"dong\": [{\"ma_sp\": \"SP15466\", \"ten_sp\": \"Puma Men Mens Active Padded Vest Blue Jackets\", \"mau\": \"xanh dương\", \"size\": \"L\", \"ton_kho\": 3, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP15466\", \"ten_sp\": \"Puma Men Mens Active Padded Vest Blue Jackets\", \"mau\": \"xanh dương\", \"size\": \"S\", \"ton_kho\": 4, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP15466\", \"ten_sp\": \"Puma Men Mens Active Padd"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE trang_thai = 'đang bán' AND danh_muc = 'áo khoác' AND gioi_tinh IN ('nam','unisex') AND tay_ao = 'sát nách'",
+      "so_luong": 8,
+      "theo_mo_ta": "gilet phao hoặc nỉ không tay giữ ấm cho nam"
+     },
+     "ma_trong_ket_qua": [
+      "SP15466",
+      "SP22313",
+      "SP5560"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 3, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.611, \"thu_5\": 0.582, \"trung_vi\": 0.593}}, \"san_pham\": [{\"ma_sp\": \"SP15466\", \"ten_sp\": \"Puma Men Mens Active Padded Vest Blue Jackets\", \"gia_ban\": 679000, \"gia_goc\": 779000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo khoác\", \"kieu_sp\": \"áo phao\", \"kieu_co\": \"cổ lọ\", \"tay_ao\": \"sát nác"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio ạ 🌿 Về áo khoác không tay cho nam (bên em ghi là kiểu sát nách), em tìm được mấy mẫu giữ ấm này:\n\n- [SP15466] Puma Men Mens Active Padded Vest Blue Jackets – 679.000đ (đang giảm từ 779.000đ), còn size S, L, XL: gile phao nhồi, không tay, cổ cao + khóa kéo, mặc se lạnh rất ấm mà gọn.\n- [SP22313] Wildcraft Men Black Fleece Jacket – 509.000đ, còn size S, XL: gile nỉ đen mềm, form suông có túi, dễ mặc dạo phố hay đi học.\n- [SP5560] Reebok Men Sport Revesable Black Green Jacket – 499.000đ, còn size S, M, L, XL: áo khoác gió không tay, nhẹ, có lót trong, hợp mặc lớp ngoài khi trời không quá lạnh.\n\nChị cho em biết anh mặc size gì (hoặc cân nặng/chiều cao) để em tư vấn size chuẩn nhé. Anh thích mẫu nào thì chị nhắn mã + size + màu giúp em, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: tìm áo khoác ko tay cho nam, kiểu gile phao hay nỉ giữ ấm",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio ạ 🌿 Về áo khoác không tay cho nam (bên em ghi là kiểu sát nách), em tìm được mấy mẫu giữ ấm này:\n\n- [SP15466] Puma Men Mens Active Padded Vest Blue Jackets – 679.000đ (đang giảm từ 779.000đ), còn size S, L, XL: gile phao nhồi, không tay, cổ cao + khóa kéo, mặc se lạnh rất ấm mà gọn.\n- [SP22313] Wildcraft Men Black Fleece Jacket – 509.000đ, còn size S, XL: gile nỉ đen mềm, form suông có túi, dễ mặc dạo phố hay đi học.\n- [SP5560] Reebok Men Sport Revesable Black Green Jacket – 499.000đ, còn size S, M, L, XL: áo khoác gió không tay, nhẹ, có lót trong, hợp mặc lớp ngoài khi trời không quá lạnh.\n\nChị cho em biết anh mặc size gì (hoặc cân nặng/chiều cao) để em tư vấn size chuẩn nhé. Anh thích mẫu nào thì chị nhắn mã + size + màu giúp em, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP15466",
+    "SP22313",
+    "SP5560"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_16",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 11.2,
+   "giay_luot_cuoi": 11.2,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4923,
+     "ra": 411,
+     "suy_nghi": 205,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 5769,
+     "ra": 452,
+     "suy_nghi": 228,
+     "vao_cache": 5248
+    },
+    {
+     "vao": 6656,
+     "ra": 447,
+     "suy_nghi": 205,
+     "vao_cache": 6144
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'chân váy' AND do_dai = 'maxi' AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "chân váy maxi dài tới mắt cá kiểu boho, nhẹ, hợp đi biển dạo bãi cát",
+      "theo_anh": "chân váy maxi dài, phong cách boho, bay bổng, họa tiết hoặc màu nhã hợp đi biển",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP30925"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 1, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.542, \"thu_5\": 0.542, \"trung_vi\": 0.542}, \"anh\": {\"cao_nhat\": 0.413, \"thu_5\": 0.413, \"trung_vi\": 0.413}}, \"san_pham\": [{\"ma_sp\": \"SP30925\", \"ten_sp\": \"Fabindia Women Printed Black Ghera Skirt\", \"gia_ban\": 229000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"chân váy\", \"kieu_sp\": \"chân"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'chân váy' AND do_dai IN ('maxi','midi') AND dang IN ('xòe','chữ A','suông')",
+      "so_luong": 8,
+      "theo_anh": "chân váy dài bay bổng kiểu boho, họa tiết hoa, chất nhẹ, hợp đi biển",
+      "theo_mo_ta": "chân váy dài nhẹ nhàng hợp đi biển, dạo bãi biển, phong cách boho",
+      "uu_tien": "anh"
+     },
+     "ma_trong_ket_qua": [
+      "SP30925"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 1, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.506, \"thu_5\": 0.506, \"trung_vi\": 0.506}, \"anh\": {\"cao_nhat\": 0.391, \"thu_5\": 0.391, \"trung_vi\": 0.391}}, \"san_pham\": [{\"ma_sp\": \"SP30925\", \"ten_sp\": \"Fabindia Women Printed Black Ghera Skirt\", \"gia_ban\": 229000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"chân váy\", \"kieu_sp\": \"chân"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em kiểm tra giúp chị ngay ạ.\n\nChân váy dài chạm mắt cá thì shop hiện chỉ còn đúng 1 mẫu:\n- [SP30925] Fabindia Women Printed Black Ghera Skirt – 229.000đ – còn M, L – váy maxi dáng xòe, cạp chun dây rút, chất nhẹ, họa tiết kẻ sọc đen trắng xen cam. Dài và bay nhẹ nên mặc đi biển được, nhưng là kiểu kẻ sọc chứ không phải họa tiết hoa boho đúng như chị tìm ạ.\n\nNếu chị thích tông hoa nhí/voan bay bổng hơn cho đi biển, em tìm giúp chị đầm maxi nhé? Chị cho em biết chị mặc size gì để em xem luôn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: chân váy dài tới mắt cá kiểu boho đi biển có ko shop",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em kiểm tra giúp chị ngay ạ.\n\nChân váy dài chạm mắt cá thì shop hiện chỉ còn đúng 1 mẫu:\n- [SP30925] Fabindia Women Printed Black Ghera Skirt – 229.000đ – còn M, L – váy maxi dáng xòe, cạp chun dây rút, chất nhẹ, họa tiết kẻ sọc đen trắng xen cam. Dài và bay nhẹ nên mặc đi biển được, nhưng là kiểu kẻ sọc chứ không phải họa tiết hoa boho đúng như chị tìm ạ.\n\nNếu chị thích tông hoa nhí/voan bay bổng hơn cho đi biển, em tìm giúp chị đầm maxi nhé? Chị cho em biết chị mặc size gì để em xem luôn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP30925"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_17",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.3,
+   "giay_luot_cuoi": 7.3,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4919,
+     "ra": 349,
+     "suy_nghi": 117,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6035,
+     "ra": 473,
+     "suy_nghi": 175,
+     "vao_cache": 5248
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE trang_thai = 'đang bán' AND danh_muc = 'đầm' AND kieu_co IN ('cúp ngực', 'hai dây') ORDER BY CASE WHEN kieu_co = 'cúp ngực' THEN 0 ELSE 1 END",
+      "theo_mo_ta": "đầm gợi cảm quyến rũ mặc đi chơi buổi tối",
+      "theo_anh": "đầm cúp ngực không dây, trễ vai, quyến rũ",
+      "uu_tien": "can_bang",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP51465",
+      "SP48479"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 2, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.544, \"thu_5\": 0.536, \"trung_vi\": 0.536}, \"anh\": {\"cao_nhat\": 0.392, \"thu_5\": 0.381, \"trung_vi\": 0.381}}, \"san_pham\": [{\"ma_sp\": \"SP51465\", \"ten_sp\": \"Tonga Women Teal Dress\", \"gia_ban\": 629000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"đầm\", \"kieu_sp\": \"đầm ôm body\", \"kieu_co\": \"c"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được 2 mẫu đầm cúp ngực hợp đi chơi tối cho chị đây:\n\n[SP51465] Tonga Women Teal Dress – 629.000đ – còn S, M, L, XL – đầm ôm body cúp ngực, dây đeo ẩn, màu xanh ngọc nổi bật, chất thun co giãn nhẹ nên mặc đi chơi tối thoải mái mà vẫn nổi bật.\n[SP48479] French Connection Women Black Dress – 389.000đ – còn M, XL – đầm đen ren cúp ngực, có lót trong, eo thắt dây rút tôn dáng, kiểu quyến rũ rất hợp hẹn hò tối.\n\nChị cho em biết chị thường mặc size gì, hoặc số đo cân nặng/chiều cao để em tư vấn size chuẩn hơn nhé. Còn muốn chốt mẫu nào thì chị để lại mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: đầm cúp ngực ko dây đi chơi tối",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được 2 mẫu đầm cúp ngực hợp đi chơi tối cho chị đây:\n\n[SP51465] Tonga Women Teal Dress – 629.000đ – còn S, M, L, XL – đầm ôm body cúp ngực, dây đeo ẩn, màu xanh ngọc nổi bật, chất thun co giãn nhẹ nên mặc đi chơi tối thoải mái mà vẫn nổi bật.\n[SP48479] French Connection Women Black Dress – 389.000đ – còn M, XL – đầm đen ren cúp ngực, có lót trong, eo thắt dây rút tôn dáng, kiểu quyến rũ rất hợp hẹn hò tối.\n\nChị cho em biết chị thường mặc size gì, hoặc số đo cân nặng/chiều cao để em tư vấn size chuẩn hơn nhé. Còn muốn chốt mẫu nào thì chị để lại mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP51465",
+    "SP48479"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_18",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.1,
+   "giay_luot_cuoi": 7.1,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4917,
+     "ra": 193,
+     "suy_nghi": 13,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6849,
+     "ra": 456,
+     "suy_nghi": 159,
+     "vao_cache": 4992
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE gioi_tinh IN ('nam','unisex') AND danh_muc = 'áo' AND kieu_sp = 'áo sơ mi' AND mau_chinh = 'trắng' AND tay_ao = 'tay dài' AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "áo sơ mi trắng nam mặc đi làm công sở, lịch sự, dễ phối",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP9254",
+      "SP15997",
+      "SP14748",
+      "SP17550",
+      "SP26128",
+      "SP9236",
+      "SP11112",
+      "SP11110"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 8, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.761, \"thu_5\": 0.664, \"trung_vi\": 0.664}}, \"san_pham\": [{\"ma_sp\": \"SP9254\", \"ten_sp\": \"Mark Taylor Men Solid White Shirts\", \"gia_ban\": 189000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo sơ mi\", \"kieu_co\": \"cổ sơ mi\", \"tay_ao\": \"tay dài\", \"do_dai\": \"ngang hông\", \"dang\""
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em gợi ý chị/anh mấy mẫu sơ mi nam trắng tay dài đúng ý nhé:\n\n[SP9254] Mark Taylor Men Solid White Shirts – 189.000đ, trắng trơn, cotton, dáng ôm vừa, còn S/M/L/XL: mẫu cơ bản nhất, dễ phối quần tây đi làm.\n[SP14748] Arrow Men Solid White Shirts – 259.000đ, trắng trơn dáng suông, cotton mềm, còn M/L: ai thích mặc thoải mái, không bó thì chọn mẫu này.\n[SP15997] Turtle Check Men White Shirt – 239.000đ, nền trắng caro nhỏ, dáng suông, còn S/M/L/XL: nhìn có điểm nhấn hơn mà vẫn lịch sự.\n\nAnh/chị cho em biết thường mặc size gì để em tư vấn cho chuẩn nhé. Muốn chốt mẫu nào thì anh/chị để lại mã + size, em nhắn nhân viên shop liên hệ lại ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo sơ mi trắng nam công sở tay dài",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em gợi ý chị/anh mấy mẫu sơ mi nam trắng tay dài đúng ý nhé:\n\n[SP9254] Mark Taylor Men Solid White Shirts – 189.000đ, trắng trơn, cotton, dáng ôm vừa, còn S/M/L/XL: mẫu cơ bản nhất, dễ phối quần tây đi làm.\n[SP14748] Arrow Men Solid White Shirts – 259.000đ, trắng trơn dáng suông, cotton mềm, còn M/L: ai thích mặc thoải mái, không bó thì chọn mẫu này.\n[SP15997] Turtle Check Men White Shirt – 239.000đ, nền trắng caro nhỏ, dáng suông, còn S/M/L/XL: nhìn có điểm nhấn hơn mà vẫn lịch sự.\n\nAnh/chị cho em biết thường mặc size gì để em tư vấn cho chuẩn nhé. Muốn chốt mẫu nào thì anh/chị để lại mã + size, em nhắn nhân viên shop liên hệ lại ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP9254",
+    "SP14748",
+    "SP15997"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_19",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 18.4,
+   "giay_luot_cuoi": 6.9,
+   "so_buoc_cong_cu": 5,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4915,
+     "ra": 205,
+     "suy_nghi": 0,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 8154,
+     "ra": 240,
+     "suy_nghi": 70,
+     "vao_cache": 5120
+    },
+    {
+     "vao": 8507,
+     "ra": 161,
+     "suy_nghi": 93,
+     "vao_cache": 8320
+    },
+    {
+     "vao": 8834,
+     "ra": 274,
+     "suy_nghi": 123,
+     "vao_cache": 8576
+    },
+    {
+     "vao": 9193,
+     "ra": 341,
+     "suy_nghi": 100,
+     "vao_cache": 8960
+    },
+    {
+     "vao": 5176,
+     "ra": 187,
+     "suy_nghi": 35,
+     "vao_cache": 4864
+    },
+    {
+     "vao": 6538,
+     "ra": 456,
+     "suy_nghi": 110,
+     "vao_cache": 5248
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE gioi_tinh IN ('nam','unisex') AND kieu_sp = 'áo sơ mi' AND hoa_tiet = 'trơn' AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "áo sơ mi nam trơn mặc đi làm lịch sự công sở",
+      "so_luong": 10
+     },
+     "ma_trong_ket_qua": [
+      "SP9254",
+      "SP14748",
+      "SP51417",
+      "SP41601"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 4, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.748, \"thu_5\": 0.644, \"trung_vi\": 0.645}}, \"san_pham\": [{\"ma_sp\": \"SP9254\", \"ten_sp\": \"Mark Taylor Men Solid White Shirts\", \"gia_ban\": 189000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo sơ mi\", \"kieu_co\": \"cổ sơ mi\", \"tay_ao\": \"tay dài\", \"do_dai\": \"ngang hông\", \"dang\""
+    }
+   ],
+   "tra_loi": "Dạ em tìm kỹ rồi ạ — sơ mi nam **trơn màu hồng** thì shop hiện không có mẫu nào còn hàng. Sơ mi nam trơn chỉ còn mấy màu này, đều hợp đi làm:\n\n[SP14748] Arrow Men Solid White Shirts – 259.000đ, trắng trơn dáng suông, cotton, cổ sơ mi tay dài, còn size M, L — mẫu công sở dễ mặc nhất, form suông không bó.\n[SP9254] Mark Taylor Men Solid White Shirts – 189.000đ, trắng trơn dáng ôm vừa, còn S, M, L, XL — giá tốt, hợp anh thích form gọn.\n[SP41601] Basics Men Brown Shirt – 289.000đ (đang giảm từ 339.000đ), nâu trầm trơn dáng suông, còn S, M, L — nếu anh muốn màu ấm, khác trắng.\n\nAnh thích mẫu nào, hoặc muốn em tìm sơ mi nam trơn tông hồng nhạt/phấn ở chất liệu khác không ạ? Anh cho em size anh mặc để em lọc cho chuẩn. Muốn mua thì anh gửi mã SP + size + màu, em nhắn nhân viên shop liên hệ chốt đơn nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: có sơ mi nam màu hồng ko shop",
+    "Bot: Dạ, em tra rồi ạ: shop hiện chỉ còn đúng 1 mẫu sơ mi nam tông hồng còn hàng:\n\n[SP17550] Mark Taylor Men Red & White Striped Shirt – 399.000đ, màu hồng chỉ còn size **XL** (còn 2 chiếc). Áo sơ mi cổ bẻ, tay dài, cotton kẻ sọc, dáng ôm vừa, mặc đi làm hay dạo phố đều ổn — hợp nếu anh thích phong cách lịch sự mà vẫn có chút màu sắc.\n\nAnh mặc size gì ạ? Nếu không vừa XL thì em tìm giúp anh sơ mi nam màu trắng, đỏ hay xám còn đủ size nhé. Anh muốn mua mẫu nào thì cho em mã SP + size + màu, em sẽ nhắn nhân viên shop liên hệ chốt đơn ạ.",
+    "Khách: loại trơn mặc đi làm ấy, ko lấy sọc",
+    "Bot: Dạ em tìm kỹ rồi ạ — sơ mi nam **trơn màu hồng** thì shop hiện không có mẫu nào còn hàng. Sơ mi nam trơn chỉ còn mấy màu này, đều hợp đi làm:\n\n[SP14748] Arrow Men Solid White Shirts – 259.000đ, trắng trơn dáng suông, cotton, cổ sơ mi tay dài, còn size M, L — mẫu công sở dễ mặc nhất, form suông không bó.\n[SP9254] Mark Taylor Men Solid White Shirts – 189.000đ, trắng trơn dáng ôm vừa, còn S, M, L, XL — giá tốt, hợp anh thích form gọn.\n[SP41601] Basics Men Brown Shirt – 289.000đ (đang giảm từ 339.000đ), nâu trầm trơn dáng suông, còn S, M, L — nếu anh muốn màu ấm, khác trắng.\n\nAnh thích mẫu nào, hoặc muốn em tìm sơ mi nam trơn tông hồng nhạt/phấn ở chất liệu khác không ạ? Anh cho em size anh mặc để em lọc cho chuẩn. Muốn mua thì anh gửi mã SP + size + màu, em nhắn nhân viên shop liên hệ chốt đơn nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP14748",
+    "SP9254",
+    "SP41601"
+   ],
+   "trung_3": false,
+   "chinh_xac": 0.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.0
+  },
+  {
+   "id": "tn_20",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 12.1,
+   "giay_luot_cuoi": 12.1,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4913,
+     "ra": 341,
+     "suy_nghi": 164,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 8369,
+     "ra": 408,
+     "suy_nghi": 98,
+     "vao_cache": 5248
+    },
+    {
+     "vao": 10440,
+     "ra": 957,
+     "suy_nghi": 593,
+     "vao_cache": 8704
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT DISTINCT size FROM bien_the"
+     },
+     "ma_trong_ket_qua": [],
+     "ket_qua_rut_gon": "{\"so_dong\": 5, \"dong\": [{\"size\": \"S\"}, {\"size\": \"M\"}, {\"size\": \"L\"}, {\"size\": \"XL\"}, {\"size\": \"Freesize\"}]}"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, danh_muc, gioi_tinh, gia_ban, mo_ta_tu_do FROM san_pham WHERE (mo_ta_tu_do LIKE '%trẻ em%' OR mo_ta_tu_do LIKE '%bé%' OR mo_ta_tu_do LIKE '%kid%' OR ten_sp LIKE '%bé%' OR ten_sp LIKE '%trẻ em%') LIMIT 20"
+     },
+     "ma_trong_ket_qua": [
+      "SP31102",
+      "SP40153",
+      "SP13323",
+      "SP18173",
+      "SP25503",
+      "SP27227",
+      "SP23621",
+      "SP27198",
+      "SP33486",
+      "SP27223",
+      "SP35433",
+      "SP27199",
+      "SP4929",
+      "SP29172",
+      "SP13515",
+      "SP13222",
+      "SP13255",
+      "SP13256",
+      "SP37514"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 19, \"dong\": [{\"ma_sp\": \"SP31102\", \"ten_sp\": \"Gini and jony Boys Printed Red T-shirt\", \"danh_muc\": \"áo\", \"gioi_tinh\": \"nam\", \"gia_ban\": 239000, \"mo_ta_tu_do\": \"Áo thun trẻ em nam màu đỏ, cổ tròn, tay ngắn, dáng suông thoải mái. Chất liệu cotton mềm mại, in hình mũ bảo hiểm và chữ thể thao nổi bật. Phù hợp mặc đi học, dạo phố hoặc vận động hàng ngày.\", \"dang_ban_va_con_hang\": true}, {\"ma"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT p.ma_sp, p.ten_sp, p.gia_ban, p.gia_goc, b.mau, b.size, b.ton_kho FROM san_pham p JOIN bien_the b ON b.ma_sp = p.ma_sp WHERE p.ma_sp IN ('SP31102','SP40153','SP13323') ORDER BY p.ma_sp, b.size"
+     },
+     "ma_trong_ket_qua": [
+      "SP13323",
+      "SP31102",
+      "SP40153"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 12, \"dong\": [{\"ma_sp\": \"SP13323\", \"ten_sp\": \"Gini and Jony Kids Boys Stripes Green Tshirts\", \"gia_ban\": 249000, \"mau\": \"xanh lá\", \"size\": \"L\", \"ton_kho\": 3, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP13323\", \"ten_sp\": \"Gini and Jony Kids Boys Stripes Green Tshirts\", \"gia_ban\": 249000, \"mau\": \"xanh lá\", \"size\": \"M\", \"ton_kho\": 0, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP13323\", \"ten"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "theo_mo_ta": "áo thun bé trai trẻ em mặc đi học thoải mái",
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'áo' AND gioi_tinh IN ('nam','unisex') AND kieu_sp = 'áo thun' AND trang_thai = 'đang bán' AND (mo_ta_tu_do LIKE '%trẻ em%' OR mo_ta_tu_do LIKE '%bé trai%' OR ten_sp LIKE '%Kids%' OR ten_sp LIKE '%Boys%')",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP4870",
+      "SP40153",
+      "SP31102"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 3, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.575, \"thu_5\": 0.497, \"trung_vi\": 0.508}}, \"san_pham\": [{\"ma_sp\": \"SP4870\", \"ten_sp\": \"Levis Kids Boy's Dawson Red Teens Kidswear\", \"gia_ban\": 369000, \"gia_goc\": 419000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo thun\", \"kieu_co\": \"cổ tròn\", \"tay_ao\": \"tay ngắn\", \"do_"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em tư vấn giúp chị ngay ạ. Bé trai 5 tuổi bên em có mấy mẫu áo thun cotton thoải mái:\n\n- [SP31102] Gini and jony Boys Printed Red T-shirt – 239.000đ (giá gốc 289.000đ), còn size S, XL: áo thun đỏ in hình mũ bảo hiểm, cotton mềm, dáng suông bé mặc đi học hay chạy nhảy đều dễ chịu.\n- [SP4870] Levis Kids Boy's Dawson Red Teens Kidswear – 369.000đ (giá gốc 419.000đ), còn size S, M, L: áo thun Levi's đỏ in chữ trắng, form suông cổ tròn, cotton thoáng mát.\n- [SP40153] Gini and Jony Boys Surfs Up Black T-shirt – 379.000đ, còn size M, L: áo thun sọc đen trắng hơi cá tính, cotton mềm, hợp mặc dạo phố hoặc đi biển.\n\nChị cho em xin chiều cao, cân nặng của bé (hoặc bé đang mặc size gì) để em nhắm size chuẩn hơn nhé. Chị muốn lấy mẫu nào thì nhắn em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo thun cho bé trai 5 tuổi",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tư vấn giúp chị ngay ạ. Bé trai 5 tuổi bên em có mấy mẫu áo thun cotton thoải mái:\n\n- [SP31102] Gini and jony Boys Printed Red T-shirt – 239.000đ (giá gốc 289.000đ), còn size S, XL: áo thun đỏ in hình mũ bảo hiểm, cotton mềm, dáng suông bé mặc đi học hay chạy nhảy đều dễ chịu.\n- [SP4870] Levis Kids Boy's Dawson Red Teens Kidswear – 369.000đ (giá gốc 419.000đ), còn size S, M, L: áo thun Levi's đỏ in chữ trắng, form suông cổ tròn, cotton thoáng mát.\n- [SP40153] Gini and Jony Boys Surfs Up Black T-shirt – 379.000đ, còn size M, L: áo thun sọc đen trắng hơi cá tính, cotton mềm, hợp mặc dạo phố hoặc đi biển.\n\nChị cho em xin chiều cao, cân nặng của bé (hoặc bé đang mặc size gì) để em nhắm size chuẩn hơn nhé. Chị muốn lấy mẫu nào thì nhắn em mã + size, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP31102",
+    "SP4870",
+    "SP40153"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_21",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 8.5,
+   "giay_luot_cuoi": 8.5,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4923,
+     "ra": 465,
+     "suy_nghi": 135,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 8582,
+     "ra": 562,
+     "suy_nghi": 257,
+     "vao_cache": 5376
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, kieu_sp, do_dai, dang, chat_lieu, co_gian, gia_ban FROM san_pham WHERE danh_muc = 'quần' AND gioi_tinh IN ('nữ','unisex') AND trang_thai = 'đang bán'"
+     },
+     "ma_trong_ket_qua": [
+      "SP51509",
+      "SP41010",
+      "SP33538",
+      "SP51499",
+      "SP27022",
+      "SP31605",
+      "SP52539",
+      "SP57076",
+      "SP32404",
+      "SP27917",
+      "SP44666",
+      "SP27914",
+      "SP27912",
+      "SP27920",
+      "SP39328",
+      "SP41007",
+      "SP37560",
+      "SP32587",
+      "SP20372",
+      "SP39125"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 23, \"dong\": [{\"ma_sp\": \"SP51509\", \"ten_sp\": \"Denizen Women Navy Blue Jeans\", \"kieu_sp\": \"quần jean\", \"do_dai\": \"không áp dụng\", \"dang\": \"ôm\", \"chat_lieu\": \"jean\", \"co_gian\": \"ít\", \"gia_ban\": 229000, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP41010\", \"ten_sp\": \"Gini and Jony Girls Woven Navy Blue Jeans\", \"kieu_sp\": \"quần jean\", \"do_dai\": \"ngang gối\", \"dang\": \"ôm\", \"chat_lieu\": \"jean\", "
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE gioi_tinh IN ('nữ','unisex') AND danh_muc = 'quần' AND trang_thai = 'đang bán' AND co_gian IN ('nhiều','ít') AND dang IN ('ôm','đứng') AND EXISTS (SELECT 1 FROM san_pham_dip d WHERE d.ma_sp = san_pham.ma_sp AND d.dip = 'tập thể thao')",
+      "theo_mo_ta": "quần lửng tập thể dục co giãn ôm vừa, mặc thoải mái khi vận động",
+      "uu_tien": "mo_ta",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP31605",
+      "SP39125",
+      "SP42350",
+      "SP49757",
+      "SP37560"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 5, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.575, \"thu_5\": 0.5, \"trung_vi\": 0.526}}, \"san_pham\": [{\"ma_sp\": \"SP31605\", \"ten_sp\": \"Nike Women Running Black Skirt with Capris\", \"gia_ban\": 439000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần legging\", \"kieu_co\": \"không áp dụng\", \"tay_ao\": \"không áp dụng\", \"do_dai"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em tìm giúp chị mấy mẫu quần lửng tập thể thao ôm co giãn nhé:\n\n- [SP42350] Flying Machine Women Black Leggings – 359.000đ, size S/M, màu đen. Dài ngang gối đúng kiểu lửng, thun co giãn nhiều, ôm vừa vặn, tập nhẹ hay mặc hàng ngày đều được.\n- [SP31605] Nike Women Running Black Skirt with Capris – 439.000đ, size M/L/XL, màu đen. Legging lửng trên gối kèm chân váy ngắn bên ngoài, polyester co giãn nhiều, chạy bộ/gym rất tiện.\n- [SP37560] Madagascar3 Girls White Shorts – 309.000đ, size S/M/XL. Set 4 quần short cotton co giãn thoải mái, dài trên gối, mặc tập thể thao hoặc ở nhà.\n\nChị thích mẫu nào để em xem tồn kho size và màu kỹ hơn ạ? Chị cho em biết chị mặc size gì nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: quần lửng tập thể dục cho nữ, ôm ôm co giãn",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em tìm giúp chị mấy mẫu quần lửng tập thể thao ôm co giãn nhé:\n\n- [SP42350] Flying Machine Women Black Leggings – 359.000đ, size S/M, màu đen. Dài ngang gối đúng kiểu lửng, thun co giãn nhiều, ôm vừa vặn, tập nhẹ hay mặc hàng ngày đều được.\n- [SP31605] Nike Women Running Black Skirt with Capris – 439.000đ, size M/L/XL, màu đen. Legging lửng trên gối kèm chân váy ngắn bên ngoài, polyester co giãn nhiều, chạy bộ/gym rất tiện.\n- [SP37560] Madagascar3 Girls White Shorts – 309.000đ, size S/M/XL. Set 4 quần short cotton co giãn thoải mái, dài trên gối, mặc tập thể thao hoặc ở nhà.\n\nChị thích mẫu nào để em xem tồn kho size và màu kỹ hơn ạ? Chị cho em biết chị mặc size gì nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP42350",
+    "SP31605",
+    "SP37560"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_22",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.2,
+   "giay_luot_cuoi": 7.2,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4928,
+     "ra": 381,
+     "suy_nghi": 120,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6619,
+     "ra": 451,
+     "suy_nghi": 124,
+     "vao_cache": 5248
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'áo khoác' AND gioi_tinh IN ('nữ','unisex') AND mau_chinh IN ('đen','xám','xanh navy','nâu','be/kem') AND trang_thai = 'đang bán' AND EXISTS (SELECT 1 FROM bien_the b WHERE b.ma_sp = san_pham.ma_sp AND b.ton_kho > 0)",
+      "theo_mo_ta": "áo khoác ấm mặc mùa lạnh, dễ phối đồ, màu tối",
+      "theo_anh": "áo khoác màu tối tối giản dễ mặc hàng ngày",
+      "uu_tien": "mo_ta",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP12536",
+      "SP52034",
+      "SP19330",
+      "SP22314"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 4, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.513, \"thu_5\": 0.392, \"trung_vi\": 0.424}, \"anh\": {\"cao_nhat\": 0.392, \"thu_5\": 0.358, \"trung_vi\": 0.37}}, \"san_pham\": [{\"ma_sp\": \"SP12536\", \"ten_sp\": \"Puma Women Solid Black Sweatshirts\", \"gia_ban\": 509000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"áo khoác\", \"kieu_sp\": \"áo khoác gi"
+    }
+   ],
+   "tra_loi": "Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ. Với áo khoác nữ màu tối, ấm cho mùa lạnh, em gợi ý:\n\n[SP19330] United Colors of Benetton Women Solid Black Jacket – 679.000đ, size S/M/L/XL, đen. Áo phao cổ cao, có lót trong, giữ ấm tốt nhất trong các mẫu em tìm được, dễ phối đồ đi làm/đi học.\n[SP12536] Puma Women Solid Black Sweatshirts – 509.000đ, size S/M/XL, đen. Áo khoác nỉ mềm, màu đen trơn, mặc se lạnh rất ổn.\n[SP52034] Just Natural Unisex Black Jacket – 309.000đ (giá gốc 359.000đ), size S/M/L/XL, đen. Áo khoác gió suông nhẹ, rẻ nhất, phù hợp chị cần một lớp khoác dễ phối hàng ngày.\n\nChị thích kiểu ấm dày như áo phao hay mỏng nhẹ hơn ạ? Chị cho em biết chiều cao, cân nặng để em tư vấn size chuẩn hơn nhé.",
+   "hoi_thoai_day_du": [
+    "Khách: áo khoác nữ ấm ấm mùa lạnh, màu tối dễ phối",
+    "Bot: Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ. Với áo khoác nữ màu tối, ấm cho mùa lạnh, em gợi ý:\n\n[SP19330] United Colors of Benetton Women Solid Black Jacket – 679.000đ, size S/M/L/XL, đen. Áo phao cổ cao, có lót trong, giữ ấm tốt nhất trong các mẫu em tìm được, dễ phối đồ đi làm/đi học.\n[SP12536] Puma Women Solid Black Sweatshirts – 509.000đ, size S/M/XL, đen. Áo khoác nỉ mềm, màu đen trơn, mặc se lạnh rất ổn.\n[SP52034] Just Natural Unisex Black Jacket – 309.000đ (giá gốc 359.000đ), size S/M/L/XL, đen. Áo khoác gió suông nhẹ, rẻ nhất, phù hợp chị cần một lớp khoác dễ phối hàng ngày.\n\nChị thích kiểu ấm dày như áo phao hay mỏng nhẹ hơn ạ? Chị cho em biết chiều cao, cân nặng để em tư vấn size chuẩn hơn nhé."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP19330",
+    "SP12536",
+    "SP52034"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.67,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.67
+  },
+  {
+   "id": "tn_23",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 13.0,
+   "giay_luot_cuoi": 13.0,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4922,
+     "ra": 202,
+     "suy_nghi": 0,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 5507,
+     "ra": 153,
+     "suy_nghi": 22,
+     "vao_cache": 5120
+    },
+    {
+     "vao": 6113,
+     "ra": 108,
+     "suy_nghi": 16,
+     "vao_cache": 5632
+    },
+    {
+     "vao": 6702,
+     "ra": 356,
+     "suy_nghi": 180,
+     "vao_cache": 6144
+    },
+    {
+     "vao": 8049,
+     "ra": 269,
+     "suy_nghi": 0,
+     "vao_cache": 7040
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE gioi_tinh IN ('nữ','unisex') AND danh_muc = 'áo khoác' AND kieu_sp = 'áo cardigan' AND chat_lieu = 'len' AND trang_thai = 'đang bán'",
+      "theo_mo_ta": "áo cardigan len mỏng nhẹ mặc khoác ngoài",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP20303"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 1, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.573, \"thu_5\": 0.573, \"trung_vi\": 0.573}}, \"san_pham\": [{\"ma_sp\": \"SP20303\", \"ten_sp\": \"Jealous 21 Women Solid Purple Sweater\", \"gia_ban\": 419000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"áo khoác\", \"kieu_sp\": \"áo cardigan\", \"kieu_co\": \"cổ V\", \"tay_ao\": \"tay dài\", \"do_dai\": \"ngang hông\""
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, gia_ban, kieu_sp, chat_lieu, mau_chinh, do_dai, dang, trang_thai FROM san_pham WHERE gioi_tinh IN ('nữ','unisex') AND (kieu_sp = 'áo cardigan' OR chat_lieu = 'len' OR danh_muc = 'áo len') AND trang_thai = 'đang bán'"
+     },
+     "ma_trong_ket_qua": [
+      "SP21137",
+      "SP20303",
+      "SP18200",
+      "SP14582",
+      "SP20222"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 5, \"dong\": [{\"ma_sp\": \"SP21137\", \"ten_sp\": \"s.Oliver Women Stripes Grey Sweater\", \"gia_ban\": 829000, \"kieu_sp\": \"áo cardigan\", \"chat_lieu\": \"len\", \"mau_chinh\": \"xám\", \"do_dai\": \"ngang hông\", \"dang\": \"suông\", \"trang_thai\": \"đang bán\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP20303\", \"ten_sp\": \"Jealous 21 Women Solid Purple Sweater\", \"gia_ban\": 419000, \"kieu_sp\": \"áo cardigan\", \"chat_"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, size, mau, ton_kho FROM bien_the WHERE ma_sp IN ('SP21137','SP20303','SP14582','SP18200','SP20222') AND ton_kho > 0 ORDER BY ma_sp, size"
+     },
+     "ma_trong_ket_qua": [
+      "SP14582",
+      "SP18200",
+      "SP20222",
+      "SP20303",
+      "SP21137"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 13, \"dong\": [{\"ma_sp\": \"SP14582\", \"size\": \"L\", \"mau\": \"đen\", \"ton_kho\": 4, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP14582\", \"size\": \"M\", \"mau\": \"đen\", \"ton_kho\": 1, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP18200\", \"size\": \"L\", \"mau\": \"hồng\", \"ton_kho\": 6, \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP18200\", \"size\": \"M\", \"mau\": \"hồng\", \"ton_kho\": 5, \"dang_ban_va_con_hang\": true}, {"
+    },
+    {
+     "cong_cu": "xem_anh",
+     "tham_so": {
+      "ma_sp": [
+       "SP20303",
+       "SP14582",
+       "SP21137"
+      ],
+      "yeu_cau": "Kiểm tra đây có phải áo cardigan len mỏng cài khuy mở phía trước, mặc khoác ngoài không; kiểu dáng có nhẹ nhàng, nữ tính không",
+      "loi_nhan_cho": "Dạ chị chờ em xíu, em xem kỹ ảnh từng mẫu cardigan cho chị nhé"
+     },
+     "ma_trong_ket_qua": [
+      "SP20303",
+      "SP14582",
+      "SP21137"
+     ],
+     "ket_qua_rut_gon": "{\"da_xem\": 3, \"hop\": [{\"ma_sp\": \"SP20303\", \"ten_sp\": \"Jealous 21 Women Solid Purple Sweater\", \"gia_ban\": 419000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"áo khoác\", \"kieu_sp\": \"áo cardigan\", \"kieu_co\": \"cổ V\", \"tay_ao\": \"tay dài\", \"do_dai\": \"ngang hông\", \"dang\": \"ôm\", \"chat_lieu\": \"len\", \"hoa_tiet\": \"kẻ sọc\", \"mau_chinh\": \"tím\", \"phong_cach\": \"basic\", \"dip\": \"đi làm, đi học, dạo phố, hẹn hò, ở nhà\", \"chi_t"
+    }
+   ],
+   "tra_loi": "Dạ có ạ, em gửi chị 3 mẫu cardigan len mỏng đang còn hàng:\n\n- [SP20303] Jealous 21 Women Solid Purple Sweater – 419.000đ – size L, XL – cardigan dệt kim tím than kẻ sọc, cổ V, xẻ tà nhẹ, mặc khoác ngoài rất nữ tính.\n- [SP14582] United Colors of Benetton Women Solid Black Sweaters – 279.000đ (đang giảm từ 329.000đ) – size M, L – màu đen trơn dáng suông, dễ phối với mọi outfit đi làm/đi học.\n- [SP21137] s.Oliver Women Stripes Grey Sweater – 829.000đ (đang giảm từ 979.000đ) – size L – len xám kẻ sọc có 2 túi trước, kiểu basic dễ mặc.\n\nChị cho em biết chị thường mặc size gì, hoặc cân nặng/chiều cao để em tư vấn size chuẩn hơn nhé ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: có áo khoác len mỏng kiểu cardigan cho nữ ko ạ",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ ảnh từng mẫu cardigan cho chị nhé",
+    "Bot: Dạ có ạ, em gửi chị 3 mẫu cardigan len mỏng đang còn hàng:\n\n- [SP20303] Jealous 21 Women Solid Purple Sweater – 419.000đ – size L, XL – cardigan dệt kim tím than kẻ sọc, cổ V, xẻ tà nhẹ, mặc khoác ngoài rất nữ tính.\n- [SP14582] United Colors of Benetton Women Solid Black Sweaters – 279.000đ (đang giảm từ 329.000đ) – size M, L – màu đen trơn dáng suông, dễ phối với mọi outfit đi làm/đi học.\n- [SP21137] s.Oliver Women Stripes Grey Sweater – 829.000đ (đang giảm từ 979.000đ) – size L – len xám kẻ sọc có 2 túi trước, kiểu basic dễ mặc.\n\nChị cho em biết chị thường mặc size gì, hoặc cân nặng/chiều cao để em tư vấn size chuẩn hơn nhé ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP20303",
+    "SP14582",
+    "SP21137"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_24",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 6.9,
+   "giay_luot_cuoi": 6.9,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4915,
+     "ra": 390,
+     "suy_nghi": 218,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 7059,
+     "ra": 343,
+     "suy_nghi": 37,
+     "vao_cache": 5248
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'quần' AND kieu_sp = 'quần tây' AND gioi_tinh IN ('nữ','unisex') AND trang_thai = 'đang bán' ORDER BY CASE WHEN dang = 'đứng' THEN 0 ELSE 1 END",
+      "theo_mo_ta": "quần tây nữ công sở ống đứng, thanh lịch đi làm",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP32404",
+      "SP27920",
+      "SP27917",
+      "SP44666",
+      "SP27912",
+      "SP27914"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 6, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.579, \"thu_5\": 0.535, \"trung_vi\": 0.544}}, \"san_pham\": [{\"ma_sp\": \"SP32404\", \"ten_sp\": \"Arrow Woman Black Trousers\", \"gia_ban\": 369000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần tây\", \"kieu_co\": \"không áp dụng\", \"tay_ao\": \"không áp dụng\", \"do_dai\": \"maxi\", \"dang\":"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em gửi chị mấy mẫu quần tây nữ ống đứng mặc công sở ạ:\n\n[SP32404] Arrow Woman Black Trousers – 369.000đ – còn S, M – màu đen dáng đứng, ống suông nhẹ, cạp cao tôn dáng, chất polyester co giãn nhẹ rất dễ phối sơ mi đi làm.\n[SP27917] Scullers For Her Brown Striped Trousers – 249.000đ – còn S, M, L – dáng đứng, sọc dọc nâu thanh lịch, giá mềm nhất trong nhóm.\n[SP44666] Wills Lifestyle Women Brown Trousers – 479.000đ – còn M, L – ống đứng, cạp cao có đai lưng, chất kaki mềm mặc cả ngày vẫn thoải mái.\n\nChị cho em biết chị mặc size nào hoặc số đo để em tư vấn size chuẩn hơn nhé. Chị muốn mua mẫu nào thì nhắn em mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: quần tây nữ công sở ống đứng",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em gửi chị mấy mẫu quần tây nữ ống đứng mặc công sở ạ:\n\n[SP32404] Arrow Woman Black Trousers – 369.000đ – còn S, M – màu đen dáng đứng, ống suông nhẹ, cạp cao tôn dáng, chất polyester co giãn nhẹ rất dễ phối sơ mi đi làm.\n[SP27917] Scullers For Her Brown Striped Trousers – 249.000đ – còn S, M, L – dáng đứng, sọc dọc nâu thanh lịch, giá mềm nhất trong nhóm.\n[SP44666] Wills Lifestyle Women Brown Trousers – 479.000đ – còn M, L – ống đứng, cạp cao có đai lưng, chất kaki mềm mặc cả ngày vẫn thoải mái.\n\nChị cho em biết chị mặc size nào hoặc số đo để em tư vấn size chuẩn hơn nhé. Chị muốn mua mẫu nào thì nhắn em mã + size + màu, nhân viên shop sẽ nhắn lại chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP32404",
+    "SP27917",
+    "SP44666"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_25",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 6.5,
+   "giay_luot_cuoi": 6.5,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4917,
+     "ra": 304,
+     "suy_nghi": 127,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 7488,
+     "ra": 343,
+     "suy_nghi": 93,
+     "vao_cache": 5120
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE kieu_sp = 'áo thun' AND gioi_tinh IN ('nữ','unisex') AND trang_thai = 'đang bán' AND (hoa_tiet = 'in chữ/hình' OR mo_ta_tu_do LIKE '%bướm%')",
+      "theo_anh": "áo thun in hình con bướm",
+      "uu_tien": "anh",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP26894",
+      "SP3931",
+      "SP26870",
+      "SP10988",
+      "SP8454",
+      "SP11362",
+      "SP2938",
+      "SP9156",
+      "SP7215",
+      "SP8448",
+      "SP4895"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 11, \"het_hang_hoac_ngung_ban\": 1, \"xep_hang\": \"theo kênh anh\", \"diem_cac_kenh\": {\"anh\": {\"cao_nhat\": 0.462, \"thu_5\": 0.378, \"trung_vi\": 0.378}}, \"san_pham\": [{\"ma_sp\": \"SP26894\", \"ten_sp\": \"Jealous 21 Women Printed White Top\", \"gia_ban\": 219000, \"gia_goc\": 269000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo thun\", \"kieu_co\": \"cổ tròn\", \"tay_ao\": \"tay ngắn\", \"do_dai\": \"ngan"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio ạ 🌿 Shop có 2 mẫu áo thun nữ in hình bướm đây chị:\n\n- [SP26894] Jealous 21 Women Printed White Top – 219.000đ (giá gốc 269.000đ), còn size M, XL: áo trắng dáng suông nhẹ, in cánh bướm đen trắng, cotton thoáng mát, dễ mặc dạo phố.\n- [SP3931] Jealous 21 Women's Black Butterfly T-shirt – 159.000đ, còn size S, L, XL: áo đen cổ V dáng ôm nhẹ, hình in bướm lớn tông xanh dương – tím nổi bật, hợp phong cách cá tính.\n\nChị thích mẫu nào để em xem kỹ size cho chị nhé? Chị cho em biết chiều cao, cân nặng để em tư vấn size chuẩn hơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: shop có áo thun nữ in hình con bướm ko",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio ạ 🌿 Shop có 2 mẫu áo thun nữ in hình bướm đây chị:\n\n- [SP26894] Jealous 21 Women Printed White Top – 219.000đ (giá gốc 269.000đ), còn size M, XL: áo trắng dáng suông nhẹ, in cánh bướm đen trắng, cotton thoáng mát, dễ mặc dạo phố.\n- [SP3931] Jealous 21 Women's Black Butterfly T-shirt – 159.000đ, còn size S, L, XL: áo đen cổ V dáng ôm nhẹ, hình in bướm lớn tông xanh dương – tím nổi bật, hợp phong cách cá tính.\n\nChị thích mẫu nào để em xem kỹ size cho chị nhé? Chị cho em biết chiều cao, cân nặng để em tư vấn size chuẩn hơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP26894",
+    "SP3931"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_26",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 7.3,
+   "giay_luot_cuoi": 7.3,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4917,
+     "ra": 381,
+     "suy_nghi": 169,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 7062,
+     "ra": 404,
+     "suy_nghi": 103,
+     "vao_cache": 5248
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE gioi_tinh IN ('nữ','unisex') AND tay_ao = 'sát nách' AND mau_chinh IN ('hồng') AND mua IN ('xuân hè','quanh năm') AND EXISTS (SELECT 1 FROM bien_the b WHERE b.ma_sp = san_pham.ma_sp AND b.ton_kho > 0)",
+      "theo_mo_ta": "áo ba lỗ sát nách nữ mặc mùa hè, mát mẻ",
+      "uu_tien": "mo_ta",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP25543",
+      "SP21416",
+      "SP26864",
+      "SP50722",
+      "SP6874",
+      "SP10506"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 6, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.446, \"thu_5\": 0.367, \"trung_vi\": 0.382}}, \"san_pham\": [{\"ma_sp\": \"SP25543\", \"ten_sp\": \"Wrangler Women Striper Tank Pink Top\", \"gia_ban\": 329000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo hai dây\", \"kieu_co\": \"cổ tròn\", \"tay_ao\": \"sát nách\", \"do_dai\": \"qua mông\", \"dan"
+    }
+   ],
+   "tra_loi": "Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được mấy mẫu áo sát nách màu hồng mặc hè cho chị đây:\n\n[SP25543] Wrangler Women Striper Tank Pink Top – 329.000đ, còn S, L, XL – tank top sọc hồng trắng, thun cotton co giãn thoáng mát, đúng kiểu ba lỗ mặc hè.\n[SP21416] Roxy Women Pink Top – 299.000đ (giá gốc 349.000đ), còn M, L, XL – hai dây hồng nhạt, có hàng cúc nhỏ xinh, dáng ôm vừa.\n[SP26864] Jealous 21 Women Pink Top – 159.000đ, còn S, XL – áo kiểu hồng, cổ tròn xếp nhún nữ tính, giá dễ thương.\n\nChị thích mẫu nào hay cần em tư vấn size thì chị cho em số cân nặng/chiều cao nhé. Chị muốn mua thì nhắn em mã + size, nhân viên shop sẽ liên hệ chốt đơn ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: áo ba lỗ nữ màu hồng mặc hè",
+    "Bot: Dạ em chào chị, em là trợ lý AI của Mộc Lam Studio ạ. Em tìm được mấy mẫu áo sát nách màu hồng mặc hè cho chị đây:\n\n[SP25543] Wrangler Women Striper Tank Pink Top – 329.000đ, còn S, L, XL – tank top sọc hồng trắng, thun cotton co giãn thoáng mát, đúng kiểu ba lỗ mặc hè.\n[SP21416] Roxy Women Pink Top – 299.000đ (giá gốc 349.000đ), còn M, L, XL – hai dây hồng nhạt, có hàng cúc nhỏ xinh, dáng ôm vừa.\n[SP26864] Jealous 21 Women Pink Top – 159.000đ, còn S, XL – áo kiểu hồng, cổ tròn xếp nhún nữ tính, giá dễ thương.\n\nChị thích mẫu nào hay cần em tư vấn size thì chị cho em số cân nặng/chiều cao nhé. Chị muốn mua thì nhắn em mã + size, nhân viên shop sẽ liên hệ chốt đơn ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP25543",
+    "SP21416",
+    "SP26864"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_27",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 8.5,
+   "giay_luot_cuoi": 8.5,
+   "so_buoc_cong_cu": 1,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4917,
+     "ra": 214,
+     "suy_nghi": 25,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 6651,
+     "ra": 675,
+     "suy_nghi": 441,
+     "vao_cache": 5120
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'chân váy' AND kieu_sp = 'chân váy jean' AND gioi_tinh IN ('nữ','unisex') AND do_dai IN ('trên gối','ngang hông','ngang gối')",
+      "theo_mo_ta": "chân váy jean ngắn trẻ trung dạo phố",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP10002",
+      "SP13515",
+      "SP57084",
+      "SP3896",
+      "SP38504"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 5, \"het_hang_hoac_ngung_ban\": 1, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.684, \"thu_5\": 0.605, \"trung_vi\": 0.631}}, \"san_pham\": [{\"ma_sp\": \"SP10002\", \"ten_sp\": \"Palm Tree Kids Sp Jema Skt Blue Skirts\", \"gia_ban\": 419000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"chân váy\", \"kieu_sp\": \"chân váy jean\", \"kieu_co\": \"không áp dụng\", \"tay_ao\": \"không áp dụng\", \"do_"
+    }
+   ],
+   "tra_loi": "Dạ chân váy jean ngắn cho nữ bên em có mẫu này ạ:\n\n- [SP57084] Elle Women Blue Skirt – 389.000đ (đang giảm từ 439.000đ), jean xanh dương nhạt dáng chữ A cạp chun xếp ly, ngắn trên gối, còn size S, M, L. Mẫu này mặc đi làm, đi học hay dạo phố đều tiện, dễ phối áo ạ.\n\nCác mẫu jean ngắn còn lại trong dữ liệu là dòng cho bé gái (Kids/Girls) nên em chưa đưa vào. Chị cần mẫu cho người lớn dài hơn chút hay màu khác thì nhắn em nhé, em lọc thêm ạ. Chị cho em biết chị thường mặc size gì để em tư vấn cho chuẩn ạ?",
+   "hoi_thoai_day_du": [
+    "Khách: chân váy jean ngắn cho nữ nha ad",
+    "Bot: Dạ chân váy jean ngắn cho nữ bên em có mẫu này ạ:\n\n- [SP57084] Elle Women Blue Skirt – 389.000đ (đang giảm từ 439.000đ), jean xanh dương nhạt dáng chữ A cạp chun xếp ly, ngắn trên gối, còn size S, M, L. Mẫu này mặc đi làm, đi học hay dạo phố đều tiện, dễ phối áo ạ.\n\nCác mẫu jean ngắn còn lại trong dữ liệu là dòng cho bé gái (Kids/Girls) nên em chưa đưa vào. Chị cần mẫu cho người lớn dài hơn chút hay màu khác thì nhắn em nhé, em lọc thêm ạ. Chị cho em biết chị thường mặc size gì để em tư vấn cho chuẩn ạ?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP57084"
+   ],
+   "trung_3": false,
+   "chinh_xac": 0.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.0
+  },
+  {
+   "id": "tn_28",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 13.5,
+   "giay_luot_cuoi": 13.5,
+   "so_buoc_cong_cu": 4,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4916,
+     "ra": 490,
+     "suy_nghi": 222,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 11161,
+     "ra": 430,
+     "suy_nghi": 160,
+     "vao_cache": 5376
+    },
+    {
+     "vao": 13401,
+     "ra": 519,
+     "suy_nghi": 392,
+     "vao_cache": 11520
+    },
+    {
+     "vao": 14167,
+     "ra": 347,
+     "suy_nghi": 0,
+     "vao_cache": 13824
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, danh_muc, kieu_sp, phong_cach, gia_ban, trang_thai FROM san_pham WHERE ten_sp LIKE '%bóng%' OR mo_ta_tu_do LIKE '%bóng đá%' OR mo_ta_tu_do LIKE '%câu lạc bộ%' OR danh_muc = 'đồ bơi' OR phong_cach = 'thể thao'"
+     },
+     "ma_trong_ket_qua": [
+      "SP17920",
+      "SP42112",
+      "SP7910",
+      "SP46407",
+      "SP12792",
+      "SP2200",
+      "SP32641",
+      "SP38621",
+      "SP9671",
+      "SP4799",
+      "SP31102",
+      "SP53795",
+      "SP2243",
+      "SP28455",
+      "SP31605",
+      "SP32457",
+      "SP46400",
+      "SP15644",
+      "SP32426",
+      "SP37560"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 50, \"dong\": [{\"ma_sp\": \"SP17920\", \"ten_sp\": \"Nike Mens Traning Blue T-shirt\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo polo\", \"phong_cach\": \"thể thao\", \"gia_ban\": 209000, \"trang_thai\": \"đang bán\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP42112\", \"ten_sp\": \"ADIDAS Men Grey T-Shirt\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo thun\", \"phong_cach\": \"thể thao\", \"gia_ban\": 279000, \"trang_thai\": \"đang bán\","
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE phong_cach = 'thể thao' OR kieu_sp IN ('áo thun','áo polo')",
+      "theo_mo_ta": "áo đá bóng câu lạc bộ, đồ thể thao mặc đá banh",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP12792",
+      "SP15603",
+      "SP17927",
+      "SP15619",
+      "SP32457",
+      "SP15321",
+      "SP31443",
+      "SP15629",
+      "SP15331",
+      "SP2107",
+      "SP15613",
+      "SP9768",
+      "SP9671",
+      "SP42112",
+      "SP15018",
+      "SP25025",
+      "SP17920",
+      "SP46407",
+      "SP2243",
+      "SP42104"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 87, \"het_hang_hoac_ngung_ban\": 6, \"xep_hang\": \"theo kênh mo_ta\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.561, \"thu_5\": 0.534, \"trung_vi\": 0.43}}, \"san_pham\": [{\"ma_sp\": \"SP12792\", \"ten_sp\": \"Nike Men Manchester United Black Jersey\", \"gia_ban\": 399000, \"gia_goc\": 499000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"áo\", \"kieu_sp\": \"áo thun\", \"kieu_co\": \"cổ tròn\", \"tay_ao\": \"tay ngắn\", \"do_da"
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, gia_ban, gia_goc, size_con_hang, mau_con_hang, trang_thai FROM (SELECT sp.ma_sp, sp.ten_sp, sp.gia_ban, sp.gia_goc, sp.trang_thai, (SELECT GROUP_CONCAT(b.size) FROM bien_the b WHERE b.ma_sp=sp.ma_sp AND b.ton_kho>0) AS size_con_hang, (SELECT GROUP_CONCAT(DISTINCT b.mau) FROM bien_the b WHERE b.ma_sp=sp.ma_sp AND b.ton_kho>0) AS mau_con_hang, sp.mo_ta_tu_do FROM san_pham sp) WHERE mo_ta_tu_do LIKE '%jersey%' OR ten_sp LIKE '%Jersey%' OR mo_ta_tu_do LIKE '%câu lạc bộ%' OR ten_sp LIKE '%United%' OR ten_sp LIKE '%Chelsea%' OR ten_sp LIKE '%Real Madrid%' OR ten_sp LIKE '%Barcelona%'"
+     },
+     "ma_trong_ket_qua": [
+      "SP12792",
+      "SP19153",
+      "SP24950",
+      "SP10372",
+      "SP11441",
+      "SP19645",
+      "SP43323",
+      "SP11362",
+      "SP10406",
+      "SP37198",
+      "SP10365",
+      "SP13472",
+      "SP29172",
+      "SP11330",
+      "SP29176",
+      "SP2107",
+      "SP19337",
+      "SP19330",
+      "SP18968",
+      "SP11522"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 25, \"dong\": [{\"ma_sp\": \"SP12792\", \"ten_sp\": \"Nike Men Manchester United Black Jersey\", \"gia_ban\": 399000, \"gia_goc\": 499000, \"size_con_hang\": \"S\", \"mau_con_hang\": \"đen\", \"trang_thai\": \"đang bán\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP19153\", \"ten_sp\": \"United Colors of Benetton Men Red Polo TShirt\", \"gia_ban\": 209000, \"size_con_hang\": \"M,XL\", \"mau_con_hang\": \"đỏ\", \"trang_thai\": \""
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT sp.ma_sp, sp.ten_sp, sp.gia_ban, GROUP_CONCAT(b.size) AS sizes FROM san_pham sp JOIN bien_the b ON b.ma_sp = sp.ma_sp AND b.ton_kho > 0 WHERE sp.ma_sp IN ('SP46407','SP42112','SP53795','SP9671','SP17920') GROUP BY sp.ma_sp"
+     },
+     "ma_trong_ket_qua": [
+      "SP17920",
+      "SP42112",
+      "SP46407",
+      "SP53795",
+      "SP9671"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 5, \"dong\": [{\"ma_sp\": \"SP17920\", \"ten_sp\": \"Nike Mens Traning Blue T-shirt\", \"gia_ban\": 209000, \"sizes\": \"L,XL\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP42112\", \"ten_sp\": \"ADIDAS Men Grey T-Shirt\", \"gia_ban\": 279000, \"sizes\": \"S,XL\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP46407\", \"ten_sp\": \"ADIDAS Men Red T-shirt\", \"gia_ban\": 219000, \"sizes\": \"S,XL\", \"dang_ban_va_con_hang\": tr"
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ anh/chị xem mẫu ạ 🌿\n\nÁo jersey CLB hiện shop chỉ có đúng 1 mẫu:\n- [SP12792] Nike Men Manchester United Black Jersey – 399.000đ (giá gốc 499.000đ), còn size S, màu đen. Áo jersey MU viền đỏ ở cổ/tay, chất polyester co giãn nhẹ, thoáng mát, mặc đá banh hay dạo phố đều được.\n\nNếu size S không vừa, anh/chị tham khảo mấy áo thun thể thao cotton thoáng mát, mặc đá banh cũng ổn:\n- [SP53795] Puma Men Black T-shirt – 219.000đ, còn S, M, màu đen dễ phối, hợp tập luyện.\n- [SP9671] ADIDAS Men Ess F Logo Blue T-Shirts – 179.000đ, còn S, L, XL, giá mềm nhất.\n\nAnh/chị cho em biết đang mặc size gì (hoặc cân nặng/chiều cao) để em xem kỹ tồn kho giúp mình nhé. Shop chưa tự lên đơn được, anh/chị để lại mã + size + màu là em nhờ nhân viên liên hệ chốt ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: co ao da banh clb ko shop, mu cang tot",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em hỗ trợ anh/chị xem mẫu ạ 🌿\n\nÁo jersey CLB hiện shop chỉ có đúng 1 mẫu:\n- [SP12792] Nike Men Manchester United Black Jersey – 399.000đ (giá gốc 499.000đ), còn size S, màu đen. Áo jersey MU viền đỏ ở cổ/tay, chất polyester co giãn nhẹ, thoáng mát, mặc đá banh hay dạo phố đều được.\n\nNếu size S không vừa, anh/chị tham khảo mấy áo thun thể thao cotton thoáng mát, mặc đá banh cũng ổn:\n- [SP53795] Puma Men Black T-shirt – 219.000đ, còn S, M, màu đen dễ phối, hợp tập luyện.\n- [SP9671] ADIDAS Men Ess F Logo Blue T-Shirts – 179.000đ, còn S, L, XL, giá mềm nhất.\n\nAnh/chị cho em biết đang mặc size gì (hoặc cân nặng/chiều cao) để em xem kỹ tồn kho giúp mình nhé. Shop chưa tự lên đơn được, anh/chị để lại mã + size + màu là em nhờ nhân viên liên hệ chốt ạ."
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP12792",
+    "SP53795",
+    "SP9671"
+   ],
+   "trung_3": true,
+   "chinh_xac": 0.33,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_29",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 8.8,
+   "giay_luot_cuoi": 8.8,
+   "so_buoc_cong_cu": 2,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4916,
+     "ra": 391,
+     "suy_nghi": 148,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 7738,
+     "ra": 236,
+     "suy_nghi": 136,
+     "vao_cache": 5248
+    },
+    {
+     "vao": 8493,
+     "ra": 285,
+     "suy_nghi": 60,
+     "vao_cache": 7936
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE trang_thai = 'đang bán' AND danh_muc = 'quần' AND kieu_sp = 'quần short' AND gioi_tinh IN ('nam','unisex') AND EXISTS (SELECT 1 FROM bien_the b WHERE b.ma_sp = san_pham.ma_sp AND b.ton_kho > 0)",
+      "theo_mo_ta": "quần short kaki túi hộp nam mặc đi chơi, thoải mái năng động",
+      "theo_anh": "quần short kaki nam có túi hộp, phong cách streetwear",
+      "uu_tien": "can_bang",
+      "so_luong": 8
+     },
+     "ma_trong_ket_qua": [
+      "SP52520",
+      "SP32457",
+      "SP2107",
+      "SP42104",
+      "SP29176",
+      "SP15331",
+      "SP32426",
+      "SP2193",
+      "SP15644",
+      "SP41701",
+      "SP13255",
+      "SP15613",
+      "SP13256",
+      "SP8397",
+      "SP13222"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 15, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.672, \"thu_5\": 0.615, \"trung_vi\": 0.602}, \"anh\": {\"cao_nhat\": 0.429, \"thu_5\": 0.33, \"trung_vi\": 0.327}}, \"san_pham\": [{\"ma_sp\": \"SP52520\", \"ten_sp\": \"Pepe Jeans Men Cream Cargo Shorts\", \"gia_ban\": 489000, \"gioi_tinh\": \"nam\", \"danh_muc\": \"quần\", \"kieu_sp\": \"quần short\", \""
+    },
+    {
+     "cong_cu": "truy_van",
+     "tham_so": {
+      "sql": "SELECT ma_sp, ten_sp, gia_ban, chat_lieu, mau_chinh, chi_tiet FROM san_pham WHERE ma_sp IN ('SP15644','SP41701','SP13255','SP15613','SP13256','SP8397','SP13222')"
+     },
+     "ma_trong_ket_qua": [
+      "SP13222",
+      "SP13255",
+      "SP13256",
+      "SP15613",
+      "SP15644",
+      "SP41701",
+      "SP8397"
+     ],
+     "ket_qua_rut_gon": "{\"so_dong\": 7, \"dong\": [{\"ma_sp\": \"SP13222\", \"ten_sp\": \"Palm Tree Kids Boys Washed Blue Shorts\", \"gia_ban\": 409000, \"chat_lieu\": \"jean\", \"mau_chinh\": \"xanh dương\", \"chi_tiet\": \"có túi, đính cúc, khóa kéo\", \"dang_ban_va_con_hang\": true}, {\"ma_sp\": \"SP13255\", \"ten_sp\": \"Palm Tree Kids Boys Check White Shorts\", \"gia_ban\": 279000, \"chat_lieu\": \"cotton\", \"mau_chinh\": \"trắng\", \"chi_tiet\": \"có túi, đính "
+    }
+   ],
+   "tra_loi": "Dạ em là trợ lý AI của Mộc Lam Studio, em chào chị/anh ạ. Em tìm được 2 mẫu short kaki có túi hộp hợp để đi chơi:\n\n[SP52520] Pepe Jeans Men Cream Cargo Shorts – 489.000đ – còn S, L, XL – kaki be, dáng suông ngang gối, nhiều túi hộp + khóa kéo, kiểu cargo đi chơi rất \"chất\".\n[SP29176] United Colors of Benetton Boys Khaki Shorts – 399.000đ – còn M, L, XL – kaki be suông rộng, túi hộp hai bên, thoáng mát, giá dễ chịu hơn.\n\nChị/anh muốn em xem thêm màu khác (đen, navy) hay cần tư vấn size theo cân nặng/chiều cao không ạ?",
+   "hoi_thoai_day_du": [
+    "Khách: quần short kaki túi hộp nam đi chơi",
+    "Bot: Dạ em là trợ lý AI của Mộc Lam Studio, em chào chị/anh ạ. Em tìm được 2 mẫu short kaki có túi hộp hợp để đi chơi:\n\n[SP52520] Pepe Jeans Men Cream Cargo Shorts – 489.000đ – còn S, L, XL – kaki be, dáng suông ngang gối, nhiều túi hộp + khóa kéo, kiểu cargo đi chơi rất \"chất\".\n[SP29176] United Colors of Benetton Boys Khaki Shorts – 399.000đ – còn M, L, XL – kaki be suông rộng, túi hộp hai bên, thoáng mát, giá dễ chịu hơn.\n\nChị/anh muốn em xem thêm màu khác (đen, navy) hay cần tư vấn size theo cân nặng/chiều cao không ạ?"
+   ],
+   "da_xem_anh": false,
+   "goi_y": [
+    "SP52520",
+    "SP29176"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 1.0
+  },
+  {
+   "id": "tn_30",
+   "loai": "tu_nhien",
+   "kieu_cham": "san_pham",
+   "giay": 22.5,
+   "giay_luot_cuoi": 22.5,
+   "so_buoc_cong_cu": 5,
+   "model": "deepseek-flash",
+   "token": [
+    {
+     "vao": 4921,
+     "ra": 520,
+     "suy_nghi": 278,
+     "vao_cache": 4736
+    },
+    {
+     "vao": 5897,
+     "ra": 776,
+     "suy_nghi": 415,
+     "vao_cache": 5376
+    },
+    {
+     "vao": 7187,
+     "ra": 639,
+     "suy_nghi": 425,
+     "vao_cache": 6656
+    },
+    {
+     "vao": 10394,
+     "ra": 578,
+     "suy_nghi": 238,
+     "vao_cache": 7808
+    },
+    {
+     "vao": 11602,
+     "ra": 482,
+     "suy_nghi": 225,
+     "vao_cache": 10880
+    }
+   ],
+   "cong_cu": [
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'đầm' AND hoa_tiet = 'hoa nhí' AND tay_ao = 'tay ngắn'",
+      "theo_mo_ta": "đầm hoa nhẹ nhàng nữ tính đi dạo phố, hẹn hò",
+      "theo_anh": "váy họa tiết hoa nhỏ li ti phong cách vintage, nhẹ nhàng",
+      "so_luong": 6
+     },
+     "ma_trong_ket_qua": [
+      "SP23621"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 1, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.488, \"thu_5\": 0.488, \"trung_vi\": 0.488}, \"anh\": {\"cao_nhat\": 0.335, \"thu_5\": 0.335, \"trung_vi\": 0.335}}, \"san_pham\": [{\"ma_sp\": \"SP23621\", \"ten_sp\": \"Doodle Kids Girls Navy Blue Floral Print Dress\", \"gia_ban\": 309000, \"gia_goc\": 459000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"đầ"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'đầm' AND hoa_tiet = 'hoa nhí' AND ten_sp NOT LIKE '%Kids%'",
+      "so_luong": 6,
+      "theo_anh": "váy họa tiết hoa nhỏ li ti phong cách vintage, nhẹ nhàng nữ tính",
+      "theo_mo_ta": "đầm hoa nhẹ nhàng nữ tính mặc dạo phố, hẹn hò"
+     },
+     "ma_trong_ket_qua": [],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 0, \"goi_y\": \"SQL không ra món nào. Nới điều kiện ít quan trọng nhất rồi gọi lại, và nói với khách đã nới gì.\"}"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'đầm' AND tay_ao = 'tay ngắn' AND hoa_tiet IN ('hoa nhí','hoa to') AND ten_sp NOT LIKE '%Kids%'",
+      "so_luong": 6,
+      "theo_anh": "váy hoa nhẹ nhàng phong cách vintage",
+      "theo_mo_ta": "đầm hoa nhẹ nhàng nữ tính"
+     },
+     "ma_trong_ket_qua": [
+      "SP59983"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 1, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.42, \"thu_5\": 0.42, \"trung_vi\": 0.42}, \"anh\": {\"cao_nhat\": 0.337, \"thu_5\": 0.337, \"trung_vi\": 0.337}}, \"san_pham\": [{\"ma_sp\": \"SP59983\", \"ten_sp\": \"Avirate Cream & Olive Green Printed Dress\", \"gia_ban\": 409000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"đầm\", \"kieu_sp\": \"đầm ôm body"
+    },
+    {
+     "cong_cu": "tim_san_pham",
+     "tham_so": {
+      "sql": "SELECT ma_sp FROM san_pham WHERE danh_muc = 'đầm' AND tay_ao IN ('tay ngắn','tay lỡ') AND hoa_tiet <> 'trơn' AND ten_sp NOT LIKE '%Kids%' ORDER BY CASE WHEN hoa_tiet = 'hoa nhí' THEN 0 ELSE 1 END",
+      "so_luong": 8,
+      "theo_anh": "váy họa tiết hoa nhỏ nhẹ nhàng phong cách vintage",
+      "theo_mo_ta": "đầm nhẹ nhàng nữ tính mặc dạo phố"
+     },
+     "ma_trong_ket_qua": [
+      "SP18736",
+      "SP23050",
+      "SP57044",
+      "SP50721",
+      "SP18735",
+      "SP58509",
+      "SP18895",
+      "SP43678",
+      "SP59983"
+     ],
+     "ket_qua_rut_gon": "{\"tong_so_khop\": 9, \"het_hang_hoac_ngung_ban\": 0, \"xep_hang\": \"theo kênh mo_ta + anh\", \"diem_cac_kenh\": {\"mo_ta\": {\"cao_nhat\": 0.521, \"thu_5\": 0.493, \"trung_vi\": 0.493}, \"anh\": {\"cao_nhat\": 0.346, \"thu_5\": 0.314, \"trung_vi\": 0.314}}, \"san_pham\": [{\"ma_sp\": \"SP18736\", \"ten_sp\": \"Arrow Woman Rima Red Dress\", \"gia_ban\": 359000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"đầm\", \"kieu_sp\": \"đầm suông\", \"kieu_co\": "
+    },
+    {
+     "cong_cu": "xem_anh",
+     "tham_so": {
+      "ma_sp": [
+       "SP23050",
+       "SP18736",
+       "SP18895",
+       "SP43678",
+       "SP50721",
+       "SP59983"
+      ],
+      "yeu_cau": "Chọn giúp các mẫu đầm nữ người lớn, họa tiết hoa nhỏ/mảnh nhẹ nhàng phong cách vintage, tay ngắn hoặc tay lỡ, nhìn nữ tính dịu dàng. Loại các mẫu trông là đồ trẻ em/bé gái hoặc họa tiết quá to, chói.",
+      "loi_nhan_cho": "Dạ chị chờ em xíu, em xem kỹ từng mẫu để chọn mẫu nhẹ nhàng hợp ý chị nhất ạ."
+     },
+     "ma_trong_ket_qua": [
+      "SP23050",
+      "SP18736",
+      "SP18895",
+      "SP43678",
+      "SP50721",
+      "SP59983"
+     ],
+     "ket_qua_rut_gon": "{\"da_xem\": 6, \"hop\": [{\"ma_sp\": \"SP23050\", \"ten_sp\": \"Arrow Woman Multi Coloured Floral Dress\", \"gia_ban\": 569000, \"gioi_tinh\": \"nữ\", \"danh_muc\": \"đầm\", \"kieu_sp\": \"đầm xòe\", \"kieu_co\": \"cổ tròn\", \"tay_ao\": \"tay lỡ\", \"do_dai\": \"trên gối\", \"dang\": \"xòe\", \"chat_lieu\": \"voan/chiffon\", \"hoa_tiet\": \"hoa to\", \"mau_chinh\": \"nhiều màu\", \"phong_cach\": \"nữ tính/tiểu thư\", \"dip\": \"dạo phố, hẹn hò, dự tiệc\", "
+    }
+   ],
+   "tra_loi": "Dạ em báo chị thật: đầm hoa nhí bên em hiện chỉ còn mẫu cho bé, không có mẫu người lớn ạ. Em nới sang hoa in nhẹ nhàng tay ngắn/tay lỡ thì lọc được đúng 1 mẫu rất hợp ý chị:\n\n[SP23050] Arrow Woman Multi Coloured Floral Dress – 569.000đ, còn size M\nĐầm xòe cổ tròn, tay lỡ bèo nhún, voan mềm có lót trong, họa tiết hoa nhỏ phối màu dịu đúng kiểu nhẹ nhàng vintage.\n\nChị cho em biết chị mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác nhé. Nếu chị thích họa tiết khác kiểu dịu dàng (ren trắng, hoa in nhỏ trên nền trơn) em tìm thêm cho chị xem ạ.",
+   "hoi_thoai_day_du": [
+    "Khách: váy hoa nhí tay ngắn nhẹ nhàng kiểu vintage",
+    "Bot (nhắn tạm): Dạ chị chờ em xíu, em xem kỹ từng mẫu để chọn mẫu nhẹ nhàng hợp ý chị nhất ạ.",
+    "Bot: Dạ em báo chị thật: đầm hoa nhí bên em hiện chỉ còn mẫu cho bé, không có mẫu người lớn ạ. Em nới sang hoa in nhẹ nhàng tay ngắn/tay lỡ thì lọc được đúng 1 mẫu rất hợp ý chị:\n\n[SP23050] Arrow Woman Multi Coloured Floral Dress – 569.000đ, còn size M\nĐầm xòe cổ tròn, tay lỡ bèo nhún, voan mềm có lót trong, họa tiết hoa nhỏ phối màu dịu đúng kiểu nhẹ nhàng vintage.\n\nChị cho em biết chị mặc size nào (hoặc cân nặng/chiều cao) để em kiểm tra tồn kho chính xác nhé. Nếu chị thích họa tiết khác kiểu dịu dàng (ren trắng, hoa in nhỏ trên nền trơn) em tìm thêm cho chị xem ạ."
+   ],
+   "da_xem_anh": true,
+   "goi_y": [
+    "SP23050"
+   ],
+   "trung_3": true,
+   "chinh_xac": 1.0,
+   "so_lan_chay": 1,
+   "ma_bia": [],
+   "ma_khong_ban_duoc": [],
+   "bao_phu_3": 0.5
+  }
+ ]
+}

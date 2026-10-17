@@ -80,15 +80,23 @@ def run_case(case, url, key, cho=0):
     return out
 
 
+def compact_trace(t):
+    """Một lần gọi công cụ ở lượt cuối, rút gọn kết quả để phân tích vì sao bot sai."""
+    res = t.get("ket_qua")
+    text = json.dumps(res, ensure_ascii=False)
+    return {"cong_cu": t.get("cong_cu"), "tham_so": t.get("tham_so"), "ma_trong_ket_qua": codes_in(text)[:20], "ket_qua_rut_gon": text[:400]}
+
+
 def run_case_once(case, url, key):
     user = f"eval-{uuid.uuid4().hex[:8]}"
-    transcript, t0, steps, last = [], time.time(), 0, None
+    transcript, t0, steps, last, token = [], time.time(), 0, None, []
     try:
         for msg in case["hoi_thoai"]:
             t = time.time()
             last = post_worker(url, "/chat", {"user": user, "text": msg})
             last["_giay"] = round(time.time() - t, 1)
             steps += len(last.get("trace", []))
+            token += last.get("token", [])
             transcript.append(f"Khách: {msg}")
             for m in last.get("interim", []):
                 transcript.append(f"Bot (nhắn tạm): {m}")
@@ -98,7 +106,7 @@ def run_case_once(case, url, key):
 
     out = {"id": case["id"], "loai": case.get("loai", "tu_nhien"), "kieu_cham": case["kieu_cham"], "giay": round(time.time() - t0, 1),
            "giay_luot_cuoi": last["_giay"], "so_buoc_cong_cu": steps, "model": last.get("model"),
-           "tra_loi": last["text"], "hoi_thoai_day_du": transcript, "da_xem_anh": any(s["cong_cu"] == "xem_anh" for s in last.get("trace", []))}
+           "token": token, "cong_cu": [compact_trace(t) for t in last.get("trace", [])], "tra_loi": last["text"], "hoi_thoai_day_du": transcript, "da_xem_anh": any(s["cong_cu"] == "xem_anh" for s in last.get("trace", []))}
     if case["kieu_cham"] == "san_pham":
         ok = set(case.get("chap_nhan", []))
         top = codes_in(last["text"])[:3]
@@ -216,6 +224,13 @@ def main():
         "case_nhac_ma_khong_ban_duoc": len([r for r in ok if r.get("ma_khong_ban_duoc")]),
         "model": sorted({r["model"] for r in ok if r.get("model")}),
     }
+    calls = [t for r in ok for t in r.get("token", [])]
+    if calls:
+        tong.update(
+            so_lan_goi_model=len(calls),
+            token_vao=sum(t["vao"] for t in calls), token_vao_cache=sum(t["vao_cache"] for t in calls),
+            token_ra=sum(t["ra"] for t in calls), token_suy_nghi=sum(t["suy_nghi"] for t in calls),
+        )
 
     os.makedirs(os.path.join(HERE, "ket_qua"), exist_ok=True)
     json.dump({"tong": tong, "theo_loai": rows, "chi_tiet": results},

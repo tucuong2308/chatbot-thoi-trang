@@ -1,5 +1,5 @@
 import { generate, GeminiError, textOf } from "./gemini";
-import type { Env } from "./types";
+import type { Env, TokenUsage } from "./types";
 
 /**
  * Lớp gọi model trò chuyện, dùng chung cho Gemini và các API kiểu OpenAI (NVIDIA build.nvidia.com,
@@ -24,11 +24,14 @@ export interface ChatResult {
   toolCalls: ToolCall[];
   model: string;
   raw: unknown;
+  /** Chỉ có với API kiểu OpenAI. */
+  usage?: TokenUsage;
 }
 
 export type Part = { text: string } | { image: { mime: string; b64: string } };
 
 const isOpenAI = (env: Env) => env.LLM_NHA_CUNG_CAP === "openai";
+const isDeepSeek = (env: Env) => /deepseek/i.test(env.OPENAI_BASE_URL ?? "");
 
 export function providerLabel(env: Env): string {
   return isOpenAI(env) ? `openai:${env.OPENAI_MODEL}` : "gemini";
@@ -61,7 +64,7 @@ export async function visionJson(env: Env, parts: Part[], schema: object): Promi
   content.push({ type: "text", text: `Chỉ trả về một đối tượng JSON đúng schema sau, không thêm chữ nào khác:\n${JSON.stringify(toJsonSchema(schema))}` });
   // Xem ảnh chỉ cần nhận xét ngắn: tắt phần suy nghĩ của DeepSeek, nếu không nó có thể nghĩ hết số token
   // cho phép rồi trả về câu trả lời rỗng (đo thực tế: 6 ảnh, có suy nghĩ 30-48 giây; tắt suy nghĩ 2,5 giây).
-  const noThinking = /deepseek/i.test(env.OPENAI_BASE_URL ?? "") ? { thinking: { type: "disabled" } } : {};
+  const noThinking = isDeepSeek(env) ? { thinking: { type: "disabled" } } : {};
   const res = await openaiCall(env, { messages: [{ role: "user", content }], temperature: 0, ...noThinking }, 90_000);
   return parseJsonLoose(res.message.content ?? "");
 }
@@ -129,7 +132,7 @@ function parseJsonLoose(text: string): any {
   return {};
 }
 
-async function openaiCall(env: Env, body: Record<string, unknown>, timeoutMs: number, modelOverride?: string): Promise<{ model: string; message: any }> {
+async function openaiCall(env: Env, body: Record<string, unknown>, timeoutMs: number, modelOverride?: string): Promise<{ model: string; message: any; usage: TokenUsage }> {
   const models = modelOverride ? [modelOverride] : [env.OPENAI_MODEL, env.OPENAI_MODEL_DU_PHONG].filter((m): m is string => !!m);
   const base = (env.OPENAI_BASE_URL || "https://integrate.api.nvidia.com/v1").replace(/\/$/, "");
   let lastErr: unknown;
@@ -152,7 +155,12 @@ async function openaiCall(env: Env, body: Record<string, unknown>, timeoutMs: nu
         const data: any = await res.json();
         const choice = data.choices?.[0];
         if (choice?.finish_reason === "length") console.warn(`${model} bị cắt vì hết max_tokens`);
-        return { model, message: choice?.message ?? {} };
+        const u = data.usage ?? {};
+        const usage = {
+          vao: u.prompt_tokens ?? 0, ra: u.completion_tokens ?? 0,
+          suy_nghi: u.completion_tokens_details?.reasoning_tokens ?? 0, vao_cache: u.prompt_cache_hit_tokens ?? 0,
+        };
+        return { model, message: choice?.message ?? {}, usage };
       }
       const wait = Number(res.headers.get("retry-after")) * 1000 || 20_000;
       lastErr = new GeminiError(`${model} lỗi ${res.status}: ${(await res.text()).slice(0, 300)}`, res.status, wait);
@@ -188,8 +196,10 @@ async function chatOpenAI(
     type: "function",
     function: { name: t.name, description: t.description, parameters: toJsonSchema(t.parameters) },
   }));
-  const { model, message } = await openaiCall(env, {
-    messages, tools, tool_choice: req.noTools ? "none" : "auto", temperature: 0.3,
+  // Vòng chính mặc định để DeepSeek suy nghĩ; DEEPSEEK_SUY_NGHI = "tat" thì tắt (nhanh hơn nhưng tìm kém kỹ hơn).
+  const noThinking = isDeepSeek(env) && env.DEEPSEEK_SUY_NGHI === "tat" ? { thinking: { type: "disabled" } } : {};
+  const { model, message, usage } = await openaiCall(env, {
+    messages, tools, tool_choice: req.noTools ? "none" : "auto", temperature: 0.3, ...noThinking,
   }, 120_000, req.sticky);
 
   let toolCalls: ToolCall[] = (message.tool_calls ?? []).map((c: any) => {
@@ -207,7 +217,7 @@ async function chatOpenAI(
   }
   // Giữ nguyên tin nhắn của model (kể cả reasoning_content) để gửi lại ở vòng sau như nhiều model suy luận yêu cầu.
   const raw = { role: "assistant", content: message.content ?? null, ...message };
-  return { text: String(message.content ?? "").trim(), toolCalls, model, raw };
+  return { text: String(message.content ?? "").trim(), toolCalls, model, raw, usage };
 }
 
 /** Đọc lời gọi công cụ dạng chữ của DeepSeek (một hoặc hai dấu ｜): <｜DSML｜ invoke name="..."> <｜DSML｜ parameter name="..." string="true">...</｜DSML｜ parameter> */

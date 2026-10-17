@@ -1,7 +1,7 @@
 import { chat, type Msg } from "./llm";
 import { systemPrompt } from "./prompt";
 import { runTool, TOOL_DECLARATIONS } from "./tools";
-import type { ChatTurn, Env, ToolTrace } from "./types";
+import type { ChatTurn, Env, TokenUsage, ToolTrace } from "./types";
 
 const HISTORY_TURNS = 10;
 /** Số vòng gọi công cụ tối đa cho một tin nhắn (tìm, xem kết quả, xem ảnh, sửa...). */
@@ -29,6 +29,8 @@ export interface BotReply {
   interim: string[];
   model?: string;
   trace?: ToolTrace[];
+  /** Token của từng lần gọi model trong lượt này (chỉ có với API kiểu OpenAI), để tính chi phí thật. */
+  token?: TokenUsage[];
 }
 
 /**
@@ -45,6 +47,7 @@ export async function handleUserMessage(
   const history = [...(await loadHistory(env, userKey)), { role: "user" as const, text: message }];
   const messages: Msg[] = history.map((t) => (t.role === "user" ? { role: "user", text: t.text } : { role: "assistant", text: t.text, toolCalls: [] }));
   const trace: ToolTrace[] = [];
+  const token: TokenUsage[] = [];
   const interim: string[] = [];
   const ctx = {
     notifyWait: async (text?: string) => {
@@ -65,6 +68,7 @@ export async function handleUserMessage(
     const lastRound = round >= MAX_TOOL_ROUNDS || Date.now() - started > TURN_BUDGET_MS;
     const res = await chat(env, { system, messages, tools: TOOL_DECLARATIONS, noTools: lastRound, sticky: model });
     model = res.model;
+    if (res.usage) token.push(res.usage);
 
     if (!res.toolCalls.length || lastRound) {
       text = res.text;
@@ -99,7 +103,7 @@ export async function handleUserMessage(
 
   if (!text) text = "Dạ em chưa trả lời được câu này, em chuyển nhân viên hỗ trợ chị ngay nhé.";
   await saveHistory(env, userKey, [...history, { role: "model", text }]);
-  return { text, images: await imagesFor(env, text), interim, model, trace };
+  return { text, images: await imagesFor(env, text), interim, model, trace, token };
 }
 
 const codesIn = (text: string) => [...new Set([...text.matchAll(/\bSP[\w-]+/g)].map((m) => m[0]))];

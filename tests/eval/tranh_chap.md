@@ -17,3 +17,16 @@ SP48098, dù tiêu chí bắt buộc chỉ là nói mẫu đã ngừng bán). T�
 "không được" hoặc yêu cầu thông tin cụ thể. Kết quả với giám khảo cũ được giữ ở `ket_qua/*.giam_khao_cu.*`.
 Giám khảo (gemini-3.1-flash-lite) vẫn còn nhiễu, nên báo cáo kèm hai chỉ số khách quan không cần giám khảo:
 số case bot bịa mã sản phẩm, và số case bot nhắc mã không bán được.
+
+## tn_19 — "có sơ mi nam màu hồng ko shop" / "loại trơn mặc đi làm ấy, ko lấy sọc"
+
+Cả ba món chấp nhận (SP17550, SP9452, SP9456) đều là sơ mi kẻ sọc (đã xem ảnh: SP9452 sọc đỏ đô trên nền trắng,
+SP17550 sọc hồng nhạt mảnh). Khách nói rõ "ko lấy sọc", nên gợi ý các món này là làm trái ý khách.
+Bot trả lời "không có sơ mi nam hồng trơn" rồi gợi ý sơ mi trơn màu khác là đúng với dữ liệu, nhưng bị chấm trượt;
+các lượt trước "trúng" vì đã gợi ý SP17550 (sọc). Đề xuất: khi so sánh, đọc tn_19 như case không có đáp án đúng.
+
+## tn_30 — "váy hoa nhí tay ngắn nhẹ nhàng kiểu vintage"
+
+SP18895 (món gợi cảm hứng) là đầm suông in họa tiết lông vũ, không phải hoa nhí, cũng không mang vẻ vintage (đã xem ảnh);
+SP23050 được gắn hoa to, tay lỡ. Bot lọc đúng theo lời khách (hoa nhí, tay ngắn) nên không ra hai món này.
+Đề xuất: kết quả tn_30 phản ánh độ lệch giữa người viết test và bộ thuộc tính nhiều hơn là chất lượng tìm kiếm.

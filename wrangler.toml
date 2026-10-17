@@ -49,6 +49,8 @@ DIA_CHI_CONG_KHAI = ""
 LLM_NHA_CUNG_CAP = "openai"
 OPENAI_BASE_URL = "https://api.deepseek.com/v1"
 OPENAI_MODEL = "deepseek-flash"
+# DeepSeek suy nghĩ ở vòng trò chuyện chính: "bat" (mặc định) hoặc "tat" (nhanh hơn nhưng tìm kém kỹ hơn, đo 15/10).
+DEEPSEEK_SUY_NGHI = "bat"
 GEMINI_MODEL = "gemini-3.8-flash"
 GEMINI_MODEL_DU_PHONG = "gemini-3.5-flash-lite"
 EMBED_MODEL = "gemini-embedding-2"
