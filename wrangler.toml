@@ -7,18 +7,22 @@ compatibility_date = "2025-09-01"
 crons = ["*/15 * * * *"]
 
 # Lịch sử chat của từng khách
-# Tạo bằng: npx wrangler kv namespace create SHOP_KV  rồi dán id vào đây (chạy local thì để nguyên)
+# Tạo bằng: npx wrangler kv namespace create SHOP_KV  rồi dán id vào đây
+# preview_id: dữ liệu khi chạy local (npm run dev) vẫn nằm dưới id cũ trong .wrangler/state, giữ để không mất lịch sử test
 [[kv_namespaces]]
 binding = "SHOP_KV"
-id = "THAY_BANG_ID_KV"
+id = "bf555aba9df540259a62ac2be906bbdd"
+preview_id = "THAY_BANG_ID_KV"
 
 # Bản sao danh mục sản phẩm + vector, để bot viết SQL tra cứu
-# Tạo bằng: npx wrangler d1 create chatbot-thoi-trang  rồi dán database_id vào đây (chạy local thì để nguyên)
+# Tạo bằng: npx wrangler d1 create chatbot-thoi-trang  rồi dán database_id vào đây
+# preview_database_id: database local (300 món + vector) vẫn nằm dưới id cũ trong .wrangler/state, giữ để không phải nạp lại
 # Tạo bảng: npx wrangler d1 migrations apply chatbot-thoi-trang --local   (bỏ --local khi lên mạng)
 [[d1_databases]]
 binding = "DB"
 database_name = "chatbot-thoi-trang"
-database_id = "THAY_BANG_ID_D1"
+database_id = "378842c5-b91d-4a90-a22a-107ebe7a94fb"
+preview_database_id = "THAY_BANG_ID_D1"
 migrations_dir = "migrations"
 
 # Ảnh sản phẩm tự host (bản demo): public/anh/<ma_sp>.jpg, phục vụ ở /anh/<ma_sp>.jpg
@@ -41,7 +45,7 @@ max_retries = 0
 [vars]
 SHOP_NAME = "Mộc Lam Studio"
 # Địa chỉ Worker sau khi deploy (VD https://chatbot-thoi-trang.<ten>.workers.dev), để gửi ảnh /anh/... qua Messenger
-DIA_CHI_CONG_KHAI = ""
+DIA_CHI_CONG_KHAI = "https://chatbot-thoi-trang.hidden-gems.workers.dev"
 # Model suy nghĩ + gọi công cụ + xem ảnh. Mặc định: DeepSeek V4.1 Flash qua API kiểu OpenAI,
 # khóa đặt ở OPENAI_API_KEY trong .dev.vars (lên mạng: npx wrangler secret put OPENAI_API_KEY).
 # Muốn dùng Gemini thay thế: đặt LLM_NHA_CUNG_CAP = "gemini" (dùng GEMINI_MODEL, GEMINI_MODEL_DU_PHONG).
