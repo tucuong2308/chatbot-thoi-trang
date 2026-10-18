@@ -259,6 +259,10 @@ export interface ToolContext {
 }
 
 async function soanDonTool(env: Env, args: YeuCauSoan, ctx: ToolContext) {
+  const mon = args?.mon as unknown;
+  if (!Array.isArray(mon) || mon.some((m) => typeof m?.ma_sp !== "string" || typeof m?.size !== "string")) {
+    return { loi: ["mon phải là mảng các món, mỗi món có ma_sp và size dạng chữ (mau, so_luong nếu có)"] };
+  }
   const r = await soanDon(env, ctx.khach, args);
   if (!r.ok) return { loi: r.loi };
   ctx.onNhap(r.nhap, r.tom_tat);

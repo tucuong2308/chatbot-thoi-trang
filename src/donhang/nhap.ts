@@ -131,13 +131,17 @@ export async function soanDon(
 }
 
 export async function luuNhap(env: Env, khach: string, nhap: DonNhap) {
-  await env.SHOP_KV.put(`nhap:${khach}`, JSON.stringify(nhap), { expirationTtl: GIU_NHAP_GIAY });
+  await env.DB.prepare(
+    "INSERT INTO don_nhap (khach, du_lieu, cap_nhat) VALUES (?1, ?2, ?3) ON CONFLICT (khach) DO UPDATE SET du_lieu = ?2, cap_nhat = ?3",
+  ).bind(khach, JSON.stringify(nhap), Date.now()).run();
 }
 
 export async function layNhap(env: Env, khach: string): Promise<DonNhap | null> {
-  return env.SHOP_KV.get<DonNhap>(`nhap:${khach}`, "json");
+  const r = await env.DB.prepare("SELECT du_lieu FROM don_nhap WHERE khach = ? AND cap_nhat > ?")
+    .bind(khach, Date.now() - GIU_NHAP_GIAY * 1000).first<{ du_lieu: string }>();
+  return r ? JSON.parse(r.du_lieu) : null;
 }
 
 export async function xoaNhap(env: Env, khach: string) {
-  await env.SHOP_KV.delete(`nhap:${khach}`);
+  await env.DB.prepare("DELETE FROM don_nhap WHERE khach = ?").bind(khach).run();
 }

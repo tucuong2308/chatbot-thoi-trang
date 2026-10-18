@@ -17,6 +17,7 @@ const TRANG_NHAT_KY = 'NhatKy';
 const TRANG_DON_HANG = 'DonHang';
 // Cột trang DonHang. trang_thai là của nhân viên: bot chỉ ghi lúc thêm dòng, không bao giờ ghi đè.
 const COT_DON = ['ma_don', 'thoi_gian', 'ten', 'sdt', 'dia_chi', 'cac_mon', 'tien_hang', 'ghi_chu', 'trang_thai', 'khach_huy', 'hoi_thoai'];
+const COT_CHU_DON = ['ma_don', 'thoi_gian', 'sdt', 'khach_huy'];
 /** Dòng 1 là tên cột, dòng 2 là giải thích (như file mẫu); dữ liệu bắt đầu từ dòng 3. */
 const DONG_DAU = 3;
 const MAU_LOI = '#f4cccc';
@@ -206,6 +207,8 @@ function keoDonHang_() {
     });
     if (moi.length) {
       sh.insertRowsAfter(1, moi.length);
+      // Ghi dạng chữ, không thì Sheets bỏ số 0 đầu số điện thoại và đọc dd/MM theo locale của bảng tính.
+      COT_CHU_DON.forEach(function (c) { sh.getRange(2, COT_DON.indexOf(c) + 1, moi.length, 1).setNumberFormat('@'); });
       const vung = sh.getRange(2, 1, moi.length, COT_DON.length);
       vung.setValues(moi.slice().reverse().map(function (d) { return COT_DON.map(function (c) { return d[c]; }); }));
       vung.setFontWeight('normal').setBackground(null); // dòng chèn dưới tiêu đề kế thừa chữ đậm
@@ -215,7 +218,7 @@ function keoDonHang_() {
     const dong = dongCua();
     kq.don.forEach(function (d) {
       if (!d.khach_huy || !dong[d.ma_don]) return;
-      sh.getRange(dong[d.ma_don], cotHuy).setValue(d.khach_huy);
+      sh.getRange(dong[d.ma_don], cotHuy).setNumberFormat('@').setValue(d.khach_huy);
       sh.getRange(dong[d.ma_don], 1, 1, COT_DON.length).setBackground(MAU_LOI);
     });
     docProps.setProperty('CON_TRO_DON', String(kq.con_tro));

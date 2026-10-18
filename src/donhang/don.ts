@@ -139,6 +139,15 @@ export interface DonChoSheet {
   hoi_thoai: string;
 }
 
+/** Một ô Google Sheets chứa tối đa 50.000 ký tự; quá thì Apps Script lỗi mãi ở đơn đó. */
+const HOI_THOAI_TOI_DA = 45_000;
+
+/** "Khách: …\nBot: …", quá dài thì bỏ phần đầu (giữ đoạn ngay trước lúc đặt). */
+function hoiThoaiChoSheet(h: DongHoiThoai[]): string {
+  const s = h.map((d) => `${d.vai === "khach" ? "Khách" : "Bot"}: ${d.chu}`).join("\n");
+  return s.length <= HOI_THOAI_TOI_DA ? s : "…" + s.slice(s.length - HOI_THOAI_TOI_DA + 1);
+}
+
 /** dd/MM/yyyy HH:mm theo giờ Việt Nam. */
 function gioVN(ms: number): string {
   const d = new Date(ms + 7 * 3600_000).toISOString();
@@ -164,7 +173,7 @@ export async function donThayDoiTu(env: Env, tu: number): Promise<{ don: DonChoS
     ghi_chu: r.ghi_chu,
     trang_thai: r.trang_thai,
     khach_huy: r.huy_luc ? gioVN(r.huy_luc) : "",
-    hoi_thoai: (JSON.parse(r.hoi_thoai) as DongHoiThoai[]).map((h) => `${h.vai === "khach" ? "Khách" : "Bot"}: ${h.chu}`).join("\n"),
+    hoi_thoai: hoiThoaiChoSheet(JSON.parse(r.hoi_thoai)),
   }));
   return { don, con_tro: results.length ? Number(results[results.length - 1].cap_nhat) : tu };
 }

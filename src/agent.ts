@@ -120,10 +120,18 @@ export async function handleUserMessage(
   }
 
   if (!text) text = "Dạ em chưa trả lời được câu này, em chuyển nhân viên hỗ trợ chị ngay nhé.";
-  await saveHistory(env, userKey, [...history, { role: "model", text }]);
+  await saveHistory(env, userKey, [...history, { role: "model", text: ghiChuLichSu(text, donNhap) }]);
   return {
     text, the_san_pham: await productCards(env, text), interim, model, trace, token, don_nhap: donNhap, yeu_cau_huy: yeuCauHuy,
   };
+}
+
+/**
+ * Câu trả lời lưu vào lịch sử model. Vừa soạn đơn nháp thì kèm tóm tắt đơn (shop gửi riêng, model không viết lại),
+ * để khi khách sửa đơn nhiều lượt sau, model vẫn có đủ mã, size, màu, người nhận cho lần gọi soan_don kế tiếp.
+ */
+export function ghiChuLichSu(text: string, donNhap: BotReply["don_nhap"]): string {
+  return donNhap ? `${text}\n(Tóm tắt đơn đã gửi khách, chờ khách bấm Xác nhận:\n${donNhap.tom_tat})` : text;
 }
 
 const codesIn = (text: string) => [...new Set([...text.matchAll(/\bSP[\w-]+/g)].map((m) => m[0]))];
