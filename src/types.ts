@@ -80,3 +80,42 @@ export interface TinNhanMessenger {
   senderId: string;
   text: string;
 }
+
+/** Một dòng trong đơn: một biến thể (mã, size, màu) kèm số lượng và giá lúc soạn. */
+export interface MonDat {
+  ma_sp: string;
+  ten_sp: string;
+  size: string;
+  /** Rỗng khi món chỉ có một màu. */
+  mau: string;
+  so_luong: number;
+  don_gia: number;
+}
+
+export interface NguoiNhan {
+  ten: string;
+  sdt: string;
+  dia_chi: string;
+}
+
+/** Nội dung tóm tắt đơn mới nhất khách chưa xác nhận (xem GLOSSARY.md). */
+export interface DonNhap extends NguoiNhan {
+  id: string;
+  mon: MonDat[];
+  ghi_chu: string;
+  tien_hang: number;
+  tao_luc: number;
+}
+
+/** Một tin trong nhật ký hội thoại, lưu kèm đơn hàng. */
+export interface DongHoiThoai {
+  vai: "khach" | "bot";
+  chu: string;
+  luc: number;
+}
+
+/** Một tin cần gửi cho khách, theo thứ tự. */
+export type TinGui =
+  | { loai: "chu"; chu: string }
+  | { loai: "the"; the: ProductCard[] }
+  | { loai: "nut"; chu: string; nut: { tieu_de: string; payload: string }[] };

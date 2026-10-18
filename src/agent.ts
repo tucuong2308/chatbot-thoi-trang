@@ -1,3 +1,4 @@
+import { vnd } from "./dinhdang";
 import { chat, type Msg } from "./llm";
 import { systemPrompt } from "./prompt";
 import { runTool, TOOL_DECLARATIONS } from "./tools";
@@ -156,4 +157,3 @@ async function productCards(env: Env, text: string): Promise<ProductCard[]> {
   });
 }
 
-const vnd = (n: number) => `${n.toLocaleString("de-DE")}đ`;
