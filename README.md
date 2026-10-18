@@ -14,13 +14,19 @@ Khách nhắn Messenger
           - xem_anh: tự nhìn ảnh từng sản phẩm theo lô 16 ảnh khi thuộc tính không đủ để quyết
             ("che bụng", "nhìn sang"...); trước đó nhắn khách chờ một chút (src/images.ts)
           - truy_van: SELECT bất kỳ (bảng size, tồn kho từng size, đếm mẫu...)
+          - soan_don / xem_don / yeu_cau_huy_don: soạn đơn nháp (kiểm tra kho, size, màu, số điện thoại, địa chỉ),
+            tra đơn của khách, xin hủy (src/donhang/)
         Nhu cầu mềm được agent tự đổi thành kiểu dáng cụ thể như người bán hàng (src/prompt.ts),
         không cần thêm cột dữ liệu.
-   → Gửi tin nhắn tạm (nếu có), câu trả lời, rồi thẻ sản phẩm (ảnh, giá, size, nút) qua Send API (src/messenger.ts)
+   → Gửi tin nhắn tạm (nếu có), câu trả lời, thẻ sản phẩm (ảnh, giá, size, nút), rồi tóm tắt đơn kèm nút
+     "Xác nhận đặt hàng" nếu vừa soạn đơn, qua Send API (src/messenger.ts, src/tinnhan.ts)
+   → Khách bấm nút DON:... (xác nhận đặt / xác nhận hủy): code tạo / hủy đơn trong D1, không qua model.
+     Đơn lưu kèm 40 tin hội thoại gần nhất; thanh toán COD, không trừ kho (src/donhang/don.ts)
 
 Google Sheets (bản gốc, chủ shop sửa, riêng tư)
    → Apps Script trong bảng tính gửi lên /admin/import (apps-script/) → chuẩn hóa → ghi đè bản sao trong D1 (src/catalog.ts)
    → hàng đợi chatbot-viec-nen: món mới / vừa sửa được tải ảnh về R2 và tạo vector (src/dongbo.ts)
+   ← cùng lịch 5 phút, Apps Script kéo đơn mới / vừa hủy từ /admin/don-hang về trang DonHang và gửi email báo shop
 Vector sản phẩm (từ mô tả và từ ảnh) → bảng vec trong D1 (bộ demo nạp bằng scripts/embed_products.py)
 Lịch sử chat → KV (7 ngày, 10 lượt gần nhất)
 ```
@@ -106,7 +112,11 @@ python scripts/hoi_thu.py "đầm đi biển dưới 400k, không lấy màu đe
 
 Mọi câu trong một lần chạy là một cuộc hội thoại. Script in ra từng câu SQL bot đã viết, điểm từng kênh,
 các lần xem ảnh và tin nhắn tạm.
-Hoặc gọi thẳng `POST /chat` với `{"user":"test","text":"..."}` và header `x-admin-key`: kết quả có `trace` là các bước tra cứu.
+Hoặc gọi thẳng `POST /chat` với `{"user":"test","text":"..."}` và header `x-admin-key`: kết quả có `trace` là các bước tra cứu,
+`tin` là các tin bot sẽ gửi. Bấm nút thì gửi `{"user":"test","payload":"DON:XAC_NHAN:<id>"}`.
+Thử trọn một lần đặt hàng: `python tests/eval/thu_dat_hang.py` (gọi model thật, vài lượt).
+
+Test tự động (D1, KV chạy cục bộ, không gọi model): `npm test`.
 
 ## Đưa lên mạng và nối Messenger
 
@@ -115,12 +125,14 @@ npx wrangler secret put GEMINI_API_KEY   # tương tự cho FB_PAGE_TOKEN, FB_VE
 npm run deploy
 ```
 
-Trong Meta for Developers > Messenger > Webhooks: URL `https://<worker>.workers.dev/webhook/messenger`, verify token = `FB_VERIFY_TOKEN`, đăng ký sự kiện `messages`.
+Trong Meta for Developers > Messenger > Webhooks: URL `https://<worker>.workers.dev/webhook/messenger`, verify token = `FB_VERIFY_TOKEN`, đăng ký sự kiện `messages` và `messaging_postbacks` (nút bấm).
+Trước khi deploy bản có đặt hàng: `npx wrangler d1 migrations apply chatbot-thoi-trang --remote` (bảng `don_hang`).
 
 ## Việc còn lại
 
-- [ ] Nhận đặt hàng (hiện bot chỉ xin mã, size, màu rồi hẹn nhân viên nhắn lại)
-- [ ] Ghi đơn hàng ngược vào Google Sheets khi khách chốt (kiểm tra tồn kho trực tiếp từ Sheet trước khi ghi)
+- [x] Nhận đặt hàng trên Messenger, đơn về trang DonHang của Google Sheets
+- [ ] Gửi trạng thái giao hàng từ Sheet về bot (hiện bot luôn trả lời "khoảng 1-2 ngày")
+- [ ] Nhớ người nhận cho lần đặt sau
 - [ ] Tìm theo ảnh khách gửi (vector ảnh sản phẩm đã có trong bảng vec, chỉ cần nhận ảnh từ Messenger và embed)
 - [ ] Gợi ý cả bộ từ sheet PhoiDo
 - [ ] Chuyển sang nhân viên khi khách cần (tắt bot cho cuộc chat đó)

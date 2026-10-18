@@ -1,6 +1,6 @@
 # Tiến độ dự án chatbot thời trang
 
-Cập nhật: 15/10/2026. Nhánh đang làm: `agent` (chưa gộp vào `main`, chưa push).
+Cập nhật: 18/10/2026. Nhánh đang làm: `agent` (chưa gộp vào `main`, chưa push).
 
 ## Trạng thái hiện tại
 
@@ -51,6 +51,13 @@ Cập nhật: 15/10/2026. Nhánh đang làm: `agent` (chưa gộp vào `main`, c
 - `scripts/tai_anh_hd.py` tải từng ảnh từ bản đầy đủ của bộ Kaggle (ảnh gốc khoảng 1080x1440), thu nhỏ 600x800 vào `public/anh`.
 - Gắn lại thuộc tính 300 món bằng DeepSeek từ ảnh nét; tạo lại 600 vector.
 
+### Chốt đơn (18/10)
+
+- Quyết định với chủ shop: spec `docs/superpowers/specs/2026-10-18-chot-don.md`, thuật ngữ `GLOSSARY.md`.
+- Bot soạn đơn nháp, khách bấm "Xác nhận đặt hàng" thì đơn vào D1 ngay (không duyệt, COD, không trừ kho), mã `DH-YYMMDD-NNN`,
+  lưu kèm 40 tin hội thoại. Khách hủy bằng nút "Xác nhận hủy". Apps Script kéo đơn về trang `DonHang`, gửi email.
+- Có test tự động (`npm test`, Vitest trong runtime Workers) cho phần đơn hàng; kịch bản thử thật `tests/eval/thu_dat_hang.py`.
+
 ## Kết quả đo trên bộ 30 câu tự nhiên
 
 | Cấu hình | Trúng top 3 | Bao phủ top 3 | Giây/lượt (trung vị) |
@@ -80,5 +87,6 @@ Rút ra:
 - [ ] Gộp nhánh `agent` vào `main` và push (chờ bạn quyết).
 - [ ] Bộ thuộc tính thiếu loại đồ truyền thống (kurta, áo dài kiểu Ấn Độ...), áo nỉ / hoodie / cardigan chưa tách rõ.
 - [ ] Tạo tài nguyên Cloudflare (KV, D1, Queue), đặt secret, deploy; điền link CSV Google Sheets.
-- [ ] Nối Messenger thật; nhận đặt hàng; tìm theo ảnh khách gửi; nối Zalo OA (danh sách cũ trong README).
+- [ ] Bật R2, deploy; chạy migration 0003 lên D1 thật; đăng ký `messaging_postbacks` trên Meta.
+- [ ] Nối Messenger thật; tìm theo ảnh khách gửi; nối Zalo OA (danh sách trong README).
 - [ ] Đổi khóa: khóa Gemini, NVIDIA, DeepSeek đều đã dán dạng chữ trong cuộc trò chuyện; nên tạo khóa mới sau khi demo.
