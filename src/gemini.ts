@@ -76,6 +76,15 @@ export function textOf(data: any): string {
   return parts.filter((p) => p.text && !p.thought).map((p) => p.text).join("").trim();
 }
 
+/** Embedding cho một nội dung bất kỳ (chữ hoặc ảnh inline_data), dùng khi tạo vector sản phẩm lúc đồng bộ Sheets. */
+export async function embedParts(env: Env, parts: object[]): Promise<number[]> {
+  const data = await call(env, env.EMBED_MODEL, "embedContent", {
+    content: { parts },
+    outputDimensionality: Number(env.EMBED_DIM),
+  }, 30_000);
+  return data.embedding?.values ?? [];
+}
+
 /** Embedding cho câu hỏi của khách. Phải dùng cùng model và số chiều với lúc nạp sản phẩm. */
 export async function embedText(env: Env, text: string): Promise<number[]> {
   const data = await call(env, env.EMBED_MODEL, "embedContent", {

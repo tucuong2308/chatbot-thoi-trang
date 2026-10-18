@@ -8,3 +8,6 @@ public/anh/
 
 # Cài đặt Claude Code riêng của máy này
 .claude/settings.local.json
+
+.superpowers/
+__pycache__/

@@ -42,6 +42,26 @@ max_batch_size = 1
 max_batch_timeout = 0
 max_retries = 0
 
+# Việc nền sau mỗi lần đồng bộ Sheets: tải ảnh về R2, tạo vector cho món mới / vừa sửa (src/dongbo.ts).
+# Tạo bằng: npx wrangler queues create chatbot-viec-nen
+# Một việc mỗi lần và tối đa 2 việc song song, để không vượt hạn mức gọi embedding của Gemini miễn phí.
+[[queues.producers]]
+binding = "VIEC_NEN"
+queue = "chatbot-viec-nen"
+
+[[queues.consumers]]
+queue = "chatbot-viec-nen"
+max_batch_size = 1
+max_batch_timeout = 1
+max_retries = 5
+max_concurrency = 2
+
+# Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/anh/<ma_sp>-<mã băm>.<đuôi>
+# Tạo bằng: npx wrangler r2 bucket create chatbot-thoi-trang-anh
+[[r2_buckets]]
+binding = "ANH"
+bucket_name = "chatbot-thoi-trang-anh"
+
 [vars]
 SHOP_NAME = "Mộc Lam Studio"
 # Địa chỉ Worker sau khi deploy (VD https://chatbot-thoi-trang.<ten>.workers.dev), để gửi ảnh /anh/... qua Messenger

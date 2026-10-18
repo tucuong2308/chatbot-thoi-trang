@@ -1,5 +1,6 @@
 import attrSchema from "../data/gemini-schema-thuoc-tinh.json";
 import { parseCsv } from "./csv";
+import { loadDongBo, planJobs, servedImage } from "./dongbo";
 import type { Env } from "./types";
 
 type Row = Record<string, string>;
@@ -30,15 +31,24 @@ const toInt = (s: string | undefined) => {
 };
 const splitList = (s: string | undefined) => clean(s).split(",").map((x) => x.trim()).filter(Boolean);
 
+/** Một lỗi gắn với một ô trong Sheets, để Apps Script tô đỏ đúng ô (xem apps-script/Bot.gs). */
+export interface CellIssue {
+  trang: "SanPham" | "BienThe";
+  ma: string;
+  cot: string;
+  gia_tri: string;
+  loi: string;
+}
+
 /**
  * Đưa giá trị chủ shop gõ tay về đúng giá trị trong danh sách ("Trễ Vai " -> "trễ vai").
  * Giá trị lạ vẫn giữ nhưng ghi cảnh báo, để sản phẩm không âm thầm biến mất khỏi kết quả lọc.
  */
-function normalize(allowed: string[], raw: string, where: string, warnings: string[]): string {
+function normalize(allowed: string[], raw: string, ma: string, cot: string, issues: CellIssue[]): string {
   const v = clean(raw);
   if (!v) return "";
   const hit = allowed.find((a) => a.toLowerCase() === v.toLowerCase());
-  if (!hit) warnings.push(`${where}: "${v}" không có trong danh sách`);
+  if (!hit) issues.push({ trang: "SanPham", ma, cot, gia_tri: v, loi: `"${v}" không có trong danh sách` });
   return hit ?? v;
 }
 
@@ -47,47 +57,66 @@ export interface ImportResult {
   bien_the: number;
   bang_size: number;
   canh_bao: string[];
+  o_loi: CellIssue[];
+  /** Số món được đưa vào hàng đợi để tải ảnh / tạo vector. */
+  dang_xu_ly: number;
 }
 
-/** Ghi đè toàn bộ bản sao trong D1 từ 3 bảng CSV (cùng cột như file mẫu data/bo-cot-thuoc-tinh-thoi-trang.xlsx). */
+/** Mỗi bảng: chuỗi CSV (link "Công bố lên web") hoặc mảng dòng {cột: giá trị} do Apps Script gửi. */
+type Table = string | Row[] | undefined;
+const rowsOf = (t: Table): Row[] =>
+  typeof t === "string" ? parseCsv(t) : (t ?? []).map((r) => Object.fromEntries(Object.entries(r).map(([k, v]) => [k.trim(), String(v ?? "")])));
+
+/** Ghi đè bản sao trong D1 từ 3 bảng (cùng cột như file mẫu data/bo-cot-thuoc-tinh-thoi-trang.xlsx). */
 export async function importCatalog(
-  env: Env, csv: { san_pham: string; bien_the?: string; bang_size?: string },
+  env: Env, input: { san_pham: Table; bien_the?: Table; bang_size?: Table; thu_lai_loi?: boolean },
 ): Promise<ImportResult> {
-  const warnings: string[] = [];
+  const issues: CellIssue[] = [];
   const seen = new Set<string>();
+  const before = await loadDongBo(env);
+  const sources = new Map<string, string>();
 
   const products: Row[] = [];
   const dips: Row[] = [];
   const details: Row[] = [];
-  for (const r of parseCsv(csv.san_pham)) {
+  for (const r of rowsOf(input.san_pham)) {
     const ma = clean(r.ma_sp);
     if (!ma.startsWith("SP")) continue; // bỏ dòng ghi chú, dòng trống
-    if (seen.has(ma)) { warnings.push(`${ma}: trùng mã, bỏ dòng sau`); continue; }
+    if (seen.has(ma)) { issues.push({ trang: "SanPham", ma, cot: "ma_sp", gia_tri: ma, loi: "trùng mã, bỏ dòng sau" }); continue; }
     const gia = toInt(r.gia_ban);
-    if (gia === null) { warnings.push(`${ma}: thiếu gia_ban, bỏ qua`); continue; }
+    if (gia === null) { issues.push({ trang: "SanPham", ma, cot: "gia_ban", gia_tri: clean(r.gia_ban), loi: "thiếu giá bán, bỏ qua món này" }); continue; }
     seen.add(ma);
 
-    const p: Row = { ma_sp: ma, ten_sp: clean(r.ten_sp), anh_chinh_url: clean(r.anh_chinh_url) };
-    for (const [col, allowed] of Object.entries(ENUM_VALUES)) p[col] = normalize(allowed, r[col], `${ma}.${col}`, warnings);
+    const src = clean(r.anh_chinh_url);
+    sources.set(ma, src);
+    const p: Row = { ma_sp: ma, ten_sp: clean(r.ten_sp), anh_chinh_url: servedImage(src, before.get(ma)) };
+    for (const [col, allowed] of Object.entries(ENUM_VALUES)) p[col] = normalize(allowed, r[col], ma, col, issues);
     for (const [col, allowed] of Object.entries(MULTI_VALUES)) {
-      const vals = [...new Set(splitList(r[col]).map((v) => normalize(allowed, v, `${ma}.${col}`, warnings)))];
+      const vals = [...new Set(splitList(r[col]).map((v) => normalize(allowed, v, ma, col, issues)))];
       p[col] = vals.join(", ");
       for (const v of vals) (col === "dip" ? dips : details).push({ ma_sp: ma, [col]: v });
     }
     p.mo_ta_tu_do = clean(r.mo_ta_tu_do);
-    p.trang_thai = normalize(TRANG_THAI, r.trang_thai || "đang bán", `${ma}.trang_thai`, warnings);
+    p.trang_thai = normalize(TRANG_THAI, r.trang_thai || "đang bán", ma, "trang_thai", issues);
     products.push({ ...p, gia_ban: gia as any, gia_goc: toInt(r.gia_goc) as any });
   }
 
   if (!products.length) throw new Error("Không có sản phẩm hợp lệ nào, giữ nguyên dữ liệu cũ");
 
-  const variants = parseCsv(csv.bien_the ?? "")
+  const variantRows = rowsOf(input.bien_the);
+  for (const r of variantRows) {
+    const ma = clean(r.ma_sp);
+    if (ma.startsWith("SP") && !seen.has(ma)) {
+      issues.push({ trang: "BienThe", ma: clean(r.ma_bien_the) || ma, cot: "ma_sp", gia_tri: ma, loi: "mã sản phẩm không có trong SanPham" });
+    }
+  }
+  const variants = variantRows
     .filter((r) => seen.has(clean(r.ma_sp)))
     .map((r) => ({
       ma_bien_the: clean(r.ma_bien_the), ma_sp: clean(r.ma_sp), mau: clean(r.mau),
       size: clean(r.size), ton_kho: (toInt(r.ton_kho) ?? 0) as any,
     }));
-  const sizes = parseCsv(csv.bang_size ?? "")
+  const sizes = rowsOf(input.bang_size)
     .filter((r) => clean(r.size))
     .map((r) => Object.fromEntries(SIZE_COLS.map((c) => [c, clean(r[c])])));
 
@@ -103,8 +132,12 @@ export async function importCatalog(
     env.DB.prepare("INSERT OR REPLACE INTO meta (k, v) VALUES ('cap_nhat_luc', ?)").bind(new Date().toISOString()),
   );
   await env.DB.batch(stmts);
+  const dang_xu_ly = await planJobs(env, products, sources, before, input.thu_lai_loi);
 
-  return { san_pham: products.length, bien_the: variants.length, bang_size: sizes.length, canh_bao: warnings.slice(0, 100) };
+  return {
+    san_pham: products.length, bien_the: variants.length, bang_size: sizes.length,
+    canh_bao: issues.slice(0, 100).map((i) => `${i.ma}.${i.cot}: ${i.loi}`), o_loi: issues.slice(0, 500), dang_xu_ly,
+  };
 }
 
 /**

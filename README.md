@@ -16,11 +16,12 @@ Khách nhắn Messenger
           - truy_van: SELECT bất kỳ (bảng size, tồn kho từng size, đếm mẫu...)
         Nhu cầu mềm được agent tự đổi thành kiểu dáng cụ thể như người bán hàng (src/prompt.ts),
         không cần thêm cột dữ liệu.
-   → Gửi tin nhắn tạm (nếu có), ảnh và câu trả lời qua Send API (src/messenger.ts)
+   → Gửi tin nhắn tạm (nếu có), câu trả lời, rồi thẻ sản phẩm (ảnh, giá, size, nút) qua Send API (src/messenger.ts)
 
-Google Sheets (bản gốc, chủ shop sửa)
-   → cron 15 phút đọc CSV → chuẩn hóa giá trị → ghi đè bản sao trong D1 (src/catalog.ts)
-Vector sản phẩm (từ mô tả và từ ảnh) → scripts/embed_products.py → bảng vec trong D1
+Google Sheets (bản gốc, chủ shop sửa, riêng tư)
+   → Apps Script trong bảng tính gửi lên /admin/import (apps-script/) → chuẩn hóa → ghi đè bản sao trong D1 (src/catalog.ts)
+   → hàng đợi chatbot-viec-nen: món mới / vừa sửa được tải ảnh về R2 và tạo vector (src/dongbo.ts)
+Vector sản phẩm (từ mô tả và từ ảnh) → bảng vec trong D1 (bộ demo nạp bằng scripts/embed_products.py)
 Lịch sử chat → KV (7 ngày, 10 lượt gần nhất)
 ```
 
@@ -47,6 +48,7 @@ chỉ cho 20 lượt/ngày với gemini-3.8-flash). Embedding luôn dùng Gemini
 | --- | --- |
 | `src/` | Code Worker (TypeScript) |
 | `migrations/` | Cấu trúc bảng D1 |
+| `apps-script/` | Apps Script dán vào Google Sheets: menu Bot, đồng bộ, tô ô lỗi, danh sách thả xuống |
 | `scripts/tag_products.py` | Cho Gemini nhìn ảnh, tự điền cột thuộc tính |
 | `scripts/embed_products.py` | Tạo vector sản phẩm (chữ, và ảnh với `--anh`) rồi nạp vào Worker |
 | `scripts/tao_du_lieu_demo.py` | Dựng bộ dữ liệu demo (giá, size, tồn kho giả) khi chưa có Google Sheets |
@@ -74,6 +76,8 @@ npx wrangler kv namespace create SHOP_KV                # dán id vào wrangler.
 npx wrangler d1 create chatbot-thoi-trang               # dán database_id vào wrangler.toml
 npx wrangler d1 migrations apply chatbot-thoi-trang --remote
 npx wrangler queues create chatbot-tin-nhan
+npx wrangler queues create chatbot-viec-nen
+npx wrangler r2 bucket create chatbot-thoi-trang-anh
 ```
 
 Sau khi deploy, đặt `DIA_CHI_CONG_KHAI` trong `wrangler.toml` thành địa chỉ Worker để gửi được ảnh `/anh/...` qua Messenger.
@@ -83,11 +87,10 @@ Sau khi deploy, đặt `DIA_CHI_CONG_KHAI` trong `wrangler.toml` thành địa c
 1. Tải lên Google Sheets file `data/bo-cot-thuoc-tinh-thoi-trang.xlsx`, điền sản phẩm.
 2. Chưa có thuộc tính? Xuất sheet SanPham ra CSV (thêm cột `anh` là đường dẫn ảnh), rồi chạy
    `python scripts/tag_products.py san_pham.csv`. Kiểm tra file kết quả, sửa dòng sai, dán lại vào sheet.
-3. Trong Google Sheets: Tệp > Chia sẻ > Công bố lên web, chọn từng sheet dạng CSV, dán link vào `SHEET_CSV_*` trong `wrangler.toml`.
-4. Đồng bộ: `curl -X POST localhost:8787/admin/sync -H "x-admin-key: <ADMIN_KEY>"` (trên mạng thì cron tự chạy 15 phút một lần).
-   Kết quả có danh sách `canh_bao` cho giá trị gõ sai danh sách (VD "Trễ vai " đã tự sửa, "trễ vai xinh" thì báo).
-5. Tạo vector: `python scripts/embed_products.py san_pham_da_gan.csv --anh --nap http://localhost:8787`.
-   Chỉ cần chạy lại khi thêm sản phẩm hoặc đổi mô tả.
+3. Cài Apps Script theo `apps-script/README.md`, rồi bấm **Bot > Đồng bộ ngay**. Ô gõ sai được tô đỏ kèm ghi chú;
+   ảnh được tải về R2 và vector được tạo tự động cho món mới / vừa sửa (xem **Bot > Xem tiến độ**).
+
+Cách cũ vẫn dùng được: Công bố lên web từng sheet dạng CSV, dán link vào `SHEET_CSV_*`, cron đọc 15 phút một lần.
 
 Chưa có Google Sheets thì thay bước 3-4 bằng bộ demo từ ảnh Kaggle:
 `python scripts/tao_du_lieu_demo.py --nap http://localhost:8787`.

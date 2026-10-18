@@ -1,9 +1,11 @@
 import { chat, type Msg } from "./llm";
 import { systemPrompt } from "./prompt";
 import { runTool, TOOL_DECLARATIONS } from "./tools";
-import type { ChatTurn, Env, TokenUsage, ToolTrace } from "./types";
+import type { ChatTurn, Env, ProductCard, TokenUsage, ToolTrace } from "./types";
 
 const HISTORY_TURNS = 10;
+/** Số thẻ sản phẩm tối đa gửi kèm một câu trả lời (Messenger cho tối đa 10 thẻ mỗi tin). */
+const MAX_CARDS = 5;
 /** Số vòng gọi công cụ tối đa cho một tin nhắn (tìm, xem kết quả, xem ảnh, sửa...). */
 const MAX_TOOL_ROUNDS = 6;
 /** Quá thời gian này thì buộc model trả lời với những gì đã có. Hàng đợi cho tới 15 phút; giữ thấp để khách không chờ lâu. */
@@ -24,7 +26,8 @@ async function saveHistory(env: Env, userKey: string, history: ChatTurn[]) {
 
 export interface BotReply {
   text: string;
-  images: string[];
+  /** Món bot gợi ý (mã viết ở đầu dòng), để gửi thành thẻ sản phẩm có ảnh. */
+  the_san_pham: ProductCard[];
   /** Tin nhắn tạm đã gửi trong lúc bot làm việc lâu (VD nhắn khách chờ trước khi xem ảnh). */
   interim: string[];
   model?: string;
@@ -103,7 +106,7 @@ export async function handleUserMessage(
 
   if (!text) text = "Dạ em chưa trả lời được câu này, em chuyển nhân viên hỗ trợ chị ngay nhé.";
   await saveHistory(env, userKey, [...history, { role: "model", text }]);
-  return { text, images: await imagesFor(env, text), interim, model, trace, token };
+  return { text, the_san_pham: await productCards(env, text), interim, model, trace, token };
 }
 
 const codesIn = (text: string) => [...new Set([...text.matchAll(/\bSP[\w-]+/g)].map((m) => m[0]))];
@@ -114,17 +117,43 @@ function dropLinesWith(text: string, codes: string[]): string {
   return codesIn(out).length ? out : "Dạ em chưa tìm được mẫu phù hợp trong kho, em nhờ nhân viên shop kiểm tra và nhắn lại chị ngay nhé.";
 }
 
-/** Ảnh của tối đa 3 sản phẩm được nhắc trong câu trả lời (theo mã [SP...]), dạng link http để gửi Messenger. */
-async function imagesFor(env: Env, text: string): Promise<string[]> {
-  const codes = [...new Set([...text.matchAll(/\bSP[\w-]+/g)].map((m) => m[0]))].slice(0, 3);
+/**
+ * Món bot thật sự gợi ý: mã [SP...] viết ở đầu một dòng (prompt yêu cầu mỗi món một dòng bắt đầu bằng mã).
+ * Mã nhắc giữa câu (món đã loại, món khách chê) không tính, để không gửi ảnh món khách không cần.
+ */
+export function suggestedCodes(text: string): string[] {
+  const codes = [...text.matchAll(/^\s*(?:[-*•]|\d+[.)])?\s*\**\[(SP[\w-]+)\]/gm)].map((m) => m[1]);
+  return [...new Set(codes)].slice(0, MAX_CARDS);
+}
+
+/** Thẻ sản phẩm (ảnh, tên, giá, size còn hàng) cho các món được gợi ý, theo đúng thứ tự trong câu trả lời. */
+async function productCards(env: Env, text: string): Promise<ProductCard[]> {
+  const codes = suggestedCodes(text);
   if (!codes.length) return [];
   const { results } = await env.DB.prepare(
-    "SELECT ma_sp, anh_chinh_url FROM san_pham WHERE ma_sp IN (SELECT value FROM json_each(?))",
-  ).bind(JSON.stringify(codes)).all<{ ma_sp: string; anh_chinh_url: string }>();
-  const url = new Map(results.map((r) => [r.ma_sp, r.anh_chinh_url ?? ""]));
+    `SELECT s.ma_sp, s.ten_sp, s.gia_ban, s.gia_goc, s.anh_chinh_url,
+            (SELECT group_concat(size, ', ') FROM (
+               SELECT DISTINCT b.size FROM bien_the b WHERE b.ma_sp = s.ma_sp AND b.ton_kho > 0
+               ORDER BY CASE b.size WHEN 'XS' THEN 0 WHEN 'S' THEN 1 WHEN 'M' THEN 2 WHEN 'L' THEN 3
+                 WHEN 'XL' THEN 4 WHEN 'XXL' THEN 5 ELSE 6 END)) AS sizes
+     FROM san_pham s WHERE s.ma_sp IN (SELECT value FROM json_each(?))`,
+  ).bind(JSON.stringify(codes)).all<{
+    ma_sp: string; ten_sp: string; gia_ban: number; gia_goc: number | null; anh_chinh_url: string | null; sizes: string | null;
+  }>();
+  const byCode = new Map(results.map((r) => [r.ma_sp, r]));
   const base = (env.DIA_CHI_CONG_KHAI ?? "").replace(/\/$/, "");
-  return codes
-    .map((c) => url.get(c) ?? "")
-    .map((u) => (u.startsWith("/") && base ? base + u : u))
-    .filter((u) => u.startsWith("http"));
+  return codes.flatMap((c) => {
+    const r = byCode.get(c);
+    if (!r) return [];
+    const img = r.anh_chinh_url ?? "";
+    return [{
+      ma_sp: r.ma_sp,
+      ten_sp: r.ten_sp,
+      gia: r.gia_goc && r.gia_goc > r.gia_ban ? `${vnd(r.gia_ban)} (giảm từ ${vnd(r.gia_goc)})` : vnd(r.gia_ban),
+      size: r.sizes ?? "",
+      anh: img.startsWith("/") && base ? base + img : img,
+    }];
+  });
 }
+
+const vnd = (n: number) => `${n.toLocaleString("de-DE")}đ`;

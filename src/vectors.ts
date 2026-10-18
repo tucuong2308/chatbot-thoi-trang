@@ -83,6 +83,15 @@ export interface VectorLine {
   b64?: string;
 }
 
+/** Ghi một vector của một món (tạo khi đồng bộ Sheets) và đổi phiên bản để các isolate nạp lại bộ nhớ đệm. */
+export async function saveVector(env: Env, maSp: string, kieu: Kind, values: number[]) {
+  if (!values.length) throw new Error(`Gemini trả về vector rỗng cho ${maSp} (${kieu})`);
+  await env.DB.batch([
+    env.DB.prepare("INSERT OR REPLACE INTO vec (ma_sp, kieu, v) VALUES (?, ?, ?)").bind(maSp, kieu, encode(values)),
+    env.DB.prepare("INSERT OR REPLACE INTO meta (k, v) VALUES ('phien_ban_vec', ?)").bind(new Date().toISOString()),
+  ]);
+}
+
 /** Nạp vector từ scripts/embed_products.py (mỗi dòng một JSON). Ghi đè vector cùng mã và cùng kiểu. */
 export async function importVectors(env: Env, lines: VectorLine[]): Promise<{ da_nap: number; bo_qua: number }> {
   const rows = lines.flatMap((l) => {

@@ -5,6 +5,10 @@ export interface Env {
   ASSETS: Fetcher;
   /** Hàng đợi tin nhắn Messenger: xử lý ở consumer để có đủ thời gian (xem ảnh, nhiều vòng tra cứu). */
   HANG_DOI: Queue<TinNhanMessenger>;
+  /** Việc chạy nền sau mỗi lần đồng bộ Sheets: tải ảnh về R2, tạo vector cho món mới / vừa sửa. */
+  VIEC_NEN: Queue<ViecNen>;
+  /** Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/<key>. */
+  ANH: R2Bucket;
   SHOP_NAME: string;
   GEMINI_MODEL: string;
   GEMINI_MODEL_DU_PHONG?: string;
@@ -46,12 +50,30 @@ export interface ToolTrace {
   ket_qua: unknown;
 }
 
+/** Một món bot gợi ý, gửi qua Messenger dạng thẻ có ảnh. */
+export interface ProductCard {
+  ma_sp: string;
+  ten_sp: string;
+  /** VD "389.000đ (giảm từ 439.000đ)" */
+  gia: string;
+  /** Các size còn hàng, VD "S, M, L"; rỗng nếu hết hàng. */
+  size: string;
+  /** Link ảnh đầy đủ (http...), rỗng nếu không có. */
+  anh: string;
+}
+
 /** Số token của một lần gọi model (theo trường usage của API kiểu OpenAI). */
 export interface TokenUsage {
   vao: number;
   ra: number;
   suy_nghi: number;
   vao_cache: number;
+}
+
+/** Một món cần tải ảnh và/hoặc tạo vector (xem src/dongbo.ts). */
+export interface ViecNen {
+  loai: "san_pham";
+  ma_sp: string;
 }
 
 export interface TinNhanMessenger {
