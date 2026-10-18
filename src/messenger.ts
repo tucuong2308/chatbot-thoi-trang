@@ -16,6 +16,8 @@ export async function verifySignature(env: Env, body: string, header: string | n
 export interface IncomingText {
   senderId: string;
   text: string;
+  /** Có khi khách bấm nút (postback). Payload "DON:..." là lệnh đặt / hủy đơn, xử lý ở src/tinnhan.ts. */
+  payload?: string;
 }
 
 /** Lấy các tin nhắn chữ từ payload webhook của Messenger. */
@@ -26,7 +28,7 @@ export function extractMessages(payload: any): IncomingText[] {
       if (ev.message?.is_echo) continue; // tin do chính page gửi
       if (ev.message?.text) out.push({ senderId: ev.sender.id, text: ev.message.text });
       // Khách bấm nút trên thẻ sản phẩm: payload là câu hỏi viết sẵn, xử lý như tin nhắn chữ.
-      else if (ev.postback?.payload) out.push({ senderId: ev.sender.id, text: ev.postback.payload });
+      else if (ev.postback?.payload) out.push({ senderId: ev.sender.id, text: ev.postback.payload, payload: ev.postback.payload });
     }
   }
   return out;
@@ -67,6 +69,19 @@ export async function sendProductCards(env: Env, to: string, cards: ProductCard[
   });
   if (!ok) for (const c of cards) if (c.anh.startsWith("http")) await sendImage(env, to, c.anh);
 }
+
+/** Tin kèm tối đa 3 nút postback (button template, chữ tối đa 640 ký tự). */
+export const sendButtons = (env: Env, to: string, text: string, buttons: { tieu_de: string; payload: string }[]) =>
+  send(env, to, {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "button",
+        text: text.slice(0, 640),
+        buttons: buttons.slice(0, 3).map((b) => ({ type: "postback", title: b.tieu_de.slice(0, 20), payload: b.payload })),
+      },
+    },
+  });
 
 export const sendTyping = (env: Env, to: string) =>
   fetch(`${GRAPH}?access_token=${env.FB_PAGE_TOKEN}`, {

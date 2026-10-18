@@ -2,7 +2,7 @@ import { vnd } from "./dinhdang";
 import { chat, type Msg } from "./llm";
 import { systemPrompt } from "./prompt";
 import { runTool, TOOL_DECLARATIONS } from "./tools";
-import type { ChatTurn, Env, ProductCard, TokenUsage, ToolTrace } from "./types";
+import type { ChatTurn, DonNhap, Env, ProductCard, TokenUsage, ToolTrace } from "./types";
 
 const HISTORY_TURNS = 10;
 /** Số thẻ sản phẩm tối đa gửi kèm một câu trả lời (Messenger cho tối đa 10 thẻ mỗi tin). */
@@ -17,6 +17,11 @@ const DEFAULT_WAIT = "Dạ chị chờ em một chút, em xem kỹ từng mẫu 
 
 async function loadHistory(env: Env, userKey: string): Promise<ChatTurn[]> {
   return (await env.SHOP_KV.get<ChatTurn[]>(`hist:${userKey}`, "json")) ?? [];
+}
+
+/** Thêm lượt vào lịch sử model ngoài vòng trò chuyện, VD kết quả khách bấm nút xác nhận đơn. */
+export async function appendHistory(env: Env, userKey: string, turns: ChatTurn[]) {
+  await saveHistory(env, userKey, [...(await loadHistory(env, userKey)), ...turns]);
 }
 
 async function saveHistory(env: Env, userKey: string, history: ChatTurn[]) {
@@ -35,6 +40,10 @@ export interface BotReply {
   trace?: ToolTrace[];
   /** Token của từng lần gọi model trong lượt này (chỉ có với API kiểu OpenAI), để tính chi phí thật. */
   token?: TokenUsage[];
+  /** Bot vừa soạn đơn nháp (soan_don): gửi tóm tắt kèm nút xác nhận. */
+  don_nhap?: { nhap: DonNhap; tom_tat: string };
+  /** Khách xin hủy đơn này (yeu_cau_huy_don): gửi nút xác nhận hủy. */
+  yeu_cau_huy?: string;
 }
 
 /**
@@ -53,7 +62,12 @@ export async function handleUserMessage(
   const trace: ToolTrace[] = [];
   const token: TokenUsage[] = [];
   const interim: string[] = [];
+  let donNhap: BotReply["don_nhap"];
+  let yeuCauHuy: string | undefined;
   const ctx = {
+    khach: userKey,
+    onNhap: (nhap: DonNhap, tom_tat: string) => { donNhap = { nhap, tom_tat }; },
+    onYeuCauHuy: (ma: string) => { yeuCauHuy = ma; },
     notifyWait: async (text?: string) => {
       if (interim.length) return;
       const msg = text?.trim() || DEFAULT_WAIT;
@@ -107,7 +121,9 @@ export async function handleUserMessage(
 
   if (!text) text = "Dạ em chưa trả lời được câu này, em chuyển nhân viên hỗ trợ chị ngay nhé.";
   await saveHistory(env, userKey, [...history, { role: "model", text }]);
-  return { text, the_san_pham: await productCards(env, text), interim, model, trace, token };
+  return {
+    text, the_san_pham: await productCards(env, text), interim, model, trace, token, don_nhap: donNhap, yeu_cau_huy: yeuCauHuy,
+  };
 }
 
 const codesIn = (text: string) => [...new Set([...text.matchAll(/\bSP[\w-]+/g)].map((m) => m[0]))];

@@ -1,21 +1,27 @@
-import { handleUserMessage } from "./agent";
 import { ENUM_VALUES, importCatalog, MULTI_VALUES, syncCatalog, TRANG_THAI } from "./catalog";
 import { processJob, serveR2Image, syncStatus } from "./dongbo";
 import { GeminiError } from "./gemini";
-import { extractMessages, sendProductCards, sendText, sendTyping, verifySignature } from "./messenger";
+import { extractMessages, sendButtons, sendProductCards, sendText, sendTyping, verifySignature } from "./messenger";
+import { handleIncoming } from "./tinnhan";
 import type { Env, TinNhanMessenger, ViecNen } from "./types";
 import { importVectors, type VectorLine } from "./vectors";
 
-async function replyMessenger(env: Env, senderId: string, text: string) {
+async function replyMessenger(env: Env, senderId: string, text: string, payload?: string) {
   await sendTyping(env, senderId);
   try {
-    const reply = await handleUserMessage(env, `fb:${senderId}`, text, async (msg) => {
-      await sendText(env, senderId, msg);
-      await sendTyping(env, senderId);
-    }, async () => { await sendTyping(env, senderId); });
-    // Lời tư vấn trước, thẻ sản phẩm (ảnh + giá + size) sau để khách đọc rồi lướt xem hàng.
-    await sendText(env, senderId, reply.text);
-    await sendProductCards(env, senderId, reply.the_san_pham);
+    const { tin } = await handleIncoming(env, `fb:${senderId}`, { text, payload }, {
+      send: async (msg) => {
+        await sendText(env, senderId, msg);
+        await sendTyping(env, senderId);
+      },
+      typing: async () => { await sendTyping(env, senderId); },
+    });
+    // Theo thứ tự: lời tư vấn, thẻ sản phẩm (ảnh + giá + size), rồi tóm tắt đơn và nút xác nhận nếu có.
+    for (const t of tin) {
+      if (t.loai === "chu") await sendText(env, senderId, t.chu);
+      else if (t.loai === "the") await sendProductCards(env, senderId, t.the);
+      else await sendButtons(env, senderId, t.chu, t.nut);
+    }
   } catch (err) {
     console.error(err);
     await sendText(env, senderId, "Dạ em đang gặp chút trục trặc, chị đợi em một lát hoặc nhắn lại giúp em nhé.");
@@ -48,11 +54,12 @@ export default {
     // Ảnh tải từ link trong Sheets, lưu trên R2 (ảnh demo trong public/anh do Static Assets phục vụ)
     if (req.method === "GET" && url.pathname.startsWith("/r2/")) return serveR2Image(env, decodeURIComponent(url.pathname.slice(4)));
 
-    // Thử bot không cần Facebook: POST /chat {"user":"test","text":"..."}
+    // Thử bot không cần Facebook: POST /chat {"user":"test","text":"..."} hoặc {"user":"test","payload":"DON:..."} (bấm nút)
     if (req.method === "POST" && url.pathname === "/chat") {
       if (req.headers.get("x-admin-key") !== env.ADMIN_KEY) return new Response("Unauthorized", { status: 401 });
-      const { user, text } = await req.json<{ user: string; text: string }>();
-      return Response.json(await handleUserMessage(env, `test:${user}`, text));
+      const { user, text, payload } = await req.json<{ user: string; text?: string; payload?: string }>();
+      const { tin, reply } = await handleIncoming(env, `test:${user}`, { text, payload });
+      return Response.json({ ...reply, tin });
     }
 
     if (url.pathname.startsWith("/admin/")) {
@@ -100,7 +107,7 @@ export default {
         }
         continue;
       }
-      await replyMessenger(env, body.senderId, body.text);
+      await replyMessenger(env, body.senderId, body.text, body.payload);
       m.ack(); // lỗi đã được báo cho khách trong replyMessenger, không gửi lại để khỏi trả lời trùng
     }
   },

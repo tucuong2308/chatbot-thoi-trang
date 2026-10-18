@@ -79,6 +79,8 @@ export interface ViecNen {
 export interface TinNhanMessenger {
   senderId: string;
   text: string;
+  /** Payload của nút khách bấm (postback). */
+  payload?: string;
 }
 
 /** Một dòng trong đơn: một biến thể (mã, size, màu) kèm số lượng và giá lúc soạn. */

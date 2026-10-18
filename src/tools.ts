@@ -1,7 +1,9 @@
+import { donCuaKhach, kiemTraHuy } from "./donhang/don";
+import { soanDon, type YeuCauSoan } from "./donhang/nhap";
 import { embedText } from "./gemini";
 import { ANH_TOI_DA, judgeImages } from "./images";
 import { runSelect, SqlError } from "./sql";
-import type { Env } from "./types";
+import type { DonNhap, Env } from "./types";
 import { channelScores, type Kenh } from "./vectors";
 
 /** Khai báo công cụ theo định dạng function calling của Gemini. */
@@ -64,6 +66,51 @@ export const TOOL_DECLARATIONS = [
       type: "OBJECT",
       properties: { sql: { type: "STRING", description: "Câu SELECT" } },
       required: ["sql"],
+    },
+  },
+  {
+    name: "soan_don",
+    description:
+      "Soạn đơn nháp khi khách muốn mua, với TOÀN BỘ các món và thông tin người nhận đã hỏi được. Kiểm tra kho, size, màu, " +
+      "số điện thoại, địa chỉ. Trả { loi: [...] } nếu còn thiếu/sai (hỏi khách đúng chỗ đó), hoặc { ok: true } và shop tự gửi " +
+      "tóm tắt đơn kèm nút Xác nhận cho khách. Gọi lại với toàn bộ đơn mới mỗi khi khách thêm, bớt, đổi món.",
+    parameters: {
+      type: "OBJECT",
+      properties: {
+        mon: {
+          type: "ARRAY",
+          items: {
+            type: "OBJECT",
+            properties: {
+              ma_sp: { type: "STRING" },
+              size: { type: "STRING" },
+              mau: { type: "STRING", description: "Bỏ trống nếu món chỉ có một màu" },
+              so_luong: { type: "INTEGER", description: "Mặc định 1" },
+            },
+            required: ["ma_sp", "size"],
+          },
+        },
+        ten: { type: "STRING", description: "Họ tên người nhận" },
+        sdt: { type: "STRING", description: "Số điện thoại người nhận" },
+        dia_chi: { type: "STRING", description: "Địa chỉ giao hàng đúng như khách gõ" },
+        ghi_chu: { type: "STRING" },
+      },
+      required: ["mon"],
+    },
+  },
+  {
+    name: "xem_don",
+    description: "Các đơn hàng gần nhất của khách đang nhắn (mã đơn, các món, tiền hàng, trạng thái Mới / Khách hủy).",
+    parameters: { type: "OBJECT", properties: {} },
+  },
+  {
+    name: "yeu_cau_huy_don",
+    description:
+      "Khách muốn hủy một đơn: kiểm tra đơn có hủy được không. Nếu được, shop gửi khách nút 'Xác nhận hủy'; đơn chỉ bị hủy khi khách bấm nút.",
+    parameters: {
+      type: "OBJECT",
+      properties: { ma_don: { type: "STRING", description: "VD DH-261018-001, lấy từ xem_don nếu khách không nói" } },
+      required: ["ma_don"],
     },
   },
 ];
@@ -203,6 +250,27 @@ async function truyVan(env: Env, args: { sql: string }) {
 export interface ToolContext {
   /** Nhắn khách chờ (chỉ gửi một lần mỗi lượt), gọi trước việc chậm như xem ảnh. */
   notifyWait: (text?: string) => Promise<void>;
+  /** Khách đang nhắn, VD fb:<PSID>. */
+  khach: string;
+  /** soan_don thành công: bot sẽ gửi tóm tắt đơn và nút xác nhận. */
+  onNhap: (nhap: DonNhap, tom_tat: string) => void;
+  /** yeu_cau_huy_don hợp lệ: bot sẽ gửi nút xác nhận hủy. */
+  onYeuCauHuy: (ma_don: string) => void;
+}
+
+async function soanDonTool(env: Env, args: YeuCauSoan, ctx: ToolContext) {
+  const r = await soanDon(env, ctx.khach, args);
+  if (!r.ok) return { loi: r.loi };
+  ctx.onNhap(r.nhap, r.tom_tat);
+  // Không trả tóm tắt cho model: shop tự gửi, model chỉ cần mời khách kiểm tra và bấm xác nhận.
+  return { ok: true, tien_hang: r.nhap.tien_hang, so_mon: r.nhap.mon.length };
+}
+
+async function yeuCauHuyTool(env: Env, args: { ma_don: string }, ctx: ToolContext) {
+  const r = await kiemTraHuy(env, ctx.khach, String(args.ma_don ?? "").trim().toUpperCase());
+  if (!r.ok) return { loi: r.loi };
+  ctx.onYeuCauHuy(r.don.ma_don);
+  return { ok: true, don: r.don };
 }
 
 /** Chạy một công cụ. Lỗi SQL được trả lại cho model dưới dạng { loi } để nó tự sửa câu lệnh. */
@@ -211,6 +279,9 @@ export async function runTool(env: Env, name: string, args: any, ctx: ToolContex
     if (name === "tim_san_pham") return await timSanPham(env, args);
     if (name === "xem_anh") return await xemAnh(env, args, ctx);
     if (name === "truy_van") return await truyVan(env, args);
+    if (name === "soan_don") return await soanDonTool(env, args, ctx);
+    if (name === "xem_don") return { don: await donCuaKhach(env, ctx.khach) };
+    if (name === "yeu_cau_huy_don") return await yeuCauHuyTool(env, args, ctx);
     return { loi: `Không có công cụ ${name}` };
   } catch (err) {
     if (err instanceof SqlError) return { loi: err.message };
