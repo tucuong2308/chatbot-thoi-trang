@@ -87,6 +87,6 @@ Rút ra:
 - [ ] Gộp nhánh `agent` vào `main` và push (chờ bạn quyết).
 - [ ] Bộ thuộc tính thiếu loại đồ truyền thống (kurta, áo dài kiểu Ấn Độ...), áo nỉ / hoodie / cardigan chưa tách rõ.
 - [ ] Tạo tài nguyên Cloudflare (KV, D1, Queue), đặt secret, deploy; điền link CSV Google Sheets.
-- [ ] Bật R2, deploy; chạy migration 0003 lên D1 thật; đăng ký `messaging_postbacks` trên Meta.
+- [ ] Deploy (R2 để sau, chưa bật thì ảnh dùng link gốc trong Sheet); chạy migration 0003, 0004 lên D1 thật; đăng ký `messaging_postbacks` trên Meta.
 - [ ] Nối Messenger thật; tìm theo ảnh khách gửi; nối Zalo OA (danh sách trong README).
 - [ ] Đổi khóa: khóa Gemini, NVIDIA, DeepSeek đều đã dán dạng chữ trong cuộc trò chuyện; nên tạo khóa mới sau khi demo.

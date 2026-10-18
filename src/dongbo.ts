@@ -130,7 +130,7 @@ function toBase64(bytes: ArrayBuffer): string {
 
 const EXT: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" };
 
-/** Xử lý một món trong hàng đợi: tạo vector mô tả nếu chữ đổi; tải ảnh về R2 và tạo vector ảnh nếu link ảnh đổi. */
+/** Xử lý một món trong hàng đợi: tạo vector mô tả nếu chữ đổi; tải ảnh (lưu R2 nếu có) và tạo vector ảnh nếu link ảnh đổi. */
 export async function processJob(env: Env, job: ViecNen): Promise<void> {
   const d = await env.DB.prepare("SELECT * FROM dong_bo WHERE ma_sp = ?").bind(job.ma_sp).first<DongBo>();
   const p = await env.DB.prepare("SELECT * FROM san_pham WHERE ma_sp = ?").bind(job.ma_sp).first<Row>();
@@ -153,10 +153,15 @@ export async function processJob(env: Env, job: ViecNen): Promise<void> {
   if (src && d.anh_da_luu !== src) {
     try {
       const { bytes, mime } = await downloadImage(env, src);
-      const key = `anh/${p.ma_sp}-${await hash(src)}.${EXT[mime] ?? "jpg"}`;
-      await env.ANH.put(key, bytes, { httpMetadata: { contentType: mime } });
+      // Có R2 thì giữ một bản riêng (không phụ thuộc link gốc); chưa bật R2 thì dùng thẳng link gốc
+      // (link chia sẻ Drive đổi sang link tải thẳng; Messenger có thể không hiển thị được ảnh Drive).
+      let path = directImageUrl(src);
+      if (env.ANH) {
+        const key = `anh/${p.ma_sp}-${await hash(src)}.${EXT[mime] ?? "jpg"}`;
+        await env.ANH.put(key, bytes, { httpMetadata: { contentType: mime } });
+        path = `/r2/${key}`;
+      }
       await saveVector(env, p.ma_sp, "anh", await embedParts(env, [{ inline_data: { mime_type: mime, data: toBase64(bytes) } }]));
-      const path = `/r2/${key}`;
       await env.DB.batch([
         env.DB.prepare("UPDATE dong_bo SET anh_da_luu = ?, anh_duong_dan = ? WHERE ma_sp = ?").bind(src, path, p.ma_sp),
         // Lần đồng bộ sau sẽ tự dùng lại đường dẫn này (servedImage), không cần chờ.
@@ -187,7 +192,7 @@ export async function syncStatus(env: Env) {
 
 /** Phục vụ ảnh đã lưu trên R2: GET /r2/anh/<file>. Tên file có mã băm của link gốc nên cache vĩnh viễn được. */
 export async function serveR2Image(env: Env, key: string): Promise<Response> {
-  const obj = await env.ANH.get(key);
+  const obj = env.ANH ? await env.ANH.get(key) : null;
   if (!obj) return new Response("Không có ảnh", { status: 404 });
   return new Response(obj.body, {
     headers: {

@@ -25,7 +25,7 @@ Khách nhắn Messenger
 
 Google Sheets (bản gốc, chủ shop sửa, riêng tư)
    → Apps Script trong bảng tính gửi lên /admin/import (apps-script/) → chuẩn hóa → ghi đè bản sao trong D1 (src/catalog.ts)
-   → hàng đợi chatbot-viec-nen: món mới / vừa sửa được tải ảnh về R2 và tạo vector (src/dongbo.ts)
+   → hàng đợi chatbot-viec-nen: món mới / vừa sửa được tải ảnh (lưu bản riêng trên R2 nếu đã bật) và tạo vector (src/dongbo.ts)
    ← cùng lịch 5 phút, Apps Script kéo đơn mới / vừa hủy từ /admin/don-hang về trang DonHang và gửi email báo shop
 Vector sản phẩm (từ mô tả và từ ảnh) → bảng vec trong D1 (bộ demo nạp bằng scripts/embed_products.py)
 Lịch sử chat → KV (7 ngày, 10 lượt gần nhất)
@@ -83,7 +83,7 @@ npx wrangler d1 create chatbot-thoi-trang               # dán database_id vào 
 npx wrangler d1 migrations apply chatbot-thoi-trang --remote
 npx wrangler queues create chatbot-tin-nhan
 npx wrangler queues create chatbot-viec-nen
-npx wrangler r2 bucket create chatbot-thoi-trang-anh
+npx wrangler r2 bucket create chatbot-thoi-trang-anh   # không bắt buộc, xem ghi chú [[r2_buckets]] trong wrangler.toml
 ```
 
 Sau khi deploy, đặt `DIA_CHI_CONG_KHAI` trong `wrangler.toml` thành địa chỉ Worker để gửi được ảnh `/anh/...` qua Messenger.
@@ -94,7 +94,7 @@ Sau khi deploy, đặt `DIA_CHI_CONG_KHAI` trong `wrangler.toml` thành địa c
 2. Chưa có thuộc tính? Xuất sheet SanPham ra CSV (thêm cột `anh` là đường dẫn ảnh), rồi chạy
    `python scripts/tag_products.py san_pham.csv`. Kiểm tra file kết quả, sửa dòng sai, dán lại vào sheet.
 3. Cài Apps Script theo `apps-script/README.md`, rồi bấm **Bot > Đồng bộ ngay**. Ô gõ sai được tô đỏ kèm ghi chú;
-   ảnh được tải về R2 và vector được tạo tự động cho món mới / vừa sửa (xem **Bot > Xem tiến độ**).
+   ảnh được tải về (lưu R2 nếu đã bật) và vector được tạo tự động cho món mới / vừa sửa (xem **Bot > Xem tiến độ**).
 
 Cách cũ vẫn dùng được: Công bố lên web từng sheet dạng CSV, dán link vào `SHEET_CSV_*`, cron đọc 15 phút một lần.
 

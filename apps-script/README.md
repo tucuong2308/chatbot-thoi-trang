@@ -1,7 +1,7 @@
 # Apps Script: nối Google Sheets với bot
 
 Google Sheets là bản gốc của danh mục. Apps Script trong bảng tính gửi dữ liệu lên Worker; Worker kiểm tra,
-ghi vào D1, rồi chạy nền việc tải ảnh về R2 và tạo vector cho món mới / vừa sửa. Bảng tính giữ ở chế độ riêng tư,
+ghi vào D1, rồi chạy nền việc tải ảnh (lưu bản riêng trên R2 nếu đã bật) và tạo vector cho món mới / vừa sửa. Bảng tính giữ ở chế độ riêng tư,
 không cần "Công bố lên web".
 
 ```
@@ -9,7 +9,7 @@ Sheets ──(Bot > Đồng bộ ngay, hoặc 5 phút/lần nếu có sửa)─�
    ▲                                                            │ ghi D1, trả về ô lỗi
    └──────────── tô đỏ ô lỗi, ghi trang NhatKy ◀────────────────┘
                                                                  └▶ hàng đợi chatbot-viec-nen:
-                                                                    tải ảnh về R2, tạo vector (Gemini)
+                                                                    tải ảnh, tạo vector (Gemini)
 ```
 
 ## Cài đặt (một lần)

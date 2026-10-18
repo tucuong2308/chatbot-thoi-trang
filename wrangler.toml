@@ -56,11 +56,12 @@ max_batch_timeout = 1
 max_retries = 5
 max_concurrency = 2
 
-# Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/anh/<ma_sp>-<mã băm>.<đuôi>
-# Tạo bằng: npx wrangler r2 bucket create chatbot-thoi-trang-anh
-[[r2_buckets]]
-binding = "ANH"
-bucket_name = "chatbot-thoi-trang-anh"
+# (Không bắt buộc) Lưu bản riêng của ảnh tải từ link trong Sheets, phục vụ ở /r2/anh/<ma_sp>-<mã băm>.<đuôi>.
+# Chưa bật thì bot dùng thẳng link gốc. Bật: bật R2 trong Cloudflare Dashboard,
+# npx wrangler r2 bucket create chatbot-thoi-trang-anh, rồi bỏ dấu # ở 3 dòng dưới và deploy lại.
+# [[r2_buckets]]
+# binding = "ANH"
+# bucket_name = "chatbot-thoi-trang-anh"
 
 [vars]
 SHOP_NAME = "Mộc Lam Studio"

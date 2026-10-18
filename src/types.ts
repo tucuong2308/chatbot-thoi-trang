@@ -7,8 +7,8 @@ export interface Env {
   HANG_DOI: Queue<TinNhanMessenger>;
   /** Việc chạy nền sau mỗi lần đồng bộ Sheets: tải ảnh về R2, tạo vector cho món mới / vừa sửa. */
   VIEC_NEN: Queue<ViecNen>;
-  /** Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/<key>. */
-  ANH: R2Bucket;
+  /** Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/<key>. Không bắt buộc: chưa bật R2 thì dùng link gốc. */
+  ANH?: R2Bucket;
   SHOP_NAME: string;
   GEMINI_MODEL: string;
   GEMINI_MODEL_DU_PHONG?: string;
