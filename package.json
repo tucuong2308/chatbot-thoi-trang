@@ -7,11 +7,14 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
-    "sync": "curl -X POST -H \"x-admin-key: $ADMIN_KEY\" http://localhost:8787/admin/sync"
+    "sync": "curl -X POST -H \"x-admin-key: $ADMIN_KEY\" http://localhost:8787/admin/sync",
+    "test": "vitest run"
   },
   "devDependencies": {
+    "@cloudflare/vitest-plugin": "1.3.6",
     "@cloudflare/workers-types": "^5.20261006.1",
     "typescript": "^5.6.0",
+    "vitest": "^4.1.0",
     "wrangler": "^4.149.0"
   }
 }
