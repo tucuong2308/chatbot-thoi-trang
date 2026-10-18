@@ -72,3 +72,53 @@ export async function xacNhanDon(env: Env, khach: string, nhapId: string): Promi
   }
   throw new Error("Không cấp được mã đơn sau 5 lần thử");
 }
+
+export interface TomTatDonHang {
+  ma_don: string;
+  tao_luc: number;
+  trang_thai: string;
+  tien_hang: number;
+  /** VD "SP1 · M · Đỏ × 2; SP2 · S × 1" */
+  cac_mon: string;
+}
+
+type DongMon = { ma_sp: string; size: string; mau: string; so_luong: number };
+export const cacMon = (rows: DongMon[]) =>
+  rows.map((m) => `${[m.ma_sp, m.size, m.mau].filter(Boolean).join(" · ")} × ${m.so_luong}`).join("; ");
+
+const CAC_MON_SQL = `(SELECT json_group_array(json_object('ma_sp', ma_sp, 'size', size, 'mau', mau, 'so_luong', so_luong))
+  FROM (SELECT * FROM don_hang_mon m WHERE m.ma_don = d.ma_don ORDER BY stt)) AS mon_json`;
+
+function tomTat(r: Record<string, any>): TomTatDonHang {
+  return { ma_don: r.ma_don, tao_luc: r.tao_luc, trang_thai: r.trang_thai, tien_hang: r.tien_hang, cac_mon: cacMon(JSON.parse(r.mon_json)) };
+}
+
+/** 10 đơn gần nhất của khách, mới nhất trước. */
+export async function donCuaKhach(env: Env, khach: string): Promise<TomTatDonHang[]> {
+  const { results } = await env.DB.prepare(
+    `SELECT d.ma_don, d.tao_luc, d.trang_thai, d.tien_hang, ${CAC_MON_SQL}
+     FROM don_hang d WHERE d.khach = ? ORDER BY d.tao_luc DESC LIMIT 10`,
+  ).bind(khach).all<Record<string, any>>();
+  return results.map(tomTat);
+}
+
+/** Đơn của khách còn hủy được không. Đơn của khách khác báo "không tìm thấy" để không lộ thông tin. */
+export async function kiemTraHuy(env: Env, khach: string, ma: string): Promise<{ ok: true; don: TomTatDonHang } | { ok: false; loi: string }> {
+  const r = await env.DB.prepare(
+    `SELECT d.ma_don, d.tao_luc, d.trang_thai, d.tien_hang, ${CAC_MON_SQL} FROM don_hang d WHERE d.ma_don = ? AND d.khach = ?`,
+  ).bind(ma, khach).first<Record<string, any>>();
+  if (!r) return { ok: false, loi: `không tìm thấy đơn ${ma}` };
+  if (r.trang_thai !== "Mới") return { ok: false, loi: `đơn ${ma} đã hủy trước đó` };
+  return { ok: true, don: tomTat(r) };
+}
+
+/** Khách đã bấm xác nhận hủy: đơn chuyển sang Khách hủy (bot không biết hàng đã gửi đi chưa). */
+export async function huyDon(env: Env, khach: string, ma: string): Promise<{ ok: true } | { ok: false; loi: string }> {
+  const now = Date.now();
+  const r = await env.DB.prepare(
+    "UPDATE don_hang SET trang_thai = 'Khách hủy', huy_luc = ?, cap_nhat = ? WHERE ma_don = ? AND khach = ? AND trang_thai = 'Mới'",
+  ).bind(now, now, ma, khach).run();
+  if (r.meta.changes) return { ok: true };
+  const k = await kiemTraHuy(env, khach, ma);
+  return k.ok ? { ok: false, loi: `chưa hủy được đơn ${ma}, thử lại giúp em` } : k;
+}
