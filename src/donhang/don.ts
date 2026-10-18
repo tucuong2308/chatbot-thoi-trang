@@ -1,6 +1,6 @@
 import { vnd } from "../dinhdang";
 import { docHoiThoai } from "../hoithoai";
-import type { DonNhap, Env } from "../types";
+import type { DongHoiThoai, DonNhap, Env } from "../types";
 import { maDon } from "./kiemtra";
 import { kiemTraLaiMon, layNhap, luuNhap, xoaNhap } from "./nhap";
 
@@ -121,4 +121,50 @@ export async function huyDon(env: Env, khach: string, ma: string): Promise<{ ok:
   if (r.meta.changes) return { ok: true };
   const k = await kiemTraHuy(env, khach, ma);
   return k.ok ? { ok: false, loi: `chưa hủy được đơn ${ma}, thử lại giúp em` } : k;
+}
+
+/** Một dòng trang DonHang trên Google Sheets. */
+export interface DonChoSheet {
+  ma_don: string;
+  thoi_gian: string;
+  ten: string;
+  sdt: string;
+  dia_chi: string;
+  cac_mon: string;
+  tien_hang: number;
+  ghi_chu: string;
+  trang_thai: string;
+  /** Lúc khách hủy, rỗng nếu chưa hủy. */
+  khach_huy: string;
+  hoi_thoai: string;
+}
+
+/** dd/MM/yyyy HH:mm theo giờ Việt Nam. */
+function gioVN(ms: number): string {
+  const d = new Date(ms + 7 * 3600_000).toISOString();
+  return `${d.slice(8, 10)}/${d.slice(5, 7)}/${d.slice(0, 4)} ${d.slice(11, 16)}`;
+}
+
+/**
+ * Đơn mới hoặc vừa đổi trạng thái từ mốc `tu` (mili giây, tính cả đúng mốc: Sheets tự bỏ trùng theo mã đơn).
+ * con_tro là mốc để gửi ở lần kéo sau.
+ */
+export async function donThayDoiTu(env: Env, tu: number): Promise<{ don: DonChoSheet[]; con_tro: number }> {
+  const { results } = await env.DB.prepare(
+    `SELECT d.*, ${CAC_MON_SQL} FROM don_hang d WHERE d.cap_nhat >= ? ORDER BY d.cap_nhat LIMIT 200`,
+  ).bind(tu).all<Record<string, any>>();
+  const don = results.map((r): DonChoSheet => ({
+    ma_don: r.ma_don,
+    thoi_gian: gioVN(r.tao_luc),
+    ten: r.ten,
+    sdt: r.sdt,
+    dia_chi: r.dia_chi,
+    cac_mon: cacMon(JSON.parse(r.mon_json)),
+    tien_hang: r.tien_hang,
+    ghi_chu: r.ghi_chu,
+    trang_thai: r.trang_thai,
+    khach_huy: r.huy_luc ? gioVN(r.huy_luc) : "",
+    hoi_thoai: (JSON.parse(r.hoi_thoai) as DongHoiThoai[]).map((h) => `${h.vai === "khach" ? "Khách" : "Bot"}: ${h.chu}`).join("\n"),
+  }));
+  return { don, con_tro: results.length ? Number(results[results.length - 1].cap_nhat) : tu };
 }

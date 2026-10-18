@@ -1,5 +1,6 @@
 import { ENUM_VALUES, importCatalog, MULTI_VALUES, syncCatalog, TRANG_THAI } from "./catalog";
 import { processJob, serveR2Image, syncStatus } from "./dongbo";
+import { donThayDoiTu } from "./donhang/don";
 import { GeminiError } from "./gemini";
 import { extractMessages, sendButtons, sendProductCards, sendText, sendTyping, verifySignature } from "./messenger";
 import { handleIncoming } from "./tinnhan";
@@ -76,6 +77,11 @@ export default {
             mot_gia_tri: ENUM_VALUES, nhieu_gia_tri: MULTI_VALUES, trang_thai: TRANG_THAI,
             size: ["XS", "S", "M", "L", "XL", "XXL", "Freesize"],
           });
+        }
+        // Apps Script kéo đơn mới / vừa hủy về trang DonHang: {"tu": <con_tro lần trước>}
+        if (url.pathname === "/admin/don-hang") {
+          const { tu } = await req.json<{ tu?: number }>();
+          return Response.json(await donThayDoiTu(env, Number(tu) || 0));
         }
         // Tiến độ tải ảnh / tạo vector sau khi đồng bộ
         if (url.pathname === "/admin/trang-thai") return Response.json(await syncStatus(env));
