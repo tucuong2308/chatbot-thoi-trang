@@ -23,7 +23,7 @@ Sheets ──(Bot > Đồng bộ ngay, hoặc 5 phút/lần nếu có sửa)─�
 4. **Bot > Cài đặt kết nối**: dán địa chỉ Worker (VD `https://chatbot-thoi-trang.hidden-gems.workers.dev`)
    và `ADMIN_KEY`. Lần đầu Google sẽ hỏi quyền: đọc/sửa bảng tính này, gọi ra ngoài, tạo lịch chạy.
 5. **Bot > Cập nhật danh sách giá trị**: dựng lại trang `DanhMuc` và danh sách thả xuống từ danh sách của bot.
-6. **Bot > Đồng bộ ngay**, rồi **Bot > Bật tự đồng bộ (5 phút)**.
+6. **Bot > Đồng bộ ngay**, rồi **Bot > Bật tự đồng bộ (5 phút)** (lấy đơn mới và gửi danh mục khi có sửa).
 
 ## Chủ shop dùng hằng ngày
 
@@ -36,6 +36,20 @@ Sheets ──(Bot > Đồng bộ ngay, hoặc 5 phút/lần nếu có sửa)─�
 - **Bot > Xem tiến độ**: số món đang chờ tải ảnh / tạo vector (món mới chỉ được tìm theo nghĩa khi đã có vector,
   thường trong vòng 1-2 phút) và các món bị lỗi ảnh.
 - Trang `NhatKy`: mỗi lần đồng bộ một dòng, mới nhất ở trên.
+
+## Đơn hàng
+
+Khách đặt hàng trên Messenger (bấm "Xác nhận đặt hàng" trên tóm tắt đơn) thì đơn được lưu ngay trong bot, không cần duyệt.
+Cứ 5 phút (cùng lịch tự đồng bộ), hoặc khi bấm **Bot > Lấy đơn mới ngay**, script kéo đơn về trang `DonHang`:
+
+- Mỗi đơn một dòng, đơn mới nhất ở trên. Cột `hoi_thoai` là đoạn chat trước lúc đặt (tối đa 40 tin).
+- Cột `trang_thai` là của nhân viên (VD ghi "Đang giao", "Hoàn thành"): bot chỉ ghi "Mới" lúc thêm dòng, không đọc
+  và không ghi đè cột này. Khách hỏi đơn tới đâu thì bot luôn trả lời khoảng 1-2 ngày.
+- **Dòng đỏ** là đơn khách đã hủy (cột `khach_huy` là lúc hủy). Nếu hàng đã gửi đi, nhân viên liên hệ khách.
+- Mỗi đơn mới gửi một email tới Gmail đang cài script (đổi trong **Bot > Cài đặt kết nối**).
+- Đơn không trừ tồn kho: nhân viên tự sửa cột `ton_kho` ở trang `BienThe`.
+
+Lần đầu sau khi dán bản script mới, Google hỏi thêm quyền gửi email và xem địa chỉ email của bạn.
 
 ## Ghi chú kỹ thuật
 

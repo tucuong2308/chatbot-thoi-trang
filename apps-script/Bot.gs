@@ -14,6 +14,9 @@ const TRANG_BIEN_THE = 'BienThe';
 const TRANG_BANG_SIZE = 'BangSize';
 const TRANG_DANH_MUC = 'DanhMuc';
 const TRANG_NHAT_KY = 'NhatKy';
+const TRANG_DON_HANG = 'DonHang';
+// Cột trang DonHang. trang_thai là của nhân viên: bot chỉ ghi lúc thêm dòng, không bao giờ ghi đè.
+const COT_DON = ['ma_don', 'thoi_gian', 'ten', 'sdt', 'dia_chi', 'cac_mon', 'tien_hang', 'ghi_chu', 'trang_thai', 'khach_huy', 'hoi_thoai'];
 /** Dòng 1 là tên cột, dòng 2 là giải thích (như file mẫu); dữ liệu bắt đầu từ dòng 3. */
 const DONG_DAU = 3;
 const MAU_LOI = '#f4cccc';
@@ -22,6 +25,7 @@ function onOpen() {
   SpreadsheetApp.getUi().createMenu('Bot')
     .addItem('Đồng bộ ngay', 'dongBoNgay')
     .addItem('Xem tiến độ tải ảnh, tạo vector', 'xemTienDo')
+    .addItem('Lấy đơn mới ngay', 'layDonNgay')
     .addSeparator()
     .addItem('Cập nhật danh sách giá trị', 'capNhatDanhMuc')
     .addItem('Bật tự đồng bộ (5 phút)', 'batTuDongBo')
@@ -51,8 +55,11 @@ function caiDat() {
   const key = ui.prompt('ADMIN_KEY', 'Khóa quản trị của bot (giống ADMIN_KEY đã đặt bằng wrangler secret).\n' +
     'Lưu trong Script Properties, không ghi vào ô nào.', ui.ButtonSet.OK_CANCEL);
   if (key.getSelectedButton() !== ui.Button.OK) return;
+  const email = ui.prompt('Email nhận báo đơn mới', 'Để trống thì giữ: ' + emailThongBao_(), ui.ButtonSet.OK_CANCEL);
+  if (email.getSelectedButton() !== ui.Button.OK) return;
   if (url.getResponseText().trim()) props.setProperty('WORKER_URL', url.getResponseText().trim().replace(/\/$/, ''));
   if (key.getResponseText().trim()) props.setProperty('ADMIN_KEY', key.getResponseText().trim());
+  if (email.getResponseText().trim()) props.setProperty('EMAIL_THONG_BAO', email.getResponseText().trim());
   const kq = goi_('/admin/trang-thai', {});
   ui.alert('Đã kết nối. Bot đang có ' + kq.tong_mon + ' món.');
 }
@@ -94,8 +101,13 @@ function dongBoNgay() {
   }
 }
 
-/** Chạy theo lịch: chỉ gửi khi có ô bị sửa kể từ lần trước. */
+/** Chạy theo lịch: luôn lấy đơn mới; danh mục chỉ gửi khi có ô bị sửa kể từ lần trước. */
 function tuDongBo() {
+  try {
+    keoDonHang_();
+  } catch (err) {
+    ghiNhatKy_({ loi: 'Lấy đơn: ' + err.message });
+  }
   const props = PropertiesService.getDocumentProperties();
   if (props.getProperty('CO_THAY_DOI') !== '1') return;
   try {
@@ -143,6 +155,89 @@ function docTrang_(ten) {
       header.forEach(function (h, i) { if (h) o[h] = r[i]; });
       return o;
     });
+}
+
+// ---------------- Đơn hàng ----------------
+
+function layDonNgay() {
+  try {
+    const moi = keoDonHang_();
+    SpreadsheetApp.getActive().toast(moi + ' đơn mới.', 'Đơn hàng', 5);
+  } catch (err) {
+    SpreadsheetApp.getUi().alert('Lấy đơn lỗi: ' + err.message);
+  }
+}
+
+function emailThongBao_() {
+  return PropertiesService.getScriptProperties().getProperty('EMAIL_THONG_BAO') || Session.getEffectiveUser().getEmail();
+}
+
+/**
+ * Kéo đơn mới / vừa bị khách hủy về trang DonHang. Đơn mới thêm lên đầu và gửi email; đơn đã có chỉ cập nhật cột
+ * khach_huy và tô đỏ cả dòng. Trả về số đơn mới. Con trỏ chỉ lưu sau khi đã ghi xong, nên lỗi giữa chừng thì lần sau
+ * kéo lại (đơn đã có được bỏ qua theo mã).
+ */
+function keoDonHang_() {
+  const lock = LockService.getDocumentLock();
+  if (!lock.tryLock(30 * 1000)) throw new Error('Đang có một lần lấy đơn / đồng bộ khác chạy.');
+  try {
+    const docProps = PropertiesService.getDocumentProperties();
+    const kq = goi_('/admin/don-hang', { tu: Number(docProps.getProperty('CON_TRO_DON') || 0) });
+    const ss = SpreadsheetApp.getActive();
+    let sh = ss.getSheetByName(TRANG_DON_HANG);
+    if (!sh) {
+      sh = ss.insertSheet(TRANG_DON_HANG);
+      sh.getRange(1, 1, 1, COT_DON.length).setValues([COT_DON]);
+      sh.setFrozenRows(1);
+      sh.getRange('1:1').setFontWeight('bold');
+    }
+    const cotHuy = COT_DON.indexOf('khach_huy') + 1;
+    const dongCua = function () {
+      const out = {};
+      if (sh.getLastRow() < 2) return out;
+      sh.getRange(2, 1, sh.getLastRow() - 1, 1).getDisplayValues().forEach(function (r, i) { out[r[0]] = i + 2; });
+      return out;
+    };
+    const daCo = dongCua();
+    const moi = [];
+    kq.don.forEach(function (d) {
+      if (daCo[d.ma_don] || moi.some(function (m) { return m.ma_don === d.ma_don; })) return;
+      moi.push(d);
+    });
+    if (moi.length) {
+      sh.insertRowsAfter(1, moi.length);
+      const vung = sh.getRange(2, 1, moi.length, COT_DON.length);
+      vung.setValues(moi.slice().reverse().map(function (d) { return COT_DON.map(function (c) { return d[c]; }); }));
+      vung.setFontWeight('normal').setBackground(null); // dòng chèn dưới tiêu đề kế thừa chữ đậm
+      sh.getRange(2, COT_DON.indexOf('hoi_thoai') + 1, moi.length, 1).setWrap(true);
+    }
+    // Đơn đã có (kể cả vừa thêm) mà khách hủy: ghi lúc hủy, tô đỏ dòng.
+    const dong = dongCua();
+    kq.don.forEach(function (d) {
+      if (!d.khach_huy || !dong[d.ma_don]) return;
+      sh.getRange(dong[d.ma_don], cotHuy).setValue(d.khach_huy);
+      sh.getRange(dong[d.ma_don], 1, 1, COT_DON.length).setBackground(MAU_LOI);
+    });
+    docProps.setProperty('CON_TRO_DON', String(kq.con_tro));
+    moi.forEach(guiEmailDon_);
+    return moi.length;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function guiEmailDon_(d) {
+  MailApp.sendEmail({
+    to: emailThongBao_(),
+    subject: 'Đơn mới ' + d.ma_don + ' · ' + Number(d.tien_hang).toLocaleString('de-DE') + 'đ',
+    body: [
+      'Khách: ' + d.ten + ' · ' + d.sdt,
+      'Địa chỉ: ' + d.dia_chi,
+      'Món: ' + d.cac_mon,
+      'Tiền hàng: ' + Number(d.tien_hang).toLocaleString('de-DE') + 'đ (chưa gồm phí ship, thu COD)',
+    ].concat(d.ghi_chu ? ['Ghi chú: ' + d.ghi_chu] : [])
+      .concat(['', 'Xem trang DonHang: ' + SpreadsheetApp.getActive().getUrl()]).join('\n'),
+  });
 }
 
 // ---------------- Tô ô lỗi ----------------
@@ -295,7 +390,7 @@ function tuSinhMa_(sh, range) {
 function batTuDongBo() {
   tatTuDongBo(true);
   ScriptApp.newTrigger('tuDongBo').timeBased().everyMinutes(5).create();
-  SpreadsheetApp.getActive().toast('Cứ 5 phút, nếu có ô bị sửa thì tự gửi lên bot.', 'Đã bật tự đồng bộ', 5);
+  SpreadsheetApp.getActive().toast('Cứ 5 phút: lấy đơn mới, và nếu có ô bị sửa thì gửi lên bot.', 'Đã bật tự đồng bộ', 5);
 }
 
 function tatTuDongBo(imLang) {
