@@ -1,6 +1,6 @@
 # Chatbot thời trang (bản demo)
 
-Trợ lý AI tư vấn quần áo trên Facebook Messenger. Bot hiểu câu như "váy trễ vai đi biển dưới 500k", tìm đúng món còn hàng trong kho của shop và gửi ảnh kèm lời tư vấn.
+Trợ lý AI tư vấn quần áo trên Facebook Messenger và Telegram. Bot hiểu câu như "váy trễ vai đi biển dưới 500k", tìm đúng món còn hàng trong kho của shop và gửi ảnh kèm lời tư vấn.
 
 ## Kiến trúc
 
@@ -128,6 +128,30 @@ npm run deploy
 Trong Meta for Developers > Messenger > Webhooks: URL `https://<worker>.workers.dev/webhook/messenger`, verify token = `FB_VERIFY_TOKEN`, đăng ký sự kiện `messages` và `messaging_postbacks` (nút bấm).
 Trước khi deploy bản có đặt hàng: `npx wrangler d1 migrations apply chatbot-thoi-trang --remote` (bảng `don_hang`).
 
+## Nối Telegram
+
+1. Trên Telegram, nhắn **@BotFather** (tài khoản có dấu tích xanh), gõ `/newbot`, lấy token.
+2. Tự đặt một chuỗi bí mật, chỉ gồm chữ, số, `_` và `-` (VD `hidden_gems_2026`).
+3. Đặt secret và deploy:
+
+   ```bash
+   npx wrangler secret put TELEGRAM_BOT_TOKEN   # dán token từ BotFather
+   npx wrangler secret put TELEGRAM_SECRET      # dán chuỗi bí mật ở bước 2
+   npm run deploy
+   ```
+
+4. Đăng ký webhook (chỉ cần một lần, Worker tự gửi địa chỉ `/webhook/telegram` và chuỗi bí mật cho Telegram):
+
+   ```bash
+   curl -X POST -H "x-admin-key: <ADMIN_KEY>" https://<worker>.workers.dev/admin/telegram/webhook
+   ```
+
+   Kết quả `{"ok":true,...}` là xong. Mở bot trên Telegram, bấm **Start** và nhắn thử.
+
+Khác với Messenger: Telegram không có thẻ lướt ngang, nên mỗi món gửi thành một ảnh kèm tên, giá, size và hai nút.
+Bot chỉ trả lời chat riêng, bỏ qua nhóm. Khách Telegram lưu với mã `tg:<chat id>` (Messenger là `fb:<PSID>`),
+nên đơn trên Sheets phân biệt được kênh. Code ở `src/telegram.ts`.
+
 ## Việc còn lại
 
 - [x] Nhận đặt hàng trên Messenger, đơn về trang DonHang của Google Sheets
@@ -136,6 +160,7 @@ Trước khi deploy bản có đặt hàng: `npx wrangler d1 migrations apply ch
 - [ ] Tìm theo ảnh khách gửi (vector ảnh sản phẩm đã có trong bảng vec, chỉ cần nhận ảnh từ Messenger và embed)
 - [ ] Gợi ý cả bộ từ sheet PhoiDo
 - [ ] Chuyển sang nhân viên khi khách cần (tắt bot cho cuộc chat đó)
+- [x] Nối Telegram
 - [ ] Nối Zalo OA
 
 ## Đo chất lượng

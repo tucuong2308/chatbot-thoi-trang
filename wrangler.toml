@@ -30,7 +30,7 @@ migrations_dir = "migrations"
 directory = "./public"
 binding = "ASSETS"
 
-# Tin nhắn Messenger đi qua hàng đợi để có tới 15 phút xử lý (waitUntil chỉ có 30 giây)
+# Tin nhắn Messenger / Telegram đi qua hàng đợi để có tới 15 phút xử lý (waitUntil chỉ có 30 giây)
 # Tạo bằng: npx wrangler queues create chatbot-tin-nhan   (chạy local thì không cần)
 [[queues.producers]]
 binding = "HANG_DOI"
@@ -87,3 +87,4 @@ SHEET_CSV_BANGSIZE = ""
 
 # Bí mật: đặt bằng `npx wrangler secret put <TÊN>` (khi chạy local thì để trong .dev.vars)
 # GEMINI_API_KEY, OPENAI_API_KEY, FB_PAGE_TOKEN, FB_VERIFY_TOKEN, FB_APP_SECRET, ADMIN_KEY
+# Telegram (không bắt buộc): TELEGRAM_BOT_TOKEN, TELEGRAM_SECRET

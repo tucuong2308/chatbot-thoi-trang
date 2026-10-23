@@ -3,7 +3,7 @@ export interface Env {
   DB: D1Database;
   /** Ảnh trong thư mục public/ (Workers Static Assets), VD /anh/SP0001.jpg */
   ASSETS: Fetcher;
-  /** Hàng đợi tin nhắn Messenger: xử lý ở consumer để có đủ thời gian (xem ảnh, nhiều vòng tra cứu). */
+  /** Hàng đợi tin nhắn Messenger / Telegram: xử lý ở consumer để có đủ thời gian (xem ảnh, nhiều vòng tra cứu). */
   HANG_DOI: Queue<TinNhanMessenger>;
   /** Việc chạy nền sau mỗi lần đồng bộ Sheets: tải ảnh về R2, tạo vector cho món mới / vừa sửa. */
   VIEC_NEN: Queue<ViecNen>;
@@ -36,6 +36,10 @@ export interface Env {
   FB_VERIFY_TOKEN: string;
   FB_APP_SECRET: string;
   ADMIN_KEY: string;
+  /** Token bot Telegram lấy từ @BotFather. Không đặt thì bỏ qua Telegram. */
+  TELEGRAM_BOT_TOKEN?: string;
+  /** Chuỗi tự đặt (chữ, số, _ và -), Telegram gửi kèm mỗi request trong header X-Telegram-Bot-Api-Secret-Token. */
+  TELEGRAM_SECRET?: string;
 }
 
 export interface ChatTurn {
@@ -76,11 +80,17 @@ export interface ViecNen {
   ma_sp: string;
 }
 
+/** Một tin khách gửi tới, nằm trong hàng đợi chờ bot trả lời. */
 export interface TinNhanMessenger {
+  /** Kênh: "fb" Messenger (mặc định, tin cũ trong hàng đợi không có trường này), "tg" Telegram. */
+  kenh?: "fb" | "tg";
+  /** PSID trên Messenger, chat id trên Telegram. */
   senderId: string;
   text: string;
-  /** Payload của nút khách bấm (postback). */
+  /** Payload của nút khách bấm (postback / callback_data). */
   payload?: string;
+  /** Telegram: id của lần bấm nút, để tắt vòng xoay trên nút. */
+  callbackId?: string;
 }
 
 /** Một dòng trong đơn: một biến thể (mã, size, màu) kèm số lượng và giá lúc soạn. */

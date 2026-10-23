@@ -3,29 +3,60 @@ import { processJob, serveR2Image, syncStatus } from "./dongbo";
 import { donThayDoiTu } from "./donhang/don";
 import { GeminiError } from "./gemini";
 import { extractMessages, sendButtons, sendProductCards, sendText, sendTyping, verifySignature } from "./messenger";
+import { extractTelegram, tgAnswerCallback, tgSendButtons, tgSendProductCards, tgSendText, tgSetWebhook, tgTyping, verifyTelegram } from "./telegram";
 import { handleIncoming } from "./tinnhan";
-import type { Env, TinNhanMessenger, ViecNen } from "./types";
+import type { Env, ProductCard, TinNhanMessenger, ViecNen } from "./types";
 import { importVectors, type VectorLine } from "./vectors";
 
-async function replyMessenger(env: Env, senderId: string, text: string, payload?: string) {
-  await sendTyping(env, senderId);
+/** Cách gửi tin trên một kênh (Messenger hoặc Telegram). */
+interface KenhGui {
+  text: (t: string) => Promise<unknown>;
+  the: (cards: ProductCard[]) => Promise<unknown>;
+  nut: (t: string, nut: { tieu_de: string; payload: string }[]) => Promise<unknown>;
+  typing: () => Promise<unknown>;
+}
+
+function kenhGui(env: Env, m: TinNhanMessenger): KenhGui {
+  const to = m.senderId;
+  if (m.kenh === "tg") {
+    return {
+      text: (t) => tgSendText(env, to, t),
+      the: (c) => tgSendProductCards(env, to, c),
+      nut: (t, n) => tgSendButtons(env, to, t, n),
+      typing: () => tgTyping(env, to),
+    };
+  }
+  return {
+    text: (t) => sendText(env, to, t),
+    the: (c) => sendProductCards(env, to, c),
+    nut: (t, n) => sendButtons(env, to, t, n),
+    typing: () => sendTyping(env, to),
+  };
+}
+
+async function reply(env: Env, m: TinNhanMessenger) {
+  const gui = kenhGui(env, m);
   try {
-    const { tin } = await handleIncoming(env, `fb:${senderId}`, { text, payload }, {
+    if (m.kenh === "tg" && m.callbackId) await tgAnswerCallback(env, m.callbackId);
+    await gui.typing();
+    // Khách Telegram lưu dưới "tg:<chat id>" nên lịch sử và đơn hàng không lẫn với khách Messenger.
+    const khach = `${m.kenh ?? "fb"}:${m.senderId}`;
+    const { tin } = await handleIncoming(env, khach, { text: m.text, payload: m.payload }, {
       send: async (msg) => {
-        await sendText(env, senderId, msg);
-        await sendTyping(env, senderId);
+        await gui.text(msg);
+        await gui.typing();
       },
-      typing: async () => { await sendTyping(env, senderId); },
+      typing: async () => { await gui.typing(); },
     });
     // Theo thứ tự: lời tư vấn, thẻ sản phẩm (ảnh + giá + size), rồi tóm tắt đơn và nút xác nhận nếu có.
     for (const t of tin) {
-      if (t.loai === "chu") await sendText(env, senderId, t.chu);
-      else if (t.loai === "the") await sendProductCards(env, senderId, t.the);
-      else await sendButtons(env, senderId, t.chu, t.nut);
+      if (t.loai === "chu") await gui.text(t.chu);
+      else if (t.loai === "the") await gui.the(t.the);
+      else await gui.nut(t.chu, t.nut);
     }
   } catch (err) {
     console.error(err);
-    await sendText(env, senderId, "Dạ em đang gặp chút trục trặc, chị đợi em một lát hoặc nhắn lại giúp em nhé.");
+    await gui.text("Dạ em đang gặp chút trục trặc, chị đợi em một lát hoặc nhắn lại giúp em nhé.");
   }
 }
 
@@ -50,6 +81,19 @@ export default {
       const messages = extractMessages(JSON.parse(body));
       if (messages.length) await env.HANG_DOI.sendBatch(messages.map((m) => ({ body: m })));
       return new Response("EVENT_RECEIVED");
+    }
+
+    // Tin nhắn mới từ Telegram: cũng trả 200 ngay và đẩy vào hàng đợi.
+    // Trả lỗi thì Telegram gửi lại cùng update nhiều lần, nên JSON hỏng cũng chỉ bỏ qua.
+    if (req.method === "POST" && url.pathname === "/webhook/telegram") {
+      if (!verifyTelegram(env, req.headers.get("x-telegram-bot-api-secret-token"))) {
+        return new Response("Forbidden", { status: 403 });
+      }
+      let update: unknown = null;
+      try { update = await req.json(); } catch { /* bỏ qua */ }
+      const messages = extractTelegram(update);
+      if (messages.length) await env.HANG_DOI.sendBatch(messages.map((m) => ({ body: m })));
+      return new Response("OK");
     }
 
     // Ảnh tải từ link trong Sheets, lưu trên R2 (ảnh demo trong public/anh do Static Assets phục vụ)
@@ -83,6 +127,10 @@ export default {
           const { tu } = await req.json<{ tu?: number }>();
           return Response.json(await donThayDoiTu(env, Number(tu) || 0));
         }
+        // Đăng ký webhook Telegram về Worker này (gọi một lần sau khi deploy)
+        if (url.pathname === "/admin/telegram/webhook") {
+          return Response.json(await tgSetWebhook(env, `${url.origin}/webhook/telegram`));
+        }
         // Tiến độ tải ảnh / tạo vector sau khi đồng bộ
         if (url.pathname === "/admin/trang-thai") return Response.json(await syncStatus(env));
         // Nạp vector từ scripts/embed_products.py: mỗi dòng một JSON {"id","kieu","b64"|"values"}
@@ -98,7 +146,7 @@ export default {
     return new Response("Chatbot thời trang đang chạy");
   },
 
-  /** Consumer của hai hàng đợi: tin nhắn Messenger và việc nền sau đồng bộ. Mỗi lần tối đa 15 phút. */
+  /** Consumer của hai hàng đợi: tin nhắn Messenger / Telegram và việc nền sau đồng bộ. Mỗi lần tối đa 15 phút. */
   async queue(batch: MessageBatch<TinNhanMessenger | ViecNen>, env: Env) {
     for (const m of batch.messages) {
       const body = m.body;
@@ -113,8 +161,8 @@ export default {
         }
         continue;
       }
-      await replyMessenger(env, body.senderId, body.text, body.payload);
-      m.ack(); // lỗi đã được báo cho khách trong replyMessenger, không gửi lại để khỏi trả lời trùng
+      await reply(env, body);
+      m.ack(); // lỗi đã được báo cho khách trong reply, không gửi lại để khỏi trả lời trùng
     }
   },
 

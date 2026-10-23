@@ -88,5 +88,6 @@ Rút ra:
 - [ ] Bộ thuộc tính thiếu loại đồ truyền thống (kurta, áo dài kiểu Ấn Độ...), áo nỉ / hoodie / cardigan chưa tách rõ.
 - [ ] Tạo tài nguyên Cloudflare (KV, D1, Queue), đặt secret, deploy; điền link CSV Google Sheets.
 - [ ] Deploy (R2 để sau, chưa bật thì ảnh dùng link gốc trong Sheet); chạy migration 0003, 0004 lên D1 thật; đăng ký `messaging_postbacks` trên Meta.
+- [x] Code nối Telegram (23/10): `/webhook/telegram`, `src/telegram.ts`, test `tests/unit/telegram.test.ts`. Còn: đặt `TELEGRAM_BOT_TOKEN`, `TELEGRAM_SECRET`, deploy, gọi `/admin/telegram/webhook` (README > Nối Telegram).
 - [ ] Nối Messenger thật; tìm theo ảnh khách gửi; nối Zalo OA (danh sách trong README).
-- [ ] Đổi khóa: khóa Gemini, NVIDIA, DeepSeek đều đã dán dạng chữ trong cuộc trò chuyện; nên tạo khóa mới sau khi demo.
+- [ ] Đổi khóa: khóa Gemini, NVIDIA, DeepSeek và token bot Telegram đều đã dán dạng chữ trong cuộc trò chuyện; nên tạo khóa mới sau khi demo.
