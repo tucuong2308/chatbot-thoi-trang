@@ -119,7 +119,8 @@ export async function handleUserMessage(
     await typing?.().catch(() => {});
   }
 
-  if (!text) text = "Dạ em chưa trả lời được câu này, em chuyển nhân viên hỗ trợ chị ngay nhé.";
+  // Không hứa chuyển nhân viên ở đây: chỉ công cụ chuyen_nhan_vien mới thật sự báo cho shop.
+  if (!text) text = "Dạ em chưa trả lời được câu này, anh/chị nói rõ hơn giúp em nhé.";
   await saveHistory(env, userKey, [...history, { role: "model", text: ghiChuLichSu(text, donNhap) }]);
   return {
     text, the_san_pham: await productCards(env, text), interim, model, trace, token, don_nhap: donNhap, yeu_cau_huy: yeuCauHuy,
@@ -136,10 +137,10 @@ export function ghiChuLichSu(text: string, donNhap: BotReply["don_nhap"]): strin
 
 const codesIn = (text: string) => [...new Set([...text.matchAll(/\bSP[\w-]+/g)].map((m) => m[0]))];
 
-/** Bỏ các dòng nhắc mã bịa; nếu không còn sản phẩm thật nào thì thay bằng câu hẹn nhân viên kiểm tra. */
+/** Bỏ các dòng nhắc mã bịa; nếu không còn sản phẩm thật nào thì thay bằng câu nhờ khách nới yêu cầu. */
 function dropLinesWith(text: string, codes: string[]): string {
   const out = text.split("\n").filter((line) => !codes.some((c) => line.includes(c))).join("\n").trim();
-  return codesIn(out).length ? out : "Dạ em chưa tìm được mẫu phù hợp trong kho, em nhờ nhân viên shop kiểm tra và nhắn lại chị ngay nhé.";
+  return codesIn(out).length ? out : "Dạ em chưa tìm được mẫu phù hợp trong kho, anh/chị nới thêm yêu cầu (màu, kiểu, tầm giá) giúp em nhé.";
 }
 
 /**

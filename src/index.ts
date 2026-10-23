@@ -2,10 +2,12 @@ import { ENUM_VALUES, importCatalog, MULTI_VALUES, syncCatalog, TRANG_THAI } fro
 import { processJob, serveR2Image, syncStatus } from "./dongbo";
 import { donThayDoiTu } from "./donhang/don";
 import { GeminiError } from "./gemini";
+import { nhanTin, xuLyKhach } from "./gomtin";
+import { hoTroThayDoiTu } from "./hotro";
 import { extractMessages, sendButtons, sendProductCards, sendText, sendTyping, verifySignature } from "./messenger";
 import { extractTelegram, tgAnswerCallback, tgSendButtons, tgSendProductCards, tgSendText, tgSetWebhook, tgTyping, verifyTelegram } from "./telegram";
 import { handleIncoming } from "./tinnhan";
-import type { Env, ProductCard, TinNhanMessenger, ViecNen } from "./types";
+import type { Env, ProductCard, TinNhanMessenger, ViecKhach, ViecNen } from "./types";
 import { importVectors, type VectorLine } from "./vectors";
 
 /** Cách gửi tin trên một kênh (Messenger hoặc Telegram). */
@@ -41,7 +43,7 @@ async function reply(env: Env, m: TinNhanMessenger) {
     await gui.typing();
     // Khách Telegram lưu dưới "tg:<chat id>" nên lịch sử và đơn hàng không lẫn với khách Messenger.
     const khach = `${m.kenh ?? "fb"}:${m.senderId}`;
-    const { tin } = await handleIncoming(env, khach, { text: m.text, payload: m.payload }, {
+    const { tin } = await handleIncoming(env, khach, { text: m.text, payload: m.payload, dinh_kem: m.dinh_kem }, {
       send: async (msg) => {
         await gui.text(msg);
         await gui.typing();
@@ -71,19 +73,18 @@ export default {
       return ok ? new Response(url.searchParams.get("hub.challenge")) : new Response("Forbidden", { status: 403 });
     }
 
-    // Tin nhắn mới từ Messenger: trả 200 ngay, đẩy vào hàng đợi.
+    // Tin nhắn mới từ Messenger: trả 200 ngay, lưu tin và hẹn hàng đợi xử lý sau vài giây (gộp tin liền nhau, src/gomtin.ts).
     // Không xử lý bằng waitUntil vì nó chỉ có 30 giây sau khi trả lời, không đủ cho nhiều vòng tra cứu và xem ảnh.
     if (req.method === "POST" && url.pathname === "/webhook/messenger") {
       const body = await req.text();
       if (!(await verifySignature(env, body, req.headers.get("x-hub-signature-256")))) {
         return new Response("Bad signature", { status: 401 });
       }
-      const messages = extractMessages(JSON.parse(body));
-      if (messages.length) await env.HANG_DOI.sendBatch(messages.map((m) => ({ body: m })));
+      await nhanTin(env, extractMessages(JSON.parse(body)));
       return new Response("EVENT_RECEIVED");
     }
 
-    // Tin nhắn mới từ Telegram: cũng trả 200 ngay và đẩy vào hàng đợi.
+    // Tin nhắn mới từ Telegram: cũng trả 200 ngay, lưu tin và hẹn xử lý như Messenger.
     // Trả lỗi thì Telegram gửi lại cùng update nhiều lần, nên JSON hỏng cũng chỉ bỏ qua.
     if (req.method === "POST" && url.pathname === "/webhook/telegram") {
       if (!verifyTelegram(env, req.headers.get("x-telegram-bot-api-secret-token"))) {
@@ -91,8 +92,7 @@ export default {
       }
       let update: unknown = null;
       try { update = await req.json(); } catch { /* bỏ qua */ }
-      const messages = extractTelegram(update);
-      if (messages.length) await env.HANG_DOI.sendBatch(messages.map((m) => ({ body: m })));
+      await nhanTin(env, extractTelegram(update));
       return new Response("OK");
     }
 
@@ -127,6 +127,11 @@ export default {
           const { tu } = await req.json<{ tu?: number }>();
           return Response.json(await donThayDoiTu(env, Number(tu) || 0));
         }
+        // Apps Script kéo yêu cầu cần nhân viên về trang HoTro: {"tu": <con_tro lần trước>}
+        if (url.pathname === "/admin/ho-tro") {
+          const { tu } = await req.json<{ tu?: number }>();
+          return Response.json(await hoTroThayDoiTu(env, Number(tu) || 0));
+        }
         // Đăng ký webhook Telegram về Worker này (gọi một lần sau khi deploy)
         if (url.pathname === "/admin/telegram/webhook") {
           return Response.json(await tgSetWebhook(env, `${url.origin}/webhook/telegram`));
@@ -147,10 +152,10 @@ export default {
   },
 
   /** Consumer của hai hàng đợi: tin nhắn Messenger / Telegram và việc nền sau đồng bộ. Mỗi lần tối đa 15 phút. */
-  async queue(batch: MessageBatch<TinNhanMessenger | ViecNen>, env: Env) {
+  async queue(batch: MessageBatch<TinNhanMessenger | ViecKhach | ViecNen>, env: Env) {
     for (const m of batch.messages) {
       const body = m.body;
-      if ("loai" in body) {
+      if ("loai" in body && body.loai === "san_pham") {
         try {
           await processJob(env, body);
           m.ack();
@@ -161,6 +166,15 @@ export default {
         }
         continue;
       }
+      if ("loai" in body && body.loai === "khach") {
+        // Khách đang có lượt khác chạy, hoặc còn tin chưa xử lý: thử lại sau vài giây (tin vẫn nằm trong tin_cho).
+        const kq = await xuLyKhach(env, body, (luot) => reply(env, luot));
+        // Chờ dần lâu hơn để tổng thời gian thử lại vượt thời hạn khóa (5 phút) nếu lượt trước bị dừng giữa chừng.
+        if (kq === "ban") m.retry({ delaySeconds: m.attempts < 10 ? 5 : 30 });
+        else m.ack();
+        continue;
+      }
+      // Tin dạng cũ (đã nằm trong hàng đợi trước bản gộp tin): trả lời luôn.
       await reply(env, body);
       m.ack(); // lỗi đã được báo cho khách trong reply, không gửi lại để khỏi trả lời trùng
     }
@@ -169,4 +183,4 @@ export default {
   async scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext) {
     ctx.waitUntil(syncCatalog(env));
   },
-} satisfies ExportedHandler<Env, TinNhanMessenger | ViecNen>;
+} satisfies ExportedHandler<Env, TinNhanMessenger | ViecKhach | ViecNen>;

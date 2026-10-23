@@ -36,11 +36,13 @@ binding = "ASSETS"
 binding = "HANG_DOI"
 queue = "chatbot-tin-nhan"
 
+# Mỗi việc là "trả lời mọi tin đang chờ của một khách" (src/gomtin.ts). Khách đang có lượt khác chạy thì việc được
+# thử lại sau 5 giây, nên cần max_retries; trả lời lỗi thì đã báo khách trong code, không thử lại.
 [[queues.consumers]]
 queue = "chatbot-tin-nhan"
 max_batch_size = 1
 max_batch_timeout = 0
-max_retries = 0
+max_retries = 20
 
 # Việc nền sau mỗi lần đồng bộ Sheets: tải ảnh về R2, tạo vector cho món mới / vừa sửa (src/dongbo.ts).
 # Tạo bằng: npx wrangler queues create chatbot-viec-nen

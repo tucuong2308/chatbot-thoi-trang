@@ -13,7 +13,7 @@ const WRITE_WORDS =
  * Bảng không cho model đọc: bảng nội bộ (vector rất dài, vô ích với model) và bảng đơn hàng (họ tên, số điện thoại,
  * địa chỉ, hội thoại của mọi khách; model chỉ xem đơn của khách đang nhắn qua công cụ xem_don).
  */
-const HIDDEN_TABLES = /\b(vec|meta|dong_bo|don_hang|don_hang_mon|don_nhap|sqlite_\w+|_cf_\w+|d1_\w+)\b/i;
+const HIDDEN_TABLES = /\b(vec|meta|dong_bo|don_hang|don_hang_mon|don_nhap|tin_cho|khach_dang_xu_ly|ho_tro|sqlite_\w+|_cf_\w+|d1_\w+)\b/i;
 
 export class SqlError extends Error {}
 

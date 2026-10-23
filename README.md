@@ -5,8 +5,10 @@ Trợ lý AI tư vấn quần áo trên Facebook Messenger và Telegram. Bot hi�
 ## Kiến trúc
 
 ```
-Khách nhắn Messenger
-   → Facebook gọi webhook → Worker trả 200 ngay, đẩy tin nhắn vào hàng đợi (Cloudflare Queues)
+Khách nhắn Messenger / Telegram
+   → webhook → Worker trả 200 ngay, lưu tin vào bảng tin_cho, hẹn hàng đợi (Cloudflare Queues) xử lý sau 3 giây
+   → mỗi khách một lượt tại một thời điểm; các tin liền nhau gộp thành một lượt (src/gomtin.ts)
+   → tin chỉ có ảnh / thoại / video: trả lời ngay là bot chưa xem được, nhờ khách tả bằng chữ (src/tinnhan.ts)
    → Consumer của hàng đợi (tối đa 15 phút) chạy agent (src/agent.ts):
         Gemini tự quyết từng bước, tối đa 6 vòng / 90 giây:
           - tim_san_pham: lọc cứng bằng SQL do nó viết, rồi xếp hạng theo nghĩa qua kênh mô tả (vector chữ)
@@ -16,6 +18,7 @@ Khách nhắn Messenger
           - truy_van: SELECT bất kỳ (bảng size, tồn kho từng size, đếm mẫu...)
           - soan_don / xem_don / yeu_cau_huy_don: soạn đơn nháp (kiểm tra kho, size, màu, số điện thoại, địa chỉ),
             tra đơn của khách, xin hủy (src/donhang/)
+          - chuyen_nhan_vien: khách cần người thật (đổi trả, phí ship, mua sỉ, khiếu nại) → bảng ho_tro (src/hotro.ts)
         Nhu cầu mềm được agent tự đổi thành kiểu dáng cụ thể như người bán hàng (src/prompt.ts),
         không cần thêm cột dữ liệu.
    → Gửi tin nhắn tạm (nếu có), câu trả lời, thẻ sản phẩm (ảnh, giá, size, nút), rồi tóm tắt đơn kèm nút
@@ -26,7 +29,8 @@ Khách nhắn Messenger
 Google Sheets (bản gốc, chủ shop sửa, riêng tư)
    → Apps Script trong bảng tính gửi lên /admin/import (apps-script/) → chuẩn hóa → ghi đè bản sao trong D1 (src/catalog.ts)
    → hàng đợi chatbot-viec-nen: món mới / vừa sửa được tải ảnh (lưu bản riêng trên R2 nếu đã bật) và tạo vector (src/dongbo.ts)
-   ← cùng lịch 5 phút, Apps Script kéo đơn mới / vừa hủy từ /admin/don-hang về trang DonHang và gửi email báo shop
+   ← cùng lịch 5 phút, Apps Script kéo đơn mới / vừa hủy từ /admin/don-hang về trang DonHang,
+     và yêu cầu cần nhân viên từ /admin/ho-tro về trang HoTro, gửi email báo shop
 Vector sản phẩm (từ mô tả và từ ảnh) → bảng vec trong D1 (bộ demo nạp bằng scripts/embed_products.py)
 Lịch sử chat → KV (7 ngày, 10 lượt gần nhất)
 ```
@@ -133,7 +137,8 @@ npm run deploy
 ```
 
 Trong Meta for Developers > Messenger > Webhooks: URL `https://<worker>.workers.dev/webhook/messenger`, verify token = `FB_VERIFY_TOKEN`, đăng ký sự kiện `messages` và `messaging_postbacks` (nút bấm).
-Trước khi deploy bản có đặt hàng: `npx wrangler d1 migrations apply chatbot-thoi-trang --remote` (bảng `don_hang`).
+Trước mỗi lần deploy bản mới: `npx wrangler d1 migrations apply chatbot-thoi-trang --remote` (bảng `don_hang`,
+`tin_cho`, `ho_tro`...). Sau đó dán lại `apps-script/Bot.gs` vào Apps Script để có trang `HoTro`.
 
 ## Nối Telegram
 
@@ -166,7 +171,9 @@ nên đơn trên Sheets phân biệt được kênh. Code ở `src/telegram.ts`.
 - [ ] Nhớ người nhận cho lần đặt sau
 - [ ] Tìm theo ảnh khách gửi (vector ảnh sản phẩm đã có trong bảng vec, chỉ cần nhận ảnh từ Messenger và embed)
 - [ ] Gợi ý cả bộ từ sheet PhoiDo
-- [ ] Chuyển sang nhân viên khi khách cần (tắt bot cho cuộc chat đó)
+- [x] Báo nhân viên khi khách cần (trang HoTro + email)
+- [ ] Tắt bot cho cuộc chat khi nhân viên đã nhận
+- [ ] Trang ThongTinShop (đổi trả, phí ship, địa chỉ cửa hàng) để bot tự trả lời, bớt chuyển nhân viên
 - [x] Nối Telegram
 - [ ] Nối Zalo OA
 

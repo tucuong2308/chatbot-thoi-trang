@@ -36,6 +36,17 @@ Ký hiệu: ✅ code xử lý đúng · ⚠️ xử lý được nhưng có rủ
 sản phẩm làm chắc. Lỗ hổng nằm ở ba chỗ: tin không phải chữ, khách nhắn nhiều tin liền nhau, và lời hứa "chuyển nhân viên"
 không dẫn tới đâu.
 
+## Đã sửa (23/10)
+
+- Số 1: tin chỉ có ảnh / thoại / video / tệp được trả lời ngay (nhờ khách tả bằng chữ); ảnh Telegram có chú thích thì
+  chú thích được đưa cho model kèm ghi chú "không xem được ảnh"; sticker được đưa cho model như một câu cảm thán.
+- Số 2: tin liền nhau của cùng khách được gộp, mỗi khách một lượt tại một thời điểm (`src/gomtin.ts`, bảng `tin_cho`).
+- Số 3: công cụ `chuyen_nhan_vien` ghi yêu cầu vào bảng `ho_tro`; Apps Script kéo về trang `HoTro` và gửi email.
+- Số 6: lời nhắc dặn gọi lại `soan_don` để gửi lại nút khi khách xác nhận bằng chữ / sticker.
+- Gửi tin hỏng (lỗi mạng) không còn làm dừng cả lượt trả lời.
+
+Còn mở: số 4 (trang thông tin shop), số 5 (lịch sử ngắn), số 7 (so khớp "Free size").
+
 ## Việc nên sửa, xếp theo mức ảnh hưởng
 
 1. **Tin ảnh, tin thoại, sticker không được trả lời** (#3). `extractMessages` và `extractTelegram` bỏ qua mọi tin

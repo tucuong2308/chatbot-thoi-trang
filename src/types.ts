@@ -4,7 +4,7 @@ export interface Env {
   /** Ảnh trong thư mục public/ (Workers Static Assets), VD /anh/SP0001.jpg */
   ASSETS: Fetcher;
   /** Hàng đợi tin nhắn Messenger / Telegram: xử lý ở consumer để có đủ thời gian (xem ảnh, nhiều vòng tra cứu). */
-  HANG_DOI: Queue<TinNhanMessenger>;
+  HANG_DOI: Queue<TinNhanMessenger | ViecKhach>;
   /** Việc chạy nền sau mỗi lần đồng bộ Sheets: tải ảnh về R2, tạo vector cho món mới / vừa sửa. */
   VIEC_NEN: Queue<ViecNen>;
   /** Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/<key>. Không bắt buộc: chưa bật R2 thì dùng link gốc. */
@@ -91,6 +91,17 @@ export interface TinNhanMessenger {
   payload?: string;
   /** Telegram: id của lần bấm nút, để tắt vòng xoay trên nút. */
   callbackId?: string;
+  /** Khách gửi thứ không phải chữ (bot chưa xem / nghe được); text là chú thích nếu có. */
+  dinh_kem?: DinhKem;
+}
+
+export type DinhKem = "anh" | "thoai" | "video" | "tep" | "sticker";
+
+/** Việc trong hàng đợi tin nhắn: trả lời mọi tin đang chờ của một khách (bảng tin_cho). */
+export interface ViecKhach {
+  loai: "khach";
+  kenh: "fb" | "tg";
+  senderId: string;
 }
 
 /** Một dòng trong đơn: một biến thể (mã, size, màu) kèm số lượng và giá lúc soạn. */

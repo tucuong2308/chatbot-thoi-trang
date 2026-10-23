@@ -51,6 +51,19 @@ Cứ 5 phút (cùng lịch tự đồng bộ), hoặc khi bấm **Bot > Lấy đ
 
 Lần đầu sau khi dán bản script mới, Google hỏi thêm quyền gửi email và xem địa chỉ email của bạn.
 
+## Khách cần nhân viên
+
+Khi khách hỏi điều bot không trả lời được (đổi trả, phí ship, mặc cả, mua trên 5 chiếc, khiếu nại...), bot ghi một yêu cầu
+và xin số điện thoại của khách. Cùng lịch 5 phút (hoặc **Bot > Lấy đơn mới và yêu cầu hỗ trợ ngay**), script kéo về trang `HoTro`:
+
+- Mỗi yêu cầu một dòng **tô vàng**, mới nhất ở trên, kèm email báo shop. Cột `kenh` là Messenger hay Telegram,
+  `hoi_thoai` là đoạn chat gần nhất.
+- Khách nhờ thêm trong 24 giờ (VD gửi thêm số điện thoại) thì cập nhật đúng dòng cũ, không gửi email lần nữa.
+- Cột `trang_thai` là của nhân viên (VD "Đã gọi"): script không ghi đè.
+- Khách Messenger: trả lời trong hộp thư của Page. Khách Telegram: nhân viên không xem được chat của bot, nên gọi / nhắn
+  Zalo theo số điện thoại khách để lại.
+- Bot vẫn tiếp tục tư vấn trong lúc chờ (chưa tắt bot cho cuộc chat đó).
+
 ## Ghi chú kỹ thuật
 
 - Mỗi lần đồng bộ ghi đè toàn bộ `san_pham`, `bien_the`, `bang_size` trong một transaction của D1;

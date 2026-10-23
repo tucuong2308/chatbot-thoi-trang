@@ -86,7 +86,7 @@ export async function kiemTraLaiMon(env: Env, yeuCau: YeuCauMon[]): Promise<{ mo
 
   const mon: MonDat[] = [];
   for (const { ton_kho, ...d } of gop.values()) {
-    if (d.so_luong > TOI_DA_MOI_MON) loi.push(`[${d.ma_sp}] tối đa ${TOI_DA_MOI_MON} chiếc mỗi món; cần nhiều hơn thì chuyển nhân viên`);
+    if (d.so_luong > TOI_DA_MOI_MON) loi.push(`[${d.ma_sp}] tối đa ${TOI_DA_MOI_MON} chiếc mỗi món; cần nhiều hơn thì gọi chuyen_nhan_vien`);
     else if (d.so_luong > ton_kho) loi.push(`[${d.ma_sp}] ${moTa(d)} chỉ còn ${ton_kho}`);
     else mon.push(d);
   }

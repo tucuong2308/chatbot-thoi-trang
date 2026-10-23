@@ -1,6 +1,7 @@
 import { donCuaKhach, kiemTraHuy } from "./donhang/don";
 import { soanDon, type YeuCauSoan } from "./donhang/nhap";
 import { embedText } from "./gemini";
+import { chuyenNhanVien } from "./hotro";
 import { ANH_TOI_DA, judgeImages } from "./images";
 import { runSelect, SqlError } from "./sql";
 import type { DonNhap, Env } from "./types";
@@ -111,6 +112,21 @@ export const TOOL_DECLARATIONS = [
       type: "OBJECT",
       properties: { ma_don: { type: "STRING", description: "VD DH-261018-001, lấy từ xem_don nếu khách không nói" } },
       required: ["ma_don"],
+    },
+  },
+  {
+    name: "chuyen_nhan_vien",
+    description:
+      "Báo nhân viên shop liên hệ khách (shop nhận qua Google Sheets và email). Dùng khi khách cần điều em không trả lời " +
+      "được: đổi trả, phí ship, mặc cả, mua trên 5 chiếc, khiếu nại, hỏi thông tin shop không có trong dữ liệu. " +
+      "Gọi lại khi khách gửi thêm số điện thoại: yêu cầu cũ được cập nhật, không tạo trùng.",
+    parameters: {
+      type: "OBJECT",
+      properties: {
+        ly_do: { type: "STRING", description: "Khách cần gì, một câu ngắn, VD 'hỏi đổi size sau khi nhận hàng'" },
+        sdt: { type: "STRING", description: "Số điện thoại khách cho để nhân viên gọi / nhắn Zalo, nếu có" },
+      },
+      required: ["ly_do"],
     },
   },
 ];
@@ -286,6 +302,7 @@ export async function runTool(env: Env, name: string, args: any, ctx: ToolContex
     if (name === "soan_don") return await soanDonTool(env, args, ctx);
     if (name === "xem_don") return { don: await donCuaKhach(env, ctx.khach) };
     if (name === "yeu_cau_huy_don") return await yeuCauHuyTool(env, args, ctx);
+    if (name === "chuyen_nhan_vien") return await chuyenNhanVien(env, ctx.khach, args ?? {});
     return { loi: `Không có công cụ ${name}` };
   } catch (err) {
     if (err instanceof SqlError) return { loi: err.message };

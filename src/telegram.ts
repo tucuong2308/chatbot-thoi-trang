@@ -1,4 +1,4 @@
-import type { Env, ProductCard, TinNhanMessenger } from "./types";
+import type { DinhKem, Env, ProductCard, TinNhanMessenger } from "./types";
 
 const api = (env: Env, method: string) => `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`;
 
@@ -30,13 +30,32 @@ function chuCuaNut(data: string): string {
   return data;
 }
 
-/** Lấy tin nhắn chữ và nút bấm từ một update của Telegram. Chỉ nhận chat riêng với bot, bỏ qua nhóm. */
+/** Loại đính kèm của một tin Telegram, nếu có. */
+function dinhKem(msg: any): DinhKem | undefined {
+  if (msg.photo) return "anh";
+  if (msg.voice || msg.audio) return "thoai";
+  if (msg.video || msg.video_note || msg.animation) return "video";
+  if (msg.sticker) return "sticker";
+  if (msg.document) return msg.document.mime_type?.startsWith("image/") ? "anh" : "tep";
+  return undefined;
+}
+
+/**
+ * Lấy tin nhắn từ một update của Telegram: chữ, nút bấm, và ảnh / thoại / sticker (kèm chú thích nếu có).
+ * Chỉ nhận chat riêng với bot, bỏ qua nhóm.
+ */
 export function extractTelegram(update: any): TinNhanMessenger[] {
   const msg = update?.message;
-  if (msg?.chat?.type === "private" && typeof msg.text === "string") {
-    // /start là lệnh Telegram tự gửi khi khách mở bot lần đầu.
-    const text = msg.text.trim() === "/start" ? "Xin chào shop" : msg.text;
-    return [{ kenh: "tg", senderId: String(msg.chat.id), text }];
+  if (msg?.chat?.type === "private") {
+    const senderId = String(msg.chat.id);
+    if (typeof msg.text === "string") {
+      // /start là lệnh Telegram tự gửi khi khách mở bot lần đầu.
+      const text = msg.text.trim() === "/start" ? "Xin chào shop" : msg.text;
+      return [{ kenh: "tg", senderId, text }];
+    }
+    const dk = dinhKem(msg);
+    if (dk) return [{ kenh: "tg", senderId, text: typeof msg.caption === "string" ? msg.caption : "", dinh_kem: dk }];
+    return [];
   }
   const cb = update?.callback_query;
   if (cb?.message?.chat?.type === "private" && typeof cb.data === "string") {
@@ -49,14 +68,20 @@ export function extractTelegram(update: any): TinNhanMessenger[] {
   return [];
 }
 
+/** Gọi Bot API. Lỗi mạng hay lỗi API chỉ ghi log và trả false: một tin gửi hỏng không được làm dừng cả lượt trả lời. */
 async function call(env: Env, method: string, body: object): Promise<boolean> {
-  const res = await fetch(api(env, method), {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) console.error(`Telegram ${method} lỗi`, res.status, await res.text());
-  return res.ok;
+  try {
+    const res = await fetch(api(env, method), {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) console.error(`Telegram ${method} lỗi`, res.status, await res.text());
+    return res.ok;
+  } catch (err) {
+    console.error(`Telegram ${method} lỗi mạng`, String(err));
+    return false;
+  }
 }
 
 type NutTg = { text: string; callback_data: string };

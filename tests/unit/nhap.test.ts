@@ -27,7 +27,7 @@ it("gom mọi lỗi cùng lúc và không lưu nháp", async () => {
   expect(e.loi).toEqual(expect.arrayContaining([
     "[SP1] cần chọn màu, còn hàng: Đỏ",
     "[SP1] size M màu Xanh đã hết; còn: M/Đỏ, L/Đỏ",
-    "[SP1] tối đa 5 chiếc mỗi món; cần nhiều hơn thì chuyển nhân viên",
+    "[SP1] tối đa 5 chiếc mỗi món; cần nhiều hơn thì gọi chuyen_nhan_vien",
     "[SP9] không có trong danh mục hoặc đã ngừng bán",
     "thiếu số điện thoại",
   ]));

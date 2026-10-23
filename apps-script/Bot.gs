@@ -6,7 +6,7 @@
  *  - Đồng bộ ngay: gửi SanPham, BienThe, BangSize lên Worker; ô lỗi được tô đỏ kèm ghi chú; ghi một dòng vào NhatKy.
  *  - Xem tiến độ: số món đang chờ tải ảnh / tạo vector và các món bị lỗi.
  *  - Cập nhật danh sách giá trị: dựng lại trang DanhMuc và danh sách thả xuống từ danh sách của bot.
- *  - Bật / tắt tự đồng bộ: cứ 5 phút gửi lên nếu có ô bị sửa.
+ *  - Bật / tắt tự đồng bộ: cứ 5 phút gửi lên nếu có ô bị sửa; đồng thời lấy đơn mới và yêu cầu cần nhân viên.
  */
 
 const TRANG_SAN_PHAM = 'SanPham';
@@ -18,6 +18,11 @@ const TRANG_DON_HANG = 'DonHang';
 // Cột trang DonHang. trang_thai là của nhân viên: bot chỉ ghi lúc thêm dòng, không bao giờ ghi đè.
 const COT_DON = ['ma_don', 'thoi_gian', 'ten', 'sdt', 'dia_chi', 'cac_mon', 'tien_hang', 'ghi_chu', 'trang_thai', 'khach_huy', 'hoi_thoai'];
 const COT_CHU_DON = ['ma_don', 'thoi_gian', 'sdt', 'khach_huy'];
+const TRANG_HO_TRO = 'HoTro';
+// Cột trang HoTro. trang_thai là của nhân viên (VD "Đã gọi"): bot không bao giờ ghi cột này.
+const COT_HO_TRO = ['ma', 'thoi_gian', 'kenh', 'sdt', 'ly_do', 'trang_thai', 'hoi_thoai', 'khach'];
+const COT_CHU_HO_TRO = ['ma', 'thoi_gian', 'sdt', 'khach'];
+const MAU_CAN_GOI = '#fff2cc';
 /** Dòng 1 là tên cột, dòng 2 là giải thích (như file mẫu); dữ liệu bắt đầu từ dòng 3. */
 const DONG_DAU = 3;
 const MAU_LOI = '#f4cccc';
@@ -26,7 +31,7 @@ function onOpen() {
   SpreadsheetApp.getUi().createMenu('Bot')
     .addItem('Đồng bộ ngay', 'dongBoNgay')
     .addItem('Xem tiến độ tải ảnh, tạo vector', 'xemTienDo')
-    .addItem('Lấy đơn mới ngay', 'layDonNgay')
+    .addItem('Lấy đơn mới và yêu cầu hỗ trợ ngay', 'layDonNgay')
     .addSeparator()
     .addItem('Cập nhật danh sách giá trị', 'capNhatDanhMuc')
     .addItem('Bật tự đồng bộ (5 phút)', 'batTuDongBo')
@@ -109,6 +114,11 @@ function tuDongBo() {
   } catch (err) {
     ghiNhatKy_({ loi: 'Lấy đơn: ' + err.message });
   }
+  try {
+    keoHoTro_();
+  } catch (err) {
+    ghiNhatKy_({ loi: 'Lấy yêu cầu hỗ trợ: ' + err.message });
+  }
   const props = PropertiesService.getDocumentProperties();
   if (props.getProperty('CO_THAY_DOI') !== '1') return;
   try {
@@ -163,7 +173,8 @@ function docTrang_(ten) {
 function layDonNgay() {
   try {
     const moi = keoDonHang_();
-    SpreadsheetApp.getActive().toast(moi + ' đơn mới.', 'Đơn hàng', 5);
+    const hoTro = keoHoTro_();
+    SpreadsheetApp.getActive().toast(moi + ' đơn mới, ' + hoTro + ' yêu cầu hỗ trợ mới.', 'Đơn hàng', 5);
   } catch (err) {
     SpreadsheetApp.getUi().alert('Lấy đơn lỗi: ' + err.message);
   }
@@ -240,6 +251,79 @@ function guiEmailDon_(d) {
       'Tiền hàng: ' + Number(d.tien_hang).toLocaleString('de-DE') + 'đ (chưa gồm phí ship, thu COD)',
     ].concat(d.ghi_chu ? ['Ghi chú: ' + d.ghi_chu] : [])
       .concat(['', 'Xem trang DonHang: ' + SpreadsheetApp.getActive().getUrl()]).join('\n'),
+  });
+}
+
+// ---------------- Yêu cầu cần nhân viên ----------------
+
+/**
+ * Kéo yêu cầu cần nhân viên (khách hỏi đổi trả, phí ship, mua sỉ, khiếu nại...) về trang HoTro, mới nhất ở trên.
+ * Yêu cầu mới: thêm dòng, tô vàng, gửi email. Yêu cầu đã có mà khách nói thêm (VD gửi số điện thoại): cập nhật các cột
+ * của bot, giữ nguyên cột trang_thai của nhân viên. Trả về số yêu cầu mới.
+ */
+function keoHoTro_() {
+  const lock = LockService.getDocumentLock();
+  if (!lock.tryLock(30 * 1000)) throw new Error('Đang có một lần lấy đơn / đồng bộ khác chạy.');
+  try {
+    const docProps = PropertiesService.getDocumentProperties();
+    const kq = goi_('/admin/ho-tro', { tu: Number(docProps.getProperty('CON_TRO_HO_TRO') || 0) });
+    const ss = SpreadsheetApp.getActive();
+    let sh = ss.getSheetByName(TRANG_HO_TRO);
+    if (!sh) {
+      sh = ss.insertSheet(TRANG_HO_TRO);
+      sh.getRange(1, 1, 1, COT_HO_TRO.length).setValues([COT_HO_TRO]);
+      sh.setFrozenRows(1);
+      sh.getRange('1:1').setFontWeight('bold');
+    }
+    const daCo = {};
+    if (sh.getLastRow() >= 2) {
+      sh.getRange(2, 1, sh.getLastRow() - 1, 1).getDisplayValues().forEach(function (r, i) { daCo[r[0]] = i + 2; });
+    }
+    const moi = [];
+    kq.yeu_cau.forEach(function (y) {
+      const dong = daCo[y.ma];
+      if (dong) {
+        COT_HO_TRO.forEach(function (c, i) {
+          if (c === 'trang_thai') return;
+          const o = sh.getRange(dong, i + 1);
+          if (COT_CHU_HO_TRO.indexOf(c) >= 0) o.setNumberFormat('@');
+          o.setValue(y[c]);
+        });
+      } else if (!moi.some(function (m) { return m.ma === y.ma; })) {
+        moi.push(y);
+      }
+    });
+    if (moi.length) {
+      sh.insertRowsAfter(1, moi.length);
+      COT_CHU_HO_TRO.forEach(function (c) { sh.getRange(2, COT_HO_TRO.indexOf(c) + 1, moi.length, 1).setNumberFormat('@'); });
+      const vung = sh.getRange(2, 1, moi.length, COT_HO_TRO.length);
+      vung.setValues(moi.slice().reverse().map(function (y) {
+        return COT_HO_TRO.map(function (c) { return c === 'trang_thai' ? '' : y[c]; });
+      }));
+      vung.setFontWeight('normal').setBackground(MAU_CAN_GOI);
+      sh.getRange(2, COT_HO_TRO.indexOf('hoi_thoai') + 1, moi.length, 1).setWrap(true);
+    }
+    docProps.setProperty('CON_TRO_HO_TRO', String(kq.con_tro));
+    moi.forEach(guiEmailHoTro_);
+    return moi.length;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function guiEmailHoTro_(y) {
+  MailApp.sendEmail({
+    to: emailThongBao_(),
+    subject: 'Khách cần nhân viên ' + y.ma + ' · ' + y.ly_do.split('\n')[0],
+    body: [
+      'Kênh: ' + y.kenh + (y.sdt ? ' · SĐT: ' + y.sdt : ' · khách chưa cho số điện thoại'),
+      'Khách cần: ' + y.ly_do,
+      '',
+      'Đoạn chat gần nhất:',
+      y.hoi_thoai.split('\n').slice(-10).join('\n'),
+      '',
+      'Xem trang HoTro: ' + SpreadsheetApp.getActive().getUrl(),
+    ].join('\n'),
   });
 }
 

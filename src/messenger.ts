@@ -1,4 +1,4 @@
-import type { Env, ProductCard } from "./types";
+import type { DinhKem, Env, ProductCard, TinNhanMessenger } from "./types";
 
 const GRAPH = "https://graph.facebook.com/v21.0/me/messages";
 
@@ -13,36 +13,47 @@ export async function verifySignature(env: Env, body: string, header: string | n
   return hex === header.slice("sha256=".length);
 }
 
-export interface IncomingText {
-  senderId: string;
-  text: string;
-  /** Có khi khách bấm nút (postback). Payload "DON:..." là lệnh đặt / hủy đơn, xử lý ở src/tinnhan.ts. */
-  payload?: string;
+/** Loại đính kèm của Messenger đổi sang loại của bot. Sticker cũng đến dưới dạng ảnh, có sticker_id. */
+function dinhKem(a: any): DinhKem {
+  if (a?.payload?.sticker_id) return "sticker";
+  return ({ image: "anh", audio: "thoai", video: "video" } as Record<string, DinhKem>)[a?.type] ?? "tep";
 }
 
-/** Lấy các tin nhắn chữ từ payload webhook của Messenger. */
-export function extractMessages(payload: any): IncomingText[] {
-  const out: IncomingText[] = [];
+/** Lấy tin nhắn từ payload webhook của Messenger: chữ, nút bấm (postback), và tin chỉ có ảnh / thoại / sticker. */
+export function extractMessages(payload: any): TinNhanMessenger[] {
+  const out: TinNhanMessenger[] = [];
   for (const entry of payload?.entry ?? []) {
     for (const ev of entry.messaging ?? []) {
       if (ev.message?.is_echo) continue; // tin do chính page gửi
-      if (ev.message?.text) out.push({ senderId: ev.sender.id, text: ev.message.text });
+      const senderId = ev.sender?.id;
+      if (!senderId) continue;
+      if (ev.message?.text) out.push({ kenh: "fb", senderId, text: ev.message.text });
+      else if (ev.message?.attachments?.length) out.push({ kenh: "fb", senderId, text: "", dinh_kem: dinhKem(ev.message.attachments[0]) });
       // Khách bấm nút trên thẻ sản phẩm: payload là câu hỏi viết sẵn, xử lý như tin nhắn chữ.
-      else if (ev.postback?.payload) out.push({ senderId: ev.sender.id, text: ev.postback.payload, payload: ev.postback.payload });
+      else if (ev.postback?.payload) out.push({ kenh: "fb", senderId, text: ev.postback.payload, payload: ev.postback.payload });
     }
   }
   return out;
 }
 
-async function send(env: Env, recipientId: string, message: object): Promise<boolean> {
-  const res = await fetch(`${GRAPH}?access_token=${env.FB_PAGE_TOKEN}`, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ recipient: { id: recipientId }, messaging_type: "RESPONSE", message }),
-  });
-  if (!res.ok) console.error("Gửi Messenger lỗi", res.status, await res.text());
-  return res.ok;
+/** Gọi Send API. Lỗi chỉ ghi log và trả false: một tin gửi hỏng không được làm dừng cả lượt trả lời. */
+async function post(env: Env, body: object): Promise<boolean> {
+  try {
+    const res = await fetch(`${GRAPH}?access_token=${env.FB_PAGE_TOKEN}`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) console.error("Gửi Messenger lỗi", res.status, await res.text());
+    return res.ok;
+  } catch (err) {
+    console.error("Gửi Messenger lỗi mạng", String(err));
+    return false;
+  }
 }
+
+const send = (env: Env, recipientId: string, message: object) =>
+  post(env, { recipient: { id: recipientId }, messaging_type: "RESPONSE", message });
 
 export const sendText = (env: Env, to: string, text: string) => send(env, to, { text: text.slice(0, 2000) });
 
@@ -83,9 +94,4 @@ export const sendButtons = (env: Env, to: string, text: string, buttons: { tieu_
     },
   });
 
-export const sendTyping = (env: Env, to: string) =>
-  fetch(`${GRAPH}?access_token=${env.FB_PAGE_TOKEN}`, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ recipient: { id: to }, sender_action: "typing_on" }),
-  });
+export const sendTyping = (env: Env, to: string) => post(env, { recipient: { id: to }, sender_action: "typing_on" });

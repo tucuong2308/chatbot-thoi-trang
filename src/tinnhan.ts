@@ -2,7 +2,30 @@ import { appendHistory, type BotReply, handleUserMessage } from "./agent";
 import { huyDon, xacNhanDon } from "./donhang/don";
 import { tomTatDon } from "./donhang/kiemtra";
 import { ghiHoiThoai } from "./hoithoai";
-import type { DonNhap, Env, TinGui } from "./types";
+import type { DinhKem, DonNhap, Env, TinGui } from "./types";
+
+/** Tên gọi từng loại đính kèm, để bot nói đúng thứ khách gửi. */
+const TEN_DINH_KEM: Record<DinhKem, string> = { anh: "ảnh", thoai: "tin nhắn thoại", video: "video", tep: "tệp", sticker: "sticker" };
+
+/** Trả lời tin chỉ có ảnh / thoại / video / tệp, không cần gọi model (bot chưa xem, nghe được). */
+function traLoiDinhKem(dk: DinhKem): string {
+  if (dk === "anh") {
+    return "Dạ em chưa xem được ảnh ạ. Anh/chị tả giúp em kiểu dáng, màu, chất liệu hoặc tầm giá, " +
+      "hoặc gửi mã sản phẩm nếu có, em tìm mẫu giống nhất cho mình nhé.";
+  }
+  return `Dạ em chưa ${dk === "thoai" ? "nghe" : "mở"} được ${TEN_DINH_KEM[dk]} ạ, anh/chị nhắn chữ giúp em nhé.`;
+}
+
+/**
+ * Câu chữ đưa cho model khi tin có đính kèm: sticker coi như một câu cảm thán; ảnh / thoại kèm chú thích thì báo
+ * model là bot không xem được phần đính kèm. null: chỉ có đính kèm, trả lời cố định bằng traLoiDinhKem.
+ */
+function chuChoModel(text: string, dk?: DinhKem): string | null {
+  if (!dk) return text;
+  if (dk === "sticker") return text || "(Khách gửi một sticker)";
+  if (!text) return null;
+  return `(Khách gửi kèm ${TEN_DINH_KEM[dk]}, em không xem được) ${text}`;
+}
 
 /** Nút "Sửa lại" gửi câu chữ này như khách tự nhắn, để model hỏi khách muốn đổi gì. */
 export const SUA_LAI = "Em muốn sửa lại đơn";
@@ -80,7 +103,7 @@ const chuCuaTin = (t: TinGui) => (t.loai === "the" ? `[thẻ] ${t.the.map((c) =>
  * nhật ký hội thoại để lưu kèm đơn.
  */
 export async function handleIncoming(
-  env: Env, khach: string, vao: { text?: string; payload?: string },
+  env: Env, khach: string, vao: { text?: string; payload?: string; dinh_kem?: DinhKem },
   hooks: { send?: (text: string) => Promise<void>; typing?: () => Promise<void> } = {},
 ): Promise<{ tin: TinGui[]; reply?: BotReply }> {
   if (vao.payload?.startsWith("DON:")) {
@@ -91,7 +114,17 @@ export async function handleIncoming(
     await appendHistory(env, khach, [{ role: "user", text: `(${bam})` }, { role: "model", text: tin.map(chuCuaTin).join("\n") }]);
     return { tin };
   }
-  const text = (vao.text ?? vao.payload ?? "").trim();
+  const goc = (vao.text ?? vao.payload ?? "").trim();
+  const text = chuChoModel(goc, vao.dinh_kem);
+  if (text === null) {
+    const tl = traLoiDinhKem(vao.dinh_kem!);
+    const khachGui = `(gửi ${TEN_DINH_KEM[vao.dinh_kem!]})`;
+    await ghiHoiThoai(env, khach, "khach", khachGui);
+    await ghiHoiThoai(env, khach, "bot", tl);
+    // Để lượt sau model biết "mẫu này" là ảnh khách vừa gửi mà bot không xem được.
+    await appendHistory(env, khach, [{ role: "user", text: khachGui }, { role: "model", text: tl }]);
+    return { tin: [{ loai: "chu", chu: tl }] };
+  }
   await ghiHoiThoai(env, khach, "khach", text);
   const reply = await handleUserMessage(env, khach, text, async (msg) => {
     await ghiHoiThoai(env, khach, "bot", msg);

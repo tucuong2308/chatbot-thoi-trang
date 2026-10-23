@@ -20,14 +20,15 @@ it("đọc tin chữ, /start, nút sản phẩm, nút đơn; bỏ qua nhóm", ()
     .toEqual([{ kenh: "tg", senderId: "42", text: "váy đi biển" }]);
   expect(extractTelegram({ message: { chat: chatRieng, text: "/start" } })[0].text).toBe("Xin chào shop");
   expect(extractTelegram({ message: { chat: { id: -5, type: "group" }, text: "hi" } })).toEqual([]);
-  expect(extractTelegram({ message: { chat: chatRieng, sticker: {} } })).toEqual([]);
+  expect(extractTelegram({ message: { chat: chatRieng, sticker: {} } })).toEqual([{ kenh: "tg", senderId: "42", text: "", dinh_kem: "sticker" }]);
+  expect(extractTelegram({ message: { chat: chatRieng, new_chat_title: "x" } })).toEqual([]);
   expect(extractTelegram({ callback_query: { id: "c1", data: "SP:MUA:SP0007", message: { chat: chatRieng } } }))
     .toEqual([{ kenh: "tg", senderId: "42", text: "Em muốn mua mẫu [SP0007]", payload: "Em muốn mua mẫu [SP0007]", callbackId: "c1" }]);
   expect(extractTelegram({ callback_query: { id: "c2", data: "DON:XAC_NHAN:ab12cd34", message: { chat: chatRieng } } })[0])
     .toMatchObject({ text: "DON:XAC_NHAN:ab12cd34", payload: "DON:XAC_NHAN:ab12cd34" });
 });
 
-it("webhook: sai bí mật thì 403, đúng thì đẩy vào hàng đợi", async () => {
+it("webhook: sai bí mật thì 403, đúng thì lưu tin và hẹn xử lý", async () => {
   const sendBatch = vi.fn();
   const e = { ...tg, HANG_DOI: { sendBatch } } as unknown as Env;
   const goi = (secret: string, body: string) => worker.fetch(new Request("https://x/webhook/telegram", {
@@ -37,7 +38,9 @@ it("webhook: sai bí mật thì 403, đúng thì đẩy vào hàng đợi", asyn
   expect((await goi("bi_mat-1", "không phải json")).status).toBe(200);
   expect(sendBatch).not.toHaveBeenCalled();
   expect((await goi("bi_mat-1", JSON.stringify({ message: { chat: chatRieng, text: "chào" } }))).status).toBe(200);
-  expect(sendBatch).toHaveBeenCalledWith([{ body: { kenh: "tg", senderId: "42", text: "chào" } }]);
+  expect(sendBatch).toHaveBeenCalledWith([{ body: { loai: "khach", kenh: "tg", senderId: "42" }, delaySeconds: 3 }]);
+  const tin = await env.DB.prepare("SELECT du_lieu FROM tin_cho WHERE khach = 'tg:42'").first<{ du_lieu: string }>();
+  expect(JSON.parse(tin!.du_lieu)).toEqual({ kenh: "tg", senderId: "42", text: "chào" });
 });
 
 it("thẻ sản phẩm: gửi ảnh kèm nút, ảnh lỗi thì gửi chữ", async () => {
