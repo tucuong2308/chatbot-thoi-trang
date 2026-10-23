@@ -64,7 +64,7 @@ Cách chấm:
             res = gemini(model, "generateContent", body, key, retries=3)
             parts = res["candidates"][0]["content"]["parts"]
             return json.loads("".join(p.get("text", "") for p in parts if not p.get("thought")))
-        except SystemExit as e:  # common.gemini báo lỗi bằng SystemExit
+        except (SystemExit, Exception) as e:  # common.gemini báo lỗi bằng SystemExit; lỗi khác cũng không được dừng cả lần chạy
             last = str(e)
     return {"dat": False, "ly_do": f"không chấm được: {last}"}
 
@@ -197,6 +197,8 @@ def main():
     ap.add_argument("--cho", type=int, default=15, help="số giây nghỉ sau mỗi case (gói Gemini miễn phí giới hạn lượt gọi mỗi phút)")
     ap.add_argument("--chi", help="chỉ chạy các id bắt đầu bằng chuỗi này")
     ap.add_argument("--bo", default="cases.json", help="file test trong tests/eval (VD cases_tu_nhien.json)")
+    ap.add_argument("--tiep", action="store_true",
+                    help="chạy tiếp lần --ten bị dừng giữa chừng: bỏ qua các case đã có trong ket_qua/<ten>.dang_chay.jsonl")
     ap.add_argument("--cham-lai", action="store_true",
                     help="không gọi bot: chấm lại các case hanh_vi của lần chạy --ten đã lưu bằng giám khảo hiện tại")
     args = ap.parse_args()
@@ -216,8 +218,30 @@ def main():
                 r.update(dat_cu=r.get("dat"), **cham_hanh_vi(c, "\n".join(transcript), [t["cong_cu"] for t in r.get("cong_cu", [])], key))
             results.append(r)
     else:
+        # Ghi từng case ngay khi xong: lần chạy bị dừng giữa chừng thì --tiep chạy nốt, không trả tiền chạy lại.
+        os.makedirs(os.path.join(HERE, "ket_qua"), exist_ok=True)
+        dang_chay = os.path.join(HERE, "ket_qua", f"{args.ten}.dang_chay.jsonl")
+        xong = {}
+        if args.tiep and os.path.exists(dang_chay):
+            for line in open(dang_chay, encoding="utf-8"):
+                r = json.loads(line)
+                if "loi" not in r:
+                    xong[r["id"]] = r
+            print(f"Chạy tiếp: {len(xong)} case đã xong, còn {len([c for c in cases if c['id'] not in xong])}", flush=True)
+        elif os.path.exists(dang_chay):
+            os.remove(dang_chay)
+
+        def chay(c):
+            if c["id"] in xong:
+                return xong[c["id"]]
+            r = run_case(c, args.url, key, args.cho)
+            with open(dang_chay, "a", encoding="utf-8") as f:
+                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+            print(f"  xong {c['id']}", flush=True)
+            return r
+
         with ThreadPoolExecutor(args.song_song) as ex:
-            results = list(ex.map(lambda c: run_case(c, args.url, key, args.cho), cases))
+            results = list(ex.map(chay, cases))
     for r in results:
         mark = "LỖI" if "loi" in r else ("ĐÚNG" if r.get("trung_3", r.get("dat")) else "SAI")
         chi_tiet = r.get("goi_y") or "; ".join(r.get("loi_cong_cu", []) + [r.get("ly_do_cham", r.get("loi", ""))])

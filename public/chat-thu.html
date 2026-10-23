@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chat thử bot</title>
+<!--
+  Trang chat thử bot ngay trên Worker (POST /chat, cần ADMIN_KEY), để người hoặc AI nói chuyện với bot và chấm điểm.
+  Dưới mỗi câu trả lời có phần "Chi tiết": công cụ đã gọi, điểm lớp quyết định Clef, số vòng gọi model, thời gian, token.
+  Có thể điều khiển bằng code: await window.guiTin("chào shop") trả về kết quả của lượt đó; window.hoiThoaiMoi().
+-->
+<style>
+  :root {
+    --nen: #f6f4f0; --the: #ffffff; --chu: #1f1d1a; --phu: #6b665e; --vien: #e3ded5;
+    --khach: #2f5d50; --khach-chu: #ffffff; --bot: #ffffff; --nhan: #b4532a; --ma: #efe9df;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --nen: #171615; --the: #22201e; --chu: #ece8e1; --phu: #a29c92; --vien: #34312d;
+      --khach: #3d7a69; --khach-chu: #ffffff; --bot: #22201e; --nhan: #e08a5f; --ma: #2c2926; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--nen); color: var(--chu); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; background: var(--nen); border-bottom: 1px solid var(--vien);
+    display: flex; gap: 8px; align-items: center; padding: 10px 16px; flex-wrap: wrap; }
+  header h1 { font-size: 16px; margin: 0 auto 0 0; }
+  input, textarea, button { font: inherit; color: inherit; }
+  input, textarea { background: var(--the); border: 1px solid var(--vien); border-radius: 8px; padding: 6px 10px; }
+  button { background: var(--khach); color: var(--khach-chu); border: 0; border-radius: 8px; padding: 6px 14px; cursor: pointer; }
+  button.phu { background: transparent; color: var(--chu); border: 1px solid var(--vien); }
+  button:disabled { opacity: .5; cursor: wait; }
+  main { max-width: 760px; margin: 0 auto; padding: 16px 16px 120px; }
+  .dong { display: flex; margin: 10px 0; }
+  .dong.khach { justify-content: flex-end; }
+  .bong { max-width: 85%; padding: 8px 12px; border-radius: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .khach .bong { background: var(--khach); color: var(--khach-chu); border-bottom-right-radius: 4px; }
+  .bot .bong { background: var(--bot); border: 1px solid var(--vien); border-bottom-left-radius: 4px; }
+  .tam .bong { font-style: italic; color: var(--phu); }
+  .cac-the { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0; max-width: 100%; }
+  .the { flex: 0 0 170px; background: var(--the); border: 1px solid var(--vien); border-radius: 10px; overflow: hidden; font-size: 13px; }
+  .the img { width: 100%; height: 170px; object-fit: cover; background: var(--ma); display: block; }
+  .the div { padding: 6px 8px; }
+  .the b { display: block; }
+  .nut-tin { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  details { margin: 2px 0 12px; font-size: 13px; color: var(--phu); }
+  details summary { cursor: pointer; }
+  details pre { background: var(--ma); padding: 8px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; font-size: 12px; }
+  .chip { display: inline-block; background: var(--ma); border-radius: 6px; padding: 0 6px; margin: 0 4px 4px 0; }
+  .chip.chac { color: var(--nhan); font-weight: 600; }
+  footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--nen); border-top: 1px solid var(--vien); padding: 10px 16px; }
+  footer form { max-width: 760px; margin: 0 auto; display: flex; gap: 8px; }
+  footer textarea { flex: 1; resize: none; height: 44px; }
+  .trong { text-align: center; color: var(--phu); margin-top: 40px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Chat thử bot</h1>
+  <input id="o-khoa" type="password" placeholder="ADMIN_KEY" size="14" aria-label="ADMIN_KEY">
+  <span id="ma-khach" class="chip"></span>
+  <button id="nut-moi" class="phu" type="button">Hội thoại mới</button>
+</header>
+<main id="khung"><p class="trong" id="trong">Nhập ADMIN_KEY rồi nhắn thử như khách hàng.</p></main>
+<footer>
+  <form id="form">
+    <textarea id="o-nhap" placeholder="Nhắn như khách hàng… (Enter để gửi)" aria-label="Tin nhắn"></textarea>
+    <button id="nut-gui" type="submit">Gửi</button>
+  </form>
+</footer>
+<script>
+const $ = (id) => document.getElementById(id);
+const luu = { get: (k) => { try { return localStorage.getItem(k) || ""; } catch { return ""; } },
+              set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
+let maKhach = "";
+$("o-khoa").value = luu.get("khoa");
+$("o-khoa").addEventListener("change", () => luu.set("khoa", $("o-khoa").value.trim()));
+
+function hoiThoaiMoi() {
+  maKhach = "ui-" + Math.random().toString(36).slice(2, 10);
+  $("ma-khach").textContent = maKhach;
+  $("khung").innerHTML = '<p class="trong" id="trong">Hội thoại mới. Bot không nhớ gì từ hội thoại trước.</p>';
+}
+$("nut-moi").onclick = hoiThoaiMoi;
+hoiThoaiMoi();
+
+function them(vai, nodes, lop = "") {
+  $("trong")?.remove();
+  const dong = document.createElement("div");
+  dong.className = `dong ${vai} ${lop}`;
+  const bong = document.createElement("div");
+  bong.className = "bong";
+  bong.append(...[].concat(nodes));
+  dong.append(bong);
+  $("khung").append(dong);
+  dong.scrollIntoView({ block: "end" });
+  return bong;
+}
+const chu = (s) => document.createTextNode(s);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+function veThe(cards) {
+  const hang = el("div", "cac-the");
+  for (const c of cards) {
+    const t = el("div", "the");
+    const img = el("img"); img.src = c.anh || ""; img.alt = c.ten_sp; img.loading = "lazy";
+    const d = el("div");
+    d.append(el("b", "", `[${c.ma_sp}] ${c.ten_sp}`), chu(c.gia), el("br"), chu(c.size ? `Size còn: ${c.size}` : ""));
+    t.append(img, d);
+    hang.append(t);
+  }
+  return hang;
+}
+
+function veChiTiet(r, giay) {
+  const d = el("details");
+  const qd = r.quyet_dinh;
+  const congCu = (r.trace || []).map((t) => t.cong_cu);
+  const vong = (r.token || []).length;
+  d.append(el("summary", "", `Chi tiết · ${giay}s · ${vong} vòng model · công cụ: ${congCu.join(", ") || "không"}`));
+  if (qd) {
+    const p = el("p", "", "Clef: ");
+    for (const [k, v] of Object.entries(qd)) p.append(el("span", v >= 0.8 ? "chip chac" : "chip", `${k} ${v.toFixed(2)}`));
+    d.append(p);
+  }
+  const rutGon = (r.trace || []).map((t) => ({ cong_cu: t.cong_cu, tham_so: t.tham_so,
+    ket_qua: JSON.stringify(t.ket_qua).slice(0, 600) }));
+  d.append(el("pre", "", JSON.stringify({ model: r.model, token: r.token, cong_cu: rutGon }, null, 1)));
+  return d;
+}
+
+async function guiTin(text, payload) {
+  const khoa = $("o-khoa").value.trim();
+  if (!khoa) { them("bot", chu("Nhập ADMIN_KEY ở góc trên trước đã."), "tam"); return null; }
+  luu.set("khoa", khoa);
+  if (text) them("khach", chu(text));
+  $("nut-gui").disabled = true;
+  const t0 = performance.now();
+  try {
+    const res = await fetch("/chat", { method: "POST", headers: { "content-type": "application/json", "x-admin-key": khoa },
+      body: JSON.stringify(payload ? { user: maKhach, payload } : { user: maKhach, text }) });
+    if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+    const r = await res.json();
+    const giay = ((performance.now() - t0) / 1000).toFixed(1);
+    for (const m of r.interim || []) them("bot", chu(m), "tam");
+    let cuoi;
+    for (const tin of r.tin || []) {
+      if (tin.loai === "chu") cuoi = them("bot", chu(tin.chu));
+      else if (tin.loai === "the") cuoi = them("bot", veThe(tin.the));
+      else if (tin.loai === "nut") {
+        const hang = el("div", "nut-tin");
+        for (const n of tin.nut) {
+          const b = el("button", "phu", n.tieu_de);
+          b.type = "button";
+          b.onclick = () => { them("khach", chu(`(bấm) ${n.tieu_de}`)); guiTin("", n.payload); };
+          hang.append(b);
+        }
+        cuoi = them("bot", [chu(tin.chu), hang]);
+      }
+    }
+    if (r.trace || r.token) (cuoi?.parentElement ?? $("khung")).after(veChiTiet(r, giay));
+    r.giay = Number(giay);
+    return r;
+  } catch (e) {
+    them("bot", chu(`Lỗi: ${e.message}`), "tam");
+    return { loi: e.message };
+  } finally {
+    $("nut-gui").disabled = false;
+  }
+}
+window.guiTin = guiTin;
+window.hoiThoaiMoi = hoiThoaiMoi;
+
+$("form").onsubmit = (e) => {
+  e.preventDefault();
+  const text = $("o-nhap").value.trim();
+  if (!text) return;
+  $("o-nhap").value = "";
+  guiTin(text);
+};
+$("o-nhap").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("form").requestSubmit(); }
+});
+</script>
+</body>
+</html>

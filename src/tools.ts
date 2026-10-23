@@ -147,7 +147,19 @@ async function available(env: Env, ids: string[] | null): Promise<Record<string,
 }
 
 const card = (r: Record<string, any>) =>
-  compact({ ...Object.fromEntries(PRODUCT_FIELDS.map((f) => [f, r[f]])), size_con_hang: r.size_con_hang, mau_con_hang: r.mau_con_hang });
+  compact({
+    ...Object.fromEntries(PRODUCT_FIELDS.map((f) => [f, r[f]])), size_con_hang: r.size_con_hang, mau_con_hang: r.mau_con_hang,
+    ...(laDoTreEm(r) ? { tre_em: true } : {}),
+  });
+
+/**
+ * Đồ trẻ em: dữ liệu chỉ ghi gioi_tinh nam / nữ, nên nhận ra qua tên (Girls, Boys, Kids...) hoặc danh mục.
+ * Chưa nhận ra thì bot từng gợi ý chân váy bé gái cho người lớn đi làm.
+ */
+const TRE_EM = /\b(kids?|kidswear|girls?|girl's|boys?|boy's|infants?|baby|babies|toddlers?|teens?)\b|trẻ em|bé gái|bé trai/i;
+export const laDoTreEm = (r: Record<string, any>) => TRE_EM.test(`${r.ten_sp ?? ""} ${r.danh_muc ?? ""} ${r.gioi_tinh ?? ""}`);
+/** Khách nhắc tới trẻ con trong yêu cầu tìm thì mới đưa đồ trẻ em vào kết quả. */
+const TIM_CHO_TRE = /\b(kids?|girls?|boys?|baby|teens?)\b|trẻ em|trẻ con|(^|[^\p{L}])bé([^\p{L}]|$)|con gái|con trai|cho con|cháu/iu;
 
 const round3 = (n: number | undefined) => (n === undefined ? undefined : Math.round(n * 1000) / 1000);
 
@@ -170,7 +182,10 @@ async function timSanPham(
       return { tong_so_khop: 0, goi_y: "SQL không ra món nào. Nới điều kiện ít quan trọng nhất rồi gọi lại, và nói với khách đã nới gì." };
     }
   }
-  const rows = await available(env, ids);
+  const tatCa = await available(env, ids);
+  const choTre = TIM_CHO_TRE.test(`${args.sql ?? ""} ${args.theo_mo_ta ?? ""} ${args.theo_anh ?? ""}`);
+  const rows = choTre ? tatCa : tatCa.filter((r) => !laDoTreEm(r));
+  const daBoTreEm = tatCa.length - rows.length;
   if (!rows.length) {
     return { tong_so_khop: 0, het_hang_hoac_ngung_ban: ids?.length ?? 0, goi_y: "Các món khớp đều đã hết hàng hoặc ngừng bán." };
   }
@@ -206,6 +221,7 @@ async function timSanPham(
   const k = Math.min(Math.max(args.so_luong ?? 6, 1), 10);
   return {
     tong_so_khop: sorted.length,
+    da_bo_do_tre_em: daBoTreEm || undefined,
     het_hang_hoac_ngung_ban: ids ? ids.length - sorted.length : undefined,
     xep_hang: fused.size ? `theo kênh ${Object.keys(queries).join(" + ")}` : "theo thứ tự câu SQL",
     diem_cac_kenh: Object.keys(stats).length ? stats : undefined,
@@ -258,10 +274,36 @@ export interface ToolContext {
   onYeuCauHuy: (ma_don: string) => void;
 }
 
-async function soanDonTool(env: Env, args: YeuCauSoan, ctx: ToolContext) {
-  const mon = args?.mon as unknown;
+const VI_DU_SOAN_DON = JSON.stringify({
+  mon: [{ ma_sp: "SP123", size: "M", mau: "đen", so_luong: 1 }], ten: "Nguyễn Văn A", sdt: "0912345678", dia_chi: "12 Lê Lợi, Quận 1, TP HCM",
+});
+
+/**
+ * Model hay gọi soan_don sai theo vài kiểu cố định (đo khi chat thử: mất 2 vòng gọi lại mỗi đơn). Đổi về đúng dạng
+ * thay vì báo lỗi: món viết phẳng (ma_sp, size ở ngoài), tên trường người nhận khác, số lượng dạng chữ.
+ */
+export function chuanHoaSoanDon(args: any): YeuCauSoan {
+  const a = { ...(args ?? {}) };
+  if (!Array.isArray(a.mon) && a.mon && typeof a.mon === "object") a.mon = [a.mon];
+  if (!Array.isArray(a.mon) && a.ma_sp) a.mon = [{ ma_sp: a.ma_sp, size: a.size, mau: a.mau, so_luong: a.so_luong }];
+  if (Array.isArray(a.mon)) {
+    a.mon = a.mon.map((m: any) => ({
+      ...m,
+      ...(m?.size != null ? { size: String(m.size) } : {}),
+      ...(m?.so_luong != null ? { so_luong: Number(m.so_luong) || 1 } : {}),
+    }));
+  }
+  a.ten ??= a.nguoi_nhan ?? a.ho_ten ?? a.ten_nguoi_nhan;
+  a.sdt ??= a.so_dien_thoai ?? a.dien_thoai;
+  a.dia_chi ??= a.dia_chi_giao ?? a.dia_chi_nhan;
+  return a;
+}
+
+async function soanDonTool(env: Env, raw: any, ctx: ToolContext) {
+  const args = chuanHoaSoanDon(raw);
+  const mon = args.mon as unknown;
   if (!Array.isArray(mon) || mon.some((m) => typeof m?.ma_sp !== "string" || typeof m?.size !== "string")) {
-    return { loi: ["mon phải là mảng các món, mỗi món có ma_sp và size dạng chữ (mau, so_luong nếu có)"] };
+    return { loi: [`mon phải là mảng các món, mỗi món có ma_sp và size dạng chữ (mau, so_luong nếu có). Ví dụ gọi đúng: ${VI_DU_SOAN_DON}`] };
   }
   const r = await soanDon(env, ctx.khach, args);
   if (!r.ok) return { loi: r.loi };

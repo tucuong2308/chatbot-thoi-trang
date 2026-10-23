@@ -1,6 +1,7 @@
-import { vnd } from "./dinhdang";
+import { boMarkdown, vnd } from "./dinhdang";
 import { chat, type Msg } from "./llm";
 import { docThongTinShop, systemPrompt } from "./prompt";
+import { ghiChuTraSan, hoiQuyetDinh, keHoach, type DiemQuyetDinh } from "./quyetdinh";
 import { runTool, TOOL_DECLARATIONS } from "./tools";
 import type { ChatTurn, DonNhap, Env, ProductCard, TokenUsage, ToolTrace } from "./types";
 
@@ -44,6 +45,8 @@ export interface BotReply {
   don_nhap?: { nhap: DonNhap; tom_tat: string };
   /** Khách xin hủy đơn này (yeu_cau_huy_don): gửi nút xác nhận hủy. */
   yeu_cau_huy?: string;
+  /** Điểm của lớp quyết định Clef (nếu bật), để đo và phân tích. */
+  quyet_dinh?: DiemQuyetDinh;
 }
 
 /**
@@ -57,7 +60,8 @@ export async function handleUserMessage(
   typing?: () => Promise<void>,
 ): Promise<BotReply> {
   const started = Date.now();
-  const history = [...(await loadHistory(env, userKey)), { role: "user" as const, text: message }];
+  const past = await loadHistory(env, userKey);
+  const history = [...past, { role: "user" as const, text: message }];
   const messages: Msg[] = history.map((t) => (t.role === "user" ? { role: "user", text: t.text } : { role: "assistant", text: t.text, toolCalls: [] }));
   const trace: ToolTrace[] = [];
   const token: TokenUsage[] = [];
@@ -75,16 +79,31 @@ export async function handleUserMessage(
       if (send) await send(msg);
     },
   };
-  const system = systemPrompt(env, await docThongTinShop(env));
+  const [thongTin, quyetDinh] = await Promise.all([docThongTinShop(env), hoiQuyetDinh(env, past, message)]);
+  const system = systemPrompt(env, thongTin);
+  // Mã sản phẩm bot được phép nhắc: đã có trong kết quả công cụ lượt này, hoặc đã được gợi ý ở các lượt trước.
+  const known = new Set(history.filter((t) => t.role === "model").flatMap((t) => codesIn(t.text)));
+
+  // Lớp quyết định: việc chắc chắn thì tra sẵn và gắn kết quả vào tin khách (chỉ trong lượt này, lịch sử giữ tin gốc).
+  const plan = quyetDinh ? keHoach(quyetDinh, message) : { traSan: [], khongCongCu: false };
+  if (plan.traSan.length) {
+    const ketQua = await Promise.all(plan.traSan.map(async (c) => {
+      const result = await runTool(env, c.name, c.args, ctx);
+      for (const code of codesIn(JSON.stringify(result))) known.add(code);
+      trace.push({ cong_cu: c.name, tham_so: c.args, ket_qua: result });
+      return { ...c, result };
+    }));
+    messages[messages.length - 1] = { role: "user", text: message + ghiChuTraSan(ketQua) };
+  }
 
   let model: string | undefined;
   let text = "";
   let nudges = 0;
-  // Mã sản phẩm bot được phép nhắc: đã có trong kết quả công cụ lượt này, hoặc đã được gợi ý ở các lượt trước.
-  const known = new Set(history.filter((t) => t.role === "model").flatMap((t) => codesIn(t.text)));
   for (let round = 0; ; round++) {
     const lastRound = round >= MAX_TOOL_ROUNDS || Date.now() - started > TURN_BUDGET_MS;
-    const res = await chat(env, { system, messages, tools: TOOL_DECLARATIONS, noTools: lastRound, sticky: model });
+    // Lớp quyết định chắc chắn không cần tra: vòng đầu không cho gọi công cụ (bị nhắc lại vì bịa mã thì vòng sau được tra).
+    const noTools = lastRound || (plan.khongCongCu && round === 0);
+    const res = await chat(env, { system, messages, tools: TOOL_DECLARATIONS, noTools, sticky: model });
     model = res.model;
     if (res.usage) token.push(res.usage);
 
@@ -120,9 +139,11 @@ export async function handleUserMessage(
   }
 
   if (!text) text = "Dạ em chưa trả lời được câu này, em chuyển nhân viên hỗ trợ chị ngay nhé.";
+  text = boMarkdown(text);
   await saveHistory(env, userKey, [...history, { role: "model", text: ghiChuLichSu(text, donNhap) }]);
   return {
     text, the_san_pham: await productCards(env, text), interim, model, trace, token, don_nhap: donNhap, yeu_cau_huy: yeuCauHuy,
+    ...(quyetDinh ? { quyet_dinh: quyetDinh } : {}),
   };
 }
 

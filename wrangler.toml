@@ -76,6 +76,9 @@ OPENAI_BASE_URL = "https://api.deepseek.com/v1"
 OPENAI_MODEL = "deepseek-flash"
 # DeepSeek suy nghĩ ở vòng trò chuyện chính: "bat" (mặc định) hoặc "tat" (nhanh hơn nhưng tìm kém kỹ hơn, đo 15/10).
 DEEPSEEK_SUY_NGHI = "bat"
+# Lớp quyết định chạy trước DeepSeek (src/quyetdinh.ts): "clef-flash" để bật, trống là tắt.
+# Gọi Cloudflare Clef qua Workers AI (binding AI bên dưới), gói Free có hạn mức miễn phí mỗi ngày.
+QUYET_DINH = ""
 GEMINI_MODEL = "gemini-3.8-flash"
 GEMINI_MODEL_DU_PHONG = "gemini-3.5-flash-lite"
 EMBED_MODEL = "gemini-embedding-2"
@@ -87,3 +90,6 @@ SHEET_CSV_BANGSIZE = ""
 
 # Bí mật: đặt bằng `npx wrangler secret put <TÊN>` (khi chạy local thì để trong .dev.vars)
 # GEMINI_API_KEY, OPENAI_API_KEY, FB_PAGE_TOKEN, FB_VERIFY_TOKEN, FB_APP_SECRET, ADMIN_KEY
+
+[ai]
+binding = "AI"

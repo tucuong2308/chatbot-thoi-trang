@@ -21,7 +21,7 @@ beforeEach(async () => {
 it("bấm xác nhận tạo đơn, bấm lại báo đã ghi nhận, ghi nhật ký và lịch sử model", async () => {
   const id = await nhapId("fb:1");
   const a = await handleIncoming(env, "fb:1", { payload: `DON:XAC_NHAN:${id}` });
-  expect(a.tin[0]).toMatchObject({ loai: "chu", chu: expect.stringMatching(/đã nhận đơn DH-\d{6}-001.*1-2 ngày/) });
+  expect(a.tin[0]).toMatchObject({ loai: "chu", chu: expect.stringMatching(/đã nhận đơn DH-\d{6}-001/) });
   const b = await handleIncoming(env, "fb:1", { payload: `DON:XAC_NHAN:${id}` });
   expect(chu(b.tin)).toContain("đã được ghi nhận");
   const log = await docHoiThoai(env, "fb:1");

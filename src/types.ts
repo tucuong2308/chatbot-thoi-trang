@@ -9,6 +9,10 @@ export interface Env {
   VIEC_NEN: Queue<ViecNen>;
   /** Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/<key>. Không bắt buộc: chưa bật R2 thì dùng link gốc. */
   ANH?: R2Bucket;
+  /** Workers AI: lớp quyết định Clef chạy trước DeepSeek (src/quyetdinh.ts). */
+  AI?: Ai;
+  /** "clef-flash" / "clef" để bật lớp quyết định; trống là tắt. */
+  QUYET_DINH?: string;
   SHOP_NAME: string;
   GEMINI_MODEL: string;
   GEMINI_MODEL_DU_PHONG?: string;

@@ -2,6 +2,7 @@ import { appendHistory, type BotReply, handleUserMessage } from "./agent";
 import { huyDon, xacNhanDon } from "./donhang/don";
 import { tomTatDon } from "./donhang/kiemtra";
 import { ghiHoiThoai } from "./hoithoai";
+import { docThongTinShop } from "./prompt";
 import type { DonNhap, Env, TinGui } from "./types";
 
 /** Nút "Sửa lại" gửi câu chữ này như khách tự nhắn, để model hỏi khách muốn đổi gì. */
@@ -18,6 +19,12 @@ function nutXacNhan(nhap: DonNhap): TinGui[] {
   ];
 }
 
+/** Câu báo thời gian giao trong tin đã nhận đơn: lấy từ trang ThongTinShop; chưa có thì không tự hứa số ngày. */
+async function cauThoiGianGiao(env: Env): Promise<string> {
+  const giao = (await docThongTinShop(env)).find((t) => /giao|ship|vận chuyển/i.test(t.chu_de));
+  return giao ? ` Thời gian giao: ${giao.noi_dung}` : " Nhân viên shop sẽ báo thời gian giao cho anh/chị.";
+}
+
 /** Khách bấm nút DON:...: tạo / hủy đơn bằng code, không qua model, để đơn chỉ ra đời khi khách thật sự bấm. */
 async function xuLyNut(env: Env, khach: string, payload: string): Promise<{ bam: string; tin: TinGui[] }> {
   const [, lenh, thamSo = ""] = payload.match(/^DON:([A-Z_]+):(.*)$/) ?? [];
@@ -25,7 +32,7 @@ async function xuLyNut(env: Env, khach: string, payload: string): Promise<{ bam:
     const r = await xacNhanDon(env, khach, thamSo);
     const bam = "Bấm: Xác nhận đặt hàng";
     if (r.kq === "da_tao") {
-      return { bam, tin: [{ loai: "chu", chu: `Dạ shop đã nhận đơn ${r.ma_don}, thanh toán khi nhận hàng. Hàng sẽ tới trong khoảng 1-2 ngày ạ. Cảm ơn anh/chị!` }] };
+      return { bam, tin: [{ loai: "chu", chu: `Dạ shop đã nhận đơn ${r.ma_don}, thanh toán khi nhận hàng.${await cauThoiGianGiao(env)} Cảm ơn anh/chị!` }] };
     }
     if (r.kq === "da_co") return { bam, tin: [{ loai: "chu", chu: `Dạ đơn ${r.ma_don} đã được ghi nhận rồi ạ.` }] };
     if (r.kq === "cu") {

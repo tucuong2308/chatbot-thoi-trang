@@ -40,6 +40,12 @@ def gemini(model, method, body, key, retries=5):
                 time.sleep(wait)
                 continue
             raise SystemExit(f"Gemini lỗi {e.code}: {e.read().decode()[:500]}")
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:  # mạng chập chờn / phản hồi quá chậm
+            if attempt < retries - 1:
+                print(f"  Gemini không phản hồi ({e}), thử lại")
+                time.sleep(5)
+                continue
+            raise SystemExit(f"Gemini không phản hồi: {e}")
 
 
 def load_admin_key():
