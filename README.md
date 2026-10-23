@@ -110,7 +110,14 @@ npm run dev
 python scripts/hoi_thu.py "đầm đi biển dưới 400k, không lấy màu đen" "mẫu đầu còn size M không" "mình 52kg cao 158 mặc size gì"
 ```
 
-Mọi câu trong một lần chạy là một cuộc hội thoại. Script in ra từng câu SQL bot đã viết, điểm từng kênh,
+Hoặc nhắn qua lại như khách thật, có thẻ sản phẩm và bấm nút theo số (`/1`, `/2`...), hội thoại tự lưu ở `tests/eval/hoi_thoai/`:
+
+```bash
+python scripts/chat_thu.py                                    # chat liên tục
+python scripts/chat_thu.py --khach kh01 "có váy đi biển không" # từng lượt, thêm --bam 2 để bấm nút số 2
+```
+
+Với `hoi_thu.py`, mọi câu trong một lần chạy là một cuộc hội thoại. Script in ra từng câu SQL bot đã viết, điểm từng kênh,
 các lần xem ảnh và tin nhắn tạm.
 Hoặc gọi thẳng `POST /chat` với `{"user":"test","text":"..."}` và header `x-admin-key`: kết quả có `trace` là các bước tra cứu,
 `tin` là các tin bot sẽ gửi. Bấm nút thì gửi `{"user":"test","payload":"DON:XAC_NHAN:<id>"}`.

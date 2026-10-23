@@ -11,3 +11,6 @@ public/anh/
 
 .superpowers/
 __pycache__/
+
+# Trạng thái nút bấm của scripts/chat_thu.py (hội thoại .md thì giữ)
+tests/eval/hoi_thoai/*.json
