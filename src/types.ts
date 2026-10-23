@@ -3,8 +3,8 @@ export interface Env {
   DB: D1Database;
   /** Ảnh trong thư mục public/ (Workers Static Assets), VD /anh/SP0001.jpg */
   ASSETS: Fetcher;
-  /** Hàng đợi tin nhắn Messenger: xử lý ở consumer để có đủ thời gian (xem ảnh, nhiều vòng tra cứu). */
-  HANG_DOI: Queue<TinNhanMessenger>;
+  /** Hàng đợi tin nhắn Messenger / Telegram: xử lý ở consumer để có đủ thời gian (xem ảnh, nhiều vòng tra cứu). */
+  HANG_DOI: Queue<TinNhanVao>;
   /** Việc chạy nền sau mỗi lần đồng bộ Sheets: tải ảnh về R2, tạo vector cho món mới / vừa sửa. */
   VIEC_NEN: Queue<ViecNen>;
   /** Ảnh sản phẩm tải từ link trong Sheets, phục vụ ở /r2/<key>. Không bắt buộc: chưa bật R2 thì dùng link gốc. */
@@ -35,6 +35,8 @@ export interface Env {
   FB_PAGE_TOKEN: string;
   FB_VERIFY_TOKEN: string;
   FB_APP_SECRET: string;
+  /** Token bot Telegram (lấy từ @BotFather). Không có thì kênh Telegram tắt. */
+  TELEGRAM_BOT_TOKEN?: string;
   ADMIN_KEY: string;
 }
 
@@ -82,6 +84,18 @@ export interface TinNhanMessenger {
   /** Payload của nút khách bấm (postback). */
   payload?: string;
 }
+
+export interface TinNhanTelegram {
+  kenh: "tg";
+  chatId: string;
+  text: string;
+  /** Có khi khách bấm nút (callback_query), đã mở lại thành payload đầy đủ. */
+  payload?: string;
+  /** Id lần bấm nút, để tắt vòng xoay trên nút. */
+  callbackId?: string;
+}
+
+export type TinNhanVao = TinNhanMessenger | TinNhanTelegram;
 
 /** Một dòng trong đơn: một biến thể (mã, size, màu) kèm số lượng và giá lúc soạn. */
 export interface MonDat {

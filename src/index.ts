@@ -2,32 +2,12 @@ import { ENUM_VALUES, importCatalog, MULTI_VALUES, syncCatalog, TRANG_THAI } fro
 import { processJob, serveR2Image, syncStatus } from "./dongbo";
 import { donThayDoiTu } from "./donhang/don";
 import { GeminiError } from "./gemini";
-import { extractMessages, sendButtons, sendProductCards, sendText, sendTyping, verifySignature } from "./messenger";
+import { traLoi } from "./kenh";
+import { extractMessages, kenhMessenger, verifySignature } from "./messenger";
+import { daBamNut, datWebhookTelegram, kenhTelegram, kiemTraTelegram, layTinTelegram } from "./telegram";
 import { handleIncoming } from "./tinnhan";
-import type { Env, TinNhanMessenger, ViecNen } from "./types";
+import type { Env, TinNhanVao, ViecNen } from "./types";
 import { importVectors, type VectorLine } from "./vectors";
-
-async function replyMessenger(env: Env, senderId: string, text: string, payload?: string) {
-  await sendTyping(env, senderId);
-  try {
-    const { tin } = await handleIncoming(env, `fb:${senderId}`, { text, payload }, {
-      send: async (msg) => {
-        await sendText(env, senderId, msg);
-        await sendTyping(env, senderId);
-      },
-      typing: async () => { await sendTyping(env, senderId); },
-    });
-    // Theo thứ tự: lời tư vấn, thẻ sản phẩm (ảnh + giá + size), rồi tóm tắt đơn và nút xác nhận nếu có.
-    for (const t of tin) {
-      if (t.loai === "chu") await sendText(env, senderId, t.chu);
-      else if (t.loai === "the") await sendProductCards(env, senderId, t.the);
-      else await sendButtons(env, senderId, t.chu, t.nut);
-    }
-  } catch (err) {
-    console.error(err);
-    await sendText(env, senderId, "Dạ em đang gặp chút trục trặc, chị đợi em một lát hoặc nhắn lại giúp em nhé.");
-  }
-}
 
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
@@ -50,6 +30,16 @@ export default {
       const messages = extractMessages(JSON.parse(body));
       if (messages.length) await env.HANG_DOI.sendBatch(messages.map((m) => ({ body: m })));
       return new Response("EVENT_RECEIVED");
+    }
+
+    // Tin nhắn mới từ Telegram: như Messenger, trả 200 ngay rồi xử lý ở hàng đợi.
+    if (req.method === "POST" && url.pathname === "/webhook/telegram") {
+      if (!(await kiemTraTelegram(env, req.headers.get("x-telegram-bot-api-secret-token")))) {
+        return new Response("Unauthorized", { status: 401 });
+      }
+      const tin = layTinTelegram(await req.json());
+      if (tin) await env.HANG_DOI.send(tin);
+      return new Response("OK");
     }
 
     // Ảnh tải từ link trong Sheets, lưu trên R2 (ảnh demo trong public/anh do Static Assets phục vụ)
@@ -83,6 +73,8 @@ export default {
           const { tu } = await req.json<{ tu?: number }>();
           return Response.json(await donThayDoiTu(env, Number(tu) || 0));
         }
+        // Nối bot Telegram vào Worker này (chạy một lần sau khi cài TELEGRAM_BOT_TOKEN)
+        if (url.pathname === "/admin/telegram-webhook") return Response.json(await datWebhookTelegram(env));
         // Tiến độ tải ảnh / tạo vector sau khi đồng bộ
         if (url.pathname === "/admin/trang-thai") return Response.json(await syncStatus(env));
         // Nạp vector từ scripts/embed_products.py: mỗi dòng một JSON {"id","kieu","b64"|"values"}
@@ -98,8 +90,8 @@ export default {
     return new Response("Chatbot thời trang đang chạy");
   },
 
-  /** Consumer của hai hàng đợi: tin nhắn Messenger và việc nền sau đồng bộ. Mỗi lần tối đa 15 phút. */
-  async queue(batch: MessageBatch<TinNhanMessenger | ViecNen>, env: Env) {
+  /** Consumer của hai hàng đợi: tin nhắn (Messenger, Telegram) và việc nền sau đồng bộ. Mỗi lần tối đa 15 phút. */
+  async queue(batch: MessageBatch<TinNhanVao | ViecNen>, env: Env) {
     for (const m of batch.messages) {
       const body = m.body;
       if ("loai" in body) {
@@ -113,12 +105,17 @@ export default {
         }
         continue;
       }
-      await replyMessenger(env, body.senderId, body.text, body.payload);
-      m.ack(); // lỗi đã được báo cho khách trong replyMessenger, không gửi lại để khỏi trả lời trùng
+      if ("kenh" in body) {
+        if (body.callbackId) await daBamNut(env, body.callbackId);
+        await traLoi(env, `tg:${body.chatId}`, body, kenhTelegram(env, body.chatId));
+      } else {
+        await traLoi(env, `fb:${body.senderId}`, body, kenhMessenger(env, body.senderId));
+      }
+      m.ack(); // lỗi đã được báo cho khách trong traLoi, không gửi lại để khỏi trả lời trùng
     }
   },
 
   async scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext) {
     ctx.waitUntil(syncCatalog(env));
   },
-} satisfies ExportedHandler<Env, TinNhanMessenger | ViecNen>;
+} satisfies ExportedHandler<Env, TinNhanVao | ViecNen>;

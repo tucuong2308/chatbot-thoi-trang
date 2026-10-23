@@ -4,6 +4,8 @@ Bot phải đang chạy (npm run dev). Mỗi case là một cuộc hội thoại
 - kieu_cham "san_pham": lấy các mã [SP...] bot gợi ý ở câu trả lời cuối (tối đa 3 mã đầu).
     trung_3: ít nhất một mã nằm trong chap_nhan.  chinh_xac: tỷ lệ mã gợi ý nằm trong chap_nhan.
 - kieu_cham "hanh_vi": một model chấm (Gemini, nhiệt độ 0) chỉ thấy hội thoại, hanh_vi_mong_doi và câu trả lời, trả đạt / không đạt.
+    Thêm (không bắt buộc) cong_cu_khong_goi / cong_cu_phai_goi: công cụ bot không được gọi / phải gọi ít nhất một ở lượt cuối,
+    VD câu hỏi kiến thức chung thì không được tim_san_pham. Case chỉ đạt khi cả giám khảo lẫn phần này đều đạt.
 
 Chạy:  python tests/eval/run_eval.py --url http://localhost:8787 --ten baseline [--bo cases_tu_nhien.json]
 Kết quả: tests/eval/ket_qua/<ten>.json và <ten>.md
@@ -80,6 +82,25 @@ def run_case(case, url, key, cho=0):
     return out
 
 
+def kiem_tra_cong_cu(case, da_goi):
+    """Lỗi dùng công cụ ở lượt cuối so với cong_cu_khong_goi / cong_cu_phai_goi của case (rỗng là đạt)."""
+    loi = []
+    cam = sorted({c for c in da_goi if c in case.get("cong_cu_khong_goi", [])})
+    if cam:
+        loi.append("không được gọi " + ", ".join(cam))
+    phai = case.get("cong_cu_phai_goi", [])
+    if phai and not any(c in phai for c in da_goi):
+        loi.append("phải gọi một trong " + ", ".join(phai))
+    return loi
+
+
+def cham_hanh_vi(case, transcript, da_goi, key):
+    v = judge(case, transcript, key)
+    loi = kiem_tra_cong_cu(case, da_goi)
+    return {"dat": bool(v.get("dat")) and not loi, "dat_giam_khao": bool(v.get("dat")), "ly_do_cham": v.get("ly_do", ""),
+            "cong_cu_da_goi": da_goi, "loi_cong_cu": loi}
+
+
 def compact_trace(t):
     """Một lần gọi công cụ ở lượt cuối, rút gọn kết quả để phân tích vì sao bot sai."""
     res = t.get("ket_qua")
@@ -113,8 +134,7 @@ def run_case_once(case, url, key):
         out.update(goi_y=top, trung_3=bool(set(top) & ok),
                    chinh_xac=round(len([c for c in top if c in ok]) / len(top), 2) if top else 0.0)
     else:
-        v = judge(case, "\n".join(transcript), key)
-        out.update(dat=bool(v.get("dat")), ly_do_cham=v.get("ly_do", ""))
+        out.update(cham_hanh_vi(case, "\n".join(transcript), [t.get("cong_cu") for t in last.get("trace", [])], key))
     return out
 
 
@@ -193,15 +213,15 @@ def main():
             if r.get("kieu_cham") == "hanh_vi":
                 c = by_id[r["id"]]
                 transcript = r.get("hoi_thoai_day_du") or [f"Khách: {m}" for m in c["hoi_thoai"]] + [f"Bot: {r['tra_loi']}"]
-                v = judge(c, "\n".join(transcript), key)
-                r.update(dat_giam_khao_cu=r.get("dat"), dat=bool(v.get("dat")), ly_do_cham=v.get("ly_do", ""))
+                r.update(dat_cu=r.get("dat"), **cham_hanh_vi(c, "\n".join(transcript), [t["cong_cu"] for t in r.get("cong_cu", [])], key))
             results.append(r)
     else:
         with ThreadPoolExecutor(args.song_song) as ex:
             results = list(ex.map(lambda c: run_case(c, args.url, key, args.cho), cases))
     for r in results:
         mark = "LỖI" if "loi" in r else ("ĐÚNG" if r.get("trung_3", r.get("dat")) else "SAI")
-        print(f"{mark:4s} {r['id']:28s} {r['giay']:5.1f}s {r.get('goi_y', r.get('ly_do_cham', r.get('loi', '')))!s:.120}")
+        chi_tiet = r.get("goi_y") or "; ".join(r.get("loi_cong_cu", []) + [r.get("ly_do_cham", r.get("loi", ""))])
+        print(f"{mark:4s} {r['id']:28s} {r['giay']:5.1f}s {chi_tiet!s:.140}")
 
     objective_checks(results)
     add_recall(results, cases)

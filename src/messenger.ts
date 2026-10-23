@@ -1,3 +1,4 @@
+import { hoiThem, type KenhGui, muonMua } from "./kenh";
 import type { Env, ProductCard } from "./types";
 
 const GRAPH = "https://graph.facebook.com/v21.0/me/messages";
@@ -60,8 +61,8 @@ export async function sendProductCards(env: Env, to: string, cards: ProductCard[
     subtitle: [c.gia, c.size ? `Size ${c.size}` : "Tạm hết hàng"].join(" · ").slice(0, 80),
     ...(c.anh.startsWith("http") ? { image_url: c.anh } : {}),
     buttons: [
-      { type: "postback", title: "Hỏi thêm món này", payload: `Cho em hỏi thêm về mẫu [${c.ma_sp}]` },
-      { type: "postback", title: "Muốn mua món này", payload: `Em muốn mua mẫu [${c.ma_sp}]` },
+      { type: "postback", title: "Hỏi thêm món này", payload: hoiThem(c.ma_sp) },
+      { type: "postback", title: "Muốn mua món này", payload: muonMua(c.ma_sp) },
     ],
   }));
   const ok = await send(env, to, {
@@ -89,3 +90,10 @@ export const sendTyping = (env: Env, to: string) =>
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ recipient: { id: to }, sender_action: "typing_on" }),
   });
+
+export const kenhMessenger = (env: Env, to: string): KenhGui => ({
+  chu: (text) => sendText(env, to, text),
+  the: (cards) => sendProductCards(env, to, cards),
+  nut: (text, buttons) => sendButtons(env, to, text, buttons),
+  dangSoan: () => sendTyping(env, to),
+});

@@ -12,6 +12,8 @@
 const TRANG_SAN_PHAM = 'SanPham';
 const TRANG_BIEN_THE = 'BienThe';
 const TRANG_BANG_SIZE = 'BangSize';
+/** Chính sách, địa chỉ, giờ làm việc... (cột chu_de, noi_dung) để bot trả lời câu hỏi về shop. Không bắt buộc. */
+const TRANG_THONG_TIN = 'ThongTinShop';
 const TRANG_DANH_MUC = 'DanhMuc';
 const TRANG_NHAT_KY = 'NhatKy';
 const TRANG_DON_HANG = 'DonHang';
@@ -36,11 +38,11 @@ function onOpen() {
     .addToUi();
 }
 
-/** Sửa ô nào ở 3 trang dữ liệu thì đánh dấu để lần tự đồng bộ tới gửi lên; ở SanPham thì tự điền mã cho món mới. */
+/** Sửa ô nào ở các trang dữ liệu thì đánh dấu để lần tự đồng bộ tới gửi lên; ở SanPham thì tự điền mã cho món mới. */
 function onEdit(e) {
   const sh = e.range.getSheet();
   const ten = sh.getName();
-  if ([TRANG_SAN_PHAM, TRANG_BIEN_THE, TRANG_BANG_SIZE].indexOf(ten) < 0) return;
+  if ([TRANG_SAN_PHAM, TRANG_BIEN_THE, TRANG_BANG_SIZE, TRANG_THONG_TIN].indexOf(ten) < 0) return;
   PropertiesService.getDocumentProperties().setProperty('CO_THAY_DOI', '1');
   if (ten === TRANG_SAN_PHAM) tuSinhMa_(sh, e.range);
 }
@@ -58,7 +60,13 @@ function caiDat() {
   if (key.getSelectedButton() !== ui.Button.OK) return;
   const email = ui.prompt('Email nhận báo đơn mới', 'Để trống thì giữ: ' + emailThongBao_(), ui.ButtonSet.OK_CANCEL);
   if (email.getSelectedButton() !== ui.Button.OK) return;
-  if (url.getResponseText().trim()) props.setProperty('WORKER_URL', url.getResponseText().trim().replace(/\/$/, ''));
+  let diaChi = url.getResponseText().trim().replace(/\/+$/, '');
+  if (diaChi && !/^https?:\/\//i.test(diaChi)) diaChi = 'https://' + diaChi;
+  if (diaChi && !/^https?:\/\/[^\/]+\.[^\/]+$/i.test(diaChi)) {
+    ui.alert('Địa chỉ "' + diaChi + '" chưa đủ. Cần dán nguyên địa chỉ, VD https://chatbot-thoi-trang.ten.workers.dev');
+    return;
+  }
+  if (diaChi) props.setProperty('WORKER_URL', diaChi);
   if (key.getResponseText().trim()) props.setProperty('ADMIN_KEY', key.getResponseText().trim());
   if (email.getResponseText().trim()) props.setProperty('EMAIL_THONG_BAO', email.getResponseText().trim());
   const kq = goi_('/admin/trang-thai', {});
@@ -131,6 +139,8 @@ function dongBo_(thuLaiLoi) {
       bang_size: docTrang_(TRANG_BANG_SIZE),
       thu_lai_loi: thuLaiLoi,
     };
+    // Chưa có trang ThongTinShop thì không gửi, bot giữ nguyên thông tin cũ.
+    if (SpreadsheetApp.getActive().getSheetByName(TRANG_THONG_TIN)) duLieu.thong_tin_shop = docTrang_(TRANG_THONG_TIN);
     const kq = goi_('/admin/import', duLieu);
     toLoi_(kq.o_loi || []);
     ghiNhatKy_(kq);

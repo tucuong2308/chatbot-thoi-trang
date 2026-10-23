@@ -1,6 +1,6 @@
 import { vnd } from "./dinhdang";
 import { chat, type Msg } from "./llm";
-import { systemPrompt } from "./prompt";
+import { docThongTinShop, systemPrompt } from "./prompt";
 import { runTool, TOOL_DECLARATIONS } from "./tools";
 import type { ChatTurn, DonNhap, Env, ProductCard, TokenUsage, ToolTrace } from "./types";
 
@@ -75,7 +75,7 @@ export async function handleUserMessage(
       if (send) await send(msg);
     },
   };
-  const system = systemPrompt(env);
+  const system = systemPrompt(env, await docThongTinShop(env));
 
   let model: string | undefined;
   let text = "";

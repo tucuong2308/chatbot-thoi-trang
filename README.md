@@ -1,6 +1,6 @@
 # Chatbot thời trang (bản demo)
 
-Trợ lý AI tư vấn quần áo trên Facebook Messenger. Bot hiểu câu như "váy trễ vai đi biển dưới 500k", tìm đúng món còn hàng trong kho của shop và gửi ảnh kèm lời tư vấn.
+Trợ lý AI tư vấn quần áo trên Facebook Messenger và Telegram. Bot hiểu câu như "váy trễ vai đi biển dưới 500k", tìm đúng món còn hàng trong kho của shop và gửi ảnh kèm lời tư vấn.
 
 ## Kiến trúc
 
@@ -128,6 +128,20 @@ npm run deploy
 Trong Meta for Developers > Messenger > Webhooks: URL `https://<worker>.workers.dev/webhook/messenger`, verify token = `FB_VERIFY_TOKEN`, đăng ký sự kiện `messages` và `messaging_postbacks` (nút bấm).
 Trước khi deploy bản có đặt hàng: `npx wrangler d1 migrations apply chatbot-thoi-trang --remote` (bảng `don_hang`).
 
+Messenger chỉ trả lời người có vai trò trong app cho tới khi Meta duyệt quyền `pages_messaging`.
+
+## Nối Telegram
+
+Telegram không cần xét duyệt: ai có link `t.me/<ten_bot>` cũng chat được. Dùng chung kho, đơn hàng và Google Sheets với Messenger (khách Telegram có mã `tg:<chat id>`).
+
+1. Nhắn @BotFather trên Telegram: `/newbot`, đặt tên, nhận token.
+2. `npx wrangler secret put TELEGRAM_BOT_TOKEN` (dán token khi được hỏi).
+3. Nối webhook (một lần, làm lại khi đổi token hoặc địa chỉ Worker):
+   `curl -X POST -H "x-admin-key: <ADMIN_KEY>" https://<worker>.workers.dev/admin/telegram-webhook`
+   Kết quả đúng: `{"ok":true,"result":true,...}`.
+
+Thẻ sản phẩm gửi thành ảnh kèm tên, giá, size và hai nút; tóm tắt đơn có nút Xác nhận đặt hàng / Sửa lại như Messenger. Webhook kiểm tra mã bí mật suy ra từ token, chỉ trả lời chat riêng (bỏ qua nhóm).
+
 ## Việc còn lại
 
 - [x] Nhận đặt hàng trên Messenger, đơn về trang DonHang của Google Sheets
@@ -139,6 +153,15 @@ Trước khi deploy bản có đặt hàng: `npx wrangler d1 migrations apply ch
 - [ ] Nối Zalo OA
 
 ## Đo chất lượng
+
+Bộ `tests/eval/cases_tu_van.json` (38 hội thoại) đo phần tư vấn bán hàng thay vì tìm hàng: chào hỏi, kiến thức thời trang
+(phối đồ, chất liệu, bảo quản: phải trả lời ngay, không tra cứu), chính sách (không bịa đổi trả, địa chỉ, khuyến mãi),
+hỏi rõ nhu cầu, gỡ băn khoăn (chê đắt, sợ mua online, phân vân), gợi ý phối kèm, chốt đơn, khiếu nại, ngoài phạm vi, size,
+nhớ ngữ cảnh. Case có `cong_cu_khong_goi` / `cong_cu_phai_goi` còn được kiểm tra công cụ bot đã gọi ở lượt cuối.
+`python tests/eval/run_eval.py --url http://localhost:8787 --ten tu-van --bo cases_tu_van.json`
+
+Thông tin shop (đổi trả, địa chỉ, giờ làm việc...) ghi ở trang `ThongTinShop` của Google Sheets (cột `chu_de`, `noi_dung`);
+bot đưa nguyên trang này vào prompt. Ô nội dung để trống thì bot nói chưa có thông tin.
 
 `tests/eval/cases.json` gồm 50 câu hỏi do một agent riêng viết: agent đó không được xem code, lời nhắc hay thuộc tính
 do Gemini gắn, chỉ có ảnh, nhãn gốc, giá và tồn kho, và tự nhìn ảnh để quyết định món nào đúng. Coi file này là cố định:

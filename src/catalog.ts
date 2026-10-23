@@ -56,6 +56,8 @@ export interface ImportResult {
   san_pham: number;
   bien_the: number;
   bang_size: number;
+  /** Số dòng ThongTinShop đã nạp; không có khi Sheets không gửi trang này (giữ nguyên thông tin cũ). */
+  thong_tin_shop?: number;
   canh_bao: string[];
   o_loi: CellIssue[];
   /** Số món được đưa vào hàng đợi để tải ảnh / tạo vector. */
@@ -69,7 +71,7 @@ const rowsOf = (t: Table): Row[] =>
 
 /** Ghi đè bản sao trong D1 từ 3 bảng (cùng cột như file mẫu data/bo-cot-thuoc-tinh-thoi-trang.xlsx). */
 export async function importCatalog(
-  env: Env, input: { san_pham: Table; bien_the?: Table; bang_size?: Table; thu_lai_loi?: boolean },
+  env: Env, input: { san_pham: Table; bien_the?: Table; bang_size?: Table; thong_tin_shop?: Table; thu_lai_loi?: boolean },
 ): Promise<ImportResult> {
   const issues: CellIssue[] = [];
   const seen = new Set<string>();
@@ -120,6 +122,11 @@ export async function importCatalog(
     .filter((r) => clean(r.size))
     .map((r) => Object.fromEntries(SIZE_COLS.map((c) => [c, clean(r[c])])));
 
+  const thongTin = input.thong_tin_shop === undefined ? null : rowsOf(input.thong_tin_shop)
+    .map((r) => ({ chu_de: clean(r.chu_de), noi_dung: clean(r.noi_dung) }))
+    .filter((r) => r.chu_de && r.noi_dung)
+    .map((r, i) => ({ stt: i + 1, ...r }));
+
   // Một batch D1 là một transaction: lỗi giữa chừng thì dữ liệu cũ vẫn còn nguyên.
   const stmts: D1PreparedStatement[] = ["san_pham", "san_pham_dip", "san_pham_chi_tiet", "bien_the", "bang_size"]
     .map((t) => env.DB.prepare(`DELETE FROM ${t}`));
@@ -129,6 +136,7 @@ export async function importCatalog(
     ...insertJson(env, "san_pham_chi_tiet", ["ma_sp", "chi_tiet"], details),
     ...insertJson(env, "bien_the", VARIANT_COLS, variants),
     ...insertJson(env, "bang_size", SIZE_COLS, sizes),
+    ...(thongTin ? [env.DB.prepare("DELETE FROM thong_tin_shop"), ...insertJson(env, "thong_tin_shop", ["stt", "chu_de", "noi_dung"], thongTin)] : []),
     env.DB.prepare("INSERT OR REPLACE INTO meta (k, v) VALUES ('cap_nhat_luc', ?)").bind(new Date().toISOString()),
   );
   await env.DB.batch(stmts);
@@ -136,6 +144,7 @@ export async function importCatalog(
 
   return {
     san_pham: products.length, bien_the: variants.length, bang_size: sizes.length,
+    ...(thongTin ? { thong_tin_shop: thongTin.length } : {}),
     canh_bao: issues.slice(0, 100).map((i) => `${i.ma}.${i.cot}: ${i.loi}`), o_loi: issues.slice(0, 500), dang_xu_ly,
   };
 }
