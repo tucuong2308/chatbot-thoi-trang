@@ -42,14 +42,23 @@ Sheets ──(Bot > Đồng bộ ngay, hoặc 5 phút/lần nếu có sửa)─�
 Khách đặt hàng trên Messenger (bấm "Xác nhận đặt hàng" trên tóm tắt đơn) thì đơn được lưu ngay trong bot, không cần duyệt.
 Cứ 5 phút (cùng lịch tự đồng bộ), hoặc khi bấm **Bot > Lấy đơn mới ngay**, script kéo đơn về trang `DonHang`:
 
-- Mỗi đơn một dòng, đơn mới nhất ở trên. Cột `hoi_thoai` là đoạn chat trước lúc đặt (tối đa 40 tin).
-- Cột `trang_thai` là của nhân viên (VD ghi "Đang giao", "Hoàn thành"): bot chỉ ghi "Mới" lúc thêm dòng, không đọc
+- Mỗi đơn một dòng, đơn mới nhất ở trên. Cột "Hội thoại trước khi đặt" là đoạn chat trước lúc đặt (tối đa 40 tin),
+  bấm vào ô để đọc hết. Script đọc trang này theo vị trí cột, nên đừng chèn hay đổi thứ tự cột.
+- Cột "Trạng thái" là của nhân viên (chọn trong danh sách, VD "Đang giao", "Hoàn thành", mỗi trạng thái một màu):
+  bot chỉ ghi "Mới" lúc thêm dòng, không đọc
   và không ghi đè cột này. Khách hỏi đơn tới đâu thì bot luôn trả lời khoảng 1-2 ngày.
-- **Dòng đỏ** là đơn khách đã hủy (cột `khach_huy` là lúc hủy). Nếu hàng đã gửi đi, nhân viên liên hệ khách.
+- **Dòng đỏ** là đơn khách đã hủy (cột "Khách hủy lúc"). Nếu hàng đã gửi đi, nhân viên liên hệ khách.
 - Mỗi đơn mới gửi một email tới Gmail đang cài script (đổi trong **Bot > Cài đặt kết nối**).
 - Đơn không trừ tồn kho: nhân viên tự sửa cột `ton_kho` ở trang `BienThe`.
 
 Lần đầu sau khi dán bản script mới, Google hỏi thêm quyền gửi email và xem địa chỉ email của bạn.
+
+## Trình bày
+
+Lần đầu mở bảng tính sau khi dán `Bot.gs`, script tự trình bày lại các trang: tiêu đề màu xanh đậm, dòng giải thích
+xám nhạt, dòng xen màu, giá có dấu chấm và chữ ₫, tồn kho 0 tô đỏ và còn 1-2 tô cam, món hết hàng / ngừng bán tô màu.
+Trang DonHang, NhatKy, DanhMuc tự giữ kiểu mỗi khi bot ghi thêm dòng. Ô bot tô đỏ vì lỗi không bị xóa.
+Muốn trình bày lại lần nữa (VD lỡ tay đổi màu): tăng `PHIEN_BAN_TRINH_BAY` trong `Bot.gs` rồi mở lại bảng tính.
 
 ## Ghi chú kỹ thuật
 

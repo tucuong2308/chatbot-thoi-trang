@@ -69,5 +69,36 @@ for ri, (chu_de, noi_dung) in enumerate(THONG_TIN, 3):
     tt.cell(row=ri, column=2, value=noi_dung or None).alignment = Alignment(wrap_text=True)
 tt.freeze_panes = "A3"
 
+# Trình bày giống hàm lamDepTrang_ trong apps-script/Bot.gs (script cũng tự làm lại lần đầu mở bảng tính).
+RONG = {"ma_sp": 11, "ten_sp": 37, "anh_chinh_url": 23, "anh_phu_url": 20, "gia_ban": 14, "gia_goc": 14, "dip": 21,
+        "chi_tiet": 21, "mo_ta_tu_do": 40, "trang_thai": 13, "gan_boi": 10, "ma_bien_the": 23, "size": 10,
+        "ton_kho": 11, "gia_rieng": 14, "anh_url": 23}
+TIEN = {"gia_ban", "gia_goc", "gia_rieng"}
+GIUA = {"ma_sp", "size", "ton_kho", "trang_thai", "gan_boi"}
+for ten in ["SanPham", "BienThe", "BangSize", "ThongTinShop"]:
+    ws = wb[ten]
+    ws.sheet_properties.tabColor = "3C78D8"
+    ws.row_dimensions[1].height = 26
+    for c in ws[1]:
+        if not c.value:
+            continue
+        c.fill, c.font = PatternFill("solid", fgColor="1F3A5F"), Font(bold=True, color="FFFFFF", size=10)
+        c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        g = ws.cell(row=2, column=c.column)
+        g.fill = PatternFill("solid", fgColor="EEF3F8")
+        g.font, g.alignment = Font(italic=True, color="5F6B7A", size=9), Alignment(vertical="top", wrap_text=True)
+        if ten in ("SanPham", "BienThe") and c.value in RONG:
+            ws.column_dimensions[c.column_letter].width = RONG[c.value]
+        if c.value in TIEN or c.value in GIUA or ten == "BangSize":
+            for (o,) in ws.iter_rows(min_row=3, max_row=ws.max_row, min_col=c.column, max_col=c.column):
+                if c.value in TIEN:
+                    o.number_format = '#,##0" ₫"'
+                else:
+                    o.alignment = Alignment(horizontal="center")
+wb["SanPham"].freeze_panes = "C3"
+for ten in ["HuongDan", "DanhMuc"]:
+    if ten in wb.sheetnames:
+        wb[ten].sheet_properties.tabColor = "999999"
+
 wb.save(OUT)
 print(f"{OUT}: {n_sp} sản phẩm, {n_bt} biến thể, {n_bs} dòng bảng size, {len(THONG_TIN)} chủ đề thông tin shop")

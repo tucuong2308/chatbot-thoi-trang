@@ -36,6 +36,7 @@ function onOpen() {
     .addSeparator()
     .addItem('Cài đặt kết nối', 'caiDat')
     .addToUi();
+  try { tuTrinhBay_(); } catch (e) { console.warn('Trình bày bảng tính: ' + e.message); }
 }
 
 /** Sửa ô nào ở các trang dữ liệu thì đánh dấu để lần tự đồng bộ tới gửi lên; ở SanPham thì tự điền mã cho món mới. */
@@ -198,9 +199,7 @@ function keoDonHang_() {
     let sh = ss.getSheetByName(TRANG_DON_HANG);
     if (!sh) {
       sh = ss.insertSheet(TRANG_DON_HANG);
-      sh.getRange(1, 1, 1, COT_DON.length).setValues([COT_DON]);
-      sh.setFrozenRows(1);
-      sh.getRange('1:1').setFontWeight('bold');
+      sh.getRange(1, 1, 1, COT_DON.length).setValues([COT_DON.map(function (c) { return TEN_COT_DON[c]; })]);
     }
     const cotHuy = COT_DON.indexOf('khach_huy') + 1;
     const dongCua = function () {
@@ -221,16 +220,17 @@ function keoDonHang_() {
       COT_CHU_DON.forEach(function (c) { sh.getRange(2, COT_DON.indexOf(c) + 1, moi.length, 1).setNumberFormat('@'); });
       const vung = sh.getRange(2, 1, moi.length, COT_DON.length);
       vung.setValues(moi.slice().reverse().map(function (d) { return COT_DON.map(function (c) { return d[c]; }); }));
-      vung.setFontWeight('normal').setBackground(null); // dòng chèn dưới tiêu đề kế thừa chữ đậm
-      sh.getRange(2, COT_DON.indexOf('hoi_thoai') + 1, moi.length, 1).setWrap(true);
     }
-    // Đơn đã có (kể cả vừa thêm) mà khách hủy: ghi lúc hủy, tô đỏ dòng.
+    // Đơn đã có (kể cả vừa thêm) mà khách hủy: ghi lúc hủy (cả dòng tự đỏ nhạt nhờ định dạng có điều kiện).
     const dong = dongCua();
+    let coHuy = false;
     kq.don.forEach(function (d) {
       if (!d.khach_huy || !dong[d.ma_don]) return;
       sh.getRange(dong[d.ma_don], cotHuy).setNumberFormat('@').setValue(d.khach_huy);
-      sh.getRange(dong[d.ma_don], 1, 1, COT_DON.length).setBackground(MAU_LOI);
+      coHuy = true;
     });
+    // Dòng chèn dưới tiêu đề kế thừa kiểu của tiêu đề, nên trình bày lại cả trang.
+    if (moi.length || coHuy || sh.getLastRow() < 2) lamDepTrang_(sh);
     docProps.setProperty('CON_TRO_DON', String(kq.con_tro));
     moi.forEach(guiEmailDon_);
     return moi.length;
@@ -305,14 +305,13 @@ function ghiNhatKy_(kq) {
   if (!sh) {
     sh = ss.insertSheet(TRANG_NHAT_KY);
     sh.appendRow(['Thời gian', 'Số món', 'Biến thể', 'Bảng size', 'Ô lỗi', 'Đang tải ảnh / tạo vector', 'Chi tiết']);
-    sh.setFrozenRows(1);
-    sh.getRange('1:1').setFontWeight('bold');
   }
   const chiTiet = kq.loi ? 'LỖI: ' + kq.loi : (kq.canh_bao || []).slice(0, 30).join('\n');
   sh.insertRowAfter(1);
   sh.getRange(2, 1, 1, 7).setValues([[new Date(), kq.san_pham || '', kq.bien_the || '', kq.bang_size || '',
     kq.o_loi ? kq.o_loi.length : '', kq.dang_xu_ly === undefined ? '' : kq.dang_xu_ly, chiTiet]]);
   if (sh.getLastRow() > 501) sh.deleteRows(502, sh.getLastRow() - 501); // giữ 500 lần gần nhất
+  lamDepTrang_(sh);
 }
 
 function xemTienDo() {
@@ -341,7 +340,7 @@ function capNhatDanhMuc() {
   }));
   dm.clearContents();
   dm.getRange(1, 1, bang.length, ten.length).setValues(bang);
-  dm.getRange('1:1').setFontWeight('bold');
+  lamDepTrang_(dm);
 
   const vungCua = function (t) {
     const c = ten.indexOf(t) + 1;
@@ -411,4 +410,155 @@ function tatTuDongBo(imLang) {
     .filter(function (t) { return t.getHandlerFunction() === 'tuDongBo'; })
     .forEach(function (t) { ScriptApp.deleteTrigger(t); });
   if (imLang !== true) SpreadsheetApp.getActive().toast('Đã tắt tự đồng bộ.', 'Bot', 5);
+}
+
+// ---------------- Trình bày ----------------
+
+/** Tăng số này khi đổi TRINH_BAY: lần mở bảng tính kế tiếp tự trình bày lại mọi trang. */
+const PHIEN_BAN_TRINH_BAY = '1';
+const MAU_TIEU_DE = '#1f3a5f';
+const MAU_GIAI_THICH = '#eef3f8';
+const MAU_SOC = '#f5f7fa';
+/** Tên cột trang DonHang cho nhân viên đọc. Script đọc trang này theo vị trí cột (thứ tự COT_DON), không theo tên. */
+const TEN_COT_DON = {
+  ma_don: 'Mã đơn', thoi_gian: 'Thời gian đặt', ten: 'Khách', sdt: 'Số điện thoại', dia_chi: 'Địa chỉ',
+  cac_mon: 'Các món', tien_hang: 'Tiền hàng', ghi_chu: 'Ghi chú', trang_thai: 'Trạng thái',
+  khach_huy: 'Khách hủy lúc', hoi_thoai: 'Hội thoại trước khi đặt',
+};
+/** Gợi ý trong ô Trạng thái của DonHang; nhân viên vẫn gõ được chữ khác. */
+const TRANG_THAI_DON = ['Mới', 'Đã gọi xác nhận', 'Đang giao', 'Hoàn thành', 'Khách hủy', 'Shop hủy'];
+
+/**
+ * Cách trình bày từng trang. dau: số dòng tiêu đề (dòng 1 tên cột, dòng 2 giải thích). cot: {tên cột: [độ rộng px, kiểu]},
+ * kiểu gồm: tien (số tiền), giua (căn giữa), dam (chữ đậm), xuong (xuống dòng), ngay (ngày giờ). Cột không nêu thì
+ * rộng theo `rong`, chữ dài được cắt gọn trong ô (bấm vào ô để đọc hết).
+ */
+const TRINH_BAY = {
+  SanPham: { dau: 2, coDinh: 2, tab: '#3c78d8', rong: 110, cot: {
+    ma_sp: [80, 'giua dam'], ten_sp: [260], anh_chinh_url: [160], anh_phu_url: [140], gia_ban: [100, 'tien'],
+    gia_goc: [100, 'tien'], dip: [150], chi_tiet: [150], mo_ta_tu_do: [280], trang_thai: [95, 'giua'], gan_boi: [70, 'giua'] } },
+  BienThe: { dau: 2, coDinh: 1, tab: '#3c78d8', rong: 100, cot: {
+    ma_bien_the: [160, 'dam'], ma_sp: [90, 'giua'], size: [70, 'giua'], ton_kho: [75, 'giua'], gia_rieng: [100, 'tien'],
+    anh_url: [160] } },
+  BangSize: { dau: 2, coDinh: 1, tab: '#3c78d8', rong: 110, canGiua: true, cot: { size: [80, 'dam'] } },
+  ThongTinShop: { dau: 2, coDinh: 1, tab: '#3c78d8', rong: 180, cot: { chu_de: [190, 'dam'], noi_dung: [640, 'xuong'] } },
+  DonHang: { dau: 1, coDinh: 1, tab: '#6aa84f', rong: 120, xoaNen: true, cot: {
+    ma_don: [120, 'dam'], thoi_gian: [125, 'giua'], ten: [150], sdt: [115, 'giua'], dia_chi: [240, 'xuong'],
+    cac_mon: [260, 'xuong'], tien_hang: [105, 'tien'], ghi_chu: [170, 'xuong'], trang_thai: [135, 'giua dam'],
+    khach_huy: [125, 'giua'], hoi_thoai: [300] } },
+  NhatKy: { dau: 1, tab: '#999999', rong: 95, canGiua: true, xoaNen: true, cot: {
+    'Thời gian': [140, 'ngay'], 'Chi tiết': [520, 'xuong'] } },
+  DanhMuc: { dau: 1, tab: '#999999', rong: 130, xoaNen: true },
+};
+
+/** Gọi từ onOpen: trình bày lại mọi trang một lần cho mỗi phiên bản TRINH_BAY. Không đụng dữ liệu và ô bot tô đỏ. */
+function tuTrinhBay_() {
+  const props = PropertiesService.getDocumentProperties();
+  if (props.getProperty('PHIEN_BAN_TRINH_BAY') === PHIEN_BAN_TRINH_BAY) return;
+  const ss = SpreadsheetApp.getActive();
+  Object.keys(TRINH_BAY).forEach(function (ten) {
+    const sh = ss.getSheetByName(ten);
+    if (sh) lamDepTrang_(sh);
+  });
+  props.setProperty('PHIEN_BAN_TRINH_BAY', PHIEN_BAN_TRINH_BAY);
+}
+
+function lamDepTrang_(sh) {
+  const tb = TRINH_BAY[sh.getName()];
+  if (!tb || sh.getLastColumn() < 1) return;
+  const laDon = sh.getName() === TRANG_DON_HANG;
+  if (laDon) sh.getRange(1, 1, 1, COT_DON.length).setValues([COT_DON.map(function (c) { return TEN_COT_DON[c]; })]);
+  const soCot = laDon ? COT_DON.length : sh.getLastColumn();
+  const header = laDon ? COT_DON
+    : sh.getRange(1, 1, 1, soCot).getDisplayValues()[0].map(function (h) { return String(h).trim(); });
+  const dau = tb.dau;
+  const soDong = Math.max(sh.getMaxRows() - dau, 0);
+
+  sh.setTabColor(tb.tab);
+  sh.setFrozenRows(dau);
+  sh.setFrozenColumns(tb.coDinh || 0);
+  sh.getRange(1, 1, dau + soDong, soCot).setFontFamily('Arial').setFontSize(10).setVerticalAlignment('middle');
+  sh.getRange(1, 1, 1, soCot).setBackground(MAU_TIEU_DE).setFontColor('#ffffff').setFontWeight('bold')
+    .setFontStyle('normal').setHorizontalAlignment('center').setWrap(true);
+  sh.setRowHeight(1, 34);
+  if (dau === 2) {
+    sh.getRange(2, 1, 1, soCot).setBackground(MAU_GIAI_THICH).setFontColor('#5f6b7a').setFontWeight('normal')
+      .setFontStyle('italic').setFontSize(9).setHorizontalAlignment('left').setVerticalAlignment('top').setWrap(true);
+  }
+
+  sh.getBandings().forEach(function (b) { b.remove(); });
+  if (soDong) {
+    const duLieu = sh.getRange(dau + 1, 1, soDong, soCot);
+    duLieu.setFontColor('#202124').setFontWeight('normal').setFontStyle('normal')
+      .setHorizontalAlignment(tb.canGiua ? 'center' : 'left').setWrapStrategy(SpreadsheetApp.WrapStrategy.CLIP);
+    if (tb.xoaNen) duLieu.setBackground(null);
+    duLieu.applyRowBanding(SpreadsheetApp.BandingTheme.LIGHT_GREY, false, false)
+      .setFirstRowColor('#ffffff').setSecondRowColor(MAU_SOC);
+  }
+  header.forEach(function (h, i) {
+    const k = (tb.cot || {})[h];
+    sh.setColumnWidth(i + 1, k ? k[0] : tb.rong);
+    if (!k || !k[1] || !soDong) return;
+    const o = sh.getRange(dau + 1, i + 1, soDong, 1);
+    const kieu = k[1].split(' ');
+    if (kieu.indexOf('tien') >= 0) o.setNumberFormat('#,##0" ₫"').setHorizontalAlignment('right');
+    if (kieu.indexOf('ngay') >= 0) o.setNumberFormat('dd/MM/yyyy HH:mm').setHorizontalAlignment('center');
+    if (kieu.indexOf('giua') >= 0) o.setHorizontalAlignment('center');
+    if (kieu.indexOf('dam') >= 0) o.setFontWeight('bold');
+    if (kieu.indexOf('xuong') >= 0) o.setWrap(true).setHorizontalAlignment('left');
+  });
+
+  if (laDon) toMauDonHang_(sh, soDong);
+  if (sh.getName() === TRANG_BIEN_THE) toMauTheoCot_(sh, header, 'ton_kho', dau, soDong, [
+    ['=AND(ISNUMBER(#3),#3<=0)', '#fce8e6', '#c5221f'],
+    ['=AND(ISNUMBER(#3),#3<=2)', '#fef7e0', '#b06000'],
+  ]);
+  if (sh.getName() === TRANG_SAN_PHAM) toMauTheoCot_(sh, header, 'trang_thai', dau, soDong, [
+    ['=#3="hết hàng"', '#fef7e0', '#b06000'],
+    ['=#3="ngừng bán"', '#f1f3f4', '#80868b'],
+  ]);
+  if (laDon && soDong) sh.autoResizeRows(2, soDong);
+}
+
+/** DonHang (trang của bot): màu theo trạng thái, cả dòng đỏ nhạt khi khách đã hủy, ô Trạng thái có danh sách chọn. */
+function toMauDonHang_(sh, soDong) {
+  if (!soDong) return;
+  const chu = function (c) { return String.fromCharCode(65 + COT_DON.indexOf(c)); };
+  const tt = chu('trang_thai');
+  const oTT = sh.getRange(2, COT_DON.indexOf('trang_thai') + 1, soDong, 1);
+  const quyTac = function (congThuc, vung, nen, mauChu) {
+    return SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied(congThuc).setRanges([vung])
+      .setBackground(nen).setFontColor(mauChu).build();
+  };
+  sh.setConditionalFormatRules([
+    quyTac('=$' + tt + '2="Mới"', oTT, '#e8f0fe', '#1967d2'),
+    quyTac('=$' + tt + '2="Đã gọi xác nhận"', oTT, '#f3e8fd', '#8430ce'),
+    quyTac('=$' + tt + '2="Đang giao"', oTT, '#fef7e0', '#b06000'),
+    quyTac('=$' + tt + '2="Hoàn thành"', oTT, '#e6f4ea', '#137333'),
+    quyTac('=ISNUMBER(SEARCH("hủy",$' + tt + '2))', oTT, '#fce8e6', '#c5221f'),
+    quyTac('=$' + chu('khach_huy') + '2<>""', sh.getRange(2, 1, soDong, COT_DON.length), MAU_LOI, '#a50e0e'),
+  ]);
+  oTT.setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(TRANG_THAI_DON, true)
+    .setAllowInvalid(true).build());
+}
+
+/**
+ * Tô màu một cột theo giá trị (VD tồn kho sắp hết). quyTac: [[công thức, màu nền, màu chữ]], '#' là chữ cái của cột,
+ * 3 là dòng dữ liệu đầu. Chỉ thay quy tắc do script này đặt, giữ quy tắc chủ shop tự thêm.
+ */
+function toMauTheoCot_(sh, header, tenCot, dau, soDong, quyTac) {
+  const c = header.indexOf(tenCot);
+  if (c < 0 || !soDong) return;
+  const chu = String.fromCharCode(65 + c);
+  const congThuc = quyTac.map(function (q) { return q[0].replace(/#/g, '$' + chu); });
+  const cu = sh.getConditionalFormatRules().filter(function (r) {
+    const b = r.getBooleanCondition();
+    return !(b && b.getCriteriaType() === SpreadsheetApp.BooleanCriteria.CUSTOM_FORMULA
+      && congThuc.indexOf(b.getCriteriaValues()[0]) >= 0);
+  });
+  const vung = sh.getRange(dau + 1, c + 1, soDong, 1);
+  sh.setConditionalFormatRules(quyTac.map(function (q, i) {
+    return SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied(congThuc[i]).setRanges([vung])
+      .setBackground(q[1]).setFontColor(q[2]).build();
+  }).concat(cu));
 }
