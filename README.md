@@ -8,6 +8,8 @@ The shop owner manages everything from **Google Sheets**. Fully serverless, runn
 **Portfolio page:** https://tucuong2308.github.io/chatbot-thoi-trang/ · **One-page PDF:** [portfolio.pdf](https://tucuong2308.github.io/chatbot-thoi-trang/portfolio.pdf)
 · **Vietnamese docs & full setup guide:** [README.vi.md](README.vi.md)
 
+**Demo video:** [English](https://tucuong2308.github.io/chatbot-thoi-trang/fashion-chatbot-intro-en.mp4) · [Tiếng Việt](https://tucuong2308.github.io/chatbot-thoi-trang/chatbot-thoi-trang-gioi-thieu.mp4)
+
 | Result (40-question independent eval) | |
 | --- | --- |
 | Correct product in top 3 | **34/34** |
