@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="AI fashion assistant for Messenger and Telegram: serverless agent on Cloudflare Workers with Google Sheets back office.">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Fashion Chatbot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: short header, then one swimlane diagram (one lane per use case, steps left to right, tech tags under each step) */
+:root{
+  --bg:#f3f4f7; --surface:#ffffff; --ink:#151a2b; --muted:#5b6175; --line:#dcdfe8; --accent:#d6336c;
+  --t-ch:#1d6fd6; --t-ch-bg:#e3eefc;   /* channels */
+  --t-cf:#c25a0c; --t-cf-bg:#fdeedd;   /* Cloudflare */
+  --t-ai:#7b3fc4; --t-ai-bg:#efe6fb;   /* AI */
+  --t-gg:#1f8a5b; --t-gg-bg:#e1f4ea;   /* Google */
+  --f-display:"Bricolage Grotesque","Be Vietnam Pro",system-ui,sans-serif;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10131d; --surface:#181c2a; --ink:#eef0f6; --muted:#a2a8bb; --line:#2b3044; --accent:#f06595;
+  --t-ch:#7fb2f5; --t-ch-bg:#1a2a44; --t-cf:#f2a35e; --t-cf-bg:#3a2817;
+  --t-ai:#c19cf2; --t-ai-bg:#2c2040; --t-gg:#5fcf98; --t-gg-bg:#163326; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10131d; --surface:#181c2a; --ink:#eef0f6; --muted:#a2a8bb; --line:#2b3044; --accent:#f06595;
+  --t-ch:#7fb2f5; --t-ch-bg:#1a2a44; --t-cf:#f2a35e; --t-cf-bg:#3a2817;
+  --t-ai:#c19cf2; --t-ai-bg:#2c2040; --t-gg:#5fcf98; --t-gg-bg:#163326; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;padding-block:44px 64px;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:12px}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-family:var(--f-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{margin:0;max-width:68ch;color:var(--muted);font-size:1.05rem}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.88rem;color:var(--muted)}
+.facts b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.t{display:inline-block;font-family:var(--f-mono);font-size:.7rem;font-weight:600;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.ch{color:var(--t-ch);background:var(--t-ch-bg)}
+.cf{color:var(--t-cf);background:var(--t-cf-bg)}
+.ai{color:var(--t-ai);background:var(--t-ai-bg)}
+.gg{color:var(--t-gg);background:var(--t-gg-bg)}
+
+.diagram{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.lanes{min-width:1040px;display:flex;flex-direction:column}
+.lane{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--line)}
+.lane:last-child{border-bottom:0}
+.who{padding:18px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;background:var(--bg)}
+.who b{font-family:var(--f-display);font-size:1.02rem;line-height:1.2}
+.who span{font-size:.78rem;color:var(--muted)}
+.steps{display:flex;align-items:stretch;padding:16px;gap:22px}
+.step{flex:1 1 0;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;position:relative;background:var(--surface)}
+.step:not(:last-child)::after{content:"";position:absolute;right:-17px;top:50%;width:12px;height:12px;transform:translateY(-50%);
+  background:var(--accent);clip-path:polygon(0 15%,100% 50%,0 85%)}
+.step p{margin:0;font-size:.84rem;line-height:1.35;font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto}
+.step.code{border-style:dashed}
+.foot{font-size:.82rem;color:var(--muted);margin:0}
+section{display:flex;flex-direction:column;gap:18px;padding-top:28px}
+h2{font-family:var(--f-display);font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
+.sec-head{display:flex;flex-direction:column;gap:6px}
+.sec-head p{margin:0;color:var(--muted);max-width:68ch}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.feat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.feat h3{font-family:var(--f-display);font-size:1.02rem;margin:0;line-height:1.25}
+.feat p{margin:0;font-size:.88rem;color:var(--muted)}
+.stack{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.srow{display:grid;grid-template-columns:200px 1fr;gap:20px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.srow:last-child{border-bottom:0}
+.srow h3{font-family:var(--f-display);font-size:1rem;margin:0}
+.srow ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;min-width:0}
+.srow li{font-size:.86rem;color:var(--muted);min-width:0}
+.srow li b{display:block;color:var(--ink);font-family:var(--f-mono);font-size:.82rem;font-weight:600}
+@media (max-width:860px){.feats{grid-template-columns:1fr 1fr}.srow{grid-template-columns:1fr;gap:10px}}
+@media (max-width:520px){.feats,.srow ul{grid-template-columns:1fr}}
+.foot code{font-family:var(--f-mono);font-size:.8rem}
+.links{display:flex;flex-wrap:wrap;gap:10px;padding-top:4px}
+.btn{font-weight:600;font-size:.9rem;text-decoration:none;padding:8px 14px;border-radius:8px;background:var(--accent);color:#fff}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Personal project · Oct 2026</span>
+    <h1>AI fashion assistant for <em>Messenger</em> &amp; Telegram</h1>
+    <p class="lead">Customers chat in plain Vietnamese ("off-shoulder beach dress under 500k"). An AI agent searches the shop's live stock, checks product photos when needed, sends product cards and takes orders. The shop owner runs everything from Google Sheets. Fully serverless, on free tiers.</p>
+    <div class="facts">
+      <span><b>34/34</b> correct product in top 3</span>
+      <span><b>0</b> hallucinated products</span>
+      <span><b>~10 s</b> median reply</span>
+      <span><b>~$0.004</b> per conversation</span>
+    </div>
+    <div class="links">
+      <a class="btn" href="https://github.com/tucuong2308/chatbot-thoi-trang">View source on GitHub</a>
+      <a class="btn ghost" href="portfolio.pdf">Download PDF</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Features</span><h2>What the bot does</h2></div>
+    <div class="feats">
+      <div class="feat"><h3>Natural-language product search</h3><p>Understands price, color, type and negations ("not black", "under 500k") and returns only items in stock.</p><div class="tags"><span class="t ai">DeepSeek</span><span class="t ai">Text-to-SQL</span><span class="t cf">D1</span></div></div>
+      <div class="feat"><h3>Style advice from vague needs</h3><p>Turns "hides the tummy" or "for a temple visit" into concrete cuts, then ranks items by meaning.</p><div class="tags"><span class="t ai">Gemini embeddings</span><span class="t cf">Vector search</span></div></div>
+      <div class="feat"><h3>Looks at product photos</h3><p>Checks images in batches of 16 when attributes are not enough to decide fit or style.</p><div class="tags"><span class="t ai">Vision</span><span class="t cf">R2</span></div></div>
+      <div class="feat"><h3>Size &amp; shop questions</h3><p>Suggests a size from height and weight, answers shipping, returns and opening hours.</p><div class="tags"><span class="t cf">D1</span><span class="t gg">Sheets</span></div></div>
+      <div class="feat"><h3>Product cards in chat</h3><p>Photo, price, sizes and action buttons on both channels, with a typing indicator while it works.</p><div class="tags"><span class="t ch">Messenger</span><span class="t ch">Telegram</span></div></div>
+      <div class="feat"><h3>Ordering in chat</h3><p>Drafts the order, customer confirms with one tap. Look up and cancel orders too. Cash on delivery.</p><div class="tags"><span class="t ch">Postback</span><span class="t cf">Workers</span><span class="t cf">D1</span></div></div>
+      <div class="feat"><h3>Catalog managed in Google Sheets</h3><p>Dropdowns, auto-generated product codes, invalid cells highlighted with a note, sync log.</p><div class="tags"><span class="t gg">Sheets</span><span class="t gg">Apps Script</span></div></div>
+      <div class="feat"><h3>Orders back in the sheet</h3><p>New and cancelled orders land in an Orders tab with the chat transcript, and the shop gets an email.</p><div class="tags"><span class="t gg">Apps Script</span><span class="t gg">MailApp</span></div></div>
+      <div class="feat"><h3>Safety guards</h3><p>Model SQL is read-only, internal tables are blocked, and any product code not found by a lookup is rejected.</p><div class="tags"><span class="t cf">Workers</span><span class="t cf">SQL sandbox</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Tech stack</span><h2>Serverless end to end, on free tiers</h2></div>
+    <div class="stack">
+      <div class="srow"><h3>Serverless runtime</h3><ul>
+        <li><b>Cloudflare Workers</b>TypeScript backend on the edge</li>
+        <li><b>Cloudflare Queues</b>Chat messages and background jobs</li>
+        <li><b>Cron Triggers</b>Scheduled catalog sync</li>
+        <li><b>Wrangler</b>Local dev, migrations, secrets, deploy</li>
+      </ul></div>
+      <div class="srow"><h3>Webhooks &amp; channels</h3><ul>
+        <li><b>Messenger Platform</b>Webhook, Send API, postback buttons</li>
+        <li><b>Telegram Bot API</b>Webhook with secret token, inline buttons</li>
+        <li><b>HMAC SHA-256</b>Verifies every Meta request (Web Crypto)</li>
+        <li><b>Admin REST API</b>Import, orders, test chat; key-protected</li>
+      </ul></div>
+      <div class="srow"><h3>Data &amp; search</h3><ul>
+        <li><b>Cloudflare D1</b>SQLite: products, stock, sizes, vectors, orders</li>
+        <li><b>Workers KV</b>Chat history, expires after 7 days</li>
+        <li><b>Cloudflare R2</b>Product image copies (optional)</li>
+        <li><b>Hybrid retrieval</b>SQL filter + in-memory cosine ranking</li>
+      </ul></div>
+      <div class="srow"><h3>AI</h3><ul>
+        <li><b>DeepSeek V4.1 Flash</b>Agent reasoning, tool calling, vision</li>
+        <li><b>Gemini</b>Text and image embeddings, fallback model</li>
+        <li><b>Workers AI</b>Fast pre-routing before the agent</li>
+        <li><b>Shared LLM layer</b>One interface for Gemini and OpenAI-style APIs</li>
+      </ul></div>
+      <div class="srow"><h3>Back office</h3><ul>
+        <li><b>Google Sheets</b>Source of truth for catalog and orders</li>
+        <li><b>Google Apps Script</b>Bot menu, sync, 5-minute triggers</li>
+        <li><b>Data validation &amp; formatting</b>Dropdowns, stock and status colors</li>
+        <li><b>MailApp</b>New-order emails</li>
+      </ul></div>
+      <div class="srow"><h3>Testing</h3><ul>
+        <li><b>Vitest</b>74 tests inside the Workers runtime</li>
+        <li><b>Python eval suite</b>Top-3 hit, precision, hallucination, latency</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">How it works</span><h2>Process overview</h2><p>Three main flows, with the technology used at each step.</p></div>
+  <div class="legend" aria-label="Legend">
+    <span class="t ch">Chat channels</span><span class="t cf">Cloudflare</span><span class="t ai">AI</span><span class="t gg">Google Workspace</span>
+  </div>
+
+  <div class="diagram">
+    <div class="lanes">
+
+      <div class="lane">
+        <div class="who"><b>Product search &amp; advice</b><span>Customer</span></div>
+        <div class="steps">
+          <div class="step"><p>Customer sends a message</p><div class="tags"><span class="t ch">Messenger</span><span class="t ch">Telegram</span></div></div>
+          <div class="step"><p>Webhook verifies signature, returns 200 at once</p><div class="tags"><span class="t cf">Workers</span><span class="t cf">HMAC SHA-256</span></div></div>
+          <div class="step"><p>Message queued for long processing</p><div class="tags"><span class="t cf">Queues</span><span class="t cf">KV history</span></div></div>
+          <div class="step"><p>Agent plans steps and calls tools</p><div class="tags"><span class="t ai">DeepSeek</span><span class="t ai">Tool calling</span><span class="t cf">Workers AI</span></div></div>
+          <div class="step"><p>Filter with read-only SQL, rank by meaning</p><div class="tags"><span class="t ai">Text-to-SQL</span><span class="t cf">D1</span><span class="t ai">Gemini embeddings</span></div></div>
+          <div class="step"><p>Look at photos for fit &amp; style</p><div class="tags"><span class="t ai">Vision</span><span class="t cf">R2</span></div></div>
+          <div class="step"><p>Reply with product cards &amp; buttons</p><div class="tags"><span class="t ch">Send API</span><span class="t ch">Bot API</span></div></div>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="who"><b>Ordering</b><span>Customer → shop</span></div>
+        <div class="steps">
+          <div class="step"><p>Agent drafts order: size, color, address, stock check</p><div class="tags"><span class="t ai">DeepSeek</span><span class="t cf">D1</span></div></div>
+          <div class="step code"><p>Customer taps "Confirm order"</p><div class="tags"><span class="t ch">Postback button</span></div></div>
+          <div class="step code"><p>Code re-checks stock &amp; price, saves COD order</p><div class="tags"><span class="t cf">Workers</span><span class="t cf">D1</span></div></div>
+          <div class="step"><p>Sheets pulls new &amp; cancelled orders every 5 min</p><div class="tags"><span class="t gg">Apps Script</span><span class="t cf">REST API</span></div></div>
+          <div class="step"><p>Order row in sheet + email to shop</p><div class="tags"><span class="t gg">Sheets</span><span class="t gg">MailApp</span></div></div>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="who"><b>Catalog management</b><span>Shop owner</span></div>
+        <div class="steps">
+          <div class="step"><p>Edit products, sizes, shop info</p><div class="tags"><span class="t gg">Sheets</span><span class="t gg">Data validation</span></div></div>
+          <div class="step"><p>"Bot › Sync now" or auto-sync every 5 min</p><div class="tags"><span class="t gg">Apps Script</span><span class="t gg">Triggers</span></div></div>
+          <div class="step"><p>Validate &amp; replace catalog in one transaction</p><div class="tags"><span class="t cf">Workers</span><span class="t cf">D1</span></div></div>
+          <div class="step"><p>Bad cells highlighted red with a note</p><div class="tags"><span class="t gg">Sheets</span></div></div>
+          <div class="step"><p>Background: download images, create vectors</p><div class="tags"><span class="t cf">Queues</span><span class="t cf">R2</span><span class="t ai">Gemini embeddings</span></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="foot">Dashed steps run in plain code, never through the model. Scroll sideways on small screens.</p>
+  </section>
+</div>
+
+</body>
+</html>
