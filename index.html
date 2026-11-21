@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="AI fashion assistant for Messenger and Telegram: serverless agent on Cloudflare Workers with Google Sheets back office.">
-<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}.demo{display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.demo video{width:100%;max-width:100%;border-radius:14px;border:1px solid var(--line);background:#000;display:block}
+.demo p{margin:0;font-size:.85rem;color:var(--muted)}
+</style>
 <title>Fashion Chatbot</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap">
@@ -101,9 +104,19 @@ h2{font-family:var(--f-display);font-size:clamp(1.5rem,3vw,2rem);font-weight:700
     </div>
     <div class="links">
       <a class="btn" href="https://github.com/tucuong2308/chatbot-thoi-trang">View source on GitHub</a>
+      <a class="btn ghost" href="#demo-video">Watch demo</a>
       <a class="btn ghost" href="portfolio.pdf">Download PDF</a>
     </div>
   </header>
+
+  <section class="demo" id="demo-video" aria-label="Demo video">
+    <div class="sec-head"><span class="eyebrow">Demo</span><h2>See it in action</h2></div>
+    <video controls preload="metadata" playsinline>
+      <source src="fashion-chatbot-intro-en.mp4" type="video/mp4">
+      Your browser cannot play this video. <a href="fashion-chatbot-intro-en.mp4">Download it</a>.
+    </video>
+    <p>Vietnamese version: <a href="chatbot-thoi-trang-gioi-thieu.mp4">chatbot-thoi-trang-gioi-thieu.mp4</a></p>
+  </section>
 
   <section>
     <div class="sec-head"><span class="eyebrow">Features</span><h2>What the bot does</h2></div>
